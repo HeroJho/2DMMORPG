@@ -1,0 +1,43 @@
+{
+  "monsters": [
+    {
+      "id": "1",
+      "name": "µÎ´õÁö",
+      "stat": {
+        "level": "1",
+        "maxHp": "20",
+        "attack": "5",
+        "speed": "5.0",
+        "totalExp": "5"
+      },
+      "rewards": [
+        {
+          "probability": "10",
+          "itemId": "1",
+          "count": "1"
+        },
+        {
+          "probability": "10",
+          "itemId": "2",
+          "count": "1"
+        },
+        {
+          "probability": "10",
+          "itemId": "100",
+          "count": "1"
+        },
+        {
+          "probability": "10",
+          "itemId": "101",
+          "count": "1"
+        },
+        {
+          "probability": "10",
+          "itemId": "200",
+          "count": "5"
+        }
+      ]
+    }
+
+  ]
+}

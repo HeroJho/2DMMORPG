@@ -1,0 +1,26 @@
+{
+  "stats": [
+    {
+      "level": "1",
+      "maxHp": "200",
+      "maxMp": "200",
+      "attack": "20",
+      "speed": "10.0",
+      "totalExp": "0"
+    },
+    {
+      "level": "2",
+      "maxHp": "250",
+      "maxMp": "250",
+      "attack": "25",
+      "speed": "10.0"
+    },
+    {
+      "level": "3",
+      "maxHp": "300",
+      "maxMp": "300",
+      "attack": "30",
+      "speed": "10.0"
+    }
+  ]
+}
