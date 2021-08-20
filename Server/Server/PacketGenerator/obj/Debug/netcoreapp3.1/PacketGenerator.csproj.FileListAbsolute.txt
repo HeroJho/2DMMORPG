@@ -1,0 +1,15 @@
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Debug\netcoreapp3.1\PacketGenerator.exe
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.csprojAssemblyReference.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.AssemblyInfoInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.AssemblyInfo.cs
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Debug\netcoreapp3.1\PacketGenerator.deps.json
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Debug\netcoreapp3.1\PacketGenerator.runtimeconfig.json
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Debug\netcoreapp3.1\PacketGenerator.runtimeconfig.dev.json
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Debug\netcoreapp3.1\PacketGenerator.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Debug\netcoreapp3.1\PacketGenerator.pdb
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.csproj.CoreCompileInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.csproj.CopyComplete
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.pdb
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.genruntimeconfig.cache

@@ -1,0 +1,9 @@
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.deps.json
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.pdb
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.csprojAssemblyReference.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfoInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfo.cs
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.csproj.CoreCompileInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.pdb

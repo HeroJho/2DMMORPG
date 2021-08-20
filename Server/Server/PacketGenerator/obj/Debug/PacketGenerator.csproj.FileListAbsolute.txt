@@ -1,0 +1,15 @@
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\PacketGenerator.exe
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\PacketGenerator.deps.json
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\PacketGenerator.runtimeconfig.json
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\PacketGenerator.runtimeconfig.dev.json
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\PacketGenerator.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\PacketGenerator.pdb
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\bin\Google.Protobuf.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfoInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.AssemblyInfo.cs
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.CoreCompileInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.csproj.CopyComplete
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.dll
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.pdb
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.genruntimeconfig.cache
+C:\Users\thehe\OneDrive\바탕 화면\복습\Server\Server\PacketGenerator\obj\Debug\PacketGenerator.csprojAssemblyReference.cache
