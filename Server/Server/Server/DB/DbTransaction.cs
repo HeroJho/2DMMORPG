@@ -19,11 +19,13 @@ namespace Server.DB
 
             // Me (GameRoom)
             PlayerDb playerDb = new PlayerDb();
-            playerDb.PlayerDbId = player.PlayerDbId;
-            playerDb.Hp = player.Stat.Hp;
-            playerDb.Mp = player.Stat.Mp;
-            playerDb.Level = player.Stat.Level;
-            playerDb.TotalExp = player.Stat.TotalExp;
+            {
+                playerDb.PlayerDbId = player.PlayerDbId;
+                playerDb.Hp = player.Stat.Hp;
+                playerDb.Mp = player.Stat.Mp;
+                playerDb.Level = player.Stat.Level;
+                playerDb.TotalExp = player.Stat.TotalExp;
+            }
 
             // You (Db)
             Instance.Push(() =>

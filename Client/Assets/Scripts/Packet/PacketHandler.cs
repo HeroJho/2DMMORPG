@@ -271,4 +271,11 @@ class PacketHandler
 		mpc.CanUseSkill = skillmanagePacket.CanUseSkill;
 
 	}
+
+	public static void S_UseConsumableHandler(PacketSession session, IMessage packet)
+    {
+		S_UseConsumable useConsumablePacket = (S_UseConsumable)packet;
+
+		Debug.Log($"Using item! Count: {useConsumablePacket.Count}");
+    }
 }

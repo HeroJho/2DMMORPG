@@ -99,6 +99,7 @@ namespace Server.Data
     {
         public ConsumableType consumableType;
         public int maxCount;
+        public int recovery;
     }
 
     [Serializable]

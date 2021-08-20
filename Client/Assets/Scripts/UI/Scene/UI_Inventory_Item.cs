@@ -29,7 +29,13 @@ public class UI_Inventory_Item : UI_Base
                 return;
 
             if (itemData.itemType == ItemType.Consumable)
+            {
+                C_UseConsumable useConsumablePacket = new C_UseConsumable();
+                useConsumablePacket.ItemDbId = ItemDbId;
+
+                Managers.Network.Send(useConsumablePacket);
                 return;
+            }
             // TODO : C_USE_ITEM 아이템 사용 패킷
 
             C_EquipItem equipPacket = new C_EquipItem();

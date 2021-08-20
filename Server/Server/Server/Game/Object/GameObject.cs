@@ -108,22 +108,29 @@ namespace Server
 
         }
 
+		public virtual GameObject GetOwner()
+		{
+			return this;
+		}
+
 		public virtual void OnDamaged(GameObject attacker, int damage)
         {
 			if (Room == null)
 				return;
 
-			damage = Math.Max(damage - TotalDefence, 0); // 둘 중 큰 수를 반환
-			Stat.Hp = Math.Max(Stat.Hp - damage, 0);
+			// 데미지 보정
+			damage = Math.Max(damage - TotalDefence, 0);
 
-			if (Stat.Hp <= 0)
+			Hp -= damage;
+
+			if (Hp <= 0)
 			{
 				OnDead(attacker);
 			}
 
 			S_ChangeHpMp changeHpPacket = new S_ChangeHpMp();
 			changeHpPacket.ObjectId = Id;
-			changeHpPacket.Hp = Stat.Hp;
+			changeHpPacket.Hp = Hp;
 			Room.Broadcast(CellPos, changeHpPacket);
         }
 
@@ -149,9 +156,18 @@ namespace Server
 			room.EnterGame(this);
         }
 
-		public virtual GameObject GetOwner()
+		public virtual void RecoveryHp(int recovery)
         {
-			return this;
-        }
+			if (Room == null)
+				return;
+
+			Hp += recovery;
+
+			S_ChangeHpMp changeHpPacket = new S_ChangeHpMp();
+			changeHpPacket.ObjectId = Id;
+			changeHpPacket.Hp = Hp;
+			Room.Broadcast(CellPos, changeHpPacket);
+		}
+
 	}
 }

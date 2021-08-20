@@ -90,5 +90,22 @@ namespace Server
             ClientSession clientSession = (ClientSession)session;
             clientSession.HandlePong();
         }
+
+        public static void C_UseConsumableHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_UseConsumable useConsumablePacket = (C_UseConsumable)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleConsumeable, player, useConsumablePacket);
+        }
+
     }
 }

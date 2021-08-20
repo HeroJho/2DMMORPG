@@ -36,7 +36,8 @@
       "id": "200",
       "name": "HP ¹°¾à",
       "consumableType": "Potion",
-      "maxCount": "10",
+      "maxCount": "999",
+      "recovery": "10",
       "iconPath": "Textures/Item/hp"
     }
   ]

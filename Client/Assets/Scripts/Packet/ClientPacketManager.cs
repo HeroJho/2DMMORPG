@@ -82,6 +82,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SManageSkill, MakePacket<S_ManageSkill>);
             _handler.Add((ushort)MsgId.SManageSkill, PacketHandler.S_ManageSkillHandler);
 
+            _onRecv.Add((ushort)MsgId.SUseConsumable, MakePacket<S_UseConsumable>);
+            _handler.Add((ushort)MsgId.SUseConsumable, PacketHandler.S_UseConsumableHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
