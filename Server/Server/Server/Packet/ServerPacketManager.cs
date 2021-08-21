@@ -49,8 +49,8 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CPong, MakePacket<C_Pong>);
             _handler.Add((ushort)MsgId.CPong, PacketHandler.C_PongHandler);
 
-            _onRecv.Add((ushort)MsgId.CUseConsumable, MakePacket<C_UseConsumable>);
-            _handler.Add((ushort)MsgId.CUseConsumable, PacketHandler.C_UseConsumableHandler);
+            _onRecv.Add((ushort)MsgId.CSetCountConsumable, MakePacket<C_SetCountConsumable>);
+            _handler.Add((ushort)MsgId.CSetCountConsumable, PacketHandler.C_SetCountConsumableHandler);
 
         }
 

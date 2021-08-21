@@ -75,9 +75,9 @@ class PacketHandler
 
 	}
 
-	public static void S_ChangeHpMpHandler(PacketSession session, IMessage packet)
+	public static void S_ChangeHpHandler(PacketSession session, IMessage packet)
     {
-		S_ChangeHpMp changeHpMpPacket = (S_ChangeHpMp)packet;
+		S_ChangeHp changeHpMpPacket = (S_ChangeHp)packet;
 
 		GameObject go = Managers.Object.FindById(changeHpMpPacket.ObjectId);
 		if (go == null)
@@ -87,17 +87,22 @@ class PacketHandler
 		if(cc == null)
 			return;
 
-		if (changeHpMpPacket.Hp != 0)
-			cc.Hp = changeHpMpPacket.Hp;
-		else
-		{
-			PlayerController pc = (PlayerController)cc;
-			if (pc == null)
-				return;
+		cc.Hp = changeHpMpPacket.Hp;
+	}
 
-			pc.Mp = changeHpMpPacket.Mp;
-		}
+	public static void S_ChangeMpHandler(PacketSession session, IMessage packet)
+	{
+		S_ChangeMp changeHpMpPacket = (S_ChangeMp)packet;
 
+		GameObject go = Managers.Object.FindById(changeHpMpPacket.ObjectId);
+		if (go == null)
+			return;
+
+		PlayerController pc = go.GetComponent<PlayerController>();
+		if (pc == null)
+			return;
+
+		pc.Mp = changeHpMpPacket.Mp;
 	}
 
 	public static void S_DieHandler(PacketSession session, IMessage packet)
@@ -215,7 +220,6 @@ class PacketHandler
 			return;
 
 		item.Equipped = equipItemOk.Equipped;
-		Debug.Log("아이템 착용변경!");
 
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.InvenUI.RefreshUI();
@@ -272,10 +276,21 @@ class PacketHandler
 
 	}
 
-	public static void S_UseConsumableHandler(PacketSession session, IMessage packet)
+	public static void S_SetCountConsumableHandler(PacketSession session, IMessage packet)
     {
-		S_UseConsumable useConsumablePacket = (S_UseConsumable)packet;
+		S_SetCountConsumable useConsumablePacket = (S_SetCountConsumable)packet;
 
-		Debug.Log($"Using item! Count: {useConsumablePacket.Count}");
-    }
+		Item item = Managers.Inven.Get(useConsumablePacket.ItemDbId);
+		if (item == null)
+			return;
+
+		item.Count = useConsumablePacket.Count;
+
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+
+		gameSceneUI.InvenUI.SetCount(item);
+
+		if (item.Count <= 0)
+			Managers.Inven.Items.Remove(item.ItemDbId);
+	}
 }

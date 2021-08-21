@@ -9,6 +9,8 @@ namespace Server
     {
         public Dictionary<int, Item> Items { get; } = new Dictionary<int, Item>();
 
+        public List<int> SlotPuse = new List<int>();
+
         public void Add(Item item)
         {
             Items.Add(item.ItemDbId, item);
@@ -37,8 +39,11 @@ namespace Server
             for (int slot = 0; slot < 20; slot++)
             {
                 Item item = Items.Values.FirstOrDefault(i => i.Slot == slot);
-                if (item == null)
+                if (item == null && !SlotPuse.Contains(slot))
+                {
+                    SlotPuse.Add(slot);
                     return slot;
+                }
             }
 
             return null;

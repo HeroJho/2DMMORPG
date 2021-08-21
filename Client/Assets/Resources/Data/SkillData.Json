@@ -13,7 +13,7 @@
       "name": "원거리 공격",
       "cooldown": "1",
       "damage": "5",
-      "mp": "0",
+      "mp": "5",
       "skillType": "SkillProjectile",
       "projectile": {
         "name": "화살",
@@ -25,9 +25,9 @@
     {
       "id": "3",
       "name": "범위 공격",
-      "cooldown": "3",
+      "cooldown": "0.5",
       "damage": "10",
-      "mp": "0",
+      "mp": "20",
       "skillType": "SkillExplosion",
       "explosion": {
         "name": "폭팔",

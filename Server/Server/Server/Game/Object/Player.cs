@@ -65,7 +65,7 @@ namespace Server
             if (Mp < 0)
                 Mp = 0;
 
-            S_ChangeHpMp changeHpPacket = new S_ChangeHpMp();
+            S_ChangeMp changeHpPacket = new S_ChangeMp();
             changeHpPacket.ObjectId = Id;
             changeHpPacket.Mp = Mp;
             Room.Broadcast(CellPos, changeHpPacket);
@@ -208,6 +208,19 @@ namespace Server
             S_ManageSkill manageSkillPacket = new S_ManageSkill();
             manageSkillPacket.CanUseSkill = CanUseSkill;
             Session.Send(manageSkillPacket);
+        }
+
+        public void RecoveryMp(int mp)
+        {
+            if (Room == null)
+                return;
+
+            Mp += mp;
+
+            S_ChangeMp changeHpMpPacket = new S_ChangeMp();
+            changeHpMpPacket.ObjectId = Id;
+            changeHpMpPacket.Mp = Mp;
+            Room.Broadcast(CellPos, changeHpMpPacket);
         }
     }
 }

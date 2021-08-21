@@ -41,4 +41,18 @@ public class UI_Inventory : UI_Base
             Items[item.Slot].SetItem(item);
         }
     }
+
+    public void SetCount(Item item)
+    {
+        UI_Inventory_Item UIitem = Items.Find(i => i.ItemDbId == item.ItemDbId);
+        if (UIitem == null)
+            return;
+
+        if(item.Count > 0)
+            Items[item.Slot].SetItem(item);
+        else
+            Items[item.Slot].SetItem(null);
+
+    }
+
 }

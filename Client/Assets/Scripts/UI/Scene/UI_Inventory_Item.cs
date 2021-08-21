@@ -12,9 +12,13 @@ public class UI_Inventory_Item : UI_Base
     [SerializeField]
     Image _frame;
 
+    [SerializeField]
+    Text _countText;
+
     public int ItemDbId { get; private set; }
     public int TemplateId { get; private set; }
     public int Count { get; private set; }
+    public bool Stackable { get; private set; }
     public bool Equipped { get; private set; }
 
     public override void Init()
@@ -30,13 +34,12 @@ public class UI_Inventory_Item : UI_Base
 
             if (itemData.itemType == ItemType.Consumable)
             {
-                C_UseConsumable useConsumablePacket = new C_UseConsumable();
+                C_SetCountConsumable useConsumablePacket = new C_SetCountConsumable();
                 useConsumablePacket.ItemDbId = ItemDbId;
 
                 Managers.Network.Send(useConsumablePacket);
                 return;
             }
-            // TODO : C_USE_ITEM 아이템 사용 패킷
 
             C_EquipItem equipPacket = new C_EquipItem();
             equipPacket.ItemDbId = ItemDbId;
@@ -53,16 +56,19 @@ public class UI_Inventory_Item : UI_Base
             ItemDbId = 0;
             TemplateId = 0;
             Count = 0;
+            Stackable = false;
             Equipped = false;
 
             _icon.gameObject.SetActive(false);
             _frame.gameObject.SetActive(false);
+            _countText.gameObject.SetActive(false);
         }
         else
         {
             ItemDbId = item.ItemDbId;
             TemplateId = item.TemplateId;
             Count = item.Count;
+            Stackable = item.Stackable;
             Equipped = item.Equipped;
 
             Data.ItemData itemData = null;
@@ -73,7 +79,24 @@ public class UI_Inventory_Item : UI_Base
 
             _icon.gameObject.SetActive(true);
             _frame.gameObject.SetActive(Equipped);
+
+
+            SetCount();
         }
 
+    }
+
+    public void SetCount()
+    {
+        if (Stackable)
+        {
+            _countText.gameObject.SetActive(true);
+            _countText.text = $"x{Count}";
+        }
+        else
+        {
+            _countText.text = "";
+            _countText.gameObject.SetActive(false);
+        }
     }
 }

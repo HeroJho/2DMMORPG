@@ -17,7 +17,7 @@ namespace Server
             player.HandleEquipItem(equipPacket);
         }
 
-        public void HandleConsumeable(Player player, C_UseConsumable useConsumablePacket)
+        public void HandleConsumeable(Player player, C_SetCountConsumable useConsumablePacket)
         {
             if (player == null)
                 return;
@@ -59,7 +59,10 @@ namespace Server
                 // *GameObject에 함수를 만들어 오버라이드해서 사용하기
                 case ConsumableType.Potion:
                     {
-                        player.RecoveryHp(consumableData.recovery);
+                        if(consumableData.posionType == PosionType.Hp)
+                            player.RecoveryHp(consumableData.recovery);
+                        else if (consumableData.posionType == PosionType.Mp)
+                            player.RecoveryMp(consumableData.recovery);
                     }
                     break;
             }
@@ -70,10 +73,15 @@ namespace Server
             // *주문서 같은 경우는 DB 적용후 메모리
             item.Count--;
 
+            // 소진하면 마찬가지로
+            // 선 메모리 삭제 후 DB처리
+            if(item.Count <= 0)
+                player.Inven.Items.Remove(item.ItemDbId);
+
             DbTransaction.UseConsumableItemNoti(player, item);
 
             // 아이템 사용 클라 통보
-            S_UseConsumable usingConsumablePacket = new S_UseConsumable();
+            S_SetCountConsumable usingConsumablePacket = new S_SetCountConsumable();
             usingConsumablePacket.ItemDbId = item.ItemDbId;
             usingConsumablePacket.Count = item.Count;
 

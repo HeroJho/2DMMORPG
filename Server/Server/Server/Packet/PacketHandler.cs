@@ -91,10 +91,10 @@ namespace Server
             clientSession.HandlePong();
         }
 
-        public static void C_UseConsumableHandler(PacketSession session, IMessage packet)
+        public static void C_SetCountConsumableHandler(PacketSession session, IMessage packet)
         {
             ClientSession clientSession = (ClientSession)session;
-            C_UseConsumable useConsumablePacket = (C_UseConsumable)packet;
+            C_SetCountConsumable useConsumablePacket = (C_SetCountConsumable)packet;
 
             Player player = clientSession.MyPlayer;
             if (player == null)

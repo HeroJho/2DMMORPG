@@ -128,7 +128,7 @@ namespace Server
 				OnDead(attacker);
 			}
 
-			S_ChangeHpMp changeHpPacket = new S_ChangeHpMp();
+			S_ChangeHp changeHpPacket = new S_ChangeHp();
 			changeHpPacket.ObjectId = Id;
 			changeHpPacket.Hp = Hp;
 			Room.Broadcast(CellPos, changeHpPacket);
@@ -157,13 +157,13 @@ namespace Server
         }
 
 		public virtual void RecoveryHp(int recovery)
-        {
+		{
 			if (Room == null)
 				return;
 
 			Hp += recovery;
 
-			S_ChangeHpMp changeHpPacket = new S_ChangeHpMp();
+			S_ChangeHp changeHpPacket = new S_ChangeHp();
 			changeHpPacket.ObjectId = Id;
 			changeHpPacket.Hp = Hp;
 			Room.Broadcast(CellPos, changeHpPacket);

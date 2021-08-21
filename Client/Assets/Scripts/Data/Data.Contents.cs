@@ -83,6 +83,7 @@ namespace Data
     public class ConsumableData : ItemData
     {
         public ConsumableType consumableType;
+        public PosionType posionType;
         public int maxCount;
     }
 

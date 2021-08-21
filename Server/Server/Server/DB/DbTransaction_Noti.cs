@@ -58,8 +58,15 @@ namespace Server.DB
             {
                 using (AppDbContext db = new AppDbContext())
                 {
-                    db.Entry(itemDb).State = EntityState.Unchanged;
-                    db.Entry(itemDb).Property(nameof(ItemDb.Count)).IsModified = true;
+                    if(itemDb.Count > 0)
+                    {
+                        db.Entry(itemDb).State = EntityState.Unchanged;
+                        db.Entry(itemDb).Property(nameof(ItemDb.Count)).IsModified = true;
+                    }
+                    else // 아이템 전부 소진시 DB에서 삭제
+                    {
+                        db.Items.Remove(itemDb);
+                    }
 
                     bool success = db.SaveChangesEx();
                     if (!success)

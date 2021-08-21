@@ -36,9 +36,19 @@
       "id": "200",
       "name": "HP 물약",
       "consumableType": "Potion",
+      "posionType": "Hp",
       "maxCount": "999",
       "recovery": "10",
       "iconPath": "Textures/Item/hp"
+    },
+    {
+      "id": "201",
+      "name": "MP 물약",
+      "consumableType": "Potion",
+      "posionType": "Mp",
+      "maxCount": "500",
+      "recovery": "10",
+      "iconPath": "Textures/Item/mp"
     }
   ]
 }

@@ -98,6 +98,7 @@ namespace Server.Data
     public class ConsumableData : ItemData
     {
         public ConsumableType consumableType;
+        public PosionType posionType;
         public int maxCount;
         public int recovery;
     }

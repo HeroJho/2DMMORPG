@@ -46,8 +46,11 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SSkill, MakePacket<S_Skill>);
             _handler.Add((ushort)MsgId.SSkill, PacketHandler.S_SkillHandler);
 
-            _onRecv.Add((ushort)MsgId.SChangeHpMp, MakePacket<S_ChangeHpMp>);
-            _handler.Add((ushort)MsgId.SChangeHpMp, PacketHandler.S_ChangeHpMpHandler);
+            _onRecv.Add((ushort)MsgId.SChangeHp, MakePacket<S_ChangeHp>);
+            _handler.Add((ushort)MsgId.SChangeHp, PacketHandler.S_ChangeHpHandler);
+
+            _onRecv.Add((ushort)MsgId.SChangeMp, MakePacket<S_ChangeMp>);
+            _handler.Add((ushort)MsgId.SChangeMp, PacketHandler.S_ChangeMpHandler);
 
             _onRecv.Add((ushort)MsgId.SDie, MakePacket<S_Die>);
             _handler.Add((ushort)MsgId.SDie, PacketHandler.S_DieHandler);
@@ -81,6 +84,9 @@ namespace Server
 
             _onRecv.Add((ushort)MsgId.SManageSkill, MakePacket<S_ManageSkill>);
             _handler.Add((ushort)MsgId.SManageSkill, PacketHandler.S_ManageSkillHandler);
+
+            _onRecv.Add((ushort)MsgId.SSetCountConsumable, MakePacket<S_SetCountConsumable>);
+            _handler.Add((ushort)MsgId.SSetCountConsumable, PacketHandler.S_SetCountConsumableHandler);
 
         }
 
