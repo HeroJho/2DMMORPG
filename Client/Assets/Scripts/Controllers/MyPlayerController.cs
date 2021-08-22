@@ -135,10 +135,12 @@ public class MyPlayerController : PlayerController
 		{
 			case CreatureState.Idle:
 				GetDirInput();
+				GetSkillKeyInput();
 				GetKeyInput();
 				break;
 			case CreatureState.Moving:
 				GetDirInput();
+				GetSkillKeyInput();
 				GetKeyInput();
 				break;
 		}
@@ -183,7 +185,7 @@ public class MyPlayerController : PlayerController
 		}
 	}
 
-	void GetKeyInput()
+	void GetSkillKeyInput()
     {
 		if (Input.GetKeyDown(KeyCode.Alpha1))
 		{
@@ -198,11 +200,9 @@ public class MyPlayerController : PlayerController
 			_currentSkill = 3;
 		}
 
-		if (!CanUseSkill)
-			return;
 
 		// 스킬 상태로 갈지 확인
-		if (_coSkillCooltime == null && Input.GetKey(KeyCode.Space))
+		if (_coSkillCooltime == null && Input.GetKey(KeyCode.Space) && CanUseSkill)
 		{
 			C_Skill skill = new C_Skill() { Info = new SkillInfo() };
 			skill.Info.SkillId = _currentSkill;
@@ -211,7 +211,30 @@ public class MyPlayerController : PlayerController
 			_coSkillCooltime = StartCoroutine("CoInputCooltime",
 				Managers.Data.SkillDict[_currentSkill].cooldown);
 		}
+
 	}
+
+	void GetKeyInput()
+    {
+		if(Input.GetKeyDown(KeyCode.Z))
+        {			
+			Item item = Managers.Object.FindItemFromGround(CellPos);
+			if(item != null)
+            {
+				C_DropItem dropItemPacket = new C_DropItem()
+				{
+					PosInfo = new PositionInfo(),
+					ItemInfo = new ItemInfo()
+				};
+				dropItemPacket.PosInfo.PosX = CellPos.x;
+				dropItemPacket.PosInfo.PosY = CellPos.y;
+				dropItemPacket.ItemInfo.MergeFrom(item.Info);
+
+				Managers.Network.Send(dropItemPacket);
+            }
+        }
+
+    }
 
 	void GetUIKeyInput()
     {

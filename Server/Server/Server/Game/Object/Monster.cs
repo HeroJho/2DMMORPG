@@ -208,23 +208,30 @@ namespace Server
                 _job = null;
             }
 
-            base.OnDead(attacker);
-
             GameObject owner = attacker.GetOwner();
+
             if(owner.ObjectType == GameObjectType.Player)
-            {
+            {// 경험치 획득
+
                 Player player = (Player)owner;
 
-                // 경험치 획득
                 player.GetEx(_monsterData.stat.TotalExp);
-
-                RewardData rewardData = GetRandomReward();
-                if (rewardData != null)
-                {
-                    DbTransaction.RewardPlayer(player, rewardData, Room);
-                }
             }
 
+            // 보상 로직
+            RewardData rewardData = GetRandomReward();
+            if (rewardData != null)
+            {
+                GameRoom room = Room;
+                if (room == null)
+                    return;
+                Vector2Int pos = CellPos;
+
+                // 선DB   후메모리 & 전송
+                DbTransaction.DropItem(pos, rewardData, room);
+            }
+
+            base.OnDead(attacker);
         }
 
         RewardData GetRandomReward()

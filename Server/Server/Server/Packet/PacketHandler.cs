@@ -107,5 +107,21 @@ namespace Server
             room.Push(room.HandleConsumeable, player, useConsumablePacket);
         }
 
+        public static void C_DropItemHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_DropItem dropItemPacket = (C_DropItem)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleDropItem, player, dropItemPacket);
+        }
+
     }
 }

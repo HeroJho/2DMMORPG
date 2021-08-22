@@ -12,29 +12,29 @@
       },
       "rewards": [
         {
-          "probability": "1",
+          "probability": "0",
           "itemId": "1",
           "count": "1"
         },
         {
-          "probability": "1",
+          "probability": "0",
           "itemId": "2",
           "count": "1"
         },
         {
-          "probability": "1",
+          "probability": "0",
           "itemId": "100",
           "count": "1"
         },
         {
-          "probability": "1",
+          "probability": "0",
           "itemId": "101",
           "count": "1"
         },
         {
-          "probability": "1",
+          "probability": "0",
           "itemId": "200",
-          "count": "1000"
+          "count": "100"
         },
         {
           "probability": "100",

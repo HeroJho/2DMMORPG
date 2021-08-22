@@ -87,6 +87,23 @@ namespace Server
 
             player.Session.Send(usingConsumablePacket);
         }
+
+        public void HandleDropItem(Player player, C_DropItem dropItempacket)
+        {
+            GameRoom room = player.Room;
+            if (player == null || room == null)
+                return;
+
+            Vector2Int pos = new Vector2Int(dropItempacket.PosInfo.PosX, dropItempacket.PosInfo.PosY);
+
+            // 아이템을 찾는다
+            Item item = Map.FindGroundItem(pos, dropItempacket.ItemInfo);
+            if (item == null)
+                return;
+
+            // DB저장 후 인벤 추가 & 해당 좌표 템 삭제
+            DbTransaction.AddItemPlayer(player, item, room);
+        }
     }
 
 }

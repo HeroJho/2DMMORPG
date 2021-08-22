@@ -94,6 +94,34 @@ namespace Server
 
         bool[,] _collision; // 벽 여부
         GameObject[,] _objects; // 플레이어 여부
+        Dictionary<Vector2Int, List<Item>> _items = new Dictionary<Vector2Int, List<Item>>(); // item 여부
+
+        public void DropItemToMap(Vector2Int pos, Item item)
+        {
+            List<Item> itemList = new List<Item>();
+
+            if (!_items.ContainsKey(pos))
+                _items.Add(pos, itemList);
+            if(_items.TryGetValue(pos, out itemList) == false)
+                _items.Add(pos, itemList);
+
+            itemList.Add(item);
+        }
+
+        public Item FindGroundItem(Vector2Int pos ,ItemInfo itemInfo)
+        {
+            List<Item> itemList = null;
+            if (_items.TryGetValue(pos, out itemList) == false)
+                return null;
+
+            foreach(Item item in itemList)
+            {
+                if (item.ItemDbId == itemInfo.ItemDbId)
+                    return item;
+            }
+
+            return null;
+        }
 
         public HashSet<GameObject> LoopByCircle(Vector2Int cellPos, int rad)
         {

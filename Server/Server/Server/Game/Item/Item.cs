@@ -82,6 +82,40 @@ namespace Server
 
             return item;
         }
+
+        public static Item CopyItem(Item newItem)
+        {
+            Item item = null;
+
+            ItemData itemData = null;
+            DataManager.ItemDict.TryGetValue(newItem.TemplateId, out itemData);
+
+            if (itemData == null)
+                return null;
+
+            switch (itemData.itemType)
+            {
+                case ItemType.Weapon:
+                    item = new Weapon(newItem.TemplateId);
+                    break;
+                case ItemType.Armor:
+                    item = new Armor(newItem.TemplateId);
+                    break;
+                case ItemType.Consumable:
+                    item = new Consumable(newItem.TemplateId);
+                    break;
+            }
+
+            if (item != null)
+            {
+                //item.ItemDbId = rewardData.ItemDbId;
+                item.Count = newItem.Count;
+                //item.Slot = 0;
+                item.Equipped = false;
+            }
+
+            return item;
+        }
     }
 
     public class Weapon : Item
