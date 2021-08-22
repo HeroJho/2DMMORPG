@@ -73,66 +73,39 @@ namespace Server.DB
                 Item item = player.Inven.Find(i =>
                 i.TemplateId == rewardData.itemId && i.Count < consumableData.maxCount);
 
+                int totalCount = 0;
                 if (item == null)
+                    totalCount = rewardData.count;
+                else
+                    totalCount = item.Count + rewardData.count;
+
+                while (totalCount > consumableData.maxCount)
                 {
-                    int totalCount = rewardData.count;
+                    totalCount -= consumableData.maxCount;
 
-                    while (totalCount > consumableData.maxCount)
+                    RewardData rewardDataCopy = new RewardData()
                     {
-                        totalCount -= consumableData.maxCount;
+                        probability = rewardData.probability,
+                        itemId = rewardData.itemId,
+                        count = consumableData.maxCount
+                    };
 
-                        RewardData rewardDataCopy = new RewardData()
-                        {
-                            probability = rewardData.probability,
-                            itemId = rewardData.itemId,
-                            count = consumableData.maxCount
-                        };
-
-                        Instance.AddNewSlot(player, rewardDataCopy, room);
-                    }
-
-                    if (totalCount <= consumableData.maxCount)
-                    {
-                        RewardData rewardDataCopy = new RewardData()
-                        {
-                            probability = rewardData.probability,
-                            itemId = rewardData.itemId,
-                            count = totalCount
-                        };
-
-                        Instance.AddNewSlot(player, rewardDataCopy, room);
-                    }
-
+                    Instance.AddNewSlot(player, rewardDataCopy, room);
                 }
-                else // 겹칠 아이템 존재
+
+                if (totalCount <= consumableData.maxCount)
                 {
-                    int totalCount = item.Count + rewardData.count;
-
-                    while (totalCount > consumableData.maxCount)
+                    RewardData rewardDataCopy = new RewardData()
                     {
-                        totalCount -= consumableData.maxCount;
+                        probability = rewardData.probability,
+                        itemId = rewardData.itemId,
+                        count = totalCount
+                    };
 
-                        RewardData rewardDataCopy = new RewardData()
-                        {
-                            probability = rewardData.probability,
-                            itemId = rewardData.itemId,
-                            count = consumableData.maxCount
-                        };
-
+                    if(item == null)
                         Instance.AddNewSlot(player, rewardDataCopy, room);
-                    }
-
-                    if (totalCount <= consumableData.maxCount)
-                    {
-                        RewardData rewardDataCopy = new RewardData()
-                        {
-                            probability = rewardData.probability,
-                            itemId = rewardData.itemId,
-                            count = totalCount
-                        };
-
+                    else
                         Instance.AddCountSlot(player, rewardDataCopy, room, item);
-                    }
                 }
 
             }
