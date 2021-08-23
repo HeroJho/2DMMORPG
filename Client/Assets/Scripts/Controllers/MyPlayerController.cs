@@ -214,13 +214,15 @@ public class MyPlayerController : PlayerController
 
 	}
 
+
 	void GetKeyInput()
     {
 		if(Input.GetKeyDown(KeyCode.Z))
-        {			
+        {
 			Item item = Managers.Object.FindItemFromGround(CellPos);
-			if(item != null)
-            {
+
+			if (item != null)
+			{
 				C_DropItem dropItemPacket = new C_DropItem()
 				{
 					PosInfo = new PositionInfo(),
@@ -231,7 +233,7 @@ public class MyPlayerController : PlayerController
 				dropItemPacket.ItemInfo.MergeFrom(item.Info);
 
 				Managers.Network.Send(dropItemPacket);
-            }
+			}
         }
 
     }

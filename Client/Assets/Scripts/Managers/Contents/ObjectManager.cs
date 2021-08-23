@@ -63,6 +63,9 @@ public class ObjectManager
             return null;
 
         // 해당 좌표의 제일 마지막에 떨어진 아이템 가져옴
+        if (_groundItems.Count <= 0)
+            return null;
+
         Item item = _groundItems[_groundItems.Count - 1];
         if (item == null)
             return null;

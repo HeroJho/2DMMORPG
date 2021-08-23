@@ -12,23 +12,29 @@ enum MsgId{
     S_MOVE = 5;
     C_SKILL = 6;
     S_SKILL = 7;
-    S_CHANGE_HP_MP = 8;
-    S_DIE = 9;
-    S_CONNECTED = 10;
-    C_LOGIN = 11;
-    S_LOGIN = 12;
-    C_ENTER_GAME = 13;
-    C_CREATE_PLAYER = 14;
-    S_CREATE_PLAYER = 15;
-    S_ITEM_LIST = 16;
-    S_ADD_ITEM = 17;
-    C_EQUIP_ITEM = 18;
-    S_EQUIP_ITEM = 19;
-    S_CHANGE_EX = 20;
-    S_LEVEL_UP = 21;
-    S_PING = 22;
-    C_PONG = 23;
-    S_MANAGE_SKILL = 24;
+    S_CHANGE_HP = 8;
+    S_CHANGE_MP = 9;
+    S_DIE = 10;
+    S_CONNECTED = 11;
+    C_LOGIN = 12;
+    S_LOGIN = 13;
+    C_ENTER_GAME = 14;
+    C_CREATE_PLAYER = 15;
+    S_CREATE_PLAYER = 16;
+    S_ITEM_LIST = 17;
+    S_ADD_ITEM = 18;
+    C_EQUIP_ITEM = 19;
+    S_EQUIP_ITEM = 20;
+    S_CHANGE_EX = 21;
+    S_LEVEL_UP = 22;
+    S_PING = 23;
+    C_PONG = 24;
+    S_MANAGE_SKILL = 25;
+    S_SET_COUNT_CONSUMABLE = 26;
+    C_SET_COUNT_CONSUMABLE = 27;
+    S_DROP_ITEM = 28;
+    C_DROP_ITEM = 29;
+    S_DELETE_GROUND_ITEM = 30;
 }
 
 enum CreatureState{
@@ -90,6 +96,12 @@ enum ConsumableType{
     CONSUMABLE_TYPE_POTION = 1;
 }
 
+enum PosionType{
+    POSION_TYPE_NONE = 0;
+    POSION_TYPE_HP = 1;
+    POSION_TYPE_MP = 2;
+}
+
 message S_EnterGame{
     ObjectInfo player = 1;
 }
@@ -124,10 +136,14 @@ message S_Skill{
     SkillInfo info = 2;
 }
 
-message S_ChangeHpMp{
+message S_ChangeHp{
     int32 objectId = 1;
     int32 hp = 2;
-    int32 mp = 3;
+}
+
+message S_ChangeMp{
+    int32 objectId = 1;
+    int32 mp = 2;
 }
 
 message S_Die{
@@ -198,6 +214,29 @@ message C_Pong{
 
 message S_ManageSkill{
     bool canUseSkill = 1;
+}
+
+message S_SetCountConsumable{
+    int32 itemDbId = 1;
+    int32 count = 2;
+}
+
+message C_SetCountConsumable{
+    int32 itemDbId = 1;
+}
+
+message S_DropItem{
+    PositionInfo posInfo = 1;
+    ItemInfo itemInfo = 2;
+}
+
+message C_DropItem{
+    PositionInfo posInfo = 1;
+    ItemInfo itemInfo = 2;
+}
+
+message S_DeleteGroundItem{
+    int32 itemDbId = 1;
 }
 
 message ItemInfo{

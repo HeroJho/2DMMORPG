@@ -100,9 +100,13 @@ namespace Server
             Item item = Map.FindGroundItem(pos, dropItempacket.ItemInfo);
             if (item == null)
                 return;
+            if (room.Map.PuseItems.Contains(item))
+                return;
 
+            // 연속으로 같은 아이템 Db에 시도하는 걸 방지 EX) Slot
+            room.Map.PuseItems.Add(item);
             // DB저장 후 인벤 추가 & 해당 좌표 템 삭제
-            DbTransaction.AddItemPlayer(player, item, room);
+            DbTransaction.AddItemPlayer(player, item, room, pos);
         }
     }
 

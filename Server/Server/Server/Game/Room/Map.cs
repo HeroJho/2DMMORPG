@@ -94,7 +94,10 @@ namespace Server
 
         bool[,] _collision; // 벽 여부
         GameObject[,] _objects; // 플레이어 여부
+
+        // TODO : 차라리 itemList도 DBid를 키로 Dic으로 관리하는게 좋을 것 같음
         Dictionary<Vector2Int, List<Item>> _items = new Dictionary<Vector2Int, List<Item>>(); // item 여부
+        public List<Item> PuseItems { get; set; } = new List<Item>();
 
         public void DropItemToMap(Vector2Int pos, Item item)
         {
@@ -121,6 +124,26 @@ namespace Server
             }
 
             return null;
+        }
+
+        public void DeleteGroundItem(Item addedItem, Vector2Int itemPos)
+        {
+            if (addedItem == null)
+                return;
+
+            List<Item> itemList = null;
+            if (_items.TryGetValue(itemPos, out itemList) == false)
+                return;
+
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                if (itemList[i].ItemDbId == addedItem.ItemDbId)
+                {
+                    itemList.Remove(addedItem);
+                }
+            }
+
+            PuseItems.Remove(addedItem);
         }
 
         public HashSet<GameObject> LoopByCircle(Vector2Int cellPos, int rad)

@@ -111,7 +111,7 @@ namespace Server.DB
             }
         }
 
-        public static void AddItemPlayer(Player player, Item newItem, GameRoom room)
+        public static void AddItemPlayer(Player player, Item newItem, GameRoom room, Vector2Int itemPos)
         {
             if (player == null || newItem == null || room == null)
                 return;
@@ -119,7 +119,7 @@ namespace Server.DB
             // 쌓을 수 있는가
             if (!newItem.Stackable)
             {
-                Instance.AddNewSlot(player, newItem, room);
+                Instance.AddNewSlot(player, newItem, room, itemPos);
             }
             else
             {
@@ -156,10 +156,10 @@ namespace Server.DB
                 }
 
                 if (item == null)
-                    Instance.AddNewSlot(player, newItem, room, totalCount);
+                    Instance.AddNewSlot(player, newItem, room, totalCount, itemPos);
                 else
                 {
-                    Instance.MergeCountSlot(player, item, newItem, room, totalCount);
+                    Instance.MergeCountSlot(player, item, newItem, room, totalCount, itemPos);
                 }
 
             }
@@ -256,7 +256,7 @@ namespace Server.DB
         }
 
         // AddPlayer
-        public void MergeCountSlot(Player player, Item item, Item newitem, GameRoom room, int totalCount)
+        public void MergeCountSlot(Player player, Item item, Item newItem, GameRoom room, int totalCount, Vector2Int itemPos)
         {
             //newitem은 Db에서 제거해줌
 
@@ -269,7 +269,7 @@ namespace Server.DB
 
             ItemDb newItemDb = new ItemDb()
             {
-                ItemDbId = newitem.ItemDbId,
+                ItemDbId = newItem.ItemDbId,
             };
 
             // You
@@ -281,6 +281,7 @@ namespace Server.DB
                     db.Entry(itemDb).Property(nameof(ItemDb.Count)).IsModified = true;
                                         
                     db.Items.Remove(newItemDb);
+                    
 
                     bool success = db.SaveChangesEx();
                     if (success)
@@ -289,6 +290,7 @@ namespace Server.DB
                         room.Push(() =>
                         {
                             item.Count = totalCount;
+                            room.Map.DeleteGroundItem(newItem, itemPos);
 
                             // TODO : Client Noti
                             {
@@ -309,7 +311,7 @@ namespace Server.DB
             });
         }
 
-        public void AddNewSlot(Player player, Item newItem, GameRoom room)
+        public void AddNewSlot(Player player, Item newItem, GameRoom room, Vector2Int itemPos)
         {
             if (player == null || newItem == null || room == null)
                 return;
@@ -343,6 +345,7 @@ namespace Server.DB
                         {
                             newItem.Slot = slot.Value;
                             player.Inven.Add(newItem);
+                            room.Map.DeleteGroundItem(newItem, itemPos);
 
                             // TODO : Client Noti
                             {
@@ -365,7 +368,7 @@ namespace Server.DB
             });
         }
 
-        public void AddNewSlot(Player player, Item newItem, GameRoom room, int totalCount)
+        public void AddNewSlot(Player player, Item newItem, GameRoom room, int totalCount, Vector2Int itemPos)
         {
             if (player == null || newItem == null || room == null)
                 return;
@@ -402,6 +405,7 @@ namespace Server.DB
                             newItem.Slot = slot.Value;
                             newItem.Count = totalCount;
                             player.Inven.Add(newItem);
+                            room.Map.DeleteGroundItem(newItem, itemPos);
 
                             // TODO : Client Noti
                             {
