@@ -27,7 +27,7 @@
       "name": "¹üÀ§ °ø°Ý",
       "cooldown": "0.5",
       "damage": "10",
-      "mp": "20",
+      "mp": "0",
       "skillType": "SkillExplosion",
       "explosion": {
         "name": "ÆøÆÈ",

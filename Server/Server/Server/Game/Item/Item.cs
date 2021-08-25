@@ -82,8 +82,8 @@ namespace Server
                 item.Equipped = itemDb.Equipped;
 
                 // 떨어진 아이템 위치
-                item.PosInfo.PosX = itemDb.PosX.Value;
-                item.PosInfo.PosY = itemDb.PosY.Value;
+                item.PosInfo.PosX = itemDb.PosX;
+                item.PosInfo.PosY = itemDb.PosY;
             }
 
             return item;

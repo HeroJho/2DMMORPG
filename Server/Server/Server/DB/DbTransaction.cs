@@ -116,7 +116,11 @@ namespace Server.DB
         public static void AddItemPlayer(Player player, Item newItem, GameRoom room)
         {
             if (player == null || newItem == null || room == null)
+            {
+                room.Map.PuseItems.Remove(newItem);
                 return;
+            }
+
 
             // 쌓을 수 있는가
             if (!newItem.Stackable)
@@ -187,6 +191,7 @@ namespace Server.DB
                 OwnerDbId = player.PlayerDbId,
                 PosX = 0,
                 PosY = 0,
+                RoomId = 0
             };
 
             // You
@@ -204,7 +209,7 @@ namespace Server.DB
                             Item newItem = Item.MakeItem(itemDb);
                             player.Inven.Add(newItem);
 
-                            // TODO : Client Noti
+                            // Client Noti
                             {
                                 S_AddItem addItemPacket = new S_AddItem();
                                 ItemInfo itemInfo = new ItemInfo();
@@ -260,55 +265,6 @@ namespace Server.DB
         }
 
         // AddPlayer
-        public void MergeCountSlot(Player player, Item item, Item newItem, GameRoom room, int totalCount)
-        {
-            //newitem은 Db에서 제거해줌
-
-            // Me
-            ItemDb itemDb = new ItemDb()
-            {
-                ItemDbId = item.ItemDbId,
-                Count = totalCount
-            };
-
-            ItemDb newItemDb = new ItemDb()
-            {
-                ItemDbId = newItem.ItemDbId,
-            };
-
-            // You
-            Instance.Push(() =>
-            {
-                using (AppDbContext db = new AppDbContext())
-                {
-                    db.Entry(itemDb).State = EntityState.Unchanged;
-                    db.Entry(itemDb).Property(nameof(ItemDb.Count)).IsModified = true;
-                                        
-                    db.Items.Remove(newItemDb);
-
-                    bool success = db.SaveChangesEx();
-                    if (success)
-                    {
-                        // Me
-                        room.Push(() =>
-                        {
-                            item.Count = totalCount;
-                            room.Map.DeleteGroundItem(newItem);
-
-                            // TODO : Client Noti
-                            {
-                                S_SetCountConsumable usingConsumablePacket = new S_SetCountConsumable();
-                                usingConsumablePacket.ItemDbId = item.ItemDbId;
-                                usingConsumablePacket.Count = item.Count;
-
-                                player.Session.Send(usingConsumablePacket);
-                            }
-                        });
-                    }
-                }
-            });
-        }
-
         public void AddNewSlot(Player player, Item newItem, GameRoom room)
         {
             if (player == null || newItem == null || room == null)
@@ -327,7 +283,8 @@ namespace Server.DB
             {
                 ItemDbId = newItem.ItemDbId,
                 Slot = slot.Value,
-                OwnerDbId = player.PlayerDbId
+                OwnerDbId = player.PlayerDbId,
+                RoomId = 0
             };
 
             // You
@@ -423,6 +380,55 @@ namespace Server.DB
             });
         }
 
+        public void MergeCountSlot(Player player, Item item, Item newItem, GameRoom room, int totalCount)
+        {
+            //newitem은 Db에서 제거해줌
+
+            // Me
+            ItemDb itemDb = new ItemDb()
+            {
+                ItemDbId = item.ItemDbId,
+                Count = totalCount
+            };
+
+            ItemDb newItemDb = new ItemDb()
+            {
+                ItemDbId = newItem.ItemDbId,
+            };
+
+            // You
+            Instance.Push(() =>
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    db.Entry(itemDb).State = EntityState.Unchanged;
+                    db.Entry(itemDb).Property(nameof(ItemDb.Count)).IsModified = true;
+
+                    db.Items.Remove(newItemDb);
+
+                    bool success = db.SaveChangesEx();
+                    if (success)
+                    {
+                        // Me
+                        room.Push(() =>
+                        {
+                            item.Count = totalCount;
+                            room.Map.DeleteGroundItem(newItem);
+
+                            // Client Noti
+                            {
+                                S_SetCountConsumable usingConsumablePacket = new S_SetCountConsumable();
+                                usingConsumablePacket.ItemDbId = item.ItemDbId;
+                                usingConsumablePacket.Count = item.Count;
+
+                                player.Session.Send(usingConsumablePacket);
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
 
         public static void DropItem(Vector2Int pos, RewardData rewardData, GameRoom room)
         {
@@ -435,7 +441,8 @@ namespace Server.DB
                 TemplateId = rewardData.itemId,
                 Count = rewardData.count,
                 PosX = pos.x,
-                PosY = pos.y
+                PosY = pos.y,
+                RoomId = room.RoomId
             };
 
             // You

@@ -54,10 +54,13 @@ namespace Server.Migrations
                     b.Property<int?>("OwnerDbId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PosX")
+                    b.Property<int>("PosX")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PosY")
+                    b.Property<int>("PosY")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
                         .HasColumnType("int");
 
                     b.Property<int>("Slot")

@@ -12,6 +12,14 @@ namespace Server
         Dictionary<int, GameRoom> _rooms = new Dictionary<int, GameRoom>();
         int _roomId = 1;
 
+        public void Init()
+        {
+            foreach (GameRoom room in _rooms.Values)
+            {
+                room.Init(1, 10);
+            }
+        }
+
         public void Update()
         {
             Flush();
@@ -25,14 +33,12 @@ namespace Server
         public GameRoom Add(int mapId)
         {
             GameRoom gameRoom = new GameRoom();
-            gameRoom.Push(gameRoom.Init, mapId, 10);
-
+            //gameRoom.Push(gameRoom.Init, mapId, 10);
 
             // 원자성! 룸ID가 겹칠일은 없다!
             gameRoom.RoomId = _roomId;
             _rooms.Add(_roomId, gameRoom);
             _roomId++;
-
 
             return gameRoom;
         }

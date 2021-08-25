@@ -1,6 +1,7 @@
 ﻿using Google.Protobuf;
 using Google.Protobuf.Protocol;
 using Server.Data;
+using Server.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,12 +48,15 @@ namespace Server
             }
 
             // TEMP
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 20; i++)
             {
                 Monster monster = ObjectManager.Instance.Add<Monster>();
                 monster.Init(1);
                 EnterGame(monster);
             }
+
+            // 맵 생성되고 Zone나눴으면 바닥 아이템 뿌림
+            LoadInitData();
         }
 
         public void Update()
@@ -267,5 +271,29 @@ namespace Server
             return zones.ToList();
         }
 
+        public void LoadInitData()
+        {
+            // TODO : 아이템 필드에 뿌리기
+            List<ItemDb> items = null;
+            using (AppDbContext db = new AppDbContext())
+            {
+                items = db.Items
+                    .Where(i => i.Owner == null).ToList();
+                
+            }
+
+            if (items == null)
+                return;
+
+            foreach (ItemDb itemDb in items)
+            {
+                Item newItem = Item.MakeItem(itemDb);
+                newItem.Id = ObjectManager.Instance.GenerateId(newItem.ObjectType);
+                Map.DropItemToMap(newItem.CellPos, newItem);
+
+                EnterGame(newItem);
+            }
+
+        }
     }
 }

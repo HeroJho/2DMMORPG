@@ -122,7 +122,7 @@ namespace Server
                                 return;
 
                             CreatureObject co = (CreatureObject)obj;
-                            co.OnDamaged(player, 2);
+                            co.OnDamaged(player, 100);
                         }
                     }
                     break;
