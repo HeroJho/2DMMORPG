@@ -5,7 +5,7 @@ using System;
 
 namespace Server
 {
-    public class Player : GameObject
+    public class Player : CreatureObject
     {
         public int PlayerDbId { get; set; }
 		public ClientSession Session { get; set; }

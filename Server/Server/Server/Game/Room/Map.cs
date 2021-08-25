@@ -95,7 +95,6 @@ namespace Server
         bool[,] _collision; // 벽 여부
         GameObject[,] _objects; // 플레이어 여부
 
-        // TODO : 차라리 itemList도 DBid를 키로 Dic으로 관리하는게 좋을 것 같음
         Dictionary<Vector2Int, List<Item>> _items = new Dictionary<Vector2Int, List<Item>>(); // item 여부
         public List<Item> PuseItems { get; set; } = new List<Item>();
 
@@ -126,13 +125,13 @@ namespace Server
             return null;
         }
 
-        public void DeleteGroundItem(Item addedItem, Vector2Int itemPos)
+        public void DeleteGroundItem(Item addedItem)
         {
             if (addedItem == null)
                 return;
 
             List<Item> itemList = null;
-            if (_items.TryGetValue(itemPos, out itemList) == false)
+            if (_items.TryGetValue(addedItem.CellPos, out itemList) == false)
                 return;
 
             for (int i = 0; i < itemList.Count; i++)
@@ -143,6 +142,7 @@ namespace Server
                 }
             }
 
+            addedItem.Room.LeaveGame(addedItem.Id);
             PuseItems.Remove(addedItem);
         }
 

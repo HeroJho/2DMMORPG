@@ -46,6 +46,40 @@ public class Item
         ItemType = itemType;
     }
 
+    public static Item MakeItem(ObjectInfo objectInfo)
+    {
+        Item item = null;
+
+        ItemData itemData = null;
+        Managers.Data.ItemDict.TryGetValue(objectInfo.ItemInfo.TemplateId, out itemData);
+
+        if (itemData == null)
+            return null;
+
+        switch (itemData.itemType)
+        {
+            case ItemType.Weapon:
+                item = new Weapon(objectInfo.ItemInfo.TemplateId);
+                break;
+            case ItemType.Armor:
+                item = new Armor(objectInfo.ItemInfo.TemplateId);
+                break;
+            case ItemType.Consumable:
+                item = new Consumable(objectInfo.ItemInfo.TemplateId);
+                break;
+        }
+
+        if (item != null)
+        {
+            item.ItemDbId = objectInfo.ItemInfo.ItemDbId;
+            item.Count = objectInfo.ItemInfo.Count;
+            item.Slot = objectInfo.ItemInfo.Slot;
+            item.Equipped = objectInfo.ItemInfo.Equipped;
+        }
+
+        return item;
+    }
+
     public static Item MakeItem(ItemInfo itemInfo)
     {
         Item item = null;

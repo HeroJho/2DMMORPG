@@ -96,6 +96,7 @@ namespace Server
 
             MyPlayer = ObjectManager.Instance.Add<Player>();
             {
+                // 플레이어 정보
                 MyPlayer.PlayerDbId = playerInfo.PlayerDbId;
                 MyPlayer.Info.Name = playerInfo.Name;
                 MyPlayer.Info.PosInfo.State = CreatureState.Idle;
@@ -104,7 +105,8 @@ namespace Server
                 MyPlayer.Info.PosInfo.PosY = 0;
                 MyPlayer.Stat.MergeFrom(playerInfo.StatInfo);
                 MyPlayer.Session = this;
-
+                
+                // 아이템 정보
                 S_ItemList itemListPacket = new S_ItemList();
 
                 using (AppDbContext db = new AppDbContext())
@@ -121,7 +123,7 @@ namespace Server
                             MyPlayer.Inven.Add(item);
 
                             ItemInfo info = new ItemInfo();
-                            info.MergeFrom(item.Info);
+                            info.MergeFrom(item.ItemInfo);
                             itemListPacket.Items.Add(info);
                         }
                     }

@@ -32,9 +32,7 @@ enum MsgId{
     S_MANAGE_SKILL = 25;
     S_SET_COUNT_CONSUMABLE = 26;
     C_SET_COUNT_CONSUMABLE = 27;
-    S_DROP_ITEM = 28;
-    C_DROP_ITEM = 29;
-    S_DELETE_GROUND_ITEM = 30;
+    C_GET_DROP_ITEM = 28;
 }
 
 enum CreatureState{
@@ -56,6 +54,7 @@ enum GameObjectType{
     PLAYER = 1;
     MONSTER = 2;
     PROJECTILE = 3;
+    ITEM = 4;
 }
 
 enum SkillType{
@@ -225,18 +224,9 @@ message C_SetCountConsumable{
     int32 itemDbId = 1;
 }
 
-message S_DropItem{
+message C_GetDropItem{
     PositionInfo posInfo = 1;
     ItemInfo itemInfo = 2;
-}
-
-message C_DropItem{
-    PositionInfo posInfo = 1;
-    ItemInfo itemInfo = 2;
-}
-
-message S_DeleteGroundItem{
-    int32 itemDbId = 1;
 }
 
 message ItemInfo{
@@ -258,6 +248,7 @@ message ObjectInfo{
     string name = 2;
     PositionInfo posInfo = 3;
     StatInfo statInfo = 4;
+    ItemInfo itemInfo = 5;
 }
 
 message PositionInfo{

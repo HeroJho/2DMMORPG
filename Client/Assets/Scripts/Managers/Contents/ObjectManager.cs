@@ -10,8 +10,7 @@ public class ObjectManager
 {
     public MyPlayerController MyPlayer { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
-    Dictionary<Vector2Int, List<Item>> _items = new Dictionary<Vector2Int, List<Item>>(); // item 여부
-    Dictionary<int, GameObject> _groundedItems = new Dictionary<int, GameObject>();
+    Dictionary<Vector2Int, List<ItemController>> _items = new Dictionary<Vector2Int, List<ItemController>>(); // item 여부
 
     public GameObject ItemRoot
     {
@@ -29,72 +28,25 @@ public class ObjectManager
     }
 
 
-    public void DropItemToMap(PositionInfo posInfo, ItemInfo itemInfo)
-    {
-        Vector2Int pos = new Vector2Int(posInfo.PosX, posInfo.PosY);
-        List<Item> itemList = new List<Item>();
-
-        if (!_items.ContainsKey(pos))
-            _items.Add(pos, itemList);
-        if (_items.TryGetValue(pos, out itemList) == false)
-            _items.Add(pos, itemList);
-
-        Item item = Item.MakeItem(itemInfo);
-
-        ItemData itemData = null;
-        Managers.Data.ItemDict.TryGetValue(item.TemplateId, out itemData);
-
-
-        GameObject go = Managers.Resource.Instantiate(itemData.iconPath, ItemRoot.transform);
-        go.name = itemData.name;
-
-        itemList.Add(item);
-
-        go.transform.position = new Vector3(pos.x + 0.5f, pos.y + 0.5f, 0);
-        _groundedItems.Add(item.ItemDbId, go);
-    }
-
-    public Item FindItemFromGround(Vector3Int cellPos)
+    public ItemController FindItemFromGround(Vector3Int cellPos)
     {
         Vector2Int pos = new Vector2Int(cellPos.x, cellPos.y);
 
-        List<Item> _groundItems = null;
+        List<ItemController> _groundItems = null;
         if (_items.TryGetValue(pos, out _groundItems) == false)
             return null;
 
-        // 해당 좌표의 제일 마지막에 떨어진 아이템 가져옴
         if (_groundItems.Count <= 0)
             return null;
 
-        Item item = _groundItems[_groundItems.Count - 1];
+        // 해당 좌표의 제일 마지막에 떨어진 아이템 가져옴
+        ItemController item = _groundItems[_groundItems.Count - 1];
         if (item == null)
             return null;
 
         // 리스트에서 지우는건 서버에서 허락맡고
 
         return item;
-    }
-
-    public void DeleteItem(int itemDbId)
-    {
-        foreach (List<Item> list in _items.Values)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                Item item = list[i];
-
-                if (itemDbId == item.ItemDbId)
-                {
-                    list.Remove(item);
-                    GameObject obj = null;
-                    if (_groundedItems.TryGetValue(itemDbId, out obj))
-                    {
-                        _groundedItems.Remove(itemDbId);
-                        Managers.Resource.Destroy(obj);
-                    }
-                }
-            }
-        }
     }
 
     public void Add(ObjectInfo info, bool myPlayer = false)
@@ -160,9 +112,38 @@ public class ObjectManager
                     ac.SyncPos();
                 }
                 break;
-        }
+            case GameObjectType.Item:
+                {
+                    ItemData itemData = null;
+                    Managers.Data.ItemDict.TryGetValue(info.ItemInfo.TemplateId, out itemData);
+                    if (itemData == null)
+                        return;
 
-        
+                    GameObject go = Managers.Resource.Instantiate(itemData.iconPath, ItemRoot.transform);
+                    go.name = itemData.name;
+
+
+                    ItemController ic = go.GetComponent<ItemController>();
+                    ic.itemInfo = info.ItemInfo;
+                    ic.PosInfo = info.PosInfo;
+                    ic.Id = info.ObjectId;
+                    ic.SyncPos();
+
+                    _objects.Add(info.ObjectId, go);
+
+                    List<ItemController> itemList = new List<ItemController>();
+                    
+                    Vector2Int pos = new Vector2Int(ic.PosInfo.PosX, ic.PosInfo.PosY);
+
+                    if (!_items.ContainsKey(pos))
+                        _items.Add(pos, itemList);
+                    if (_items.TryGetValue(pos, out itemList) == false)
+                        _items.Add(pos, itemList);
+
+                    itemList.Add(ic);
+                }
+                break;
+        }        
     }
 
     public void Remove(int id)
@@ -177,6 +158,24 @@ public class ObjectManager
             return;
 
         _objects.Remove(id);
+
+        ItemController item = go.GetComponent<ItemController>();
+        if (item != null)
+        {
+            Vector2Int pos = new Vector2Int(item.CellPos.x, item.CellPos.y);
+            List<ItemController> groundItems = null;
+            if (_items.TryGetValue(pos, out groundItems) == false)
+                return;
+
+            for (int i = 0; i < groundItems.Count; i++)
+            {
+                ItemController groundItem = groundItems[i];
+                if (groundItem.Id == id)
+                    groundItems.Remove(groundItem);
+            }
+
+        }
+
         Managers.Resource.Destroy(go);
     }
 

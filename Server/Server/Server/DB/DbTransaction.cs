@@ -49,6 +49,7 @@ namespace Server.DB
             });
         }
 
+        // 보상 아이템 추가
         public static void RewardPlayer(Player player, RewardData rewardData, GameRoom room)
         {
             if (player == null || rewardData == null || room == null)
@@ -111,7 +112,8 @@ namespace Server.DB
             }
         }
 
-        public static void AddItemPlayer(Player player, Item newItem, GameRoom room, Vector2Int itemPos)
+        // 땅에 떨어진 아이템 추가
+        public static void AddItemPlayer(Player player, Item newItem, GameRoom room)
         {
             if (player == null || newItem == null || room == null)
                 return;
@@ -119,7 +121,7 @@ namespace Server.DB
             // 쌓을 수 있는가
             if (!newItem.Stackable)
             {
-                Instance.AddNewSlot(player, newItem, room, itemPos);
+                Instance.AddNewSlot(player, newItem, room);
             }
             else
             {
@@ -156,10 +158,10 @@ namespace Server.DB
                 }
 
                 if (item == null)
-                    Instance.AddNewSlot(player, newItem, room, totalCount, itemPos);
+                    Instance.AddNewSlot(player, newItem, room, totalCount);
                 else
                 {
-                    Instance.MergeCountSlot(player, item, newItem, room, totalCount, itemPos);
+                    Instance.MergeCountSlot(player, item, newItem, room, totalCount);
                 }
 
             }
@@ -182,7 +184,9 @@ namespace Server.DB
                 TemplateId = rewardData.itemId,
                 Count = rewardData.count,
                 Slot = slot.Value,
-                OwnerDbId = player.PlayerDbId
+                OwnerDbId = player.PlayerDbId,
+                PosX = 0,
+                PosY = 0,
             };
 
             // You
@@ -204,7 +208,7 @@ namespace Server.DB
                             {
                                 S_AddItem addItemPacket = new S_AddItem();
                                 ItemInfo itemInfo = new ItemInfo();
-                                itemInfo.MergeFrom(newItem.Info);
+                                itemInfo.MergeFrom(newItem.ItemInfo);
                                 addItemPacket.Items.Add(itemInfo);
 
                                 player.Session.Send(addItemPacket);
@@ -256,7 +260,7 @@ namespace Server.DB
         }
 
         // AddPlayer
-        public void MergeCountSlot(Player player, Item item, Item newItem, GameRoom room, int totalCount, Vector2Int itemPos)
+        public void MergeCountSlot(Player player, Item item, Item newItem, GameRoom room, int totalCount)
         {
             //newitem은 Db에서 제거해줌
 
@@ -281,7 +285,6 @@ namespace Server.DB
                     db.Entry(itemDb).Property(nameof(ItemDb.Count)).IsModified = true;
                                         
                     db.Items.Remove(newItemDb);
-                    
 
                     bool success = db.SaveChangesEx();
                     if (success)
@@ -290,7 +293,7 @@ namespace Server.DB
                         room.Push(() =>
                         {
                             item.Count = totalCount;
-                            room.Map.DeleteGroundItem(newItem, itemPos);
+                            room.Map.DeleteGroundItem(newItem);
 
                             // TODO : Client Noti
                             {
@@ -299,11 +302,6 @@ namespace Server.DB
                                 usingConsumablePacket.Count = item.Count;
 
                                 player.Session.Send(usingConsumablePacket);
-
-                                S_DeleteGroundItem deletePacket = new S_DeleteGroundItem();
-                                deletePacket.ItemDbId = newItemDb.ItemDbId;
-
-                                player.Session.Send(deletePacket);
                             }
                         });
                     }
@@ -311,7 +309,7 @@ namespace Server.DB
             });
         }
 
-        public void AddNewSlot(Player player, Item newItem, GameRoom room, Vector2Int itemPos)
+        public void AddNewSlot(Player player, Item newItem, GameRoom room)
         {
             if (player == null || newItem == null || room == null)
                 return;
@@ -319,7 +317,11 @@ namespace Server.DB
             // TODO : 살짝 문제가 있긴 하다... > 해결
             int? slot = player.Inven.GetEmptySlot();
             if (slot == null)
+            {
+                room.Map.PuseItems.Remove(newItem);
                 return;
+            }
+
 
             ItemDb itemDb = new ItemDb()
             {
@@ -345,22 +347,17 @@ namespace Server.DB
                         {
                             newItem.Slot = slot.Value;
                             player.Inven.Add(newItem);
-                            room.Map.DeleteGroundItem(newItem, itemPos);
+                            room.Map.DeleteGroundItem(newItem);
 
                             // TODO : Client Noti
                             {
                                 S_AddItem addItemPacket = new S_AddItem();
                                 ItemInfo itemInfo = new ItemInfo();
-                                itemInfo.MergeFrom(newItem.Info);
+                                itemInfo.MergeFrom(newItem.ItemInfo);
                                 addItemPacket.Items.Add(itemInfo);
 
                                 player.Session.Send(addItemPacket);
                                 player.Inven.SlotPuse.Remove(newItem.Slot);
-
-                                S_DeleteGroundItem deletePacket = new S_DeleteGroundItem();
-                                deletePacket.ItemDbId = newItem.ItemDbId;
-
-                                player.Session.Send(deletePacket);
                             }
                         });
                     }
@@ -368,7 +365,7 @@ namespace Server.DB
             });
         }
 
-        public void AddNewSlot(Player player, Item newItem, GameRoom room, int totalCount, Vector2Int itemPos)
+        public void AddNewSlot(Player player, Item newItem, GameRoom room, int totalCount)
         {
             if (player == null || newItem == null || room == null)
                 return;
@@ -376,7 +373,10 @@ namespace Server.DB
             // TODO : 살짝 문제가 있긴 하다... > 해결
             int? slot = player.Inven.GetEmptySlot();
             if (slot == null)
+            {
+                room.Map.PuseItems.Remove(newItem);
                 return;
+            }
 
             ItemDb itemDb = new ItemDb()
             {
@@ -405,22 +405,17 @@ namespace Server.DB
                             newItem.Slot = slot.Value;
                             newItem.Count = totalCount;
                             player.Inven.Add(newItem);
-                            room.Map.DeleteGroundItem(newItem, itemPos);
+                            room.Map.DeleteGroundItem(newItem);
 
                             // TODO : Client Noti
                             {
                                 S_AddItem addItemPacket = new S_AddItem();
                                 ItemInfo itemInfo = new ItemInfo();
-                                itemInfo.MergeFrom(newItem.Info);
+                                itemInfo.MergeFrom(newItem.ItemInfo);
                                 addItemPacket.Items.Add(itemInfo);
 
                                 player.Session.Send(addItemPacket);
                                 player.Inven.SlotPuse.Remove(newItem.Slot);
-
-                                S_DeleteGroundItem deletePacket = new S_DeleteGroundItem();
-                                deletePacket.ItemDbId = newItem.ItemDbId;
-
-                                player.Session.Send(deletePacket);
                             }
                         });
                     }
@@ -439,6 +434,8 @@ namespace Server.DB
             {
                 TemplateId = rewardData.itemId,
                 Count = rewardData.count,
+                PosX = pos.x,
+                PosY = pos.y
             };
 
             // You
@@ -454,21 +451,13 @@ namespace Server.DB
                         room.Push(() =>
                         {
                             Item newItem = Item.MakeItem(itemDb);
+                            newItem.Id = ObjectManager.Instance.GenerateId(newItem.ObjectType);
                             room.Map.DropItemToMap(pos, newItem);
 
-                            //Client Noti
-                            {
-                                S_DropItem dropItemPacket = new S_DropItem()
-                                {
-                                    PosInfo = new PositionInfo(),
-                                    ItemInfo = new ItemInfo()
-                                };
-                                dropItemPacket.PosInfo.PosX = pos.x;
-                                dropItemPacket.PosInfo.PosY = pos.y;
-                                dropItemPacket.ItemInfo.MergeFrom(newItem.Info);
+                            // 이제 떨어진 아이템을 바로 보내는게 아니라
+                            // 방에 입장해서 Zone적용 시킴
+                            room.EnterGame(newItem);
 
-                                room.Broadcast(pos, dropItemPacket);
-                            }
                         });
                     }
                 }

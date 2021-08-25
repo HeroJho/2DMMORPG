@@ -45,6 +45,8 @@ namespace Server.DB
         public int Count { get; set; } // 소유 갯수
         public int Slot { get; set; } // 아이템 배치 위치
         public bool Equipped { get; set; } = false;
+        public int? PosX { get; set; }
+        public int? PosY { get; set; }
 
         [ForeignKey("Owner")]
         public int? OwnerDbId { get; set; } // 바닥템 고려 null 허용

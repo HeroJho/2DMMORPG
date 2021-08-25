@@ -7,38 +7,38 @@ using System.Text;
 
 namespace Server
 {
-    public class Item
+    public class Item : GameObject
     {
-        public ItemInfo Info { get; } = new ItemInfo();
+        public ItemInfo ItemInfo { get; } = new ItemInfo();
 
         public int ItemDbId
         {
-            get { return Info.ItemDbId; }
-            set { Info.ItemDbId = value; }
+            get { return ItemInfo.ItemDbId; }
+            set { ItemInfo.ItemDbId = value; }
         }
 
         public int TemplateId
         {
-            get { return Info.TemplateId; }
-            set { Info.TemplateId = value; }
+            get { return ItemInfo.TemplateId; }
+            set { ItemInfo.TemplateId = value; }
         }
 
         public int Count
         {
-            get { return Info.Count; }
-            set { Info.Count = value; }
+            get { return ItemInfo.Count; }
+            set { ItemInfo.Count = value; }
         }
 
         public int Slot
         {
-            get { return Info.Slot; }
-            set { Info.Slot = value; }
+            get { return ItemInfo.Slot; }
+            set { ItemInfo.Slot = value; }
         }
 
         public bool Equipped
         {
-            get { return Info.Equipped; }
-            set { Info.Equipped = value; }
+            get { return ItemInfo.Equipped; }
+            set { ItemInfo.Equipped = value; }
         }
 
         public ItemType ItemType { get; private set; }
@@ -46,7 +46,9 @@ namespace Server
 
         public Item(ItemType itemType)
         {
+            ObjectType = GameObjectType.Item;
             ItemType = itemType;
+            Info.ItemInfo = ItemInfo;
         }
 
         public static Item MakeItem(ItemDb itemDb)
@@ -78,6 +80,10 @@ namespace Server
                 item.Count = itemDb.Count;
                 item.Slot = itemDb.Slot;
                 item.Equipped = itemDb.Equipped;
+
+                // 떨어진 아이템 위치
+                item.PosInfo.PosX = itemDb.PosX.Value;
+                item.PosInfo.PosY = itemDb.PosY.Value;
             }
 
             return item;

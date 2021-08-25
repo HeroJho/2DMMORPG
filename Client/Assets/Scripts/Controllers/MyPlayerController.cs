@@ -219,18 +219,18 @@ public class MyPlayerController : PlayerController
     {
 		if(Input.GetKeyDown(KeyCode.Z))
         {
-			Item item = Managers.Object.FindItemFromGround(CellPos);
+			ItemController item = Managers.Object.FindItemFromGround(CellPos);
 
 			if (item != null)
 			{
-				C_DropItem dropItemPacket = new C_DropItem()
+				C_GetDropItem dropItemPacket = new C_GetDropItem()
 				{
 					PosInfo = new PositionInfo(),
 					ItemInfo = new ItemInfo()
 				};
 				dropItemPacket.PosInfo.PosX = CellPos.x;
 				dropItemPacket.PosInfo.PosY = CellPos.y;
-				dropItemPacket.ItemInfo.MergeFrom(item.Info);
+				dropItemPacket.ItemInfo.MergeFrom(item.itemInfo);
 
 				Managers.Network.Send(dropItemPacket);
 			}

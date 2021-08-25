@@ -293,20 +293,4 @@ class PacketHandler
 		if (item.Count <= 0)
 			Managers.Inven.Items.Remove(item.ItemDbId);
 	}
-
-	public static void S_DropItemHandler(PacketSession session, IMessage packet)
-    {
-		S_DropItem dropItemPacket = (S_DropItem)packet;
-
-		Managers.Object.DropItemToMap(dropItemPacket.PosInfo, dropItemPacket.ItemInfo);
-
-	}
-
-	public static void S_DeleteGroundItemHandler(PacketSession session, IMessage packet)
-	{
-		S_DeleteGroundItem deletePacket = (S_DeleteGroundItem)packet;
-
-		Managers.Object.DeleteItem(deletePacket.ItemDbId);
-
-	}
 }

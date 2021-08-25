@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Server
 {
-    public class Projectile : GameObject
+    public class Projectile : CreatureObject
     {
         public Data.Skill Data { get; set; }
 

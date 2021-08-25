@@ -7,7 +7,7 @@ namespace Server
 {
     public class Arrow : Projectile
     {
-        public GameObject Owner { get; set; } // 주인
+        public CreatureObject Owner { get; set; } // 주인
 
         public override void Update()
         {
@@ -27,8 +27,13 @@ namespace Server
             }
             else
             {
-                GameObject target = Room.Map.Find(destPos);
-                if(target != null)
+                GameObject go = Room.Map.Find(destPos);
+                if (go as CreatureObject == null)
+                    return;
+
+                CreatureObject target = (CreatureObject)go;
+
+                if (target != null)
                 {
                     target.OnDamaged(this, Data.damage + Owner.TotalAttack);
                 }

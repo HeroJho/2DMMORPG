@@ -52,8 +52,8 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CSetCountConsumable, MakePacket<C_SetCountConsumable>);
             _handler.Add((ushort)MsgId.CSetCountConsumable, PacketHandler.C_SetCountConsumableHandler);
 
-            _onRecv.Add((ushort)MsgId.CDropItem, MakePacket<C_DropItem>);
-            _handler.Add((ushort)MsgId.CDropItem, PacketHandler.C_DropItemHandler);
+            _onRecv.Add((ushort)MsgId.CGetDropItem, MakePacket<C_GetDropItem>);
+            _handler.Add((ushort)MsgId.CGetDropItem, PacketHandler.C_GetDropItemHandler);
 
         }
 

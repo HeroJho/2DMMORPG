@@ -81,7 +81,12 @@ namespace Server
                     {
                         // 데미지 판정
                         Vector2Int skillPos = player.GetFrontCellPos(info.PosInfo.MoveDir);
-                        GameObject target = Map.Find(skillPos);
+                        GameObject go = Map.Find(skillPos);
+
+                        if (go as CreatureObject == null)
+                            return;
+
+                        CreatureObject target = (CreatureObject)go;
 
                         if (target != null)
                         {
@@ -113,7 +118,11 @@ namespace Server
 
                         foreach (GameObject obj in objects)
                         {
-                            obj.OnDamaged(player, 2);
+                            if (obj as CreatureObject == null)
+                                return;
+
+                            CreatureObject co = (CreatureObject)obj;
+                            co.OnDamaged(player, 2);
                         }
                     }
                     break;

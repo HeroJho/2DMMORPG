@@ -65,6 +65,17 @@ namespace Server
 
                     objects.Add(projectile);
                 }
+                foreach (Item item in zone.Items)
+                {
+                    int dx = item.CellPos.x - cellPos.x;
+                    int dy = item.CellPos.y - cellPos.y;
+                    if (Math.Abs(dx) > GameRoom.VisionCells)
+                        continue;
+                    if (Math.Abs(dy) > GameRoom.VisionCells)
+                        continue;
+
+                    objects.Add(item);
+                }
             }
 
             return objects;

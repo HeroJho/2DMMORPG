@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Server
 {
-    public class Monster : GameObject
+    public class Monster : CreatureObject
     {
         public int TemplateId { get; private set; }
         Player _target;

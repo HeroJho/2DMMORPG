@@ -17,8 +17,10 @@ namespace Server
         Dictionary<int, Player> _players = new Dictionary<int, Player>();
         Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
         Dictionary<int, Projectile> _projectiles = new Dictionary<int, Projectile>();
+        Dictionary<int, Item> _Items = new Dictionary<int, Item>();
 
         public Zone[,] Zones { get; private set; }
+        public Zone[,] ItemZones { get; private set; }
         public int ZoneCells { get; private set; }
 
         public Map Map { get; private set; } = new Map();
@@ -33,12 +35,14 @@ namespace Server
             int countY = (Map.SizeY + zoneCells - 1) / zoneCells;
             int countX = (Map.SizeX + zoneCells - 1) / zoneCells;
             Zones = new Zone[countY, countX];
+            ItemZones = new Zone[countY, countX];
 
             for (int y = 0; y < countY; y++)
             {
                 for (int x = 0; x < countX; x++)
                 {
                     Zones[y, x] = new Zone(y, x);
+                    ItemZones[y, x] = new Zone(y, x);
                 }
             }
 
@@ -109,9 +113,18 @@ namespace Server
                         projectile.Update();
                     }
                     break;
+                case GameObjectType.Item:
+                    {
+                        Item item = (Item)gameObject;
+                        _Items.Add(item.Id, item);
+                        item.Room = this;
+
+                        GetZone(item.CellPos).Items.Add(item);
+                    }
+                    break;
             }
 
-            // 타인한테 정보 전송
+            // 게임 입장(죽고 다시 생성)할 때 주변에 자신 스폰 알림
             {
                 S_Spawn spawnPacket = new S_Spawn();
                 spawnPacket.Objects.Add(gameObject.Info);
@@ -169,8 +182,20 @@ namespace Server
                         projectile.Room = null;
                     }
                     break;
+                case GameObjectType.Item:
+                    {
+                        Item item = null;
+                        if (_Items.Remove(objectId, out item) == false)
+                            return;
+
+                        cellPos = item.CellPos;
+                        Map.ApplyLeave(item);
+                        item.Room = null;
+                    }
+                    break;
                 default:
                     return;
+
             }
 
             // 타인한테 정보 전송
