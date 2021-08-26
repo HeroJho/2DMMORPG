@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\DummyClient\\DummyClient.csproj": {}
+    "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\DummyClient\\DummyClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\DummyClient\\DummyClient.csproj": {
+    "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\DummyClient\\DummyClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\DummyClient\\DummyClient.csproj",
+        "projectUniqueName": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\DummyClient\\DummyClient.csproj",
         "projectName": "DummyClient",
-        "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\DummyClient\\DummyClient.csproj",
+        "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\DummyClient\\DummyClient.csproj",
         "packagesPath": "C:\\Users\\thehe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\DummyClient\\obj\\",
+        "outputPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\DummyClient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\thehe\\AppData\\Roaming\\NuGet\\NuGet.Config",

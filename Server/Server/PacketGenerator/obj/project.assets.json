@@ -117,11 +117,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\PacketGenerator\\PacketGenerator.csproj",
+      "projectUniqueName": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\PacketGenerator\\PacketGenerator.csproj",
       "projectName": "PacketGenerator",
-      "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\PacketGenerator\\PacketGenerator.csproj",
+      "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\PacketGenerator\\PacketGenerator.csproj",
       "packagesPath": "C:\\Users\\thehe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\PacketGenerator\\obj\\",
+      "outputPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\PacketGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thehe\\AppData\\Roaming\\NuGet\\NuGet.Config",

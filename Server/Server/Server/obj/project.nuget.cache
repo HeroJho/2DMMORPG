@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9xQh+dFpU+8XuIHNkg4IaaX0Vpborjnq45FLMiF3JyTBYtR/fSIDUc1SIUcjxD93EXUHhdcTwSCD1iZjTNI0Ew==",
+  "dgSpecHash": "K2RCsT/UC0e0wanrMRaf/iztDR6Swjout9ViyHtIVvW52kbLYydTfkXw8kXwuxUPOu2vDZNFTB4gbd3mk1RL3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\thehe\\.nuget\\packages\\google.protobuf\\3.17.3\\google.protobuf.3.17.3.nupkg.sha512",
     "C:\\Users\\thehe\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

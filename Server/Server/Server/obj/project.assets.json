@@ -5740,11 +5740,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\Server\\Server.csproj",
+      "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\thehe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\Server\\obj\\",
+      "outputPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\thehe\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5760,8 +5760,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\ServerCore\\ServerCore.csproj": {
-              "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\복습\\Server\\Server\\ServerCore\\ServerCore.csproj"
+            "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj": {
+              "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj"
             }
           }
         }

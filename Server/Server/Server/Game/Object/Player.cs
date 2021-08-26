@@ -92,6 +92,10 @@ namespace Server
             Item item = Inven.Get(equipPacket.ItemDbId);
             if (item == null)
                 return;
+               
+            // 같은 아이템이고 장착에 변화가 없으면 스킵
+            if (item.ItemDbId == equipPacket.ItemDbId && item.Equipped == equipPacket.Equipped)
+                return;
 
             // 소모품은 장착 x
             if (item.ItemType == ItemType.Consumable)
