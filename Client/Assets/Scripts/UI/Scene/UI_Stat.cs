@@ -114,6 +114,8 @@ public class UI_Stat : UI_Base
         BindEvent(Get<Image>((int)Images.Slot_Helmet_BG).gameObject, (e) =>
         {
             UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
+            if (itemInfo == null)
+                return;
 
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(itemInfo.TemplateId, out itemData);
@@ -136,6 +138,8 @@ public class UI_Stat : UI_Base
         BindEvent(Get<Image>((int)Images.Slot_Armor_BG).gameObject, (e) =>
         {
             UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
+            if (itemInfo == null)
+                return;
 
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(itemInfo.TemplateId, out itemData);
@@ -158,6 +162,8 @@ public class UI_Stat : UI_Base
         BindEvent(Get<Image>((int)Images.Slot_Boots_BG).gameObject, (e) =>
         {
             UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
+            if (itemInfo == null)
+                return;
 
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(itemInfo.TemplateId, out itemData);
@@ -180,6 +186,8 @@ public class UI_Stat : UI_Base
         BindEvent(Get<Image>((int)Images.Slot_Weapon_BG).gameObject, (e) =>
         {
             UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
+            if (itemInfo == null)
+                return;
 
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(itemInfo.TemplateId, out itemData);
@@ -199,6 +207,8 @@ public class UI_Stat : UI_Base
         BindEvent(Get<Image>((int)Images.Slot_Shield_BG).gameObject, (e) =>
         {
             UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
+            if (itemInfo == null)
+                return;
 
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(itemInfo.TemplateId, out itemData);

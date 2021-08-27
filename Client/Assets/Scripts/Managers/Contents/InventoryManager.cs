@@ -30,6 +30,19 @@ public class InventoryManager
         return null;
     }
 
+    public List<Item> FindToList(Func<Item, bool> condition)
+    {
+        List<Item> items = new List<Item>();
+
+        foreach (Item item in Items.Values)
+        {
+            if (condition.Invoke(item))
+                items.Add(item);
+        }
+
+        return items;
+    }
+
     public void Clear()
     {
         Items.Clear();

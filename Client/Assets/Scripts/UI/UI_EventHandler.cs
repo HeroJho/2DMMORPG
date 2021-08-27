@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, IEndDragHandler, IPointerUpHandler, IDropHandler
+public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler, IEndDragHandler, IPointerUpHandler, IDropHandler 
 {
     public Action<PointerEventData> OnRightClickHandler = null;
     public Action<PointerEventData> OnLeftClickHandler = null;
@@ -51,6 +51,8 @@ public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IDragHandler
             OnUpHandler.Invoke(eventData);
     }
 
+    // OnDrop은 마우스를 누른 오브젝트를 드롭할 때 인자로 불러올 수 있음
+    // 위치를 굳이 옮길 필요가 없음
     public void OnDrop(PointerEventData eventData)
     {
         if (OnDropHandler != null)

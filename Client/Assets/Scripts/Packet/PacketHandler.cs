@@ -207,7 +207,7 @@ class PacketHandler
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.InvenUI.RefreshUI();
 		gameSceneUI.StatUI.RefreshUI();
-
+		gameSceneUI.ShortcutKeyUI.RefreshUI();
 	}
 
 	public static void S_EquipItemHandler(PacketSession session, IMessage packet)
@@ -289,6 +289,7 @@ class PacketHandler
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 
 		gameSceneUI.InvenUI.SetCount(item);
+		gameSceneUI.ShortcutKeyUI.RefreshUI();
 
 		if (item.Count <= 0)
 			Managers.Inven.Items.Remove(item.ItemDbId);

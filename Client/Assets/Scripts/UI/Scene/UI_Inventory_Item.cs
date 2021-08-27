@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class UI_Inventory_Item : UI_Base
 {
-    public Image Icon;
+    [SerializeField]
+    Image _icon;
 
     [SerializeField]
     Image _dragIcon;
@@ -23,6 +24,7 @@ public class UI_Inventory_Item : UI_Base
     public int TemplateId { get; private set; }
     public int Count { get; private set; }
     public bool Stackable { get; private set; }
+    public ItemType ItemType { get; private set; }
     public ArmorType ArmorType { get; private set; }
     public bool Equipped { get; private set; }
 
@@ -31,8 +33,6 @@ public class UI_Inventory_Item : UI_Base
     {
         // 드래그 UI가 가림 > 최상위 부모에 생성된 UI로 덮어줌
         _frontDragIcon = transform.root.GetComponentInChildren<UI_FrontDragIcon>().GetComponent<Image>();
-        
-        _canvasGroup = _dragIcon.GetComponent<CanvasGroup>();
 
         BindEvent();
     }
@@ -46,8 +46,10 @@ public class UI_Inventory_Item : UI_Base
             Count = 0;
             Stackable = false;
             Equipped = false;
+            ItemType = ItemType.None;
+            ArmorType = ArmorType.None;
 
-            Icon.gameObject.SetActive(false);
+            _icon.gameObject.SetActive(false);
             _dragIcon.gameObject.SetActive(false);
             _frame.gameObject.SetActive(false);
             _countText.gameObject.SetActive(false);
@@ -59,22 +61,23 @@ public class UI_Inventory_Item : UI_Base
             Count = item.Count;
             Stackable = item.Stackable;
             Equipped = item.Equipped;
-            
+            ItemType = item.ItemType;
             // UI_Stat Drop할 때 확인용
-            if(item.ItemType == ItemType.Armor)
+            if (item.ItemType == ItemType.Armor)
             {
                 Armor armor = (Armor)item;
                 ArmorType = armor.ArmorType;
             }
 
+
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(TemplateId, out itemData);
 
             Sprite icon = Managers.Resource.Load<Sprite>(itemData.iconPath);
-            Icon.sprite = icon;
+            _icon.sprite = icon;
             _dragIcon.sprite = icon;
 
-            Icon.gameObject.SetActive(true);
+            _icon.gameObject.SetActive(true);
             _dragIcon.gameObject.SetActive(true);
             _frame.gameObject.SetActive(Equipped);
 
@@ -103,8 +106,6 @@ public class UI_Inventory_Item : UI_Base
         // 오른 클릭시 장착패킷
         BindEvent(_dragIcon.gameObject, (e) =>
         {
-            Debug.Log("Click Item");
-
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(TemplateId, out itemData);
             if (itemData == null)
@@ -130,11 +131,10 @@ public class UI_Inventory_Item : UI_Base
         BindEvent(_dragIcon.gameObject, (e) =>
         {
             _frontDragIcon.transform.position = e.position;
-            _frontDragIcon.sprite = Icon.sprite;
+            _frontDragIcon.sprite = _icon.sprite;
             _frontDragIcon.enabled = true;
 
-            _dragIcon.transform.position = e.position;
-            _canvasGroup.blocksRaycasts = false;
+            _frontDragIcon.transform.position = e.position;
 
         }, Define.UIEvent.Drag);
         // 드래그를 풀면 제자리로
@@ -143,21 +143,7 @@ public class UI_Inventory_Item : UI_Base
             _frontDragIcon.enabled = false;
             _frontDragIcon.transform.position = Vector3.zero;
 
-            _canvasGroup.blocksRaycasts = true;
-            _dragIcon.transform.position = Icon.transform.position;
-
         }, Define.UIEvent.Click_Up);
 
-    }
-
-    IEnumerator ReSpawnDragIcon()
-    {
-        yield return new WaitForSeconds(1f);
-
-        if (_dragIcon.transform.position != Icon.transform.position)
-        {
-            _dragIcon.transform.position = Icon.transform.position;
-            _canvasGroup.blocksRaycasts = true;
-        }
     }
 }

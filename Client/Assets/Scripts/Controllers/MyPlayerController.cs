@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class MyPlayerController : PlayerController
 {
+	UI_GameScene _gameSceneUI = null;
 	bool _moveKeyPressed = false;
 	int _currentSkill = 1;
 	public bool CanUseSkill { get; set; }
@@ -41,6 +42,7 @@ public class MyPlayerController : PlayerController
     {
         base.Init();
 
+		_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		CanUseSkill = true;
 		RefreshAdditionanlStat();
 		AddExBar();
@@ -130,6 +132,7 @@ public class MyPlayerController : PlayerController
     protected override void UpdateController()
     {
 		GetUIKeyInput();
+		GetQuickSlotInput();
 
 		switch (State)
 		{
@@ -163,19 +166,19 @@ public class MyPlayerController : PlayerController
 	{
 		_moveKeyPressed = true;
 
-		if (Input.GetKey(KeyCode.W))
+		if (Input.GetKey(KeyCode.UpArrow))
 		{
 			Dir = MoveDir.Up;
 		}
-		else if (Input.GetKey(KeyCode.S))
+		else if (Input.GetKey(KeyCode.DownArrow))
 		{
 			Dir = MoveDir.Down;
 		}
-		else if (Input.GetKey(KeyCode.A))
+		else if (Input.GetKey(KeyCode.LeftArrow))
 		{
 			Dir = MoveDir.Left;
 		}
-		else if (Input.GetKey(KeyCode.D))
+		else if (Input.GetKey(KeyCode.RightArrow))
 		{
 			Dir = MoveDir.Right;
 		}
@@ -214,7 +217,6 @@ public class MyPlayerController : PlayerController
 
 	}
 
-
 	void GetKeyInput()
     {
 		if(Input.GetKeyDown(KeyCode.Z))
@@ -242,8 +244,8 @@ public class MyPlayerController : PlayerController
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-			UI_Inventory invenUI = gameSceneUI.InvenUI;
+			_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+			UI_Inventory invenUI = _gameSceneUI.InvenUI;
 
             if (invenUI.gameObject.activeSelf) // 활성화 여부
             {
@@ -257,8 +259,8 @@ public class MyPlayerController : PlayerController
 		}
         else if (Input.GetKeyDown(KeyCode.C))
         {
-			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-			UI_Stat statUI = gameSceneUI.StatUI;
+			_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+			UI_Stat statUI = _gameSceneUI.StatUI;
 
 			if (statUI.gameObject.activeSelf) // 활성화 여부
 			{
@@ -270,6 +272,28 @@ public class MyPlayerController : PlayerController
 				statUI.RefreshUI(); // 켤 때 갱신
 			}
 		}
+	}
+
+	void GetQuickSlotInput()
+	{ // 단축키
+
+		if (Input.GetKeyDown(KeyCode.Q))
+			_gameSceneUI.ShortcutKeyUI.GetKeyQ();
+		if (Input.GetKeyDown(KeyCode.W))
+			_gameSceneUI.ShortcutKeyUI.GetKeyW();
+		if (Input.GetKeyDown(KeyCode.E))
+			_gameSceneUI.ShortcutKeyUI.GetKeyE();
+		if (Input.GetKeyDown(KeyCode.R))
+			_gameSceneUI.ShortcutKeyUI.GetKeyR();
+		if (Input.GetKeyDown(KeyCode.A))
+			_gameSceneUI.ShortcutKeyUI.GetKeyA();
+		if (Input.GetKeyDown(KeyCode.S))
+			_gameSceneUI.ShortcutKeyUI.GetKeyS();
+		if (Input.GetKeyDown(KeyCode.D))
+			_gameSceneUI.ShortcutKeyUI.GetKeyD();
+		if (Input.GetKeyDown(KeyCode.F))
+			_gameSceneUI.ShortcutKeyUI.GetKeyF();
+
 	}
 
 	Coroutine _coSkillCooltime;

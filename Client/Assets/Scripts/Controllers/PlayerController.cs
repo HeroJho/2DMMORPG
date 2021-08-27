@@ -202,10 +202,9 @@ public class PlayerController : CreatureController
 		GameObject go = Managers.Resource.Instantiate("Effect/ExplosionEffect");
 		go.transform.position = transform.position;
 		go.GetComponent<Animator>().Play("EXPLOSION_START");
+		Destroy(go, 1);
 
 		yield return new WaitForSeconds(0.5f);
-
-		Managers.Resource.Destroy(go);
 
 		State = CreatureState.Idle;
 		_coSkill = null;
