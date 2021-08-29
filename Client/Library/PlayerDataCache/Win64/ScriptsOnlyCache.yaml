@@ -15,6 +15,8 @@ ScriptsOnlyBuild:
     - UI_Inventory_Item
     - UI_ShortcutKey
     - UI_ShortcutKeys
+    - UI_Skill
+    - UI_Skill_Slot
     - UI_Stat
     - UI_StatBar
     Unity.2D.Animation.Editor.dll:
@@ -45,10 +47,14 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   sceneClasses:
@@ -104,11 +110,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11650}
     - Class: 114
+      Script: {instanceID: 11720}
+    - Class: 114
+      Script: {instanceID: 12044}
+    - Class: 114
       Script: {instanceID: 12222}
     - Class: 114
       Script: {instanceID: 12436}
     - Class: 114
+      Script: {instanceID: 12588}
+    - Class: 114
       Script: {instanceID: 12722}
+    - Class: 114
+      Script: {instanceID: 12954}
     - Class: 114
       Script: {instanceID: 12964}
     - Class: 114
@@ -129,6 +143,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14404}
     - Class: 114
       Script: {instanceID: 14432}
+    - Class: 114
+      Script: {instanceID: 19566}
+    - Class: 114
+      Script: {instanceID: 44710}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -768,7 +786,19 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_Skill
+  - hash:
+      serializedVersion: 2
+      Hash: 7add0d64fbfb2dc07104f7b76a9f3313
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_Skill_Slot
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game.unity
-  playerPath: "C:/Users/thehe/OneDrive/\uBC14\uD0D5 \uD654\uBA74/GitHub/Client/Builds/Win64/Client4/Client4.exe"
+  playerPath: "C:/Users/thehe/OneDrive/\uBC14\uD0D5 \uD654\uBA74/GitHub/Client/Builds/Win64/Client2/Client2.exe"

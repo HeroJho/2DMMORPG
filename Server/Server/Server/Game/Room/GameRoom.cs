@@ -48,7 +48,7 @@ namespace Server
             }
 
             // TEMP
-            for (int i = 0; i < 0; i++)
+            for (int i = 0; i < 5; i++)
             {
                 Monster monster = ObjectManager.Instance.Add<Monster>();
                 monster.Init(1);

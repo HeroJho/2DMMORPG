@@ -17,6 +17,7 @@ namespace Data
         public int damage;
         public int mp;
         public SkillType skillType;
+        public string iconPath;
         public projectileInfo projectile;
         public explosionInfo explosion;
     }

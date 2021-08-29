@@ -6,7 +6,8 @@
       "cooldown": "0.5",
       "damage": "10",
       "mp": "0",
-      "skillType": "SkillAuto"
+      "skillType": "SkillAuto",
+      "iconPath": "Textures/Skill/Auto"
     },
     {
       "id": "2",
@@ -15,6 +16,7 @@
       "damage": "5",
       "mp": "5",
       "skillType": "SkillProjectile",
+      "iconPath": "Textures/Skill/Arrow",
       "projectile": {
         "name": "È­»ì",
         "speed": "25.0",
@@ -25,10 +27,11 @@
     {
       "id": "3",
       "name": "¹üÀ§ °ø°Ý",
-      "cooldown": "1",
+      "cooldown": "5",
       "damage": "10",
-      "mp": "20",
+      "mp": "0",
       "skillType": "SkillExplosion",
+      "iconPath": "Textures/Skill/Explosion",
       "explosion": {
         "name": "ÆøÆÈ",
         "radian": "5",
