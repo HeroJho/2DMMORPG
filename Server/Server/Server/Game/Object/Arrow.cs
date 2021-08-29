@@ -28,14 +28,14 @@ namespace Server
             else
             {
                 GameObject go = Room.Map.Find(destPos);
-                if (go as CreatureObject == null)
-                    return;
-
-                CreatureObject target = (CreatureObject)go;
-
-                if (target != null)
+                if (go as CreatureObject != null)
                 {
-                    target.OnDamaged(this, Data.damage + Owner.TotalAttack);
+                    CreatureObject target = (CreatureObject)go;
+
+                    if (target != null)
+                    {
+                        target.OnDamaged(this, Data.damage + Owner.TotalAttack);
+                    }
                 }
 
                 Room.Push(Room.LeaveGame, Id);

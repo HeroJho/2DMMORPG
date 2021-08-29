@@ -221,10 +221,10 @@ namespace Server
 
             Mp += mp;
 
-            S_ChangeMp changeHpMpPacket = new S_ChangeMp();
-            changeHpMpPacket.ObjectId = Id;
-            changeHpMpPacket.Mp = Mp;
-            Room.Broadcast(CellPos, changeHpMpPacket);
+            S_ChangeMp changeMpPacket = new S_ChangeMp();
+            changeMpPacket.ObjectId = Id;
+            changeMpPacket.Mp = Mp;
+            Room.Broadcast(CellPos, changeMpPacket);
         }
     }
 }

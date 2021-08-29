@@ -8,7 +8,7 @@ public class MyPlayerController : PlayerController
 {
 	UI_GameScene _gameSceneUI = null;
 	bool _moveKeyPressed = false;
-	int _currentSkill = 1;
+	public int CurrentSkill { get; set; } = 1;
 	public bool CanUseSkill { get; set; }
 
     public override StatInfo Stat 
@@ -190,29 +190,29 @@ public class MyPlayerController : PlayerController
 
 	void GetSkillKeyInput()
     {
-		if (Input.GetKeyDown(KeyCode.Alpha1))
-		{
-			_currentSkill = 1;
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			_currentSkill = 2;
-		}
-		else if (Input.GetKeyDown(KeyCode.Alpha3))
-		{
-			_currentSkill = 3;
-		}
+		//if (Input.GetKeyDown(KeyCode.Alpha1))
+		//{
+		//	_currentSkill = 1;
+		//}
+		//else if (Input.GetKeyDown(KeyCode.Alpha2))
+		//{
+		//	_currentSkill = 2;
+		//}
+		//else if (Input.GetKeyDown(KeyCode.Alpha3))
+		//{
+		//	_currentSkill = 3;
+		//}
 
 
 		// 스킬 상태로 갈지 확인
 		if (_coSkillCooltime == null && Input.GetKey(KeyCode.Space) && CanUseSkill)
 		{
 			C_Skill skill = new C_Skill() { Info = new SkillInfo() };
-			skill.Info.SkillId = _currentSkill;
+			skill.Info.SkillId = CurrentSkill;
 			Managers.Network.Send(skill);
 
 			_coSkillCooltime = StartCoroutine("CoInputCooltime",
-				Managers.Data.SkillDict[_currentSkill].cooldown);
+				Managers.Data.SkillDict[CurrentSkill].cooldown);
 		}
 
 	}
@@ -244,7 +244,6 @@ public class MyPlayerController : PlayerController
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-			_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 			UI_Inventory invenUI = _gameSceneUI.InvenUI;
 
             if (invenUI.gameObject.activeSelf) // 활성화 여부
@@ -259,7 +258,6 @@ public class MyPlayerController : PlayerController
 		}
         else if (Input.GetKeyDown(KeyCode.C))
         {
-			_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 			UI_Stat statUI = _gameSceneUI.StatUI;
 
 			if (statUI.gameObject.activeSelf) // 활성화 여부
@@ -270,6 +268,20 @@ public class MyPlayerController : PlayerController
 			{
 				statUI.gameObject.SetActive(true);
 				statUI.RefreshUI(); // 켤 때 갱신
+			}
+		}
+		else if(Input.GetKeyDown(KeyCode.K))
+        {
+			UI_Skill skillUI = _gameSceneUI.SkillUI;
+
+			if (skillUI.gameObject.activeSelf) // 활성화 여부
+			{
+				skillUI.gameObject.SetActive(false);
+			}
+			else
+			{
+				skillUI.gameObject.SetActive(true);
+				skillUI.RefreshUI();
 			}
 		}
 	}

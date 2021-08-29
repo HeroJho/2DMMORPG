@@ -70,6 +70,7 @@ namespace Server
             skill.Info.SkillId = skillPacket.Info.SkillId;
             Broadcast(player.CellPos, skill);
                        
+            // 쿨타임 실행
             player.StartCheckCooltime(skillData.cooldown);
 
             // 스킬을 사용했으니 Mp 깎음
@@ -114,7 +115,7 @@ namespace Server
                     break;
                 case SkillType.SkillExplosion:
                     {
-                        HashSet<GameObject> objects = Map.LoopByCircle(player.CellPos, skillData.damage);
+                        HashSet<GameObject> objects = Map.LoopByCircle(player.CellPos, skillData.explosion.radian);
 
                         foreach (GameObject obj in objects)
                         {
@@ -122,7 +123,7 @@ namespace Server
                                 return;
 
                             CreatureObject co = (CreatureObject)obj;
-                            co.OnDamaged(player, 100);
+                            co.OnDamaged(player, skillData.damage);
                         }
                     }
                     break;
