@@ -14,7 +14,7 @@
       "name": "원거리 공격",
       "cooldown": "0.5",
       "damage": "5",
-      "mp": "5",
+      "mp": "0",
       "skillType": "SkillProjectile",
       "iconPath": "Textures/Skill/Arrow",
       "projectile": {

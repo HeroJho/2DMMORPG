@@ -10,7 +10,7 @@ namespace Server
         public int PlayerDbId { get; set; }
 		public ClientSession Session { get; set; }
         public VisionCube Vision { get; private set; }
-        public bool CanUseSkill { get; private set; } = true;
+        public SkillBase Skill { get; private set; }
 
         public Inventory Inven { get; private set; } = new Inventory();
 
@@ -47,6 +47,7 @@ namespace Server
         {
             ObjectType = GameObjectType.Player;
             Vision = new VisionCube(this);
+            Skill = new SkillBase(this);
         }
 
         public override void OnDamaged(GameObject attacker, int damage)
@@ -198,20 +199,6 @@ namespace Server
             changeExPacket.LevelEx = LevelUpExp;
 
             Session.Send(changeExPacket);
-        }
-
-        public void StartCheckCooltime(float coolTime)
-        {
-            CanUseSkill = false;
-            Room.PushAfter((int)(coolTime * 1000), ResetCooltime);
-        }
-
-        public void ResetCooltime()
-        {
-            CanUseSkill = true;
-            S_ManageSkill manageSkillPacket = new S_ManageSkill();
-            manageSkillPacket.CanUseSkill = CanUseSkill;
-            Session.Send(manageSkillPacket);
         }
 
         public void RecoveryMp(int mp)

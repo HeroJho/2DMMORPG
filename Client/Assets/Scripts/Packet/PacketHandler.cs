@@ -272,7 +272,7 @@ class PacketHandler
 		if (mpc == null)
 			return;
 
-		mpc.CanUseSkill = skillmanagePacket.CanUseSkill;
+		Managers.Skill.ResetCooltime(skillmanagePacket.TemplateId);
 
 	}
 

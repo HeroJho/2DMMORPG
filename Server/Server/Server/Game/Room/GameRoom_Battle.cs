@@ -56,8 +56,6 @@ namespace Server
             ObjectInfo info = player.Info;
             if (info.PosInfo.State != CreatureState.Idle) // 멈춘 상태에서
                 return;
-            if (!player.CanUseSkill) // 스킬 쿨이 돌았을 때
-                return;
 
             // 마나 여부 확인
             if (player.Mp < skillData.mp)
@@ -67,11 +65,16 @@ namespace Server
             info.PosInfo.State = CreatureState.Skill;
             S_Skill skill = new S_Skill() { Info = new SkillInfo() };
             skill.ObjectId = info.ObjectId;
-            skill.Info.SkillId = skillPacket.Info.SkillId;
+            skill.Info.SkillId = skillData.id;
             Broadcast(player.CellPos, skill);
-                       
-            // 쿨타임 실행
-            player.StartCheckCooltime(skillData.cooldown);
+
+            // 쿨타임 확인 or 쿨타임 체크
+            if (!player.Skill.StartCheckCooltime(skillData.id))
+            {
+                Console.WriteLine("FailedSkill");
+                return;
+            }
+
 
             // 스킬을 사용했으니 Mp 깎음
             player.UseMp(skillData.mp);

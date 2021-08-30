@@ -212,7 +212,7 @@ message C_Pong{
 }
 
 message S_ManageSkill{
-    bool canUseSkill = 1;
+    int32 templateId = 1;
 }
 
 message S_SetCountConsumable{

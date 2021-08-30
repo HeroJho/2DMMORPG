@@ -8,7 +8,6 @@ public class MyPlayerController : PlayerController
 {
 	UI_GameScene _gameSceneUI = null;
 	bool _moveKeyPressed = false;
-	public bool CanUseSkill { get; set; }
 
     public override StatInfo Stat 
 	{
@@ -42,7 +41,6 @@ public class MyPlayerController : PlayerController
         base.Init();
 
 		_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-		CanUseSkill = true;
 		RefreshAdditionanlStat();
 		AddExBar();
 		InitLevelUI();
@@ -357,14 +355,6 @@ public class MyPlayerController : PlayerController
 					break;
 			}
 		}
-	}
-
-	public void UseSkill(int skillId)
-    {
-		C_Skill skill = new C_Skill() { Info = new SkillInfo() };
-		skill.Info.SkillId = skillId;
-		Managers.Network.Send(skill);
-
 	}
 
 }

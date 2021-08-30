@@ -12,12 +12,14 @@ public class Managers : MonoBehaviour
     NetworkManager _network = new NetworkManager();
     MapManager _map = new MapManager();
     ObjectManager _obj = new ObjectManager();
+    SkillManager _skill = new SkillManager();
 
 
     public static InventoryManager Inven { get { return Instance._inven; } }
     public static NetworkManager Network { get { return Instance._network; } }
     public static MapManager Map { get { return Instance._map; } }
     public static ObjectManager Object { get { return Instance._obj; } }
+    public static SkillManager Skill { get { return Instance._skill; } }
     #endregion
 
     #region Core
