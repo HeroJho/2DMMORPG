@@ -294,4 +294,20 @@ class PacketHandler
 		if (item.Count <= 0)
 			Managers.Inven.Items.Remove(item.ItemDbId);
 	}
+
+	public static void S_RemoveItemHandler(PacketSession session, IMessage packet)
+	{
+		S_RemoveItem removeItemPacket = (S_RemoveItem)packet;
+
+		Debug.Log("아이템을 버렸습니다!");
+
+		Managers.Inven.Remove(removeItemPacket.ItemDbId);
+
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.InvenUI.RefreshUI();
+		//gameSceneUI.StatUI.RefreshUI();
+		//gameSceneUI.ShortcutKeyUI.RefreshUI();
+	}
+
+
 }

@@ -109,6 +109,23 @@ namespace Server
             // DB저장 후 인벤 추가 & 해당 좌표 템 삭제
             DbTransaction.AddItemPlayer(player, item, room);
         }
+
+        public void HandleRemoveItem(Player player, C_RemoveItem removeItemPacket)
+        {
+            GameRoom room = player.Room;
+
+            if (player == null || room == null)
+                return;
+
+            int itemDbId = removeItemPacket.ItemDbId;
+            Item item = player.Inven.Get(itemDbId);
+
+            if (item == null)
+                return;
+
+            DbTransaction.RemoveItem(player, item, room);
+
+        }
     }
 
 }

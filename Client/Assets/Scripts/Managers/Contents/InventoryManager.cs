@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.Protocol;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,22 @@ public class InventoryManager
         }
 
         return null;
+    }
+
+    public bool Remove(int itemDbId)
+    {
+        if (Items.Remove(itemDbId) == false)
+            return false;
+
+        return true;
+    }
+
+    public void TryToRemoveItem(int itemDbId)
+    {
+        C_RemoveItem removeItem = new C_RemoveItem();
+        removeItem.ItemDbId = itemDbId;
+
+        Managers.Network.Send(removeItem);
     }
 
     public List<Item> FindToList(Func<Item, bool> condition)

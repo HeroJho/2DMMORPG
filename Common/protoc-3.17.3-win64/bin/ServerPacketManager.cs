@@ -55,6 +55,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CGetDropItem, MakePacket<C_GetDropItem>);
             _handler.Add((ushort)MsgId.CGetDropItem, PacketHandler.C_GetDropItemHandler);
 
+            _onRecv.Add((ushort)MsgId.CRemoveItem, MakePacket<C_RemoveItem>);
+            _handler.Add((ushort)MsgId.CRemoveItem, PacketHandler.C_RemoveItemHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

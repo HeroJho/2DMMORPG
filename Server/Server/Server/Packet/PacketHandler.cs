@@ -123,5 +123,21 @@ namespace Server
             room.Push(room.HandleDropItem, player, dropItemPacket);
         }
 
+        public static void C_RemoveItemHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_RemoveItem removeItemPacket = (C_RemoveItem)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleRemoveItem, player, removeItemPacket);
+        }
+
     }
 }

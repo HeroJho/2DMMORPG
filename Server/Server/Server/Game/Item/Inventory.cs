@@ -34,6 +34,11 @@ namespace Server
             return null;
         }
 
+        public void Remove(int itemDbId)
+        {
+            Items.Remove(itemDbId);
+        }
+
         public int? GetEmptySlot()
         {
             for (int slot = 0; slot < 20; slot++)

@@ -45,5 +45,14 @@ public class UI_GameScene : UI_Scene
                 keyInfo.RemoveSlot();
 
         },Define.UIEvent.Drop);
+
+        BindEvent(Get<Image>((int)Images.DropPanel).gameObject, (e) =>
+        {
+            UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
+
+            if (itemInfo != null)
+                Managers.Inven.TryToRemoveItem(itemInfo.ItemDbId);
+
+        }, Define.UIEvent.Drop);
     }
 }

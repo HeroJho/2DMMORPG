@@ -88,6 +88,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SSetCountConsumable, MakePacket<S_SetCountConsumable>);
             _handler.Add((ushort)MsgId.SSetCountConsumable, PacketHandler.S_SetCountConsumableHandler);
 
+            _onRecv.Add((ushort)MsgId.SRemoveItem, MakePacket<S_RemoveItem>);
+            _handler.Add((ushort)MsgId.SRemoveItem, PacketHandler.S_RemoveItemHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

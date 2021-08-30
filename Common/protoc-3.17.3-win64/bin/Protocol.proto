@@ -33,6 +33,8 @@ enum MsgId{
     S_SET_COUNT_CONSUMABLE = 26;
     C_SET_COUNT_CONSUMABLE = 27;
     C_GET_DROP_ITEM = 28;
+    C_REMOVE_ITEM = 29;
+    S_REMOVE_ITEM = 30;
 }
 
 enum CreatureState{
@@ -227,6 +229,14 @@ message C_SetCountConsumable{
 message C_GetDropItem{
     PositionInfo posInfo = 1;
     ItemInfo itemInfo = 2;
+}
+
+message C_RemoveItem{
+    int32 itemDbId = 1; 
+}
+
+message S_RemoveItem{
+    int32 itemDbId = 1;
 }
 
 message ItemInfo{

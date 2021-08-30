@@ -146,4 +146,5 @@ public class UI_Inventory_Item : UI_Base
         }, Define.UIEvent.Click_Up);
 
     }
+
 }

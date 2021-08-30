@@ -470,6 +470,46 @@ namespace Server.DB
                 }
             });
         }
+
+        public static void RemoveItem(Player player, Item item, GameRoom room)
+        {
+            if (player == null || item == null || room == null)
+                return;
+
+            // Me
+            ItemDb itemDb = new ItemDb()
+            {
+                ItemDbId = item.ItemDbId
+            };
+
+            // You
+            Instance.Push(() =>
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    db.Items.Remove(itemDb);
+
+                    bool success = db.SaveChangesEx();
+                    if (success)
+                    {
+                        // Me
+                        room.Push(() =>
+                        {
+                            player.Inven.Remove(item.ItemDbId);
+
+                            // Client Noti
+                            {
+                                S_RemoveItem removeItemPacket = new S_RemoveItem();
+                                removeItemPacket.ItemDbId = item.ItemDbId;
+
+                                player.Session.Send(removeItemPacket);
+                            }
+                        });
+                    }
+                }
+            });
+
+        }
     }
 }
 
