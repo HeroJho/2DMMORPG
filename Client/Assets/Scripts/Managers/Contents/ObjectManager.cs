@@ -11,6 +11,7 @@ public class ObjectManager
     public MyPlayerController MyPlayer { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
     Dictionary<Vector2Int, List<ItemController>> _items = new Dictionary<Vector2Int, List<ItemController>>(); // item 여부
+    Dictionary<int, GameObject> _npcs = new Dictionary<int, GameObject>();
 
     public GameObject ItemRoot
     {
@@ -186,15 +187,18 @@ public class ObjectManager
         return go;
     }
 
-    public GameObject FindCreature(Vector3Int cellPos)
+    public GameObject FindCollsion(Vector3Int cellPos)
     {
         foreach(GameObject obj in _objects.Values)
         {
-            CreatureController cc = obj.GetComponent<CreatureController>();
-            if (cc == null)
+            BaseController bc = obj.GetComponent<BaseController>();
+            if (bc == null)
                 continue;
 
-            if (cc.CellPos == cellPos)
+            if (bc.CanCollision == false)
+                continue;
+
+            if (bc.CellPos == cellPos)
                 return obj;
         }
 
@@ -217,7 +221,24 @@ public class ObjectManager
         foreach (GameObject obj in _objects.Values)
             Managers.Resource.Destroy(obj);
         _objects.Clear();
+        _npcs.Clear();
         MyPlayer = null;
+    }
+
+    public void SpawnNpc(ObjectInfo info)
+    {
+        // Npc프리팹을 찾고
+        GameObject go = Managers.Resource.Instantiate($"Creature/Npc/Npc_{info.ObjectId}");
+        go.name = $"Npc_{info.ObjectId}";
+        _objects.Add(info.ObjectId, go);
+        _npcs.Add(info.ObjectId, go);
+
+        // 위치를 설정
+        NpcController nc = go.GetComponent<NpcController>();
+        nc.PosInfo = info.PosInfo;
+        nc.State = CreatureState.Idle;
+        nc.SyncPos();
+
     }
 
     public static GameObjectType GetObjectTypeById(int id)
@@ -225,4 +246,5 @@ public class ObjectManager
         int type = (id >> 24) & 0x7F;
         return (GameObjectType)type;
     }
+        
 }

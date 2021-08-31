@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class ArrowController : BaseController
 {
+	public ArrowController()
+    {
+		CanCollision = false;
+    }
+
 	protected override void Init()
 	{
 		switch (Dir)

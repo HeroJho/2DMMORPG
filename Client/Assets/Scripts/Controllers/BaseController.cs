@@ -6,6 +6,7 @@ using UnityEngine;
 public class BaseController : MonoBehaviour
 {
     public int Id { get; set; }
+	public bool CanCollision { get; protected set; }
 
 	protected StatInfo _stat = new StatInfo();
 	public virtual StatInfo Stat

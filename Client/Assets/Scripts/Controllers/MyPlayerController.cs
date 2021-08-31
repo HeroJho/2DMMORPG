@@ -314,7 +314,7 @@ public class MyPlayerController : PlayerController
 
 		if (Managers.Map.CanGo(destPos))
 		{
-			if (Managers.Object.FindCreature(destPos) == null)
+			if (Managers.Object.FindCollsion(destPos) == null)
 			{
 				CellPos = destPos;
 			}

@@ -8,7 +8,9 @@ ScriptsOnlyBuild:
     - MonsterController
     - MpBar
     - MyPlayerController
+    - NpcController
     - PlayerController
+    - QuestGiver
     - UI_FrontDragIcon
     - UI_GameScene
     - UI_Inventory
@@ -98,55 +100,59 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11172}
     - Class: 114
-      Script: {instanceID: 11194}
+      Script: {instanceID: 11174}
     - Class: 114
-      Script: {instanceID: 11216}
+      Script: {instanceID: 11196}
     - Class: 114
-      Script: {instanceID: 11338}
+      Script: {instanceID: 11218}
     - Class: 114
-      Script: {instanceID: 11400}
+      Script: {instanceID: 11340}
     - Class: 114
-      Script: {instanceID: 11450}
+      Script: {instanceID: 11404}
     - Class: 114
-      Script: {instanceID: 11650}
+      Script: {instanceID: 11454}
     - Class: 114
-      Script: {instanceID: 11720}
+      Script: {instanceID: 11654}
     - Class: 114
-      Script: {instanceID: 12044}
+      Script: {instanceID: 11724}
     - Class: 114
-      Script: {instanceID: 12222}
+      Script: {instanceID: 12048}
     - Class: 114
-      Script: {instanceID: 12436}
+      Script: {instanceID: 12228}
     - Class: 114
-      Script: {instanceID: 12588}
+      Script: {instanceID: 12416}
     - Class: 114
-      Script: {instanceID: 12722}
+      Script: {instanceID: 12444}
     - Class: 114
-      Script: {instanceID: 12954}
+      Script: {instanceID: 12596}
     - Class: 114
-      Script: {instanceID: 12964}
+      Script: {instanceID: 12608}
     - Class: 114
-      Script: {instanceID: 13392}
+      Script: {instanceID: 12732}
     - Class: 114
-      Script: {instanceID: 13396}
+      Script: {instanceID: 12972}
     - Class: 114
-      Script: {instanceID: 13736}
+      Script: {instanceID: 13402}
     - Class: 114
-      Script: {instanceID: 13894}
+      Script: {instanceID: 13406}
     - Class: 114
-      Script: {instanceID: 14036}
+      Script: {instanceID: 13748}
     - Class: 114
-      Script: {instanceID: 14204}
+      Script: {instanceID: 13906}
     - Class: 114
-      Script: {instanceID: 14366}
+      Script: {instanceID: 14016}
     - Class: 114
-      Script: {instanceID: 14404}
+      Script: {instanceID: 14050}
     - Class: 114
-      Script: {instanceID: 14432}
+      Script: {instanceID: 14218}
     - Class: 114
-      Script: {instanceID: 19566}
+      Script: {instanceID: 14380}
     - Class: 114
-      Script: {instanceID: 44710}
+      Script: {instanceID: 14418}
+    - Class: 114
+      Script: {instanceID: 14446}
+    - Class: 114
+      Script: {instanceID: 23714}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -200,6 +206,12 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 5f1752ed2092162f016c19510c28a8b9
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Button
+  - hash:
+      serializedVersion: 2
       Hash: 7072231382eb3c4871b3dd75ad0227e1
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -240,6 +252,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UI_ShortcutKeys
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: QuestManager
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -419,6 +437,12 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
+    className: UI_Quest
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
     className: UI_Stat
   - hash:
       serializedVersion: 2
@@ -461,6 +485,12 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
+    className: UI_Skill
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
     className: UI_ShortcutKey
   - hash:
       serializedVersion: 2
@@ -480,6 +510,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ScrollRect
+  - hash:
+      serializedVersion: 2
+      Hash: ce53f43b5d92e3ac924e81e104aab240
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: QuestGiver
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -522,12 +558,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UI_Popup
-  - hash:
-      serializedVersion: 2
-      Hash: 5f1752ed2092162f016c19510c28a8b9
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Button
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -662,6 +692,12 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
+      Hash: 7add0d64fbfb2dc07104f7b76a9f3313
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_Skill_Slot
+  - hash:
+      serializedVersion: 2
       Hash: d791aa6007fa3640be1164ea75bb087d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -791,13 +827,7 @@ ScriptsOnlyBuild:
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: UI_Skill
-  - hash:
-      serializedVersion: 2
-      Hash: 7add0d64fbfb2dc07104f7b76a9f3313
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: UI_Skill_Slot
+    className: NpcController
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game.unity

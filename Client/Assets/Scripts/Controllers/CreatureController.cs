@@ -7,6 +7,11 @@ public class CreatureController : BaseController
 {
 	HpBar _hpBar;
 
+	public CreatureController()
+	{
+		CanCollision = true;
+	}
+
 	public override StatInfo Stat
 	{
 		get { return _stat; }

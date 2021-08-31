@@ -123,7 +123,7 @@ namespace Server
                         foreach (GameObject obj in objects)
                         {
                             if (obj as CreatureObject == null)
-                                return;
+                                continue;
 
                             CreatureObject co = (CreatureObject)obj;
                             co.OnDamaged(player, skillData.damage);

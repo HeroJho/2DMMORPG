@@ -309,5 +309,14 @@ class PacketHandler
 		//gameSceneUI.ShortcutKeyUI.RefreshUI();
 	}
 
+	public static void S_SpawnNpcHandler(PacketSession session, IMessage packet)
+	{
+		S_SpawnNpc spawnNpcPacket = (S_SpawnNpc)packet;
+
+        foreach (ObjectInfo info in spawnNpcPacket.NpcInfos)
+        {
+			Managers.Object.SpawnNpc(info);
+        }
+	}
 
 }

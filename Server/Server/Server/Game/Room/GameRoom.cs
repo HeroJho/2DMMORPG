@@ -20,6 +20,8 @@ namespace Server
         Dictionary<int, Projectile> _projectiles = new Dictionary<int, Projectile>();
         Dictionary<int, Item> _Items = new Dictionary<int, Item>();
 
+        Dictionary<int, Npc> _npc = new Dictionary<int, Npc>();
+
         public Zone[,] Zones { get; private set; }
         public Zone[,] ItemZones { get; private set; }
         public int ZoneCells { get; private set; }
@@ -48,7 +50,7 @@ namespace Server
             }
 
             // TEMP
-            for (int i = 0; i < 0; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Monster monster = ObjectManager.Instance.Add<Monster>();
                 monster.Init(1);
@@ -56,6 +58,7 @@ namespace Server
             }
 
             // 맵 생성되고 Zone나눴으면 바닥 아이템 뿌림
+            // Npc 메모리에 생성 > Player입장 시 패킷 보내서 생성
             LoadInitData();
         }
 
@@ -78,6 +81,9 @@ namespace Server
                         Player player = (Player)gameObject;
                         _players.Add(player.Id, player);
                         player.Room = this;
+
+                        // Npc 스폰
+                        SpawnNpc(player);
 
                         player.RefreshAdditionanlStat();
 
@@ -124,7 +130,7 @@ namespace Server
                         item.Room = this;
 
                         GetZone(item.CellPos).Items.Add(item);
-                    }
+                    }                    
                     break;
             }
 
@@ -273,7 +279,7 @@ namespace Server
 
         public void LoadInitData()
         {
-            // TODO : 아이템 필드에 뿌리기
+            // 아이템 필드에 뿌리기
             List<ItemDb> items = null;
             using (AppDbContext db = new AppDbContext())
             {
@@ -294,6 +300,39 @@ namespace Server
                 EnterGame(newItem);
             }
 
+
+            // NPC 메모리에 넣기
+            foreach (NpcData npcData in DataManager.NpcDict.Values)
+            {
+                // 따로 Npc패킷을 만들어서 tampId랑해서 보내기
+                Npc npc = new Npc();
+                npc.Init(npcData.id);
+                _npc.Add(npcData.id, npc);
+            }
+
         }
+
+        void SpawnNpc(Player player)
+        {
+            if (player == null || player.Room == null)
+                return;
+
+            S_SpawnNpc spawnNpcPacket = new S_SpawnNpc();
+
+            foreach (NpcData npcData in DataManager.NpcDict.Values)
+            {
+                // 따로 Npc패킷을 만들어서 tampId랑해서 보내기
+                Npc npc = new Npc();
+                npc.Init(npcData.id);
+                npc.Room = this;
+                Map.ApplyMove(npc, npc.CellPos, checkObjects:false, collision:true);
+
+                spawnNpcPacket.NpcInfos.Add(npc.Info);
+            }
+
+            player.Session.Send(spawnNpcPacket);
+        }
+
+
     }
 }

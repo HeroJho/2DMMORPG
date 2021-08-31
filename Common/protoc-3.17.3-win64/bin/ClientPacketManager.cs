@@ -91,6 +91,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SRemoveItem, MakePacket<S_RemoveItem>);
             _handler.Add((ushort)MsgId.SRemoveItem, PacketHandler.S_RemoveItemHandler);
 
+            _onRecv.Add((ushort)MsgId.SSpawnNpc, MakePacket<S_SpawnNpc>);
+            _handler.Add((ushort)MsgId.SSpawnNpc, PacketHandler.S_SpawnNpcHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
