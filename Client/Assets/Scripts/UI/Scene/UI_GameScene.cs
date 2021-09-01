@@ -15,6 +15,7 @@ public class UI_GameScene : UI_Scene
     public UI_StatBar StatBarUI { get; private set; }
     public UI_ShortcutKeys ShortcutKeyUI { get; private set; }
     public UI_Skill SkillUI { get; private set; }
+    public UI_QuestPanel QuestUI { get; private set; }
 
     public override void Init()
     {
@@ -28,6 +29,7 @@ public class UI_GameScene : UI_Scene
         StatBarUI = GetComponentInChildren<UI_StatBar>();
         ShortcutKeyUI = GetComponentInChildren<UI_ShortcutKeys>();
         SkillUI = GetComponentInChildren<UI_Skill>();
+        QuestUI = GetComponentInChildren<UI_QuestPanel>();
 
         StatUI.gameObject.SetActive(false);
         InvenUI.gameObject.SetActive(false);

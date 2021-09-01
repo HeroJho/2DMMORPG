@@ -192,6 +192,7 @@ public class MyPlayerController : PlayerController
 
 	void GetKeyInput()
     {
+		// 아이템 먹기
 		if(Input.GetKeyDown(KeyCode.Z))
         {
 			ItemController item = Managers.Object.FindItemFromGround(CellPos);
@@ -209,6 +210,11 @@ public class MyPlayerController : PlayerController
 
 				Managers.Network.Send(dropItemPacket);
 			}
+        }
+		
+		if(Input.GetKeyDown(KeyCode.Space))
+        {
+			Managers.Quest.ViewQuest(GetFrontCellPos());
         }
 
     }

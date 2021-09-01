@@ -11,7 +11,7 @@ public class ObjectManager
     public MyPlayerController MyPlayer { get; set; }
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
     Dictionary<Vector2Int, List<ItemController>> _items = new Dictionary<Vector2Int, List<ItemController>>(); // item 여부
-    Dictionary<int, GameObject> _npcs = new Dictionary<int, GameObject>();
+    Dictionary<int, GameObject> _npcs = new Dictionary<int, GameObject>(); // Npc만 빠르게 서칭
 
     public GameObject ItemRoot
     {
@@ -189,7 +189,7 @@ public class ObjectManager
 
     public GameObject FindCollsion(Vector3Int cellPos)
     {
-        foreach(GameObject obj in _objects.Values)
+        foreach (GameObject obj in _objects.Values)
         {
             BaseController bc = obj.GetComponent<BaseController>();
             if (bc == null)
@@ -199,6 +199,21 @@ public class ObjectManager
                 continue;
 
             if (bc.CellPos == cellPos)
+                return obj;
+        }
+
+        return null;
+    }
+
+    public GameObject FindNpc(Vector3Int cellPos)
+    {
+        foreach (GameObject obj in _npcs.Values)
+        {
+            NpcController nc = obj.GetComponent<NpcController>();
+            if (nc == null)
+                continue;
+
+            if (nc.CellPos == cellPos)
                 return obj;
         }
 

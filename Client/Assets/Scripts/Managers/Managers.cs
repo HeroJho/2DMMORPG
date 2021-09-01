@@ -13,6 +13,7 @@ public class Managers : MonoBehaviour
     MapManager _map = new MapManager();
     ObjectManager _obj = new ObjectManager();
     SkillManager _skill = new SkillManager();
+    QuestManager _quest = new QuestManager();
 
 
     public static InventoryManager Inven { get { return Instance._inven; } }
@@ -20,6 +21,7 @@ public class Managers : MonoBehaviour
     public static MapManager Map { get { return Instance._map; } }
     public static ObjectManager Object { get { return Instance._obj; } }
     public static SkillManager Skill { get { return Instance._skill; } }
+    public static QuestManager Quest { get { return Instance._quest; } }
     #endregion
 
     #region Core

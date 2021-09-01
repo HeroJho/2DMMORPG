@@ -50,7 +50,7 @@ namespace Server
             }
 
             // TEMP
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 0; i++)
             {
                 Monster monster = ObjectManager.Instance.Add<Monster>();
                 monster.Init(1);
@@ -307,7 +307,9 @@ namespace Server
                 // 따로 Npc패킷을 만들어서 tampId랑해서 보내기
                 Npc npc = new Npc();
                 npc.Init(npcData.id);
+                npc.Room = this;
                 _npc.Add(npcData.id, npc);
+                Map.ApplyMove(npc, npc.CellPos, checkObjects: false, collision: true);
             }
 
         }
@@ -319,14 +321,9 @@ namespace Server
 
             S_SpawnNpc spawnNpcPacket = new S_SpawnNpc();
 
-            foreach (NpcData npcData in DataManager.NpcDict.Values)
+            foreach (Npc npc in _npc.Values)
             {
                 // 따로 Npc패킷을 만들어서 tampId랑해서 보내기
-                Npc npc = new Npc();
-                npc.Init(npcData.id);
-                npc.Room = this;
-                Map.ApplyMove(npc, npc.CellPos, checkObjects:false, collision:true);
-
                 spawnNpcPacket.NpcInfos.Add(npc.Info);
             }
 
