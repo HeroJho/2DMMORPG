@@ -58,6 +58,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CRemoveItem, MakePacket<C_RemoveItem>);
             _handler.Add((ushort)MsgId.CRemoveItem, PacketHandler.C_RemoveItemHandler);
 
+            _onRecv.Add((ushort)MsgId.CAddQuest, MakePacket<C_AddQuest>);
+            _handler.Add((ushort)MsgId.CAddQuest, PacketHandler.C_AddQuestHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

@@ -211,11 +211,13 @@ namespace Server
             GameObject owner = attacker.GetOwner();
 
             if(owner.ObjectType == GameObjectType.Player)
-            {// 경험치 획득
+            {
 
                 Player player = (Player)owner;
-
+                // 경험치 획득
                 player.GetEx(_monsterData.stat.TotalExp);
+                // 퀘스트 진행여부 확인
+                player.Quest.ProceddWithQuest(TemplateId);
             }
 
             // 보상 로직

@@ -319,4 +319,11 @@ class PacketHandler
         }
 	}
 
+	public static void S_RefreshHuntingQuestHandler(PacketSession session, IMessage packet)
+	{
+		S_RefreshHuntingQuest refreshHuntingQuestPacket = (S_RefreshHuntingQuest)packet;
+
+		Managers.Quest.RefreshQuest(refreshHuntingQuestPacket);
+	}
+
 }

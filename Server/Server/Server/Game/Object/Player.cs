@@ -11,6 +11,7 @@ namespace Server
 		public ClientSession Session { get; set; }
         public VisionCube Vision { get; private set; }
         public SkillBase Skill { get; private set; }
+        public QuestManager Quest { get; private set; }
 
         public Inventory Inven { get; private set; } = new Inventory();
 
@@ -48,6 +49,7 @@ namespace Server
             ObjectType = GameObjectType.Player;
             Vision = new VisionCube(this);
             Skill = new SkillBase(this);
+            Quest = new QuestManager(this);
         }
 
         public override void OnDamaged(GameObject attacker, int damage)

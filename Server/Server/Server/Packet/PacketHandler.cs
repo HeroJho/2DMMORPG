@@ -139,5 +139,21 @@ namespace Server
             room.Push(room.HandleRemoveItem, player, removeItemPacket);
         }
 
+        public static void C_AddQuestHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_AddQuest addQuestPacket = (C_AddQuest)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleAcceptQuest, player, addQuestPacket);
+        }
+
     }
 }

@@ -50,7 +50,7 @@ namespace Server
             }
 
             // TEMP
-            for (int i = 0; i < 0; i++)
+            for (int i = 0; i < 3; i++)
             {
                 Monster monster = ObjectManager.Instance.Add<Monster>();
                 monster.Init(1);
@@ -216,6 +216,16 @@ namespace Server
             }
         }
 
+        public void HandleAcceptQuest(Player player, C_AddQuest questPacket)
+        {
+            int questid = questPacket.QuestId;
+
+            Quest quest = Quest.MakeQuest(questid);
+
+            player.Quest.AcceptQuest(quest);
+
+        }
+
         public void Broadcast(Vector2Int pos, IMessage packet)
         {
             List<Zone> zones = GetAdiacentZones(pos);
@@ -329,7 +339,6 @@ namespace Server
 
             player.Session.Send(spawnNpcPacket);
         }
-
 
     }
 }

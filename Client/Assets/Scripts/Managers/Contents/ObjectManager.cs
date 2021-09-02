@@ -220,6 +220,14 @@ public class ObjectManager
         return null;
     }
 
+    public GameObject FindNpcWithId(int id)
+    {
+        GameObject npc = null;
+        _npcs.TryGetValue(id, out npc);
+
+        return npc;
+    }
+
     public GameObject Find(Func<GameObject, bool> condition)
     {
         foreach(GameObject obj in _objects.Values)

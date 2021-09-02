@@ -147,4 +147,36 @@ namespace Data
 
     #endregion
 
+    #region Quest
+
+    [Serializable]
+    public class QuestData
+    {
+        public int id;
+        public int npcId;
+        public QuestType questType;
+    }
+
+    public class HuntingQuestData : QuestData
+    {
+        public int monsterId;
+        public int purposeNumber;
+        public int currentNumber;
+    }
+
+    [Serializable]
+    public class QuestLoader : ILoader<int, QuestData>
+    {
+        public List<HuntingQuestData> quests = new List<HuntingQuestData>();
+
+        public Dictionary<int, QuestData> MakeDict()
+        {
+            Dictionary<int, QuestData> dict = new Dictionary<int, QuestData>();
+            foreach (QuestData quest in quests)
+                dict.Add(quest.id, quest);
+            return dict;
+        }
+    }
+
+    #endregion
 }

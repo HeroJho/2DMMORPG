@@ -36,6 +36,8 @@ enum MsgId{
     C_REMOVE_ITEM = 29;
     S_REMOVE_ITEM = 30;
     S_SPAWN_NPC = 31;
+    C_ADD_QUEST = 32;
+    S_REFRESH_HUNTING_QUEST = 33;
 }
 
 enum CreatureState{
@@ -103,6 +105,11 @@ enum PosionType{
     POSION_TYPE_NONE = 0;
     POSION_TYPE_HP = 1;
     POSION_TYPE_MP = 2;
+}
+
+enum QuestType{
+    QUEST_TYPE_NONE = 0;
+    QUEST_TYPE_HUNTING = 1;
 }
 
 message S_EnterGame{
@@ -243,6 +250,15 @@ message S_RemoveItem{
 
 message S_SpawnNpc{
     repeated ObjectInfo npcInfos = 1;
+}
+
+message C_AddQuest{
+    int32 questId = 1;
+}
+
+message S_RefreshHuntingQuest{
+    int32 questId = 1;
+    int32 currentNumber = 2;
 }
 
 message ItemInfo{

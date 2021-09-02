@@ -94,6 +94,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SSpawnNpc, MakePacket<S_SpawnNpc>);
             _handler.Add((ushort)MsgId.SSpawnNpc, PacketHandler.S_SpawnNpcHandler);
 
+            _onRecv.Add((ushort)MsgId.SRefreshHuntingQuest, MakePacket<S_RefreshHuntingQuest>);
+            _handler.Add((ushort)MsgId.SRefreshHuntingQuest, PacketHandler.S_RefreshHuntingQuestHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
