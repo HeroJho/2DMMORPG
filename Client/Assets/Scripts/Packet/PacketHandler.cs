@@ -319,6 +319,13 @@ class PacketHandler
         }
 	}
 
+	public static void S_AddQuestHandler(PacketSession session, IMessage packet)
+    {
+		S_AddQuest addQuestPacket = (S_AddQuest)packet;
+
+		Managers.Quest.ReceiveQuest(addQuestPacket);
+    }
+
 	public static void S_RefreshHuntingQuestHandler(PacketSession session, IMessage packet)
 	{
 		S_RefreshHuntingQuest refreshHuntingQuestPacket = (S_RefreshHuntingQuest)packet;
@@ -326,4 +333,19 @@ class PacketHandler
 		Managers.Quest.RefreshQuest(refreshHuntingQuestPacket);
 	}
 
+	public static void S_CompleteQuestHandler(PacketSession session, IMessage packet)
+	{
+		S_CompleteQuest completeQuestPacket = (S_CompleteQuest)packet;
+
+		GameObject go = Managers.Object.FindNpcWithId(completeQuestPacket.NpcId);
+		QuestGiver npc = go.GetComponent<QuestGiver>();
+
+		Quest quest = null;
+		npc.QuestList.TryGetValue(completeQuestPacket.QuestId, out quest);
+
+		quest.QuestState = QuestState.Cancomplete;
+
+		npc.RefreshMark();
+		Debug.Log("aaaaaaaaaaaa");
+	}
 }

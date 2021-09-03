@@ -124,6 +124,9 @@ public class MyPlayerController : PlayerController
 			return;
 
 		gameScene.StatBarUI.SetLevel(level);
+
+		// 퀘스트 여부 체크
+		Managers.Quest.CheckCondition();
 	}
 
     protected override void UpdateController()

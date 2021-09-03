@@ -74,6 +74,10 @@ public class ObjectManager
                         MyPlayer.PosInfo = info.PosInfo;
                         MyPlayer.Stat = info.StatInfo;
                         MyPlayer.SyncPos();
+
+                        // 퀘스트 여부 체크
+                        Managers.Quest.CheckCondition();
+
                     }
                     else
                     {
@@ -242,14 +246,25 @@ public class ObjectManager
     public void Clear()
     {
         foreach (GameObject obj in _objects.Values)
+        {
+            // TEMP : NPC같은 경우는 Player가 죽어도 일단 초기화 안 함.
+            NpcController npc = obj.GetComponent<NpcController>();
+            if (npc != null)
+                continue;
+
             Managers.Resource.Destroy(obj);
+        }
+            
         _objects.Clear();
-        _npcs.Clear();
+        //_npcs.Clear();
         MyPlayer = null;
     }
 
     public void SpawnNpc(ObjectInfo info)
     {
+        if (_npcs.Count > 0)
+            return;
+
         // Npc프리팹을 찾고
         GameObject go = Managers.Resource.Instantiate($"Creature/Npc/Npc_{info.ObjectId}");
         go.name = $"Npc_{info.ObjectId}";
