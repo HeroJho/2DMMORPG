@@ -256,6 +256,11 @@ public class ObjectManager
         _objects.Add(info.ObjectId, go);
         _npcs.Add(info.ObjectId, go);
 
+        // 퀘스트 담기
+        QuestGiver questGiver = go.GetComponent<QuestGiver>();
+        questGiver.NpcId = info.ObjectId;
+        Managers.Quest.InitQuests(questGiver);
+
         // 위치를 설정
         NpcController nc = go.GetComponent<NpcController>();
         nc.PosInfo = info.PosInfo;

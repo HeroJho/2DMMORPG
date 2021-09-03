@@ -155,6 +155,16 @@ namespace Data
         public int id;
         public int npcId;
         public QuestType questType;
+        public Condition condition;
+        public string title;
+        public string description;
+        public string contents;
+    }
+
+    public class Condition
+    {
+        public int level;
+        public List<int> completeQuests;
     }
 
     public class HuntingQuestData : QuestData

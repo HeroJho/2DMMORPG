@@ -204,6 +204,13 @@ namespace Server.Data
         public int id;
         public int npcId;
         public QuestType questType;
+        public Condition condition;
+    }
+
+    public class Condition
+    {
+        public int level;
+        public List<int> completeQuests;
     }
 
     public class HuntingQuestData : QuestData

@@ -218,9 +218,10 @@ namespace Server
 
         public void HandleAcceptQuest(Player player, C_AddQuest questPacket)
         {
-            int questid = questPacket.QuestId;
+            if (player == null && player.Room == null)
+                return;
 
-            Quest quest = Quest.MakeQuest(questid);
+            Quest quest = Quest.MakeQuest(questPacket.QuestId);
 
             player.Quest.AcceptQuest(quest);
 
