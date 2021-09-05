@@ -131,6 +131,9 @@ public class MyPlayerController : PlayerController
 
     protected override void UpdateController()
     {
+		if (State == CreatureState.Dead)
+			return;
+
 		GetUIKeyInput();
 		GetQuickSlotInput();
 

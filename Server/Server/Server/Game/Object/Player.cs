@@ -76,10 +76,27 @@ namespace Server
 
         public override void OnDead(GameObject attacker)
         {
-            if(Vision.job != null)
-                Vision.job.Cancel = true;
-            Vision.job = null;
-            base.OnDead(attacker);
+            //if(Vision.job != null)
+            //    Vision.job.Cancel = true;
+            //Vision.job = null;
+
+            if (Room == null)
+                return;
+
+            // UI 띄우기
+            S_Die diePacket = new S_Die();
+            diePacket.ObjectId = Id;
+            diePacket.AttackerId = attacker.Id;
+            Room.Broadcast(CellPos, diePacket);
+
+            //// 다른 유저한테 죽었다고 알림
+            //S_Despawn despawnPacket = new S_Despawn();
+            //despawnPacket.ObjectIds.Add(Id);
+            //Room.Broadcast(CellPos, despawnPacket);
+
+
+            // Zone과 Collision 삭제
+            BecomeGhost();
         }
 
         public void OnLeaveGame()
@@ -214,6 +231,26 @@ namespace Server
             changeMpPacket.ObjectId = Id;
             changeMpPacket.Mp = Mp;
             Room.Broadcast(CellPos, changeMpPacket);
+        }
+
+        public void BecomeGhost()
+        {// Zone과 Collision 삭제
+            State = CreatureState.Dead;
+            //Room.Map.SetOffCollsion(this);
+        }
+
+        public void Respawn()
+        {
+            GameRoom room = Room;
+            room.LeaveGame(Id);
+
+            Stat.Hp = Stat.MaxHp;
+            PosInfo.State = CreatureState.Idle;
+            PosInfo.MoveDir = MoveDir.Down;
+            PosInfo.PosX = 0;
+            PosInfo.PosY = 0;
+
+            room.EnterGame(this);
         }
     }
 }

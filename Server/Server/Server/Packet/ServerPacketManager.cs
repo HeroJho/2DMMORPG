@@ -61,6 +61,15 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CAddQuest, MakePacket<C_AddQuest>);
             _handler.Add((ushort)MsgId.CAddQuest, PacketHandler.C_AddQuestHandler);
 
+            _onRecv.Add((ushort)MsgId.CTryCompleteQuest, MakePacket<C_TryCompleteQuest>);
+            _handler.Add((ushort)MsgId.CTryCompleteQuest, PacketHandler.C_TryCompleteQuestHandler);
+
+            _onRecv.Add((ushort)MsgId.CCompleteQuest, MakePacket<C_CompleteQuest>);
+            _handler.Add((ushort)MsgId.CCompleteQuest, PacketHandler.C_CompleteQuestHandler);
+
+            _onRecv.Add((ushort)MsgId.CRespawn, MakePacket<C_Respawn>);
+            _handler.Add((ushort)MsgId.CRespawn, PacketHandler.C_RespawnHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

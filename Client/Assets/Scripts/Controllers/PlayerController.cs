@@ -62,6 +62,10 @@ public class PlayerController : CreatureController
 		if (_animator == null || _sprite == null)
 			return;
 
+		Color color = _sprite.color;
+		color.a = 1f;
+		_sprite.color = color;
+
 		if (State == CreatureState.Idle)
 		{
 			switch (Dir)
@@ -128,9 +132,11 @@ public class PlayerController : CreatureController
 					break;
 			}
 		}
-		else
+		else if (State == CreatureState.Dead)
 		{
-
+			_animator.Play("IDLE_FRONT");
+			color.a = 0.5f;
+			_sprite.color = color;
 		}
 	}
 
@@ -215,5 +221,11 @@ public class PlayerController : CreatureController
     public override void OnDamaged()
 	{
 		Debug.Log("Player HIT !");
+	}
+
+	public override void OnDead()
+	{
+		base.OnDead();
+
 	}
 }

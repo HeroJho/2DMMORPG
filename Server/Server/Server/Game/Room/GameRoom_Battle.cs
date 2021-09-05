@@ -134,5 +134,12 @@ namespace Server
 
         }
 
+        public void HandleRespawn(Player player)
+        {
+            if (player == null || player.Room == null)
+                return;
+
+            player.Respawn();
+        }
     }
 }

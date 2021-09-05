@@ -39,7 +39,12 @@ enum MsgId{
     C_ADD_QUEST = 32;
     S_ADD_QUEST = 33;
     S_REFRESH_HUNTING_QUEST = 34;
-    S_COMPLETE_QUEST = 35;
+    S_CAN_COMPLETE_QUEST = 35;
+    C_TRY_COMPLETE_QUEST = 36;
+    S_COMPLETE_QUEST = 37;
+    C_COMPLETE_QUEST = 38;
+    S_RESPAWN = 39;
+    C_RESPAWN = 40;
 }
 
 enum CreatureState{
@@ -261,6 +266,7 @@ message S_RemoveItem{
 
 message S_SpawnNpc{
     repeated ObjectInfo npcInfos = 1;
+    QuestInfo questInfo = 2;
 }
 
 message C_AddQuest{
@@ -277,9 +283,32 @@ message S_RefreshHuntingQuest{
     int32 currentNumber = 2;
 }
 
+message S_CanCompleteQuest{
+    int32 questId = 1;
+    int32 npcId = 2;
+}
+
+message C_TryCompleteQuest{
+    int32 questId = 1;
+    int32 npcId = 2;
+}
+
 message S_CompleteQuest{
     int32 questId = 1;
     int32 npcId = 2;
+}
+
+message C_CompleteQuest{
+    int32 questId = 1;
+    int32 npcId = 2;
+}
+
+message S_Respawn{
+    ObjectInfo info = 1;
+}
+
+message C_Respawn{
+    int32 playerId = 1;
 }
 
 message ItemInfo{
@@ -324,4 +353,10 @@ message StatInfo{
     int32 attack = 6;
     float speed = 7;
     int32 totalExp = 8;
+}
+
+message QuestInfo{
+    repeated int32 quests = 1;
+    repeated int32 canCompleteQuests = 2;
+    repeated int32 completedQuests = 3;
 }

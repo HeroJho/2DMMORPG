@@ -155,5 +155,55 @@ namespace Server
             room.Push(room.HandleAcceptQuest, player, addQuestPacket);
         }
 
+        public static void C_TryCompleteQuestHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_TryCompleteQuest tryCompleteQuestPacket = (C_TryCompleteQuest)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleTryCompleteQuest, player, tryCompleteQuestPacket);
+        }
+
+        public static void C_CompleteQuestHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_CompleteQuest completeQuestPacket = (C_CompleteQuest)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            //room.Push(room.HandleRespawn, player);
+        }
+
+        public static void C_RespawnHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleRespawn, player);
+        }
+
+
+
+
     }
 }

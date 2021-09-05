@@ -153,8 +153,8 @@ public class ObjectManager
 
     public void Remove(int id)
     {
-        if (MyPlayer != null && MyPlayer.Id == id)
-            return;
+        //if (MyPlayer != null && MyPlayer.Id == id)
+        //    return;
         if (_objects.ContainsKey(id) == false)
             return;
 
@@ -247,24 +247,17 @@ public class ObjectManager
     {
         foreach (GameObject obj in _objects.Values)
         {
-            // TEMP : NPC같은 경우는 Player가 죽어도 일단 초기화 안 함.
-            NpcController npc = obj.GetComponent<NpcController>();
-            if (npc != null)
-                continue;
-
             Managers.Resource.Destroy(obj);
         }
             
         _objects.Clear();
-        //_npcs.Clear();
+        _npcs.Clear();
         MyPlayer = null;
+        Managers.Quest.Clear();
     }
 
     public void SpawnNpc(ObjectInfo info)
     {
-        if (_npcs.Count > 0)
-            return;
-
         // Npc프리팹을 찾고
         GameObject go = Managers.Resource.Instantiate($"Creature/Npc/Npc_{info.ObjectId}");
         go.name = $"Npc_{info.ObjectId}";

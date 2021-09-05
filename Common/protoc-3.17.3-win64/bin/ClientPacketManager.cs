@@ -100,8 +100,14 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SRefreshHuntingQuest, MakePacket<S_RefreshHuntingQuest>);
             _handler.Add((ushort)MsgId.SRefreshHuntingQuest, PacketHandler.S_RefreshHuntingQuestHandler);
 
+            _onRecv.Add((ushort)MsgId.SCanCompleteQuest, MakePacket<S_CanCompleteQuest>);
+            _handler.Add((ushort)MsgId.SCanCompleteQuest, PacketHandler.S_CanCompleteQuestHandler);
+
             _onRecv.Add((ushort)MsgId.SCompleteQuest, MakePacket<S_CompleteQuest>);
             _handler.Add((ushort)MsgId.SCompleteQuest, PacketHandler.S_CompleteQuestHandler);
+
+            _onRecv.Add((ushort)MsgId.SRespawn, MakePacket<S_Respawn>);
+            _handler.Add((ushort)MsgId.SRespawn, PacketHandler.S_RespawnHandler);
 
         }
 

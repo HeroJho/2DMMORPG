@@ -118,8 +118,15 @@ class PacketHandler
         {
 			cc.Hp = 0;
 			cc.OnDead();
+
+			// 내 플레이어라면 창 띄우기
+			if(cc.Id == Managers.Object.MyPlayer.Id)
+            {
+				Managers.UI.ShowPopupUI<UI_Die>();
+			}
+
         }
-    }
+	}
 
 	public static void S_ConnectedHandler(PacketSession session, IMessage packet)
 	{
@@ -333,9 +340,9 @@ class PacketHandler
 		Managers.Quest.RefreshQuest(refreshHuntingQuestPacket);
 	}
 
-	public static void S_CompleteQuestHandler(PacketSession session, IMessage packet)
+	public static void S_CanCompleteQuestHandler(PacketSession session, IMessage packet)
 	{
-		S_CompleteQuest completeQuestPacket = (S_CompleteQuest)packet;
+		S_CanCompleteQuest completeQuestPacket = (S_CanCompleteQuest)packet;
 
 		GameObject go = Managers.Object.FindNpcWithId(completeQuestPacket.NpcId);
 		QuestGiver npc = go.GetComponent<QuestGiver>();
@@ -343,9 +350,21 @@ class PacketHandler
 		Quest quest = null;
 		npc.QuestList.TryGetValue(completeQuestPacket.QuestId, out quest);
 
+		Managers.Quest.CanCompleteQuests.Add(quest.QuestId, quest);
 		quest.QuestState = QuestState.Cancomplete;
 
 		npc.RefreshMark();
-		Debug.Log("aaaaaaaaaaaa");
+	}
+
+	public static void S_CompleteQuestHandler(PacketSession session, IMessage packet)
+    {
+		S_CompleteQuest completeQuestPacket = (S_CompleteQuest)packet;
+
+		Managers.Quest.CompleteQuest(completeQuestPacket.QuestId);
+	}
+
+	public static void S_RespawnHandler(PacketSession session, IMessage packet)
+	{
+		
 	}
 }

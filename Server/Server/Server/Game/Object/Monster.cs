@@ -64,8 +64,9 @@ namespace Server
 
             Player target = Room.FindPlayer(p =>
             {
+                
                 Vector2Int dir = p.CellPos - CellPos;
-                return dir.cellDistFromZero <= _searchCellDist;
+                return dir.cellDistFromZero <= _searchCellDist && p.State != CreatureState.Dead;
             });
 
             if (target == null)
@@ -84,7 +85,7 @@ namespace Server
             int moveTick = (int)(1000 / Speed);
             _nextMoveTick = Environment.TickCount64 + moveTick;
 
-            if (_target == null || _target.Room == null)
+            if (_target == null || _target.Room == null || _target.State == CreatureState.Dead)
             {
                 _target = null;
                 State = CreatureState.Idle;
@@ -137,7 +138,7 @@ namespace Server
             if (_coolTick == 0)
             {
                 // 유효한 타겟인지
-                if (_target == null || _target.Room != Room)
+                if (_target == null || _target.Room != Room || _target.State == CreatureState.Dead)
                 {
                     _target = null;
                     State = CreatureState.Moving;

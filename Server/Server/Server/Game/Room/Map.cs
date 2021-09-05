@@ -289,6 +289,7 @@ namespace Server
 
                         Zone now = gameObject.Room.GetZone(gameObject.CellPos);
                         Zone after = gameObject.Room.GetZone(dest);
+
                         if (now != after)
                         {
                             now.Players.Remove(player);
@@ -350,6 +351,31 @@ namespace Server
             // Zone
             Zone zone = gameObject.Room.GetZone(gameObject.CellPos);
             zone.Remove(gameObject);
+
+            {// 기존위치 null
+                int x = posInfo.PosX - MinX;
+                int y = MaxY - posInfo.PosY;
+                if (_objects[y, x] == gameObject)
+                    _objects[y, x] = null;
+            }
+
+            return true;
+        }
+
+        public bool SetOffCollsion(GameObject gameObject)
+        {
+            if (gameObject.Room == null)
+                return false;
+            if (gameObject.Room.Map != this)
+                return false;
+
+            PositionInfo posInfo = gameObject.PosInfo;
+
+            // 배열 범위 Check
+            if (posInfo.PosX < MinX || posInfo.PosX > MaxX)
+                return false;
+            if (posInfo.PosY < MinY || posInfo.PosY > MaxY)
+                return false;
 
             {// 기존위치 null
                 int x = posInfo.PosX - MinX;
