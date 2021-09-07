@@ -111,6 +111,70 @@ namespace Server.DB
 
             }
         }
+        public static void RewardQuestPlayer(Player player, QuestRewardData rewardData, GameRoom room)
+        {
+            if (player == null || rewardData == null || room == null)
+                return;
+
+            // count가 없는 일반 보상은 그냥 추가
+            if (rewardData.count <= 0)
+            {
+                RewardData rewardDataCopy = new RewardData()
+                {
+                    itemId = rewardData.itemId,
+                };
+
+                Instance.AddNewSlot(player, rewardDataCopy, room);
+            }
+            else // count가 있다면 countMax따져서 추가
+            {
+                ItemData itemData = null;
+                DataManager.ItemDict.TryGetValue(rewardData.itemId, out itemData);
+                if (itemData == null)
+                    return;
+                ConsumableData consumableData = itemData as ConsumableData;
+                if (consumableData == null)
+                    return;
+
+                // 동일 종류이고 최대갯수가 아닌 아이템
+                Item item = player.Inven.Find(i =>
+                i.TemplateId == rewardData.itemId && i.Count < consumableData.maxCount);
+
+                int totalCount = 0;
+                if (item == null)
+                    totalCount = rewardData.count;
+                else
+                    totalCount = item.Count + rewardData.count;
+
+                while (totalCount > consumableData.maxCount)
+                {
+                    totalCount -= consumableData.maxCount;
+
+                    RewardData rewardDataCopy = new RewardData()
+                    {
+                        itemId = rewardData.itemId,
+                        count = consumableData.maxCount
+                    };
+
+                    Instance.AddNewSlot(player, rewardDataCopy, room);
+                }
+
+                if (totalCount <= consumableData.maxCount)
+                {
+                    RewardData rewardDataCopy = new RewardData()
+                    {
+                        itemId = rewardData.itemId,
+                        count = totalCount
+                    };
+
+                    if (item == null)
+                        Instance.AddNewSlot(player, rewardDataCopy, room);
+                    else
+                        Instance.AddCountSlot(player, rewardDataCopy, room, item);
+                }
+
+            }
+        }
 
         // 땅에 떨어진 아이템 추가
         public static void AddItemPlayer(Player player, Item newItem, GameRoom room)
