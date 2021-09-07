@@ -84,9 +84,7 @@ namespace Server
 
                         // Npc 스폰
                         SpawnNpc(player);
-
-                        
-
+                                             
                         player.RefreshAdditionanlStat();
 
                         Map.ApplyMove(player, new Vector2Int(player.CellPos.x, player.CellPos.y));
@@ -322,6 +320,7 @@ namespace Server
                 return;
 
             S_SpawnNpc spawnNpcPacket = new S_SpawnNpc();
+            spawnNpcPacket.QuestInfo = new QuestInfo();
 
             foreach (Npc npc in _npc.Values)
             {
@@ -391,7 +390,6 @@ namespace Server
         {
             if (player == null && player.Room == null)
                 return;
-
 
             if (!player.Quest.CompleteQuest(questPacket.QuestId))
                 return;

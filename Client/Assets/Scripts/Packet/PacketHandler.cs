@@ -320,6 +320,8 @@ class PacketHandler
 	{
 		S_SpawnNpc spawnNpcPacket = (S_SpawnNpc)packet;
 
+		Managers.Quest.ParsingQuest(spawnNpcPacket.QuestInfo);
+
         foreach (ObjectInfo info in spawnNpcPacket.NpcInfos)
         {
 			Managers.Object.SpawnNpc(info);
