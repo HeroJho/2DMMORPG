@@ -159,12 +159,21 @@ namespace Data
         public string title;
         public string description;
         public string contents;
+        public List<QuestRewardData> rewards;
     }
 
     public class Condition
     {
         public int level;
         public List<int> completeQuests;
+    }
+
+    public class QuestRewardData
+    {
+        public int exp;
+        public int gold;
+        public int itemId;
+        public int count; // 얼마나
     }
 
     public class HuntingQuestData : QuestData
