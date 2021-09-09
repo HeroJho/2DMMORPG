@@ -35,6 +35,8 @@ namespace Server.DB
         public int TotalExp { get; set; }
 
         public ICollection<ItemDb> Items { get; set; }
+        public ICollection<QuestDb> Quests { get; set; }
+
     }
 
     [Table("Item")]
@@ -54,5 +56,18 @@ namespace Server.DB
         public PlayerDb Owner { get; set; }
     }
 
+    [Table("Quest")]
+    public class QuestDb
+    {
+        public int QuestDbId { get; set; }
+        public int TmeplateId { get; set; }
+
+        public int QuestState { get; set; }
+        public int? CurrentNumber { get; set; }
+
+        [ForeignKey("Owner")]
+        public int OwnerDbId { get; set; }
+        public PlayerDb Owner { get; set; }
+    }
 
 }

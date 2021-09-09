@@ -104,6 +104,7 @@ namespace Server
             // DB 연동
 
             DbTransaction.SavePlayerStatus_AllInOne(this, Room);
+            DbTransaction.SavePlayerQuests_AllInOne(this, Room);
         }
 
         public void HandleEquipItem(C_EquipItem equipPacket)

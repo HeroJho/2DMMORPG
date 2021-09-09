@@ -139,29 +139,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12978}
     - Class: 114
-      Script: {instanceID: 13408}
+      Script: {instanceID: 13044}
     - Class: 114
-      Script: {instanceID: 13412}
+      Script: {instanceID: 13410}
     - Class: 114
-      Script: {instanceID: 13692}
+      Script: {instanceID: 13414}
     - Class: 114
-      Script: {instanceID: 13756}
+      Script: {instanceID: 13694}
     - Class: 114
-      Script: {instanceID: 13914}
+      Script: {instanceID: 13758}
     - Class: 114
-      Script: {instanceID: 14024}
+      Script: {instanceID: 13916}
     - Class: 114
-      Script: {instanceID: 14058}
+      Script: {instanceID: 14026}
     - Class: 114
-      Script: {instanceID: 14226}
+      Script: {instanceID: 14060}
     - Class: 114
-      Script: {instanceID: 14388}
+      Script: {instanceID: 14228}
     - Class: 114
-      Script: {instanceID: 14426}
+      Script: {instanceID: 14390}
     - Class: 114
-      Script: {instanceID: 14454}
+      Script: {instanceID: 14428}
     - Class: 114
-      Script: {instanceID: 38292}
+      Script: {instanceID: 14456}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -215,16 +215,16 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 5f1752ed2092162f016c19510c28a8b9
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: Button
-  - hash:
-      serializedVersion: 2
       Hash: 7072231382eb3c4871b3dd75ad0227e1
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Slider
+  - hash:
+      serializedVersion: 2
+      Hash: 5f1752ed2092162f016c19510c28a8b9
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: Button
   - hash:
       serializedVersion: 2
       Hash: 4bc4346a71a8df53a6b106f68ef3a190
@@ -587,6 +587,12 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
+      Hash: f47de347a950a929ab72fd43f8a52c6c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_RewardSlot
+  - hash:
+      serializedVersion: 2
       Hash: 5ad4aa237d47ac2bab17bacb672edf7a
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -843,13 +849,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: f47de347a950a929ab72fd43f8a52c6c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: UI_RewardSlot
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game.unity
-  playerPath: "C:/Users/thehe/OneDrive/\uBC14\uD0D5 \uD654\uBA74/GitHub/Client/Builds/Win64/Client3/Client3.exe"
+  playerPath: "C:/Users/thehe/OneDrive/\uBC14\uD0D5 \uD654\uBA74/GitHub/Client/Builds/Win64/Client2/Client2.exe"

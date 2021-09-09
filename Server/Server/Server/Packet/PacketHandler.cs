@@ -171,22 +171,6 @@ namespace Server
             room.Push(room.HandleTryCompleteQuest, player, tryCompleteQuestPacket);
         }
 
-        public static void C_CompleteQuestHandler(PacketSession session, IMessage packet)
-        {
-            ClientSession clientSession = (ClientSession)session;
-            C_CompleteQuest completeQuestPacket = (C_CompleteQuest)packet;
-
-            Player player = clientSession.MyPlayer;
-            if (player == null)
-                return;
-
-            GameRoom room = player.Room;
-            if (room == null)
-                return;
-
-            //room.Push(room.HandleRespawn, player);
-        }
-
         public static void C_RespawnHandler(PacketSession session, IMessage packet)
         {
             ClientSession clientSession = (ClientSession)session;

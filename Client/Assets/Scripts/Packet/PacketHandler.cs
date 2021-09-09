@@ -326,6 +326,9 @@ class PacketHandler
         {
 			Managers.Object.SpawnNpc(info);
         }
+
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.QuestUI.RefreshUI();
 	}
 
 	public static void S_AddQuestHandler(PacketSession session, IMessage packet)

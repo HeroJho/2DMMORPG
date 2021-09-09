@@ -111,6 +111,7 @@ namespace Server
 
                 using (AppDbContext db = new AppDbContext())
                 {
+                    // Loading Item
                     List<ItemDb> items = db.Items
                         .Where(i => i.OwnerDbId == MyPlayer.PlayerDbId)
                         .ToList();
@@ -127,8 +128,44 @@ namespace Server
                             itemListPacket.Items.Add(info);
                         }
                     }
+
+
+                    // Loading Quest
+                    List<QuestDb> quests = db.Quests
+                        .Where(q => q.OwnerDbId == MyPlayer.PlayerDbId)
+                        .ToList();
+
+                    foreach (QuestDb questDb in quests)
+                    {
+                        Quest quest = Quest.MakeQuest(questDb);
+                        if (quest == null)
+                            continue;
+
+                        switch (quest.QuestState)
+                        {
+                            case QuestState.Proceed:
+                                {
+                                    MyPlayer.Quest.Quests.Add(quest.QuestId, quest);
+                                }
+                                break;
+                            case QuestState.Cancomplete:
+                                {
+                                    MyPlayer.Quest.Quests.Add(quest.QuestId, quest);
+                                    MyPlayer.Quest.CanCompleteQuests.Add(quest.QuestId, quest);
+                                }
+                                break;
+                            case QuestState.Complete:
+                                {
+                                    MyPlayer.Quest.CompletedQuests.Add(quest.QuestId, quest);
+                                }
+                                break;
+                        }
+                                               
+                    }
+ 
                 }
 
+                // 퀘스트 같은 경우는 EnterGame할 때 보내줌
                 Send(itemListPacket);
             }
 

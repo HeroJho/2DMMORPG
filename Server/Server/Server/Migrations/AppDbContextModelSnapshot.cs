@@ -124,6 +124,32 @@ namespace Server.Migrations
                     b.ToTable("Player");
                 });
 
+            modelBuilder.Entity("Server.DB.QuestDb", b =>
+                {
+                    b.Property<int>("QuestDbId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CurrentNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OwnerDbId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuestState")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TmeplateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("QuestDbId");
+
+                    b.HasIndex("OwnerDbId");
+
+                    b.ToTable("Quest");
+                });
+
             modelBuilder.Entity("Server.DB.ItemDb", b =>
                 {
                     b.HasOne("Server.DB.PlayerDb", "Owner")
@@ -144,6 +170,17 @@ namespace Server.Migrations
                     b.Navigation("Account");
                 });
 
+            modelBuilder.Entity("Server.DB.QuestDb", b =>
+                {
+                    b.HasOne("Server.DB.PlayerDb", "Owner")
+                        .WithMany("Quests")
+                        .HasForeignKey("OwnerDbId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("Server.DB.AccountDb", b =>
                 {
                     b.Navigation("Players");
@@ -152,6 +189,8 @@ namespace Server.Migrations
             modelBuilder.Entity("Server.DB.PlayerDb", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("Quests");
                 });
 #pragma warning restore 612, 618
         }

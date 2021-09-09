@@ -42,9 +42,8 @@ enum MsgId{
     S_CAN_COMPLETE_QUEST = 35;
     C_TRY_COMPLETE_QUEST = 36;
     S_COMPLETE_QUEST = 37;
-    C_COMPLETE_QUEST = 38;
-    S_RESPAWN = 39;
-    C_RESPAWN = 40;
+    S_RESPAWN = 38;
+    C_RESPAWN = 39;
 }
 
 enum CreatureState{
@@ -294,11 +293,6 @@ message C_TryCompleteQuest{
 }
 
 message S_CompleteQuest{
-    int32 questId = 1;
-    int32 npcId = 2;
-}
-
-message C_CompleteQuest{
     int32 questId = 1;
     int32 npcId = 2;
 }

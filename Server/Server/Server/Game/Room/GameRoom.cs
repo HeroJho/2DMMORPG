@@ -344,7 +344,12 @@ namespace Server
 
             player.Session.Send(spawnNpcPacket);
 
-           
+            // 접속하고 몇마리 잡았는지 갱신(퀘스트 진행 갱신)
+            foreach (Quest quest in player.Quest.Quests.Values)
+            {
+                player.Quest.RefreshQuest(quest);
+            }
+
         }
 
 

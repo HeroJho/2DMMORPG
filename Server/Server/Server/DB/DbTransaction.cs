@@ -49,6 +49,131 @@ namespace Server.DB
             });
         }
 
+        // Me (GameRoom) -> You (Db) -> Me (GameRoom)
+        public static void SavePlayerQuests_AllInOne(Player player, GameRoom room)
+        {
+            if (player == null || room == null)
+                return;
+
+            // Me (GameRoom)
+            QuestManager questManager = player.Quest;
+
+            List<QuestDb> addQuestDbList = new List<QuestDb>();
+            List<QuestDb> editQuestList = new List<QuestDb>();
+
+            // 변경, 추가해야하는 퀘스트
+            foreach (Quest quest in questManager.Quests.Values)
+            {
+                // DB에 저장된 퀘스트가 아니다 > 새로운 퀘스트다
+                if (quest.QuestDbId == 0)
+                {
+                    QuestDb questDb = new QuestDb();
+                    {
+                        questDb.OwnerDbId = player.PlayerDbId;
+                        questDb.TmeplateId = quest.QuestId;
+                        questDb.QuestState = (int)quest.QuestState;
+
+                        switch (quest.QuestType)
+                        {
+                            case QuestType.Hunting:
+                                {
+                                    HuntingQuest huntQuest = (HuntingQuest)quest;
+                                    questDb.CurrentNumber = huntQuest.CurrentNumber;
+                                }
+                                break;
+
+                        }
+
+                    }
+
+                    addQuestDbList.Add(questDb);
+                }
+                else
+                {
+                    QuestDb questDb = new QuestDb();
+                    {
+                        questDb.QuestDbId = quest.QuestDbId;
+                        questDb.OwnerDbId = player.PlayerDbId;
+                        questDb.TmeplateId = quest.QuestId;
+
+                        questDb.QuestState = (int)quest.QuestState;
+
+                        switch (quest.QuestType)
+                        {
+                            case QuestType.Hunting:
+                                {
+                                    HuntingQuest huntQuest = (HuntingQuest)quest;
+                                    questDb.CurrentNumber = huntQuest.CurrentNumber;
+                                }
+                                break;
+
+                        }
+                    }
+
+                    editQuestList.Add(questDb);
+                }
+                
+            }
+            // 완료한 퀘스트 > State만 변경됨
+            foreach (Quest quest in questManager.CompletedQuests.Values)
+            {
+                // DB에 저장된 퀘스트가 아니다 > 새로운 퀘스트다
+                if (quest.QuestDbId == 0)
+                {
+                    QuestDb questDb = new QuestDb();
+                    {
+                        questDb.OwnerDbId = player.PlayerDbId;
+                        questDb.TmeplateId = quest.QuestId;
+                        questDb.QuestState = (int)quest.QuestState;
+                    }
+
+                    addQuestDbList.Add(questDb);
+                }
+                else
+                {
+                    QuestDb questDb = new QuestDb();
+                    {
+                        questDb.QuestDbId = quest.QuestDbId;
+                        questDb.OwnerDbId = player.PlayerDbId;
+                        questDb.TmeplateId = quest.QuestId;
+
+                        questDb.QuestState = (int)quest.QuestState;
+
+                    }
+
+                    editQuestList.Add(questDb);
+                }
+            }
+
+
+
+            // You (Db)
+            Instance.Push(() =>
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    // 추가 되어야할 퀘스트 목록
+                    db.Quests.AddRange(addQuestDbList);
+
+                    // 변경되어야할 퀘스트 목록
+                    foreach (QuestDb questDb in editQuestList)
+                    {
+                        db.Entry(questDb).State = EntityState.Unchanged;
+                        db.Entry(questDb).Property(nameof(QuestDb.QuestState)).IsModified = true;
+                        db.Entry(questDb).Property(nameof(QuestDb.CurrentNumber)).IsModified = true;
+                    }
+
+                    bool success = db.SaveChangesEx();
+                    if (success)
+                    {// 성공했다면 일감을 나한테 돌려줘
+                     // Me (GameRoom)
+                        room.Push(() => Console.WriteLine($"Quest Saved!"));
+
+                    }
+                }
+            });
+        }
+
         // 보상 아이템 추가
         public static void RewardPlayer(Player player, RewardData rewardData, GameRoom room)
         {
