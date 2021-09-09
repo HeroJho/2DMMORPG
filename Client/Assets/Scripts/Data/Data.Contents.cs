@@ -183,15 +183,25 @@ namespace Data
         public int currentNumber;
     }
 
+    public class CollectionQuestData : QuestData
+    {
+        public int itemId;
+        public int purposeNumber;
+        public int currentNumber;
+    }
+
     [Serializable]
     public class QuestLoader : ILoader<int, QuestData>
     {
-        public List<HuntingQuestData> quests = new List<HuntingQuestData>();
+        public List<HuntingQuestData> hunting = new List<HuntingQuestData>();
+        public List<CollectionQuestData> collection = new List<CollectionQuestData>();
 
         public Dictionary<int, QuestData> MakeDict()
         {
             Dictionary<int, QuestData> dict = new Dictionary<int, QuestData>();
-            foreach (QuestData quest in quests)
+            foreach (QuestData quest in hunting)
+                dict.Add(quest.id, quest);
+            foreach (QuestData quest in collection)
                 dict.Add(quest.id, quest);
             return dict;
         }

@@ -81,6 +81,12 @@ namespace Server.DB
                                     questDb.CurrentNumber = huntQuest.CurrentNumber;
                                 }
                                 break;
+                            case QuestType.Collection:
+                                {
+                                    CollectionQuest collectionQuest = (CollectionQuest)quest;
+                                    questDb.CurrentNumber = collectionQuest.CurrentNumber;
+                                }
+                                break;
 
                         }
 
@@ -104,6 +110,12 @@ namespace Server.DB
                                 {
                                     HuntingQuest huntQuest = (HuntingQuest)quest;
                                     questDb.CurrentNumber = huntQuest.CurrentNumber;
+                                }
+                                break;
+                            case QuestType.Collection:
+                                {
+                                    CollectionQuest collectionQuest = (CollectionQuest)quest;
+                                    questDb.CurrentNumber = collectionQuest.CurrentNumber;
                                 }
                                 break;
 
@@ -407,6 +419,8 @@ namespace Server.DB
 
                                 player.Session.Send(addItemPacket);
                                 player.Inven.SlotPuse.Remove(newItem.Slot);
+
+                                player.Quest.ProceddWithQuest(newItem.TemplateId);
                             }
                         });
                     }
@@ -446,6 +460,8 @@ namespace Server.DB
                                 usingConsumablePacket.Count = item.Count;
 
                                 player.Session.Send(usingConsumablePacket);
+
+                                player.Quest.ProceddWithQuest(item.TemplateId);
                             }
                         });
                     }
@@ -504,6 +520,8 @@ namespace Server.DB
 
                                 player.Session.Send(addItemPacket);
                                 player.Inven.SlotPuse.Remove(newItem.Slot);
+
+                                player.Quest.ProceddWithQuest(newItem.TemplateId);
                             }
                         });
                     }
@@ -562,6 +580,8 @@ namespace Server.DB
 
                                 player.Session.Send(addItemPacket);
                                 player.Inven.SlotPuse.Remove(newItem.Slot);
+
+                                player.Quest.ProceddWithQuest(newItem.TemplateId);
                             }
                         });
                     }
@@ -611,6 +631,8 @@ namespace Server.DB
                                 usingConsumablePacket.Count = item.Count;
 
                                 player.Session.Send(usingConsumablePacket);
+
+                                player.Quest.ProceddWithQuest(newItem.TemplateId);
                             }
                         });
                     }
@@ -692,6 +714,64 @@ namespace Server.DB
                                 removeItemPacket.ItemDbId = item.ItemDbId;
 
                                 player.Session.Send(removeItemPacket);
+
+                                player.Quest.ProceddWithQuest(item.TemplateId);
+                            }
+                        });
+                    }
+                }
+            });
+
+        }
+
+        public static void RemoveCountItem(Player player, Item item, int count, GameRoom room)
+        {
+            if (player == null || item == null || room == null)
+                return;
+
+            int totalCount = item.Count - count;
+
+            if (totalCount < 0)
+                return;
+            else if(totalCount == 0)
+            {
+                RemoveItem(player, item, room);
+                return;
+            }
+
+            // Me
+            ItemDb itemDb = new ItemDb()
+            {
+                ItemDbId = item.ItemDbId,
+                Count = totalCount
+            };
+
+            // You
+            Instance.Push(() =>
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    db.Entry(itemDb).State = EntityState.Unchanged;
+                    db.Entry(itemDb).Property(nameof(ItemDb.Count)).IsModified = true;
+
+                    bool success = db.SaveChangesEx();
+                    if (success)
+                    {
+                        // Me
+                        room.Push(() =>
+                        {
+                            item.Count = totalCount;
+
+                            // Client Noti
+                            {
+                                S_SetCountConsumable usingConsumablePacket = new S_SetCountConsumable();
+                                usingConsumablePacket.ItemDbId = item.ItemDbId;
+                                usingConsumablePacket.Count = item.Count;
+
+                                player.Session.Send(usingConsumablePacket);
+
+                                // 똑같은 아이템 퀘스트에서 갯수 이하로 떨어지면 완료 불가능 해야하니
+                                player.Quest.ProceddWithQuest(item.TemplateId);
                             }
                         });
                     }

@@ -86,6 +86,8 @@ namespace Server
             usingConsumablePacket.Count = item.Count;
 
             player.Session.Send(usingConsumablePacket);
+            // 아이템 사용시 퀘스트 진행
+            player.Quest.ProceddWithQuest(item.TemplateId);
         }
 
         public void HandleDropItem(Player player, C_GetDropItem dropItempacket)

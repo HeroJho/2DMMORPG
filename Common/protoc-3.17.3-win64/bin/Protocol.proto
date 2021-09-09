@@ -116,6 +116,7 @@ enum PosionType{
 enum QuestType{
     QUEST_TYPE_NONE = 0;
     QUEST_TYPE_HUNTING = 1;
+    QUEST_TYPE_COLLECTION = 2;
 }
 
 enum QuestState{

@@ -389,6 +389,14 @@ namespace Server
             addQuestPacket.QuestId = questPacket.QuestId;
             addQuestPacket.NpcId = questData.npcId;
             player.Session.Send(addQuestPacket);
+
+            // 수집퀘스트인 경우 수락과 동시에 한번 실행
+            if(quest.QuestType == QuestType.Collection)
+            {
+                CollectionQuest collectionQuest = (CollectionQuest)quest;
+                player.Quest.ProceddWithQuest(collectionQuest.ItemId);
+            }
+
         }
 
         public void HandleTryCompleteQuest(Player player, C_TryCompleteQuest questPacket)
