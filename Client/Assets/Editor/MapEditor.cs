@@ -21,12 +21,16 @@ public class MapEditor
 
     private static void GenerateByPath(string pathPrefix)
     {
-        GameObject[] gameObjects = Resources.LoadAll<GameObject>("Prefabs/Map");
+        GameObject[] gameObjects = Resources.LoadAll<GameObject>("Prefabs/Map/Maps");
 
         foreach (GameObject go in gameObjects)
         {
             Tilemap tmBase = Util.FindChild<Tilemap>(go, "Tilemap_Base", true);
             Tilemap tm = Util.FindChild<Tilemap>(go, "Tilemap_Collision", true);
+
+            // Env
+            Tilemap tree = Util.FindChild<Tilemap>(go, "Tilemap_Env_Tree", true);
+            Tilemap bush = Util.FindChild<Tilemap>(go, "Tilemap_Env_Bush", true);
 
             using (var writer = File.CreateText($"{pathPrefix}/{go.name}.txt"))
             {
@@ -40,6 +44,29 @@ public class MapEditor
                     for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
                     {
                         TileBase tile = tm.GetTile(new Vector3Int(x, y, 0));
+                        TileBase tree_tile = tree.GetTile(new Vector3Int(x, y, 0));
+
+                        if (tile != null)
+                            writer.Write("1");
+                        else if(tree_tile != null)
+                            writer.Write("1");
+                        else
+                            writer.Write("0");
+                    }
+
+                    writer.WriteLine();
+                }
+            }
+
+            // Env
+            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Tree.txt"))
+            {
+
+                for (int y = tmBase.cellBounds.yMax - 1; y >= tmBase.cellBounds.yMin; y--)
+                {
+                    for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
+                    {
+                        TileBase tile = tree.GetTile(new Vector3Int(x, y, 0));
                         if (tile != null)
                             writer.Write("1");
                         else
@@ -49,6 +76,24 @@ public class MapEditor
                     writer.WriteLine();
                 }
             }
+            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Bush.txt"))
+            {
+
+                for (int y = tmBase.cellBounds.yMax - 1; y >= tmBase.cellBounds.yMin; y--)
+                {
+                    for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
+                    {
+                        TileBase tile = bush.GetTile(new Vector3Int(x, y, 0));
+                        if (tile != null)
+                            writer.Write("1");
+                        else
+                            writer.Write("0");
+                    }
+
+                    writer.WriteLine();
+                }
+            }
+
         }
     }
 

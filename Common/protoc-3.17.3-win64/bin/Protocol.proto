@@ -87,6 +87,7 @@ enum ItemType{
     ITEM_TYPE_WEAPON = 1;
     ITEM_TYPE_ARMOR = 2;
     ITEM_TYPE_CONSUMABLE = 3;
+    ITEM_TYPE_COLLECTION = 4;
 }
 
 enum WeaponType{
@@ -111,6 +112,10 @@ enum PosionType{
     POSION_TYPE_NONE = 0;
     POSION_TYPE_HP = 1;
     POSION_TYPE_MP = 2;
+}
+
+enum CollectionType{
+    COLLECTION_TYPE_NONE = 0;
 }
 
 enum QuestType{

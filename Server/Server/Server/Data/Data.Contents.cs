@@ -103,12 +103,19 @@ namespace Server.Data
         public int recovery;
     }
 
+    public class CollectionData : ItemData
+    {
+        public CollectionType collectionType;
+        public int maxCount;
+    }
+
     [Serializable]
     public class ItemLoader : ILoader<int, ItemData>
     {
         public List<WeaponData> weapons = new List<WeaponData>();
         public List<ArmorData> armors = new List<ArmorData>();
         public List<ConsumableData> consumables = new List<ConsumableData>();
+        public List<CollectionData> collections = new List<CollectionData>();
 
         public Dictionary<int, ItemData> MakeDict()
         {
@@ -126,6 +133,11 @@ namespace Server.Data
             foreach (ItemData item in consumables)
             {
                 item.itemType = ItemType.Consumable;
+                dict.Add(item.id, item);
+            }
+            foreach (ItemData item in collections)
+            {
+                item.itemType = ItemType.Collection;
                 dict.Add(item.id, item);
             }
 

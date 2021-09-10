@@ -57,23 +57,38 @@ public class MapManager
         DestroyMap();
 
         string mapName = "Map_" + mapId.ToString("000");
-        GameObject go = Managers.Resource.Instantiate($"Map/{mapName}");
+        GameObject go = Managers.Resource.Instantiate($"Map/Maps/{mapName}");
         go.name = "Map";
 
         GameObject collision = Util.FindChild(go, "Tilemap_Collision", true);
         if (collision != null)
             collision.SetActive(false);
 
+        // Env
+        GameObject tree = Util.FindChild(go, "Tilemap_Env_Tree", true);
+        if (collision != null)
+            tree.SetActive(false);
+        GameObject bush = Util.FindChild(go, "Tilemap_Env_Bush", true);
+        if (collision != null)
+            bush.SetActive(false);
+        GameObject treeLoot = Util.FindChild(go, "Trees", true);
+
         CurrentGrid = go.GetComponent<Grid>();
 
         // Collision 관련 파일
-        TextAsset txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}");
-        StringReader reader = new StringReader(txt.text);
+        TextAsset collision_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}");
+        StringReader coliision_reader = new StringReader(collision_txt.text);
 
-        MinX = int.Parse(reader.ReadLine());
-        MaxX = int.Parse(reader.ReadLine());
-        MinY = int.Parse(reader.ReadLine());
-        MaxY = int.Parse(reader.ReadLine());
+        // Env
+        TextAsset tree_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Tree");
+        StringReader tree_reader = new StringReader(tree_txt.text);
+        TextAsset bush_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Bush");
+        StringReader bush_reader = new StringReader(bush_txt.text);
+
+        MinX = int.Parse(coliision_reader.ReadLine());
+        MaxX = int.Parse(coliision_reader.ReadLine());
+        MinY = int.Parse(coliision_reader.ReadLine());
+        MaxY = int.Parse(coliision_reader.ReadLine());
 
         int xCount = MaxX - MinX + 1;
         int yCount = MaxY - MinY + 1;
@@ -81,10 +96,30 @@ public class MapManager
 
         for(int y = 0; y < yCount; y++)
         {
-            string line = reader.ReadLine();
+            string line = coliision_reader.ReadLine();
+            string tree_line = tree_reader.ReadLine();
+            string bush_line = bush_reader.ReadLine();
+
             for(int x = 0; x < xCount; x++)
             {
                 _collision[y, x] = (line[x] == '1' ? true : false);
+
+                // 나무 깔아주기
+                if(tree_line[x] == '1')
+                {
+                    Vector3 cellPos = Pos2Cell(new Pos(y, x));
+
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/Tree", treeLoot.transform);
+                    obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
+                }
+                if (bush_line[x] == '1')
+                {
+                    Vector3 cellPos = Pos2Cell(new Pos(y, x));
+
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/Bush", treeLoot.transform);
+                    obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
+                }
+
             }
         }
     }

@@ -334,13 +334,26 @@ namespace Server.DB
                 DataManager.ItemDict.TryGetValue(newItem.TemplateId, out itemData);
                 if (itemData == null)
                     return;
-                ConsumableData consumableData = itemData as ConsumableData;
-                if (consumableData == null)
-                    return;
+
+                int maxCount = 0;
+                switch (itemData.itemType)
+                {
+                    case ItemType.Consumable:
+                        ConsumableData consumableData = itemData as ConsumableData;
+                        maxCount = consumableData.maxCount;
+                        break;
+                    case ItemType.Collection:
+                        CollectionData collectionData = itemData as CollectionData;
+                        maxCount = collectionData.maxCount;
+                        break;
+                    default:
+                        return;
+                }
+
 
                 // 동일 종류이고 최대갯수가 아닌 아이템
                 Item item = player.Inven.Find(i =>
-                i.TemplateId == newItem.TemplateId && i.Count < consumableData.maxCount);
+                i.TemplateId == newItem.TemplateId && i.Count < maxCount);
 
                 int totalCount = 0;
                 if (item == null)
@@ -348,15 +361,15 @@ namespace Server.DB
                 else
                     totalCount = item.Count + newItem.Count;
 
-                while (totalCount > consumableData.maxCount)
+                while (totalCount > maxCount)
                 {
-                    totalCount -= consumableData.maxCount;
+                    totalCount -= maxCount;
 
                     RewardData rewardDataCopy = new RewardData()
                     {
                         probability = 0,
                         itemId = newItem.TemplateId,
-                        count = consumableData.maxCount
+                        count = maxCount
                     };
 
                     Instance.AddNewSlot(player, rewardDataCopy, room);

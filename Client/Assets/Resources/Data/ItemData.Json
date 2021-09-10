@@ -50,5 +50,14 @@
       "recovery": "10",
       "iconPath": "Textures/Item/mp"
     }
+  ],
+  "collections": [
+    {
+      "id": "1001",
+      "name": "°¨¿°µÈ µÎ´õÁö ÅÐ",
+      "collectionType": "None",
+      "maxCount": "999",
+      "iconPath": "Textures/Item/wool"
+    }
   ]
 }

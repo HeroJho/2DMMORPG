@@ -72,6 +72,9 @@ namespace Server
                 case ItemType.Consumable:
                     item = new Consumable(itemDb.TemplateId);
                     break;
+                case ItemType.Collection:
+                    item = new Collection(itemDb.TemplateId);
+                    break;
             }
 
             if(item != null)
@@ -109,6 +112,9 @@ namespace Server
                     break;
                 case ItemType.Consumable:
                     item = new Consumable(newItem.TemplateId);
+                    break;
+                case ItemType.Collection:
+                    item = new Collection(newItem.TemplateId);
                     break;
             }
 
@@ -202,6 +208,34 @@ namespace Server
                 TemplateId = data.id;
                 Count = 1;
                 ConsumableType = data.consumableType;
+                MaxCount = data.maxCount;
+                Stackable = (data.maxCount > 1);
+            }
+        }
+    }
+
+    public class Collection : Item
+    {
+        public CollectionType CollectionType { get; private set; }
+        public int MaxCount { get; private set; }
+
+        public Collection(int templateId) : base(ItemType.Collection)
+        {
+            Init(templateId);
+        }
+
+        void Init(int templateId)
+        {
+            ItemData itemData = null;
+            DataManager.ItemDict.TryGetValue(templateId, out itemData);
+            if (itemData.itemType != ItemType.Collection)
+                return;
+
+            CollectionData data = (CollectionData)itemData;
+            {
+                TemplateId = data.id;
+                Count = 1;
+                CollectionType = data.collectionType;
                 MaxCount = data.maxCount;
                 Stackable = (data.maxCount > 1);
             }

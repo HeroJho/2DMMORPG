@@ -1,8 +1,8 @@
 {
   "monsters": [
     {
-      "id": "1",
-      "name": "두더지",
+      "id": "9999",
+      "name": "작성 예",
       "stat": {
         "level": "1",
         "maxHp": "20",
@@ -42,7 +42,36 @@
           "count": "5"
         }
       ]
+    },
+    {
+      "id": "1",
+      "name": "감염된 두더지",
+      "stat": {
+        "level": "1",
+        "maxHp": "20",
+        "attack": "1",
+        "speed": "5.0",
+        "totalExp": "5"
+      },
+      "rewards": [
+        {
+          "probability": "50",
+          "itemId": "1001",
+          "count": "1"
+        },
+        {
+          "probability": "5",
+          "itemId": "200",
+          "count": "5"
+        },
+        {
+          "probability": "5",
+          "itemId": "201",
+          "count": "5"
+        }
+      ]
     }
 
   ]
+
 }

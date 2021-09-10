@@ -67,6 +67,10 @@ public class Item
             case ItemType.Consumable:
                 item = new Consumable(objectInfo.ItemInfo.TemplateId);
                 break;
+            case ItemType.Collection:
+                item = new Collection(objectInfo.ItemInfo.TemplateId);
+                break;
+
         }
 
         if (item != null)
@@ -100,6 +104,9 @@ public class Item
                 break;
             case ItemType.Consumable:
                 item = new Consumable(itemInfo.TemplateId);
+                break;
+            case ItemType.Collection:
+                item = new Collection(itemInfo.TemplateId);
                 break;
         }
 
@@ -193,6 +200,34 @@ public class Consumable : Item
             TemplateId = data.id;
             Count = 1;
             ConsumableType = data.consumableType;
+            MaxCount = data.maxCount;
+            Stackable = (data.maxCount > 1);
+        }
+    }
+}
+
+public class Collection : Item
+{
+    public CollectionType CollectionType { get; private set; }
+    public int MaxCount { get; private set; }
+
+    public Collection(int templateId) : base(ItemType.Collection)
+    {
+        Init(templateId);
+    }
+
+    void Init(int templateId)
+    {
+        ItemData itemData = null;
+        Managers.Data.ItemDict.TryGetValue(templateId, out itemData);
+        if (itemData.itemType != ItemType.Collection)
+            return;
+
+        CollectionData data = (CollectionData)itemData;
+        {
+            TemplateId = data.id;
+            Count = 1;
+            CollectionType = data.collectionType;
             MaxCount = data.maxCount;
             Stackable = (data.maxCount > 1);
         }

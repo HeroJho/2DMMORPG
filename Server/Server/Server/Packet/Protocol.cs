@@ -105,26 +105,28 @@ namespace Google.Protobuf.Protocol {
             "TkUQABIOCgpTS0lMTF9BVVRPEAESFAoQU0tJTExfUFJPSkVDVElMRRACEhMK",
             "D1NLSUxMX0VYUExPU0lPThADKloKEVBsYXllclNlcnZlclN0YXRlEhYKElNF",
             "UlZFUl9TVEFURV9MT0dJThAAEhYKElNFUlZFUl9TVEFURV9MT0JCWRABEhUK",
-            "EVNFUlZFUl9TVEFURV9HQU1FEAIqYwoISXRlbVR5cGUSEgoOSVRFTV9UWVBF",
+            "EVNFUlZFUl9TVEFURV9HQU1FEAIqfQoISXRlbVR5cGUSEgoOSVRFTV9UWVBF",
             "X05PTkUQABIUChBJVEVNX1RZUEVfV0VBUE9OEAESEwoPSVRFTV9UWVBFX0FS",
-            "TU9SEAISGAoUSVRFTV9UWVBFX0NPTlNVTUFCTEUQAypOCgpXZWFwb25UeXBl",
-            "EhQKEFdFQVBPTl9UWVBFX05PTkUQABIVChFXRUFQT05fVFlQRV9TV09SRBAB",
-            "EhMKD1dFQVBPTl9UWVBFX0JPVxACKmMKCUFybW9yVHlwZRITCg9BUk1PUl9U",
-            "WVBFX05PTkUQABIVChFBUk1PUl9UWVBFX0hFTE1FVBABEhQKEEFSTU9SX1RZ",
-            "UEVfQVJNT1IQAhIUChBBUk1PUl9UWVBFX0JPT1RTEAMqRgoOQ29uc3VtYWJs",
-            "ZVR5cGUSGAoUQ09OU1VNQUJMRV9UWVBFX05PTkUQABIaChZDT05TVU1BQkxF",
-            "X1RZUEVfUE9USU9OEAEqSgoKUG9zaW9uVHlwZRIUChBQT1NJT05fVFlQRV9O",
-            "T05FEAASEgoOUE9TSU9OX1RZUEVfSFAQARISCg5QT1NJT05fVFlQRV9NUBAC",
-            "KlMKCVF1ZXN0VHlwZRITCg9RVUVTVF9UWVBFX05PTkUQABIWChJRVUVTVF9U",
-            "WVBFX0hVTlRJTkcQARIZChVRVUVTVF9UWVBFX0NPTExFQ1RJT04QAiqrAQoK",
-            "UXVlc3RTdGF0ZRIUChBRVUVTVF9TVEFURV9OT05FEAASHAoYUVVFU1RfU1RB",
-            "VEVfQ0FOTk9UQUNDQVBUEAESGQoVUVVFU1RfU1RBVEVfQ0FOQUNDQVBUEAIS",
-            "FwoTUVVFU1RfU1RBVEVfUFJPQ0VFRBADEhsKF1FVRVNUX1NUQVRFX0NBTkNP",
-            "TVBMRVRFEAQSGAoUUVVFU1RfU1RBVEVfQ09NUExFVEUQBUIbqgIYR29vZ2xl",
-            "LlByb3RvYnVmLlByb3RvY29sYgZwcm90bzM="));
+            "TU9SEAISGAoUSVRFTV9UWVBFX0NPTlNVTUFCTEUQAxIYChRJVEVNX1RZUEVf",
+            "Q09MTEVDVElPThAEKk4KCldlYXBvblR5cGUSFAoQV0VBUE9OX1RZUEVfTk9O",
+            "RRAAEhUKEVdFQVBPTl9UWVBFX1NXT1JEEAESEwoPV0VBUE9OX1RZUEVfQk9X",
+            "EAIqYwoJQXJtb3JUeXBlEhMKD0FSTU9SX1RZUEVfTk9ORRAAEhUKEUFSTU9S",
+            "X1RZUEVfSEVMTUVUEAESFAoQQVJNT1JfVFlQRV9BUk1PUhACEhQKEEFSTU9S",
+            "X1RZUEVfQk9PVFMQAypGCg5Db25zdW1hYmxlVHlwZRIYChRDT05TVU1BQkxF",
+            "X1RZUEVfTk9ORRAAEhoKFkNPTlNVTUFCTEVfVFlQRV9QT1RJT04QASpKCgpQ",
+            "b3Npb25UeXBlEhQKEFBPU0lPTl9UWVBFX05PTkUQABISCg5QT1NJT05fVFlQ",
+            "RV9IUBABEhIKDlBPU0lPTl9UWVBFX01QEAIqKgoOQ29sbGVjdGlvblR5cGUS",
+            "GAoUQ09MTEVDVElPTl9UWVBFX05PTkUQACpTCglRdWVzdFR5cGUSEwoPUVVF",
+            "U1RfVFlQRV9OT05FEAASFgoSUVVFU1RfVFlQRV9IVU5USU5HEAESGQoVUVVF",
+            "U1RfVFlQRV9DT0xMRUNUSU9OEAIqqwEKClF1ZXN0U3RhdGUSFAoQUVVFU1Rf",
+            "U1RBVEVfTk9ORRAAEhwKGFFVRVNUX1NUQVRFX0NBTk5PVEFDQ0FQVBABEhkK",
+            "FVFVRVNUX1NUQVRFX0NBTkFDQ0FQVBACEhcKE1FVRVNUX1NUQVRFX1BST0NF",
+            "RUQQAxIbChdRVUVTVF9TVEFURV9DQU5DT01QTEVURRAEEhgKFFFVRVNUX1NU",
+            "QVRFX0NPTVBMRVRFEAVCG6oCGEdvb2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.CreatureState), typeof(global::Google.Protobuf.Protocol.MoveDir), typeof(global::Google.Protobuf.Protocol.GameObjectType), typeof(global::Google.Protobuf.Protocol.SkillType), typeof(global::Google.Protobuf.Protocol.PlayerServerState), typeof(global::Google.Protobuf.Protocol.ItemType), typeof(global::Google.Protobuf.Protocol.WeaponType), typeof(global::Google.Protobuf.Protocol.ArmorType), typeof(global::Google.Protobuf.Protocol.ConsumableType), typeof(global::Google.Protobuf.Protocol.PosionType), typeof(global::Google.Protobuf.Protocol.QuestType), typeof(global::Google.Protobuf.Protocol.QuestState), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.CreatureState), typeof(global::Google.Protobuf.Protocol.MoveDir), typeof(global::Google.Protobuf.Protocol.GameObjectType), typeof(global::Google.Protobuf.Protocol.SkillType), typeof(global::Google.Protobuf.Protocol.PlayerServerState), typeof(global::Google.Protobuf.Protocol.ItemType), typeof(global::Google.Protobuf.Protocol.WeaponType), typeof(global::Google.Protobuf.Protocol.ArmorType), typeof(global::Google.Protobuf.Protocol.ConsumableType), typeof(global::Google.Protobuf.Protocol.PosionType), typeof(global::Google.Protobuf.Protocol.CollectionType), typeof(global::Google.Protobuf.Protocol.QuestType), typeof(global::Google.Protobuf.Protocol.QuestState), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_EnterGame), global::Google.Protobuf.Protocol.S_EnterGame.Parser, new[]{ "Player" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_LeaveGame), global::Google.Protobuf.Protocol.S_LeaveGame.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.S_Spawn), global::Google.Protobuf.Protocol.S_Spawn.Parser, new[]{ "Objects" }, null, null, null, null),
@@ -262,6 +264,7 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("ITEM_TYPE_WEAPON")] Weapon = 1,
     [pbr::OriginalName("ITEM_TYPE_ARMOR")] Armor = 2,
     [pbr::OriginalName("ITEM_TYPE_CONSUMABLE")] Consumable = 3,
+    [pbr::OriginalName("ITEM_TYPE_COLLECTION")] Collection = 4,
   }
 
   public enum WeaponType {
@@ -286,6 +289,10 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("POSION_TYPE_NONE")] None = 0,
     [pbr::OriginalName("POSION_TYPE_HP")] Hp = 1,
     [pbr::OriginalName("POSION_TYPE_MP")] Mp = 2,
+  }
+
+  public enum CollectionType {
+    [pbr::OriginalName("COLLECTION_TYPE_NONE")] None = 0,
   }
 
   public enum QuestType {
