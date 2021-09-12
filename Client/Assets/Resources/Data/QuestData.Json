@@ -1,0 +1,295 @@
+﻿{
+  "hunting": [
+    {
+      "id": "1",
+      "npcId": "2",
+      "questType": "Hunting",
+      "monsterId": "1",
+      "purposeNumber": "5",
+      "currentNumber": "0",
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+
+        ]
+      },
+      "title": "불길한 징조(1)",
+      "description": "안녕! 너는 처음보는 얼굴인데? \n... \n근처에 마을이 있냐고? \n꽤 큰 마을이 있지. 내가 거기 살거든! \n그런데 지금 두더지 때문에 갈 수가 없어. \n이 두더지들...  왜 이렇게 크고 사나운거야! 뭔가 이상해. \n 너가 좀 잡아줘! 그러면 내가 마을까지 가는 길을 안내해 줄게.",
+      "contents": "두더지 잡기",
+      "rewards": [
+        {
+          "exp": "100",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "100",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ]
+
+    },
+    {
+      "id": "2",
+      "npcId": "2",
+      "questType": "Hunting",
+      "monsterId": "1",
+      "purposeNumber": "20",
+      "currentNumber": "0",
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "1"
+        ]
+      },
+      "title": "불길한 징조(2)",
+      "Description": "강해! \n너같이 강한 사람은 만나기 드물다고! \n딱히 훈련 받은 것 같지는 않지만... \n근육의 밀도가 달라! 타고 낫어! \n우리 마을에서는 대대로 전사를 육성하고 있어. \n너는 전사가 돼야해! 재능을 썩히는건 죄라고! \n이런... \n말하는 사이에 두더지가 더 많이 나왔네",
+      "contents": "두더지 잡기",
+      "rewards": [
+        {
+          "exp": "500",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ]
+    },
+
+    {
+      "id": "5",
+      "npcId": "3",
+      "questType": "Hunting",
+      "monsterId": "2",
+      "purposeNumber": "10",
+      "currentNumber": "0",
+      "condition": {
+        "level": "20",
+        "completeQuests": [
+          "4"
+        ]
+      },
+      "title": "불길한 징조(1)",
+      "description": "안녕! 너는 처음보는 얼굴인데? \n... \n근처에 마을이 있냐고? \n꽤 큰 마을이 있지. 내가 거기 살거든! \n그런데 지금 두더지 때문에 갈 수가 없어. \n이 두더지들...  왜 이렇게 크고 사나운거야! 뭔가 이상해. \n 너가 좀 잡아줘! 그러면 내가 마을까지 가는 길을 안내해 줄게.",
+      "contents": "부쉬 잡기",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "100",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "50"
+        }
+      ]
+
+    },
+    {
+      "id": "6",
+      "npcId": "3",
+      "questType": "Hunting",
+      "monsterId": "2",
+      "purposeNumber": "30",
+      "currentNumber": "0",
+      "condition": {
+        "level": "20",
+        "completeQuests": [
+          "5"
+        ]
+      },
+      "title": "불길한 징조(2)",
+      "Description": "강해! \n너같이 강한 사람은 만나기 드물다고! \n딱히 훈련 받은 것 같지는 않지만... \n근육의 밀도가 달라! 타고 낫어! \n우리 마을에서는 대대로 전사를 육성하고 있어. \n너는 전사가 돼야해! 재능을 썩히는건 죄라고! \n이런... \n말하는 사이에 두더지가 더 많이 나왔네",
+      "contents": "두더지 잡기",
+      "rewards": [
+        {
+          "exp": "1500",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ]
+    }
+
+  ],
+
+  "collection": [
+    {
+      "id": "3",
+      "npcId": "2",
+      "questType": "Collection",
+      "itemId": "1001",
+      "purposeNumber": "20",
+      "currentNumber": "0",
+      "condition": {
+        "level": "10",
+        "completeQuests": [
+          "1",
+          "2"
+        ]
+      },
+      "title": "유령의 동동",
+      "Description": "강해! \n너같이 강한 사람은 만나기 드물다고! \n딱히 훈련 받은 것 같지는 않지만... \n근육의 밀도가 달라! 타고 낫어! \n우리 마을에서는 대대로 전사를 육성하고 있어. \n너는 전사가 돼야해! 재능을 썩히는건 죄라고! \n이런... \n말하는 사이에 두더지가 더 많이 나왔네",
+      "contents": "유령을 도와라",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ]
+
+    },
+    {
+      "id": "4",
+      "npcId": "2",
+      "questType": "Collection",
+      "itemId": "1001",
+      "purposeNumber": "30",
+      "currentNumber": "0",
+      "condition": {
+        "level": "10",
+        "completeQuests": [
+          "1",
+          "2",
+          "3"
+        ]
+      },
+      "title": "유령의 동동",
+      "Description": "강해! \n너같이 강한 사람은 만나기 드물다고! \n딱히 훈련 받은 것 같지는 않지만... \n근육의 밀도가 달라! 타고 낫어! \n우리 마을에서는 대대로 전사를 육성하고 있어. \n너는 전사가 돼야해! 재능을 썩히는건 죄라고! \n이런... \n말하는 사이에 두더지가 더 많이 나왔네",
+      "contents": "유령을 도와라",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ]
+
+    },
+
+    {
+      "id": "7",
+      "npcId": "3",
+      "questType": "Collection",
+      "itemId": "1002",
+      "purposeNumber": "20",
+      "currentNumber": "0",
+      "condition": {
+        "level": "20",
+        "completeQuests": [
+          "6"
+        ]
+      },
+      "title": "유령의 동동",
+      "Description": "강해! \n너같이 강한 사람은 만나기 드물다고! \n딱히 훈련 받은 것 같지는 않지만... \n근육의 밀도가 달라! 타고 낫어! \n우리 마을에서는 대대로 전사를 육성하고 있어. \n너는 전사가 돼야해! 재능을 썩히는건 죄라고! \n이런... \n말하는 사이에 두더지가 더 많이 나왔네",
+      "contents": "유령을 도와라",
+      "rewards": [
+        {
+          "exp": "2000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ]
+
+    },
+    {
+      "id": "8",
+      "npcId": "3",
+      "questType": "Collection",
+      "itemId": "1002",
+      "purposeNumber": "30",
+      "currentNumber": "0",
+      "condition": {
+        "level": "20",
+        "completeQuests": [
+          "7"
+        ]
+      },
+      "title": "유령의 동동",
+      "Description": "강해! \n너같이 강한 사람은 만나기 드물다고! \n딱히 훈련 받은 것 같지는 않지만... \n근육의 밀도가 달라! 타고 낫어! \n우리 마을에서는 대대로 전사를 육성하고 있어. \n너는 전사가 돼야해! 재능을 썩히는건 죄라고! \n이런... \n말하는 사이에 두더지가 더 많이 나왔네",
+      "contents": "유령을 도와라",
+      "rewards": [
+        {
+          "exp": "2000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "50"
+        }
+      ]
+
+    }
+
+
+  ]
+  
+
+}
