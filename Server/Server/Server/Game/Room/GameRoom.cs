@@ -11,7 +11,7 @@ namespace Server
 {
     public partial class GameRoom : JobSerializer
     {
-        public const int VisionCells = 5; // TODO : config로 관리
+        public const int VisionCells = 8; // TODO : config로 관리
 
         public int RoomId { get; set; }
 
@@ -22,6 +22,8 @@ namespace Server
 
         Dictionary<int, Npc> _npc = new Dictionary<int, Npc>();
 
+        SpawnManager _spawnManager;
+
         public Zone[,] Zones { get; private set; }
         public Zone[,] ItemZones { get; private set; }
         public int ZoneCells { get; private set; }
@@ -30,10 +32,10 @@ namespace Server
 
         public void Init(int mapId, int zoneCells)
         {
-            Map.LoadMap(mapId);
+            string spawnInfo = Map.LoadMap(mapId);
 
             // Zone
-            ZoneCells = zoneCells; // 10
+            ZoneCells = zoneCells;
             
             int countY = (Map.SizeY + zoneCells - 1) / zoneCells;
             int countX = (Map.SizeX + zoneCells - 1) / zoneCells;
@@ -49,22 +51,17 @@ namespace Server
                 }
             }
 
-            // TEMP
-            for (int i = 0; i < 2; i++)
-            {
-                Monster monster = ObjectManager.Instance.Add<Monster>();
-                monster.Init(1);
-                EnterGame(monster);
-            }
-
             // 맵 생성되고 Zone나눴으면 바닥 아이템 뿌림
             // Npc 메모리에 생성 > Player입장 시 패킷 보내서 생성
             LoadInitData();
+
+            _spawnManager = new SpawnManager(spawnInfo, this);
+            _spawnManager.Init();
         }
 
         public void Update()
         {
-            Flush();            
+            Flush();         
         }
 
         public void EnterGame(GameObject gameObject)

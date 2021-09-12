@@ -35,7 +35,7 @@ public class MonsterController : CreatureController
                     break;
             }
         }
-        else if (State == CreatureState.Moving)
+        else if (State == CreatureState.Moving || State == CreatureState.Callback)
         {
             switch (Dir)
             {
@@ -89,6 +89,28 @@ public class MonsterController : CreatureController
     {
         base.Init();
 
+    }
+
+    protected override void UpdateController()
+    {
+        switch (State)
+        {
+            case CreatureState.Idle:
+                UpdateIdle();
+                break;
+            case CreatureState.Moving:
+                UpdateMoving();
+                break;
+            case CreatureState.Skill:
+                UpdateSkill();
+                break;
+            case CreatureState.Dead:
+                UpdateDead();
+                break;
+            case CreatureState.Callback:
+                UpdateMoving();
+                break;
+        }
     }
 
     protected override void UpdateIdle()

@@ -28,9 +28,12 @@ public class MapEditor
             Tilemap tmBase = Util.FindChild<Tilemap>(go, "Tilemap_Base", true);
             Tilemap tm = Util.FindChild<Tilemap>(go, "Tilemap_Collision", true);
 
+            // Spawn
+            Tilemap spawn = Util.FindChild<Tilemap>(go, "Tilemap_Spawn", true);
+
             // Env
-            Tilemap tree = Util.FindChild<Tilemap>(go, "Tilemap_Env_Collision", true);
-            Tilemap bush = Util.FindChild<Tilemap>(go, "Tilemap_Env_NoCollision", true);
+            Tilemap envCollsion = Util.FindChild<Tilemap>(go, "Tilemap_Env_Collision", true);
+            Tilemap envNoCollsion = Util.FindChild<Tilemap>(go, "Tilemap_Env_NoCollision", true);
 
             using (var writer = File.CreateText($"{pathPrefix}/{go.name}.txt"))
             {
@@ -44,7 +47,7 @@ public class MapEditor
                     for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
                     {
                         TileBase tile = tm.GetTile(new Vector3Int(x, y, 0));
-                        TileBase tree_tile = tree.GetTile(new Vector3Int(x, y, 0));
+                        TileBase tree_tile = envCollsion.GetTile(new Vector3Int(x, y, 0));
 
                         if (tile != null)
                             writer.Write("1");
@@ -58,6 +61,26 @@ public class MapEditor
                 }
             }
 
+            // Spawn
+            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Spawn.txt"))
+            {
+
+                for (int y = tmBase.cellBounds.yMax - 1; y >= tmBase.cellBounds.yMin; y--)
+                {
+                    for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
+                    {
+                        TileBase tile = spawn.GetTile(new Vector3Int(x, y, 0));
+                        if (tile == null)
+                            continue;
+
+                        string name = tile.ToString();
+                        string[] words = name.Split('_');
+                        writer.Write(words[0]+ $"_{x}_{y}");
+                        writer.WriteLine();
+                    }
+                }
+            }
+
             // Env
             using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Collision.txt"))
             {
@@ -66,7 +89,7 @@ public class MapEditor
                 {
                     for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
                     {
-                        TileBase tile = tree.GetTile(new Vector3Int(x, y, 0));
+                        TileBase tile = envCollsion.GetTile(new Vector3Int(x, y, 0));
                         if (tile != null)
                             writer.Write("1");
                         else
@@ -83,7 +106,7 @@ public class MapEditor
                 {
                     for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
                     {
-                        TileBase tile = bush.GetTile(new Vector3Int(x, y, 0));
+                        TileBase tile = envNoCollsion.GetTile(new Vector3Int(x, y, 0));
                         if (tile == null)
                         {
                             writer.Write("0");

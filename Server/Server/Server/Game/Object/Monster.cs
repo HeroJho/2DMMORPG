@@ -12,6 +12,9 @@ namespace Server
         public int TemplateId { get; private set; }
         Player _target;
         MonsterData _monsterData;
+        Spawner _spawner;
+
+        private Vector2Int _beginPos;
 
         public Monster()
         {
@@ -19,16 +22,19 @@ namespace Server
 
         }
 
-        public void Init(int templateId)
+        public void Init(int templateId, Spawner spawner, Vector2Int beginPos)
         {
+            _spawner = spawner;
+
             TemplateId = templateId;
 
             DataManager.MonsterDict.TryGetValue(templateId, out _monsterData);
             Stat.MergeFrom(_monsterData.stat);
             Stat.Hp = _monsterData.stat.MaxHp;
             State = CreatureState.Idle;
-            CellPos = new Vector2Int(-28, -51);
             Info.TemplateId = templateId;
+            CellPos = beginPos;
+            _beginPos = beginPos;
         }
 
         // FSM (Finite State Machine)
@@ -48,6 +54,9 @@ namespace Server
                     break;
                 case CreatureState.Dead:
                     UpdateDead();
+                    break;
+                case CreatureState.Callback:
+                    UpdateCallback();
                     break;
             }
 
@@ -79,7 +88,7 @@ namespace Server
         }
 
         long _nextMoveTick = 0;
-        int _chaseCellDist = 20;
+        int _chaseCellDist = 5;
         public virtual void UpdateMoving()
         {
             if (_nextMoveTick > Environment.TickCount64)
@@ -95,20 +104,22 @@ namespace Server
                 return;
             }
 
-            // 추격 범위를 벗어났냐
-            Vector2Int dir = _target.CellPos - CellPos;
-            int dist = dir.cellDistFromZero;
-            if(dist == 0 || dist > _chaseCellDist)
+            //추격 범위를 벗어났냐
+            if (_spawner.MaxX + _chaseCellDist < CellPos.x || _spawner.MinX - _chaseCellDist > CellPos.x ||
+               _spawner.MaxY + _chaseCellDist < CellPos.y || _spawner.MinY - _chaseCellDist > CellPos.y)
             {
                 _target = null;
-                State = CreatureState.Idle;
+                State = CreatureState.Callback;
                 BroadcastMove();
                 return;
             }
 
+            Vector2Int dir = _target.CellPos - CellPos;
+            int dist = dir.cellDistFromZero;
+
             // 길찾기 계산 && 추격 범위 검사
             List<Vector2Int> path = Room.Map.FindPath(CellPos, _target.CellPos, checkObject: true);
-            if(path.Count < 2 || path.Count > _chaseCellDist)
+            if(path.Count < 2)
             {
                 _target = null;
                 State = CreatureState.Idle;
@@ -195,6 +206,27 @@ namespace Server
 
         }
 
+        public virtual void UpdateCallback()
+        {
+            if(CellPos.x == _beginPos.x && CellPos.y == _beginPos.y)
+            {
+                _target = null;
+                State = CreatureState.Idle;
+                BroadcastMove();
+                return;
+            }
+
+            // 길찾기 계산 && 추격 범위 검사
+            List<Vector2Int> path = Room.Map.FindPath(CellPos, _beginPos, checkObject: true);
+
+            // 서버 좌표 갱신
+            Dir = GetDirFromVec(path[1] - CellPos);
+            Room.Map.ApplyMove(this, path[1]);
+
+            // 클라 갱신
+            BroadcastMove();
+        }
+
         private void BroadcastMove()
         {
             S_Move movePacket = new S_Move();
@@ -236,7 +268,30 @@ namespace Server
                 DbTransaction.DropItem(pos, rewardData, room);
             }
 
-            base.OnDead(attacker);
+            {
+                S_Die diePacket = new S_Die();
+                diePacket.ObjectId = Id;
+                diePacket.AttackerId = attacker.Id;
+                Room.Broadcast(CellPos, diePacket);
+
+                GameRoom room = Room;
+                room.LeaveGame(Id);
+                _spawner.Dead(this);
+            }
+        }
+
+        public void ReSpawn(Vector2Int randPos, GameRoom room)
+        {
+            if (room == null)
+                return;
+
+            Stat.Hp = Stat.MaxHp;
+            PosInfo.State = CreatureState.Idle;
+            PosInfo.MoveDir = MoveDir.Down;
+            CellPos = randPos;
+            _beginPos = randPos;
+
+            room.EnterGame(this);
         }
 
         RewardData GetRandomReward()

@@ -51,6 +51,7 @@ enum CreatureState{
     MOVING = 1;
     SKILL = 2;
     DEAD = 3;
+    CALLBACK = 4;
 }
 
 enum MoveDir{

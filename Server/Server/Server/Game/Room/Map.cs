@@ -409,7 +409,7 @@ namespace Server
             return _objects[y, x];
         }
 
-        public void LoadMap(int mapId, string pathPrefix = "../../../../../../Common/MapData")
+        public string LoadMap(int mapId, string pathPrefix = "../../../../../../Common/MapData")
         {
             string mapName = "Map_" + mapId.ToString("000");
 
@@ -435,6 +435,8 @@ namespace Server
                     _collision[y, x] = (line[x] == '1' ? true : false);
                 }
             }
+
+            return File.ReadAllText($"{pathPrefix}/{mapName}_Spawn.txt");
         }
 
         #region A* PathFinding
