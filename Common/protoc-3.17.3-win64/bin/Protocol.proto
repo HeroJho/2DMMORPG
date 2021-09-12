@@ -327,10 +327,11 @@ message LobbyPlayerInfo{
 
 message ObjectInfo{
     int32 objectId = 1;
-    string name = 2;
-    PositionInfo posInfo = 3;
-    StatInfo statInfo = 4;
-    ItemInfo itemInfo = 5;
+    int32 templateId = 2;
+    string name = 3;
+    PositionInfo posInfo = 4;
+    StatInfo statInfo = 5;
+    ItemInfo itemInfo = 6;
 }
 
 message PositionInfo{

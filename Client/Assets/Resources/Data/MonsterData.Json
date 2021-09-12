@@ -10,6 +10,7 @@
         "speed": "5.0",
         "totalExp": "5"
       },
+      "prefabPath": "BushMon",
       "rewards": [
         {
           "probability": "15",
@@ -45,7 +46,7 @@
     },
     {
       "id": "1",
-      "name": "감염된 두더지",
+      "name": "두더지",
       "stat": {
         "level": "1",
         "maxHp": "20",
@@ -53,6 +54,7 @@
         "speed": "5.0",
         "totalExp": "5"
       },
+      "prefabPath": "Mole",
       "rewards": [
         {
           "probability": "10",
@@ -81,6 +83,7 @@
         "speed": "5.0",
         "totalExp": "20"
       },
+      "prefabPath": "BushMon",
       "rewards": [
         {
           "probability": "10",

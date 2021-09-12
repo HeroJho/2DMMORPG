@@ -95,7 +95,10 @@ public class ObjectManager
                 break;
             case GameObjectType.Monster:
                 {
-                    GameObject go = Managers.Resource.Instantiate($"Creature/BushMon");
+                    MonsterData monsterData = null;
+                    Managers.Data.MonsterDict.TryGetValue(info.TemplateId, out monsterData);
+
+                    GameObject go = Managers.Resource.Instantiate($"Creature/{monsterData.prefabPath}");
                     go.name = "Monster";
                     _objects.Add(info.ObjectId, go);
 

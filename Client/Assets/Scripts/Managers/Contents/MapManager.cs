@@ -65,13 +65,13 @@ public class MapManager
             collision.SetActive(false);
 
         // Env
-        GameObject tree = Util.FindChild(go, "Tilemap_Env_Tree", true);
+        GameObject tree = Util.FindChild(go, "Tilemap_Env_Collision", true);
         if (collision != null)
             tree.SetActive(false);
-        GameObject bush = Util.FindChild(go, "Tilemap_Env_Bush", true);
+        GameObject bush = Util.FindChild(go, "Tilemap_Env_NoCollision", true);
         if (collision != null)
             bush.SetActive(false);
-        GameObject treeLoot = Util.FindChild(go, "Trees", true);
+        GameObject treeLoot = Util.FindChild(go, "EnvObjects", true);
 
         CurrentGrid = go.GetComponent<Grid>();
 
@@ -80,9 +80,9 @@ public class MapManager
         StringReader coliision_reader = new StringReader(collision_txt.text);
 
         // Env
-        TextAsset tree_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Tree");
+        TextAsset tree_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Collision");
         StringReader tree_reader = new StringReader(tree_txt.text);
-        TextAsset bush_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Bush");
+        TextAsset bush_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_NoCollision");
         StringReader bush_reader = new StringReader(bush_txt.text);
 
         MinX = int.Parse(coliision_reader.ReadLine());
@@ -109,14 +109,22 @@ public class MapManager
                 {
                     Vector3 cellPos = Pos2Cell(new Pos(y, x));
 
-                    GameObject obj = Managers.Resource.Instantiate("Map/Env/Tree", treeLoot.transform);
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/RedTree", treeLoot.transform);
                     obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
                 }
-                if (bush_line[x] == '1')
+                // 부쉬 깔아주기
+                if (bush_line[x] == '1') 
                 {
                     Vector3 cellPos = Pos2Cell(new Pos(y, x));
 
-                    GameObject obj = Managers.Resource.Instantiate("Map/Env/Bush", treeLoot.transform);
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/RedBush", treeLoot.transform);
+                    obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
+                }
+                else if(bush_line[x] == '2')
+                {
+                    Vector3 cellPos = Pos2Cell(new Pos(y, x));
+
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/GreenBush", treeLoot.transform);
                     obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
                 }
 

@@ -29,8 +29,8 @@ public class MapEditor
             Tilemap tm = Util.FindChild<Tilemap>(go, "Tilemap_Collision", true);
 
             // Env
-            Tilemap tree = Util.FindChild<Tilemap>(go, "Tilemap_Env_Tree", true);
-            Tilemap bush = Util.FindChild<Tilemap>(go, "Tilemap_Env_Bush", true);
+            Tilemap tree = Util.FindChild<Tilemap>(go, "Tilemap_Env_Collision", true);
+            Tilemap bush = Util.FindChild<Tilemap>(go, "Tilemap_Env_NoCollision", true);
 
             using (var writer = File.CreateText($"{pathPrefix}/{go.name}.txt"))
             {
@@ -59,7 +59,7 @@ public class MapEditor
             }
 
             // Env
-            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Tree.txt"))
+            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Collision.txt"))
             {
 
                 for (int y = tmBase.cellBounds.yMax - 1; y >= tmBase.cellBounds.yMin; y--)
@@ -76,7 +76,7 @@ public class MapEditor
                     writer.WriteLine();
                 }
             }
-            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_Bush.txt"))
+            using (var writer = File.CreateText($"{pathPrefix}/{go.name}_NoCollision.txt"))
             {
 
                 for (int y = tmBase.cellBounds.yMax - 1; y >= tmBase.cellBounds.yMin; y--)
@@ -84,10 +84,23 @@ public class MapEditor
                     for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
                     {
                         TileBase tile = bush.GetTile(new Vector3Int(x, y, 0));
-                        if (tile != null)
-                            writer.Write("1");
-                        else
+                        if (tile == null)
+                        {
                             writer.Write("0");
+                            continue;
+                        }
+ 
+                        if (tile.ToString() == "RedBush (UnityEngine.Tilemaps.Tile)")
+                        {
+                            writer.Write("1");
+                            Debug.Log(tile.ToString());
+                        }
+                        else if (tile.ToString() == "GreenBush (UnityEngine.Tilemaps.Tile)")
+                        {
+                            writer.Write("2");
+                            Debug.Log(tile.ToString());
+                        }
+
                     }
 
                     writer.WriteLine();

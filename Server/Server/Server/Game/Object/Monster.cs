@@ -28,6 +28,7 @@ namespace Server
             Stat.Hp = _monsterData.stat.MaxHp;
             State = CreatureState.Idle;
             CellPos = new Vector2Int(-28, -51);
+            Info.TemplateId = templateId;
         }
 
         // FSM (Finite State Machine)
