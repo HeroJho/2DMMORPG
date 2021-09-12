@@ -53,7 +53,7 @@ namespace Server
             for (int i = 0; i < 2; i++)
             {
                 Monster monster = ObjectManager.Instance.Add<Monster>();
-                monster.Init(1);
+                monster.Init(2);
                 EnterGame(monster);
             }
 

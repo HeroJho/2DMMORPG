@@ -95,7 +95,7 @@ public class ObjectManager
                 break;
             case GameObjectType.Monster:
                 {
-                    GameObject go = Managers.Resource.Instantiate($"Creature/InfectedMole");
+                    GameObject go = Managers.Resource.Instantiate($"Creature/BushMon");
                     go.name = "Monster";
                     _objects.Add(info.ObjectId, go);
 

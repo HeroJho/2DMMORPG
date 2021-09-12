@@ -55,8 +55,36 @@
       },
       "rewards": [
         {
-          "probability": "50",
+          "probability": "10",
           "itemId": "1001",
+          "count": "1"
+        },
+        {
+          "probability": "5",
+          "itemId": "200",
+          "count": "5"
+        },
+        {
+          "probability": "5",
+          "itemId": "201",
+          "count": "5"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "수풀 몬스터",
+      "stat": {
+        "level": "10",
+        "maxHp": "250",
+        "attack": "5",
+        "speed": "5.0",
+        "totalExp": "20"
+      },
+      "rewards": [
+        {
+          "probability": "10",
+          "itemId": "1002",
           "count": "1"
         },
         {

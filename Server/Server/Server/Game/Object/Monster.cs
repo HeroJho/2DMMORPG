@@ -27,6 +27,7 @@ namespace Server
             Stat.MergeFrom(_monsterData.stat);
             Stat.Hp = _monsterData.stat.MaxHp;
             State = CreatureState.Idle;
+            CellPos = new Vector2Int(-28, -51);
         }
 
         // FSM (Finite State Machine)
