@@ -66,7 +66,7 @@ namespace Server
         }
                 
         long _nextSearchTick = 0;
-        int _searchCellDist = 10;
+        int _searchCellDist = 3;
         public virtual void UpdateIdle()
         {
             if (_nextSearchTick > Environment.TickCount64)
@@ -114,9 +114,6 @@ namespace Server
                 return;
             }
 
-            Vector2Int dir = _target.CellPos - CellPos;
-            int dist = dir.cellDistFromZero;
-
             // 길찾기 계산 && 추격 범위 검사
             List<Vector2Int> path = Room.Map.FindPath(CellPos, _target.CellPos, checkObject: true);
             if(path.Count < 2)
@@ -128,6 +125,8 @@ namespace Server
             }
 
             // 스킬로 넘어갈지 체크
+            Vector2Int dir = _target.CellPos - CellPos;
+            int dist = dir.cellDistFromZero;
             if (dist <= _skillRange && (dir.x == 0 || dir.y == 0))
             {
                 _coolTick = 0;
@@ -206,9 +205,15 @@ namespace Server
 
         }
 
+        long _callMoveTick = 0;
         public virtual void UpdateCallback()
         {
-            if(CellPos.x == _beginPos.x && CellPos.y == _beginPos.y)
+            if (_callMoveTick > Environment.TickCount64)
+                return;
+            int moveTick = (int)(1000 / Speed);
+            _callMoveTick = Environment.TickCount64 + moveTick;
+
+            if (CellPos.x == _beginPos.x && CellPos.y == _beginPos.y)
             {
                 _target = null;
                 State = CreatureState.Idle;
@@ -218,6 +223,13 @@ namespace Server
 
             // 길찾기 계산 && 추격 범위 검사
             List<Vector2Int> path = Room.Map.FindPath(CellPos, _beginPos, checkObject: true);
+            if (path == null)
+            {
+                _target = null;
+                State = CreatureState.Callback;
+                BroadcastMove();
+                return;
+            }
 
             // 서버 좌표 갱신
             Dir = GetDirFromVec(path[1] - CellPos);

@@ -4,7 +4,7 @@
       "id": "1",
       "name": "견습생의 검",
       "weaponType": "Sword",
-      "damage": "10",
+      "damage": "1000",
       "iconPath": "Textures/Item/sword"
     },
     {
@@ -54,10 +54,17 @@
   "collections": [
     {
       "id": "1001",
-      "name": "감염된 두더지 털",
+      "name": "두더지 털",
       "collectionType": "None",
       "maxCount": "999",
       "iconPath": "Textures/Item/wool"
+    },
+    {
+      "id": "1002",
+      "name": "부쉬의 사과",
+      "collectionType": "None",
+      "maxCount": "999",
+      "iconPath": "Textures/Item/bushApple"
     }
   ]
 }

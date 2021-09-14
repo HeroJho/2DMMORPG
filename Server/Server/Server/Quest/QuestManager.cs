@@ -52,6 +52,8 @@ namespace Server
             CanCompleteQuests.Remove(questId);
             CompletedQuests.Add(canQuest.QuestId, canQuest);
 
+            ProceddWithQuest();
+
             return true;
         }
 
@@ -71,7 +73,7 @@ namespace Server
             return quest;
         }
 
-        public void ProceddWithQuest(int id)
+        public void ProceddWithQuest(int id = 0)
         {
             if (_player == null || _player.Room == null)
                 return;
@@ -87,6 +89,8 @@ namespace Server
                     quest.ProceedWithQuest(id);
                 else if (quest.QuestType == QuestType.Collection)
                     quest.ProceedWithQuest(id, _player);
+                else if (quest.QuestType == QuestType.Complete)
+                    quest.ProceedWithQuest(_player);
                 
                 // 퀘스트 내용이 실행 돼서 변화가 있다면
                 if(quest.IsChanged)
@@ -135,6 +139,17 @@ namespace Server
                         S_RefreshHuntingQuest refreshHuntingQuestPacket = new S_RefreshHuntingQuest();
                         refreshHuntingQuestPacket.QuestId = collectionQuest.QuestId;
                         refreshHuntingQuestPacket.CurrentNumber = collectionQuest.CurrentNumber;
+
+                        _player.Session.Send(refreshHuntingQuestPacket);
+                    }
+                    break;
+                case QuestType.Complete:
+                    {
+                        // 그냥 패킷만 보내서 클라쪽에서 확인 하도록 함
+                        CompletingQuest collectionQuest = (CompletingQuest)quest;
+
+                        S_RefreshHuntingQuest refreshHuntingQuestPacket = new S_RefreshHuntingQuest();
+                        refreshHuntingQuestPacket.QuestId = collectionQuest.QuestId;
 
                         _player.Session.Send(refreshHuntingQuestPacket);
                     }

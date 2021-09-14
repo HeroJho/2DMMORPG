@@ -117,13 +117,14 @@ namespace Google.Protobuf.Protocol {
             "ABIaChZDT05TVU1BQkxFX1RZUEVfUE9USU9OEAEqSgoKUG9zaW9uVHlwZRIU",
             "ChBQT1NJT05fVFlQRV9OT05FEAASEgoOUE9TSU9OX1RZUEVfSFAQARISCg5Q",
             "T1NJT05fVFlQRV9NUBACKioKDkNvbGxlY3Rpb25UeXBlEhgKFENPTExFQ1RJ",
-            "T05fVFlQRV9OT05FEAAqUwoJUXVlc3RUeXBlEhMKD1FVRVNUX1RZUEVfTk9O",
+            "T05fVFlQRV9OT05FEAAqbAoJUXVlc3RUeXBlEhMKD1FVRVNUX1RZUEVfTk9O",
             "RRAAEhYKElFVRVNUX1RZUEVfSFVOVElORxABEhkKFVFVRVNUX1RZUEVfQ09M",
-            "TEVDVElPThACKqsBCgpRdWVzdFN0YXRlEhQKEFFVRVNUX1NUQVRFX05PTkUQ",
-            "ABIcChhRVUVTVF9TVEFURV9DQU5OT1RBQ0NBUFQQARIZChVRVUVTVF9TVEFU",
-            "RV9DQU5BQ0NBUFQQAhIXChNRVUVTVF9TVEFURV9QUk9DRUVEEAMSGwoXUVVF",
-            "U1RfU1RBVEVfQ0FOQ09NUExFVEUQBBIYChRRVUVTVF9TVEFURV9DT01QTEVU",
-            "RRAFQhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
+            "TEVDVElPThACEhcKE1FVRVNUX1RZUEVfQ09NUExFVEUQAyqrAQoKUXVlc3RT",
+            "dGF0ZRIUChBRVUVTVF9TVEFURV9OT05FEAASHAoYUVVFU1RfU1RBVEVfQ0FO",
+            "Tk9UQUNDQVBUEAESGQoVUVVFU1RfU1RBVEVfQ0FOQUNDQVBUEAISFwoTUVVF",
+            "U1RfU1RBVEVfUFJPQ0VFRBADEhsKF1FVRVNUX1NUQVRFX0NBTkNPTVBMRVRF",
+            "EAQSGAoUUVVFU1RfU1RBVEVfQ09NUExFVEUQBUIbqgIYR29vZ2xlLlByb3Rv",
+            "YnVmLlByb3RvY29sYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.CreatureState), typeof(global::Google.Protobuf.Protocol.MoveDir), typeof(global::Google.Protobuf.Protocol.GameObjectType), typeof(global::Google.Protobuf.Protocol.SkillType), typeof(global::Google.Protobuf.Protocol.PlayerServerState), typeof(global::Google.Protobuf.Protocol.ItemType), typeof(global::Google.Protobuf.Protocol.WeaponType), typeof(global::Google.Protobuf.Protocol.ArmorType), typeof(global::Google.Protobuf.Protocol.ConsumableType), typeof(global::Google.Protobuf.Protocol.PosionType), typeof(global::Google.Protobuf.Protocol.CollectionType), typeof(global::Google.Protobuf.Protocol.QuestType), typeof(global::Google.Protobuf.Protocol.QuestState), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -300,6 +301,7 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("QUEST_TYPE_NONE")] None = 0,
     [pbr::OriginalName("QUEST_TYPE_HUNTING")] Hunting = 1,
     [pbr::OriginalName("QUEST_TYPE_COLLECTION")] Collection = 2,
+    [pbr::OriginalName("QUEST_TYPE_COMPLETE")] Complete = 3,
   }
 
   public enum QuestState {

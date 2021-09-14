@@ -67,6 +67,22 @@ public class QuestGiver : MonoBehaviour
 
                 }
                 break;
+            case QuestType.Complete:
+                {
+                    CompleteQuestData collectionQuestData = (CompleteQuestData)questData;
+
+                    CompletingQuest quest = new CompletingQuest();
+                    quest.Init(collectionQuestData);
+                    quest.QuestGiver = this;
+                    quest.QuestState = QuestState.Cannotaccapt;
+
+                    QuestList.Add(quest.QuestId, quest);
+
+                    // 이벤트 등록
+                    BindEvent(quest);
+
+                }
+                break;
         }
 
 

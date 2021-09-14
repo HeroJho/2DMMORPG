@@ -136,6 +136,29 @@ public class UI_Quest : UI_Popup
 
                 }
                 break;
+            case QuestType.Complete:
+                {
+                    CompletingQuest collectionQuest = (CompletingQuest)questInfo;
+
+                    Get<Text>((int)Texts.TitleText).text = questInfo.Title;
+                    Get<Text>((int)Texts.ContentsText).text =
+                        questInfo.Description +
+                        System.Environment.NewLine +
+                        System.Environment.NewLine +
+                        questInfo.Contents +
+                        System.Environment.NewLine;
+
+                    foreach (int id in collectionQuest.CompleteQuestIds)
+                    {
+                        QuestData questData = null;
+                        Managers.Data.QuestDict.TryGetValue(id, out questData);
+
+                        Get<Text>((int)Texts.ContentsText).text += questData.title + "완료하기" +
+                            System.Environment.NewLine;
+                    }
+
+                }
+                break;
 
         }
     }

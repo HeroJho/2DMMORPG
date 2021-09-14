@@ -248,11 +248,17 @@ namespace Server.Data
         public int currentNumber;
     }
 
+    public class CompleteQuestData : QuestData 
+    {
+        public List<int> completeQuestIds;
+    }
+
     [Serializable]
     public class QuestLoader : ILoader<int, QuestData>
     {
         public List<HuntingQuestData> hunting = new List<HuntingQuestData>();
         public List<CollectionQuestData> collection = new List<CollectionQuestData>();
+        public List<CompleteQuestData> complete = new List<CompleteQuestData>();
 
         public Dictionary<int, QuestData> MakeDict()
         {
@@ -260,6 +266,8 @@ namespace Server.Data
             foreach (QuestData quest in hunting)
                 dict.Add(quest.id, quest);
             foreach (QuestData quest in collection)
+                dict.Add(quest.id, quest);
+            foreach (QuestData quest in complete)
                 dict.Add(quest.id, quest);
             return dict;
         }

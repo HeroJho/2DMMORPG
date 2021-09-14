@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 317993024112072966}
   - component: {fileID: 3941362626602165026}
   m_Layer: 0
-  m_Name: Bush
+  m_Name: RedBush
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,8 +121,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.78, y: -0.224}
-      - {x: -0.78, y: 1.1359999}
-      - {x: 0.02, y: 1.2559999}
-      - {x: 0.82, y: 1.1359999}
-      - {x: 0.82, y: -0.224}
+    - - {x: -0.07648814, y: -0.9546961}
+      - {x: -1.3622732, y: -0.6007651}
+      - {x: -1.2252678, y: 1.4328451}
+      - {x: -0.117004976, y: 1.8154389}
+      - {x: 1.116845, y: 1.4670966}
+      - {x: 1.2881019, y: -0.6007652}

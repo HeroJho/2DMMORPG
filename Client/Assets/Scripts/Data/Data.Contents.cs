@@ -174,13 +174,13 @@ namespace Data
         public string contents;
         public List<QuestRewardData> rewards;
     }
-
+    [Serializable]
     public class Condition
     {
         public int level;
         public List<int> completeQuests;
     }
-
+    [Serializable]
     public class QuestRewardData
     {
         public int exp;
@@ -188,19 +188,24 @@ namespace Data
         public int itemId;
         public int count; // 얼마나
     }
-
+    [Serializable]
     public class HuntingQuestData : QuestData
     {
         public int monsterId;
         public int purposeNumber;
         public int currentNumber;
     }
-
+    [Serializable]
     public class CollectionQuestData : QuestData
     {
         public int itemId;
         public int purposeNumber;
         public int currentNumber;
+    }
+    [Serializable]
+    public class CompleteQuestData : QuestData
+    {
+        public List<int> completeQuestIds;
     }
 
     [Serializable]
@@ -208,6 +213,7 @@ namespace Data
     {
         public List<HuntingQuestData> hunting = new List<HuntingQuestData>();
         public List<CollectionQuestData> collection = new List<CollectionQuestData>();
+        public List<CompleteQuestData> complete = new List<CompleteQuestData>();
 
         public Dictionary<int, QuestData> MakeDict()
         {
@@ -215,6 +221,8 @@ namespace Data
             foreach (QuestData quest in hunting)
                 dict.Add(quest.id, quest);
             foreach (QuestData quest in collection)
+                dict.Add(quest.id, quest);
+            foreach (QuestData quest in complete)
                 dict.Add(quest.id, quest);
             return dict;
         }

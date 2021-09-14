@@ -22,6 +22,11 @@ namespace Server
 
         }
 
+        public virtual void ProceedWithQuest(Player player)
+        {
+
+        }
+
         public virtual void ProceedWithQuest(int id, Player player)
         {
 
@@ -51,6 +56,9 @@ namespace Server
                 case QuestType.Collection:
                     quest = new CollectionQuest(templateId);
                     break;
+                case QuestType.Complete:
+                    quest = new CompletingQuest(templateId);
+                    break;
 
             }
 
@@ -74,6 +82,9 @@ namespace Server
                     break;
                 case QuestType.Collection:
                     quest = new CollectionQuest(questDb);
+                    break;
+                case QuestType.Complete:
+                    quest = new CompletingQuest(questDb);
                     break;
 
             }

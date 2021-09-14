@@ -268,6 +268,7 @@ namespace Server
                     int x = cellPos.x + dx;
                     Zone zone = GetZone(new Vector2Int(x, y));
 
+                    // 범위에 벗어나면 zone null반환
                     if (zone == null)
                         continue;
 

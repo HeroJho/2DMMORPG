@@ -87,6 +87,12 @@ namespace Server.DB
                                     questDb.CurrentNumber = collectionQuest.CurrentNumber;
                                 }
                                 break;
+                            case QuestType.Complete:
+                                {
+                                    CompletingQuest collectionQuest = (CompletingQuest)quest;
+                                    // 퀘스트를 완료할 때마다 완료 퀘스트 목록에서 쫙 확인함
+                                }
+                                break;
 
                         }
 
@@ -116,6 +122,12 @@ namespace Server.DB
                                 {
                                     CollectionQuest collectionQuest = (CollectionQuest)quest;
                                     questDb.CurrentNumber = collectionQuest.CurrentNumber;
+                                }
+                                break;
+                            case QuestType.Complete:
+                                {
+                                    CompletingQuest collectionQuest = (CompletingQuest)quest;
+                                    // 퀘스트를 완료할 때마다 완료 퀘스트 목록에서 쫙 확인함
                                 }
                                 break;
 

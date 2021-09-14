@@ -51,6 +51,17 @@ public class QuestManager
                         Quests.Add(quest.QuestId, quest);
                     }
                     break;
+                case QuestType.Complete:
+                    {
+                        CompleteQuestData collectionQuestData = (CompleteQuestData)questData;
+
+                        CompletingQuest quest = new CompletingQuest();
+                        quest.Init(collectionQuestData);
+                        quest.QuestState = QuestState.Proceed;
+
+                        Quests.Add(quest.QuestId, quest);
+                    }
+                    break;
             }
         }
         foreach (int id in questInfo.CanCompleteQuests)
@@ -76,6 +87,17 @@ public class QuestManager
                         CollectionQuestData collectionQuestData = (CollectionQuestData)questData;
 
                         CollectionQuest quest = new CollectionQuest();
+                        quest.Init(collectionQuestData);
+                        quest.QuestState = QuestState.Cancomplete;
+
+                        CanCompleteQuests.Add(quest.QuestId, quest);
+                    }
+                    break;
+                case QuestType.Complete:
+                    {
+                        CompleteQuestData collectionQuestData = (CompleteQuestData)questData;
+
+                        CompletingQuest quest = new CompletingQuest();
                         quest.Init(collectionQuestData);
                         quest.QuestState = QuestState.Cancomplete;
 
@@ -113,6 +135,18 @@ public class QuestManager
                         CompletedQuests.Add(quest.QuestId, quest);
                     }
                     break;
+                case QuestType.Complete:
+                    {
+                        CompleteQuestData collectionQuestData = (CompleteQuestData)questData;
+
+                        CompletingQuest quest = new CompletingQuest();
+                        quest.Init(collectionQuestData);
+                        quest.QuestState = QuestState.Complete;
+
+                        CompletedQuests.Add(quest.QuestId, quest);
+                    }
+                    break;
+
             }
         }
 
@@ -230,6 +264,12 @@ public class QuestManager
                     {
                         collectionQuest.QuestState = QuestState.Proceed;
                     }
+                }
+                break;
+            case QuestType.Complete:
+                {
+                    CompletingQuest collectionQuest = (CompletingQuest)quest;
+                    collectionQuest.RefreshQuest();
                 }
                 break;
         }
