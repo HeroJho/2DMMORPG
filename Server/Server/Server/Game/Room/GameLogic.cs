@@ -16,7 +16,7 @@ namespace Server
         {
             foreach (GameRoom room in _rooms.Values)
             {
-                room.Init(1, 20);
+                room.Init(1, 50);
             }
         }
 

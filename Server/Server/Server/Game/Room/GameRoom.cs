@@ -11,7 +11,7 @@ namespace Server
 {
     public partial class GameRoom : JobSerializer
     {
-        public const int VisionCells = 8; // TODO : config로 관리
+        public const int VisionCells = 11; // TODO : config로 관리
 
         public int RoomId { get; set; }
 
@@ -35,6 +35,7 @@ namespace Server
             string spawnInfo = Map.LoadMap(mapId);
 
             // Zone
+            
             ZoneCells = zoneCells;
             
             int countY = (Map.SizeY + zoneCells - 1) / zoneCells;
@@ -217,7 +218,7 @@ namespace Server
         {
             List<Zone> zones = GetAdiacentZones(pos);
 
-            foreach(Player p in zones.SelectMany(z => z.Players))
+            foreach (Player p in zones.SelectMany(z => z.Players))
             {
                 int dx = p.CellPos.x - pos.x;
                 int dy = p.CellPos.y - pos.y;
@@ -266,6 +267,9 @@ namespace Server
                     int y = cellPos.y + dy;
                     int x = cellPos.x + dx;
                     Zone zone = GetZone(new Vector2Int(x, y));
+
+                    if (zone == null)
+                        continue;
 
                     zones.Add(zone);
                 }
