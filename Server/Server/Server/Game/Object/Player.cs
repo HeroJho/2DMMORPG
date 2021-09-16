@@ -12,6 +12,7 @@ namespace Server
         public VisionCube Vision { get; private set; }
         public SkillBase Skill { get; private set; }
         public QuestManager Quest { get; private set; }
+        public ObstacleManager Obstacle { get; private set; }
 
         public Inventory Inven { get; private set; } = new Inventory();
 
@@ -50,6 +51,8 @@ namespace Server
             Vision = new VisionCube(this);
             Skill = new SkillBase(this);
             Quest = new QuestManager(this);
+            Obstacle = new ObstacleManager();
+
         }
 
         public override void OnDamaged(GameObject attacker, int damage)

@@ -23,7 +23,7 @@ namespace Server
             // 상태만 바껴도 패킷을 보내기 때문에 한번 체크
             if (movePosInfo.PosX != info.PosInfo.PosX || movePosInfo.PosY != info.PosInfo.PosY)
             {
-                if (Map.CanGo(new Vector2Int(movePosInfo.PosX, movePosInfo.PosY)) == false)
+                if (Map.ApplyMove(player, new Vector2Int(movePosInfo.PosX, movePosInfo.PosY)) == false)
                     return;
             }
 
@@ -31,8 +31,6 @@ namespace Server
             info.PosInfo.State = movePosInfo.State;
             info.PosInfo.MoveDir = movePosInfo.MoveDir;
 
-            // _map에 좌표를 갱신
-            Map.ApplyMove(player, new Vector2Int(movePosInfo.PosX, movePosInfo.PosY));
 
             // 다른 플레이어한테도 알려준다
             S_Move resMovePacket = new S_Move();

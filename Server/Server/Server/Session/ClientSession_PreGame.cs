@@ -162,6 +162,17 @@ namespace Server
                         }
                                                
                     }
+
+                    // Loading Obstacle
+                    foreach (ObstacleData obstacleData in DataManager.ObstacleDict.Values)
+                    {
+                        Obstacle obstacle = Obstacle.MakeObstacle(obstacleData);
+                        if (obstacle == null)
+                            continue;
+
+                        MyPlayer.Obstacle.Add(obstacle);
+                    }
+                    
  
                 }
 
