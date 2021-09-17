@@ -19,10 +19,26 @@ namespace Server
             PositionInfo movePosInfo = movePacket.PosInfo;
             ObjectInfo info = player.Info;
 
-            // 다른 좌표로 이동 가능한지 체크
             // 상태만 바껴도 패킷을 보내기 때문에 한번 체크
             if (movePosInfo.PosX != info.PosInfo.PosX || movePosInfo.PosY != info.PosInfo.PosY)
             {
+
+                // 한턴에 이동거리가 2이상이다 > 핵 사용으로 간주 > 다시 원래자리로 콜빽
+                Vector2Int destPos = new Vector2Int(movePosInfo.PosX, movePosInfo.PosY);
+                int dist = (destPos - player.CellPos).cellDistFromZero;
+                if (dist > 1)
+                {
+                    // 다른 플레이어한테도 알려준다
+                    S_Move backMovePacket = new S_Move();
+                    backMovePacket.ObjectId = player.Info.ObjectId;
+                    backMovePacket.PosInfo = player.PosInfo;
+                    backMovePacket.IncludingMe = true;
+
+                    Broadcast(player.CellPos, backMovePacket);
+                    return;
+                }
+
+                // 다른 좌표로 이동 가능한지 체크
                 if (Map.ApplyMove(player, new Vector2Int(movePosInfo.PosX, movePosInfo.PosY)) == false)
                     return;
             }
@@ -36,6 +52,7 @@ namespace Server
             S_Move resMovePacket = new S_Move();
             resMovePacket.ObjectId = player.Info.ObjectId;
             resMovePacket.PosInfo = movePacket.PosInfo;
+            resMovePacket.IncludingMe = false;
 
             Broadcast(player.CellPos, resMovePacket);
 

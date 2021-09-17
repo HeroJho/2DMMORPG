@@ -129,8 +129,16 @@ public class MyPlayerController : PlayerController
 		Managers.Quest.CheckCondition();
 	}
 
+	public Vector3Int TestPos;
+	public bool TestMapDo = false;
+
     protected override void UpdateController()
     {
+		if(TestMapDo)
+        {
+			CellPos = TestPos;
+        }
+
 		if (State == CreatureState.Dead)
 			return;
 
