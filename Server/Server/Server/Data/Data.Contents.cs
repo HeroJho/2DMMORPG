@@ -215,6 +215,7 @@ namespace Server.Data
     {
         public int id;
         public int npcId;
+        public List<int> obstacleRemoves;
         public QuestType questType;
         public Condition condition;
         public List<QuestRewardData> rewards;
@@ -282,6 +283,7 @@ namespace Server.Data
     {
         public int id;
         public Vector2Int spawnPos;
+        public int despawnConditionQuestId;
         public List<Vector2Int> obstaclePos;
     }
 

@@ -54,10 +54,10 @@
   "collections": [
     {
       "id": "1001",
-      "name": "두더지 털",
+      "name": "두더지 발톱",
       "collectionType": "None",
       "maxCount": "999",
-      "iconPath": "Textures/Item/wool"
+      "iconPath": "Textures/Item/moleClaw"
     },
     {
       "id": "1002",

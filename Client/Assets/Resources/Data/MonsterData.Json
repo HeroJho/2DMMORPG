@@ -57,9 +57,9 @@
       "prefabPath": "Mole",
       "rewards": [
         {
-          "probability": "10",
+          "probability": "80",
           "itemId": "1001",
-          "count": "1"
+          "count": "5"
         },
         {
           "probability": "5",
@@ -86,9 +86,9 @@
       "prefabPath": "BushMon",
       "rewards": [
         {
-          "probability": "10",
+          "probability": "80",
           "itemId": "1002",
-          "count": "1"
+          "count": "5"
         },
         {
           "probability": "5",

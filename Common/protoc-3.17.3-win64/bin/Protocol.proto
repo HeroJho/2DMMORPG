@@ -44,6 +44,8 @@ enum MsgId{
     S_COMPLETE_QUEST = 37;
     S_RESPAWN = 38;
     C_RESPAWN = 39;
+    S_SPAWN_OBSTACLE = 40;
+    S_DESPAWN_OBSTACLE = 41;
 }
 
 enum CreatureState{
@@ -313,6 +315,14 @@ message S_Respawn{
 
 message C_Respawn{
     int32 playerId = 1;
+}
+
+message S_SpawnObstacle{
+    repeated int32 templateId = 1;
+}
+
+message S_DespawnObstacle{
+    repeated int32 templateId = 1;
 }
 
 message ItemInfo{

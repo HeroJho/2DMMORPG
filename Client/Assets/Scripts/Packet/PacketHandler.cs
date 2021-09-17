@@ -372,4 +372,25 @@ class PacketHandler
 	{
 		
 	}
+
+	public static void S_SpawnObstacleHandler(PacketSession session, IMessage packet)
+    {
+		S_SpawnObstacle spawnObjstaclePacket = (S_SpawnObstacle)packet;
+
+        foreach (int id in spawnObjstaclePacket.TemplateId)
+        {
+			Managers.Object.SpawnObstacle(id);
+        }
+    }
+
+	public static void S_DespawnObstacleHandler(PacketSession session, IMessage packet)
+	{
+		S_DespawnObstacle spawnObjstaclePacket = (S_DespawnObstacle)packet;
+
+		foreach (int id in spawnObjstaclePacket.TemplateId)
+		{
+			Managers.Object.DespawnObstacle(id);
+		}
+	}
+
 }

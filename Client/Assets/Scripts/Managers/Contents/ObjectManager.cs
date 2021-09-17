@@ -12,6 +12,7 @@ public class ObjectManager
     Dictionary<int, GameObject> _objects = new Dictionary<int, GameObject>();
     Dictionary<Vector2Int, List<ItemController>> _items = new Dictionary<Vector2Int, List<ItemController>>(); // item 여부
     Dictionary<int, GameObject> _npcs = new Dictionary<int, GameObject>(); // Npc만 빠르게 서칭
+    private Dictionary<int, Obstacle> _obstacles = new Dictionary<int, Obstacle>();
 
     public GameObject ItemRoot
     {
@@ -278,6 +279,32 @@ public class ObjectManager
         nc.State = CreatureState.Idle;
         nc.SyncPos();
 
+    }
+
+    public void SpawnObstacle(int templateId)
+    {
+        ObstacleData obstacleData = null;
+        Managers.Data.ObstacleDict.TryGetValue(templateId, out obstacleData);
+
+
+        GameObject go = Managers.Resource.Instantiate($"Map/Obstacle/Obstacle_{templateId}");
+        Obstacle obstacle = go.GetComponent<Obstacle>();
+        obstacle.Init(obstacleData);
+        go.transform.position = new Vector3(obstacle.SpawnPos.x + 0.5f, obstacle.SpawnPos.y + 1f, 0);
+        
+        Managers.Map.AddObstacle(obstacle);
+        _obstacles.Add(obstacle.TemplateId, obstacle);
+    }
+
+    public void DespawnObstacle(int templateId)
+    {
+        Obstacle obstacle = null;
+        _obstacles.TryGetValue(templateId, out obstacle);
+        _obstacles.Remove(templateId);
+
+        Managers.Map.RemoveObstacle(obstacle);
+
+        Managers.Resource.Destroy(obstacle.gameObject);
     }
 
     public static GameObjectType GetObjectTypeById(int id)

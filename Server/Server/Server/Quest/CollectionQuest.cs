@@ -37,6 +37,7 @@ namespace Server
                 NpcId = data.npcId;
                 QuestType = QuestType.Collection;
                 QuestState = QuestState.Proceed;
+                ObstacleRemoves = data.obstacleRemoves;
 
                 ItemId = data.itemId;
                 PurposeNumber = data.purposeNumber;
@@ -57,6 +58,7 @@ namespace Server
                 QuestId = data.id;
                 NpcId = data.npcId;
                 QuestType = QuestType.Collection;
+                ObstacleRemoves = data.obstacleRemoves;
 
                 ItemId = data.itemId;
                 PurposeNumber = data.purposeNumber;

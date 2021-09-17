@@ -9,6 +9,7 @@ ScriptsOnlyBuild:
     - MpBar
     - MyPlayerController
     - NpcController
+    - Obstacle
     - PlayerController
     - QuestGiver
     - TreeController
@@ -44,10 +45,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -179,6 +178,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 14436}
     - Class: 114
       Script: {instanceID: 14464}
+    - Class: 114
+      Script: {instanceID: 19774}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -878,6 +879,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: ade068e850022dc0fd573cde5e13190a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Obstacle
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game.unity

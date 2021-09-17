@@ -47,6 +47,21 @@ namespace Server
             // 보상
             canQuest.CompleteQuest(_player);
 
+            // Obstacle이 있으면 제거
+            if(canQuest.ObstacleRemoves != null)
+            {
+                S_DespawnObstacle deSpawnObstacle = new S_DespawnObstacle();
+
+                foreach (int obstacleId in canQuest.ObstacleRemoves)
+                {
+                    Obstacle obstacle = _player.Obstacle.RemoveObstacle(obstacleId);
+                    if (obstacle != null)
+                        deSpawnObstacle.TemplateId.Add(obstacle.TemplateId);
+                }
+
+                _player.Session.Send(deSpawnObstacle);
+            }
+
             // 리스트 관리
             Quests.Remove(questId);
             CanCompleteQuests.Remove(questId);

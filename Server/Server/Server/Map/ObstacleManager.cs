@@ -6,12 +6,12 @@ namespace Server
 {
     public class ObstacleManager
     {
-        private Dictionary<int, Obstacle> _obstacle = new Dictionary<int, Obstacle>();
+        public Dictionary<int, Obstacle> Obstacles { get; private set; } = new Dictionary<int, Obstacle>();
         private Dictionary<Vector2Int, Obstacle> _checkObstacle = new Dictionary<Vector2Int, Obstacle>();
 
         public void Add(Obstacle obstacle)
         {
-            _obstacle.Add(obstacle.TemplateId, obstacle);
+            Obstacles.Add(obstacle.TemplateId, obstacle);
 
             foreach (Vector2Int obstaclePos in obstacle.ObstaclePos)
             {
@@ -19,13 +19,18 @@ namespace Server
             }
         }
 
-        public void RemoveObstacle(int templateId)
+        public Obstacle RemoveObstacle(int templateId)
         {
             Obstacle obstacle = null;
-            if (_obstacle.TryGetValue(templateId, out obstacle) == false)
-                return;
+            if (Obstacles.Remove(templateId, out obstacle) == false)
+                return null;
 
-            obstacle.RemoveObstacle();
+            foreach (Vector2Int pos in obstacle.ObstaclePos)
+            {
+                _checkObstacle.Remove(pos);
+            }
+
+            return obstacle;
         }
 
         public bool CheckObstaclePos(Vector2Int dest)

@@ -12,12 +12,6 @@ namespace Server
         public List<Vector2Int> ObstaclePos = new List<Vector2Int>();
         
 
-        public void RemoveObstacle()
-        {
-
-        }
-
-
         public static Obstacle MakeObstacle(ObstacleData obstacleData)
         {
             Obstacle obstacle = new Obstacle();

@@ -14,6 +14,7 @@ namespace Server
         public int NpcId { get; protected set; } // 누구의 퀘스트
         public QuestType QuestType { get; protected set; }
         public QuestState QuestState { get; protected set; }
+        public List<int> ObstacleRemoves { get; protected set; } = new List<int>();
         public bool IsChanged { get; set; } = false;
 
 

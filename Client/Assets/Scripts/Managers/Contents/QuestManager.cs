@@ -69,43 +69,12 @@ public class QuestManager
             QuestData questData = null;
             Managers.Data.QuestDict.TryGetValue(id, out questData);
 
-            switch (questData.questType)
-            {
-                case QuestType.Hunting:
-                    {
-                        HuntingQuestData huntinQuestData = (HuntingQuestData)questData;
-
-                        HuntingQuest quest = new HuntingQuest();
-                        quest.Init(huntinQuestData);
-                        quest.QuestState = QuestState.Cancomplete;
-
-                        CanCompleteQuests.Add(quest.QuestId, quest);
-                    }
-                    break;
-                case QuestType.Collection:
-                    {
-                        CollectionQuestData collectionQuestData = (CollectionQuestData)questData;
-
-                        CollectionQuest quest = new CollectionQuest();
-                        quest.Init(collectionQuestData);
-                        quest.QuestState = QuestState.Cancomplete;
-
-                        CanCompleteQuests.Add(quest.QuestId, quest);
-                    }
-                    break;
-                case QuestType.Complete:
-                    {
-                        CompleteQuestData collectionQuestData = (CompleteQuestData)questData;
-
-                        CompletingQuest quest = new CompletingQuest();
-                        quest.Init(collectionQuestData);
-                        quest.QuestState = QuestState.Cancomplete;
-
-                        CanCompleteQuests.Add(quest.QuestId, quest);
-                    }
-                    break;
-            }
+            Quest quest = null;
+            Quests.TryGetValue(id, out quest);
+            quest.QuestState = QuestState.Cancomplete;
+            CanCompleteQuests.Add(quest.QuestId, quest);
         }
+
         foreach (int id in questInfo.CompletedQuests)
         {
             QuestData questData = null;

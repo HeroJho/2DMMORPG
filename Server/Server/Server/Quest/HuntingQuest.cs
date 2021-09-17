@@ -37,6 +37,7 @@ namespace Server
                 NpcId = data.npcId;
                 QuestType = QuestType.Hunting;
                 QuestState = QuestState.Proceed;
+                ObstacleRemoves = data.obstacleRemoves;
 
                 MonsterId = data.monsterId;
                 PurposeNumber = data.purposeNumber;
@@ -57,6 +58,7 @@ namespace Server
                 QuestId = data.id;
                 NpcId = data.npcId;
                 QuestType = QuestType.Hunting;
+                ObstacleRemoves = data.obstacleRemoves;
 
                 MonsterId = data.monsterId;
                 PurposeNumber = data.purposeNumber;

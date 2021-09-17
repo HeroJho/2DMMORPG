@@ -229,4 +229,30 @@ namespace Data
     }
 
     #endregion
+
+    #region Obstacle
+
+    [Serializable]
+    public class ObstacleData
+    {
+        public int id;
+        public Vector2Int spawnPos;
+        public List<Vector2Int> obstaclePos;
+    }
+
+    [Serializable]
+    public class ObstacleLoader : ILoader<int, ObstacleData>
+    {
+        public List<ObstacleData> obstacle = new List<ObstacleData>();
+
+        public Dictionary<int, ObstacleData> MakeDict()
+        {
+            Dictionary<int, ObstacleData> dict = new Dictionary<int, ObstacleData>();
+            foreach (ObstacleData quest in obstacle)
+                dict.Add(quest.id, quest);
+            return dict;
+        }
+    }
+
+    #endregion
 }

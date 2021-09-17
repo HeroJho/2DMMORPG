@@ -166,6 +166,10 @@ namespace Server
                     // Loading Obstacle
                     foreach (ObstacleData obstacleData in DataManager.ObstacleDict.Values)
                     {
+                        Quest tempQuest = null;
+                        if (MyPlayer.Quest.CompletedQuests.TryGetValue(obstacleData.despawnConditionQuestId, out tempQuest))
+                            continue;
+
                         Obstacle obstacle = Obstacle.MakeObstacle(obstacleData);
                         if (obstacle == null)
                             continue;

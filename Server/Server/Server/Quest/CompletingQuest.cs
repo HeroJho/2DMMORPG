@@ -35,6 +35,7 @@ namespace Server
                 NpcId = data.npcId;
                 QuestType = QuestType.Complete;
                 QuestState = QuestState.Proceed;
+                ObstacleRemoves = data.obstacleRemoves;
 
                 CompleteQuestIds = data.completeQuestIds;
             }
@@ -53,6 +54,7 @@ namespace Server
                 QuestId = data.id;
                 NpcId = data.npcId;
                 QuestType = QuestType.Complete;
+                ObstacleRemoves = data.obstacleRemoves;
 
                 CompleteQuestIds = data.completeQuestIds;
 

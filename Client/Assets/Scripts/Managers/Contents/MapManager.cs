@@ -28,6 +28,8 @@ public struct PQNode : IComparable<PQNode>
 
 public class MapManager
 {
+    private Dictionary<Vector2Int, Obstacle> _checkObstacle = new Dictionary<Vector2Int, Obstacle>();
+
     public Grid CurrentGrid { get; private set; }
 
     public int MinX { get; set; }
@@ -45,6 +47,12 @@ public class MapManager
         if (cellPos.x < MinX || cellPos.x > MaxX)
             return false;
         if (cellPos.y < MinY || cellPos.y > MaxY)
+            return false;
+
+        // 장애물 확인
+        Obstacle obstacle = null;
+        Vector2Int pos = (Vector2Int)cellPos;
+        if (_checkObstacle.TryGetValue(pos, out obstacle) == true)
             return false;
 
         int x = cellPos.x - MinX;
@@ -139,6 +147,22 @@ public class MapManager
         {
             GameObject.Destroy(map);
             CurrentGrid = null;
+        }
+    }
+
+    public void AddObstacle(Obstacle obstacle)
+    {
+        foreach (Vector2Int pos in obstacle.ObstaclePos)
+        {
+            _checkObstacle.Add(pos, obstacle);
+        }
+    }
+
+    public void RemoveObstacle(Obstacle obstacle)
+    {
+        foreach (Vector2Int pos in obstacle.ObstaclePos)
+        {
+            _checkObstacle.Remove(pos);
         }
     }
 

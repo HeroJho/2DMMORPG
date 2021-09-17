@@ -109,6 +109,12 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SRespawn, MakePacket<S_Respawn>);
             _handler.Add((ushort)MsgId.SRespawn, PacketHandler.S_RespawnHandler);
 
+            _onRecv.Add((ushort)MsgId.SSpawnObstacle, MakePacket<S_SpawnObstacle>);
+            _handler.Add((ushort)MsgId.SSpawnObstacle, PacketHandler.S_SpawnObstacleHandler);
+
+            _onRecv.Add((ushort)MsgId.SDespawnObstacle, MakePacket<S_DespawnObstacle>);
+            _handler.Add((ushort)MsgId.SDespawnObstacle, PacketHandler.S_DespawnObstacleHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
