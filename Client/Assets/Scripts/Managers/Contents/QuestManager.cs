@@ -204,7 +204,11 @@ public class QuestManager
         // 완료했으니 완료 퀘스트 조건 체크
         CheckCondition();
 
-        Managers.CutScene.StartCutScene();
+        // 컷씬 있으면 실행
+        QuestData questData = null;
+        Managers.Data.QuestDict.TryGetValue(questId, out questData);
+        if(questData.cutSceneId != -1)
+            Managers.CutScene.StartCutScene(questData.cutSceneId);
 
         // 퀘스트판넬 갱신
         UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;

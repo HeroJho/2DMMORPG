@@ -129,12 +129,14 @@ public class MyPlayerController : PlayerController
 		Managers.Quest.CheckCondition();
 	}
 
+	// 맵핵 사용 테스트
 	public Vector3Int TestPos;
 	public bool TestMapDo = false;
 
     protected override void UpdateController()
     {
-		if(TestMapDo)
+		// 맵핵 사용 테스트
+		if (TestMapDo)
         {
 			CellPos = TestPos;
         }

@@ -90,10 +90,23 @@ public class MapEditor
                     for (int x = tmBase.cellBounds.xMin; x <= tmBase.cellBounds.xMax - 1; x++)
                     {
                         TileBase tile = envCollsion.GetTile(new Vector3Int(x, y, 0));
-                        if (tile != null)
-                            writer.Write("1");
-                        else
+                        if (tile == null)
+                        {
                             writer.Write("0");
+                            continue;
+                        }
+
+                        if (tile.ToString() == "RedTree (UnityEngine.Tilemaps.Tile)")
+                        {
+                            writer.Write("1");
+                            Debug.Log(tile.ToString());
+                        }
+                        else if (tile.ToString() == "GreenTree (UnityEngine.Tilemaps.Tile)")
+                        {
+                            writer.Write("2");
+                            Debug.Log(tile.ToString());
+                        }
+
                     }
 
                     writer.WriteLine();
@@ -123,6 +136,12 @@ public class MapEditor
                             writer.Write("2");
                             Debug.Log(tile.ToString());
                         }
+                        else if (tile.ToString() == "building (UnityEngine.Tilemaps.Tile)")
+                        {
+                            writer.Write("3");
+                            Debug.Log(tile.ToString());
+                        }
+
 
                     }
 

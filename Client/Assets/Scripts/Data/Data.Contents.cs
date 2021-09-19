@@ -173,6 +173,7 @@ namespace Data
         public string description;
         public string contents;
         public List<QuestRewardData> rewards;
+        public int cutSceneId;
     }
     [Serializable]
     public class Condition

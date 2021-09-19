@@ -88,10 +88,10 @@ public class MapManager
         StringReader coliision_reader = new StringReader(collision_txt.text);
 
         // Env
-        TextAsset tree_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Collision");
-        StringReader tree_reader = new StringReader(tree_txt.text);
-        TextAsset bush_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_NoCollision");
-        StringReader bush_reader = new StringReader(bush_txt.text);
+        TextAsset collisionEnv_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_Collision");
+        StringReader collisionEnv_reader = new StringReader(collisionEnv_txt.text);
+        TextAsset noCollisionEnv_txt = Managers.Resource.Load<TextAsset>($"Map/{mapName}_NoCollision");
+        StringReader noCollisionEnv_reader = new StringReader(noCollisionEnv_txt.text);
 
         MinX = int.Parse(coliision_reader.ReadLine());
         MaxX = int.Parse(coliision_reader.ReadLine());
@@ -105,34 +105,49 @@ public class MapManager
         for(int y = 0; y < yCount; y++)
         {
             string line = coliision_reader.ReadLine();
-            string tree_line = tree_reader.ReadLine();
-            string bush_line = bush_reader.ReadLine();
+            string collisionEnv_line = collisionEnv_reader.ReadLine();
+            string noCollisionEnv_line = noCollisionEnv_reader.ReadLine();
 
             for(int x = 0; x < xCount; x++)
             {
                 _collision[y, x] = (line[x] == '1' ? true : false);
 
                 // 나무 깔아주기
-                if(tree_line[x] == '1')
+                if(collisionEnv_line[x] == '1')
                 {
                     Vector3 cellPos = Pos2Cell(new Pos(y, x));
 
                     GameObject obj = Managers.Resource.Instantiate("Map/Env/RedTree", treeLoot.transform);
                     obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
                 }
+                else if (collisionEnv_line[x] == '2')
+                {
+                    Vector3 cellPos = Pos2Cell(new Pos(y, x));
+
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/GreenTree", treeLoot.transform);
+                    obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
+                }
+
                 // 부쉬 깔아주기
-                if (bush_line[x] == '1') 
+                if (noCollisionEnv_line[x] == '1') 
                 {
                     Vector3 cellPos = Pos2Cell(new Pos(y, x));
 
                     GameObject obj = Managers.Resource.Instantiate("Map/Env/RedBush", treeLoot.transform);
                     obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
                 }
-                else if(bush_line[x] == '2')
+                else if(noCollisionEnv_line[x] == '2')
                 {
                     Vector3 cellPos = Pos2Cell(new Pos(y, x));
 
                     GameObject obj = Managers.Resource.Instantiate("Map/Env/GreenBush", treeLoot.transform);
+                    obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
+                }
+                else if (noCollisionEnv_line[x] == '3')
+                {
+                    Vector3 cellPos = Pos2Cell(new Pos(y, x));
+
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/Building_1", treeLoot.transform);
                     obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
                 }
 

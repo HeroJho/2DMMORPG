@@ -19,6 +19,7 @@ namespace Server
             PositionInfo movePosInfo = movePacket.PosInfo;
             ObjectInfo info = player.Info;
 
+
             // 상태만 바껴도 패킷을 보내기 때문에 한번 체크
             if (movePosInfo.PosX != info.PosInfo.PosX || movePosInfo.PosY != info.PosInfo.PosY)
             {
