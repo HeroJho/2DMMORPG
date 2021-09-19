@@ -231,7 +231,7 @@ public class MyPlayerController : PlayerController
 			Managers.Quest.ViewQuest(GetFrontCellPos());
         }
 
-    }
+	}
 
 	void GetUIKeyInput()
     {

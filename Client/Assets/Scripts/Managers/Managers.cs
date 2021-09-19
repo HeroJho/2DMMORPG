@@ -14,6 +14,8 @@ public class Managers : MonoBehaviour
     ObjectManager _obj = new ObjectManager();
     SkillManager _skill = new SkillManager();
     QuestManager _quest = new QuestManager();
+    CutSceneManager _cutScene;
+
 
 
     public static InventoryManager Inven { get { return Instance._inven; } }
@@ -22,6 +24,7 @@ public class Managers : MonoBehaviour
     public static ObjectManager Object { get { return Instance._obj; } }
     public static SkillManager Skill { get { return Instance._skill; } }
     public static QuestManager Quest { get { return Instance._quest; } }
+    public static CutSceneManager CutScene { get { return Instance._cutScene; } }
     #endregion
 
     #region Core
@@ -38,6 +41,7 @@ public class Managers : MonoBehaviour
     void Start()
     {
         Init();
+        _cutScene = GameObject.Find("CutScene").GetComponent<CutSceneManager>();
     }
 
     void Update()

@@ -204,6 +204,8 @@ public class QuestManager
         // 완료했으니 완료 퀘스트 조건 체크
         CheckCondition();
 
+        Managers.CutScene.StartCutScene();
+
         // 퀘스트판넬 갱신
         UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
         gameSceneUI.QuestUI.RefreshUI();
