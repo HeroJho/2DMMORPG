@@ -2,11 +2,17 @@
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestGiver : MonoBehaviour
 {
     public int NpcId { get; set; }
+
+    [SerializeField]
+    private TextMeshPro NameBox;
+    public string NpcName { set { NameBox.text = value; } }
 
     public Dictionary<int, Quest> QuestList { get; set; } = new Dictionary<int, Quest>();
 

@@ -42,6 +42,8 @@ public class Managers : MonoBehaviour
     {
         Init();
         _cutScene = GameObject.Find("CutScene").GetComponent<CutSceneManager>();
+
+        CutScene.Init();
     }
 
     void Update()
@@ -65,6 +67,7 @@ public class Managers : MonoBehaviour
 
             s_instance._network.Init();
             Data.LoadData();
+
         }
     }
 

@@ -268,9 +268,13 @@ public class ObjectManager
         _objects.Add(info.ObjectId, go);
         _npcs.Add(info.ObjectId, go);
 
+        NpcData npcData = null;
+        Managers.Data.NpcDict.TryGetValue(info.ObjectId, out npcData);
+
         // 퀘스트 담기
         QuestGiver questGiver = go.GetComponent<QuestGiver>();
         questGiver.NpcId = info.ObjectId;
+        questGiver.NpcName = npcData.name;
         Managers.Quest.InitQuests(questGiver);
 
         // 위치를 설정
