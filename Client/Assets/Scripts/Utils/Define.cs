@@ -19,6 +19,8 @@ public class Define
         Click_Up,
         Drag,
         DragEnd,
-        Drop
+        Drop,
+        Enter,
+        Exit
     }
 }

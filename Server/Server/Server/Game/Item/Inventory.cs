@@ -22,7 +22,7 @@ namespace Server
             Items.TryGetValue(itemDbId, out item);
             return item;
         }
-
+        
         public Item Find(Func<Item, bool> condition)
         {
             foreach (Item item in Items.Values)

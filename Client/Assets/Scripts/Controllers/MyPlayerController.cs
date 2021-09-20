@@ -244,6 +244,7 @@ public class MyPlayerController : PlayerController
             if (invenUI.gameObject.activeSelf) // 활성화 여부
             {
 				invenUI.gameObject.SetActive(false);
+				_gameSceneUI.DescriptionBox.ClosePosition();
 			}
             else
             {
@@ -258,6 +259,7 @@ public class MyPlayerController : PlayerController
 			if (statUI.gameObject.activeSelf) // 활성화 여부
 			{
 				statUI.gameObject.SetActive(false);
+				_gameSceneUI.DescriptionBox.ClosePosition();
 			}
 			else
 			{
@@ -272,6 +274,7 @@ public class MyPlayerController : PlayerController
 			if (skillUI.gameObject.activeSelf) // 활성화 여부
 			{
 				skillUI.gameObject.SetActive(false);
+				_gameSceneUI.DescriptionBox.ClosePosition();
 			}
 			else
 			{

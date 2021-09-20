@@ -13,6 +13,7 @@ public class UI_Inventory_Item : UI_Base
     Image _dragIcon;
     CanvasGroup _canvasGroup;
     Image _frontDragIcon;
+    UI_DescriptionBox _descriptionBox;
 
     [SerializeField]
     Image _frame;
@@ -28,11 +29,16 @@ public class UI_Inventory_Item : UI_Base
     public ArmorType ArmorType { get; private set; }
     public bool Equipped { get; private set; }
 
+    public string Name { get; private set; }
+    public string Description { get; private set; }
+
 
     public override void Init()
     {
         // 드래그 UI가 가림 > 최상위 부모에 생성된 UI로 덮어줌
         _frontDragIcon = transform.root.GetComponentInChildren<UI_FrontDragIcon>().GetComponent<Image>();
+        _descriptionBox = transform.root.GetComponentInChildren<UI_DescriptionBox>();
+
 
         BindEvent();
     }
@@ -49,6 +55,9 @@ public class UI_Inventory_Item : UI_Base
             ItemType = ItemType.None;
             ArmorType = ArmorType.None;
 
+            Name = null;
+            Description = null;
+
             _icon.gameObject.SetActive(false);
             _dragIcon.gameObject.SetActive(false);
             _frame.gameObject.SetActive(false);
@@ -62,6 +71,10 @@ public class UI_Inventory_Item : UI_Base
             Stackable = item.Stackable;
             Equipped = item.Equipped;
             ItemType = item.ItemType;
+
+            Name = item.Name;
+            Description = item.Description;
+
             // UI_Stat Drop할 때 확인용
             if (item.ItemType == ItemType.Armor)
             {
@@ -144,6 +157,22 @@ public class UI_Inventory_Item : UI_Base
             _frontDragIcon.transform.position = Vector3.zero;
 
         }, Define.UIEvent.Click_Up);
+
+        // 아이템 설명
+        BindEvent(_dragIcon.gameObject, (e) =>
+        {
+            _descriptionBox.WriteNameText(Name);
+            _descriptionBox.WriteDescriptionText(Description);
+            _descriptionBox.ModifyPosition(e);
+
+        }, Define.UIEvent.Enter);
+        BindEvent(_dragIcon.gameObject, (e) =>
+        {
+            _descriptionBox.WriteNameText(Name);
+            _descriptionBox.WriteDescriptionText(Description);
+            _descriptionBox.ClosePosition();
+
+        }, Define.UIEvent.Exit);
 
     }
 

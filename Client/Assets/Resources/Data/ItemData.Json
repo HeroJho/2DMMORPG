@@ -1,15 +1,16 @@
-{
+﻿{
   "weapons": [
     {
       "id": "1",
-      "name": "�߽����� ��",
+      "name": "조영웅의 검",
+      "description": "공격력: 1000\n아무나 사용할 수 없는 검이다. 자칫 어둠의 힘에 잡아먹힐 수도...",
       "weaponType": "Sword",
       "damage": "1000",
       "iconPath": "Textures/Item/sword"
     },
     {
       "id": "2",
-      "name": "�߽����� Ȱ",
+      "name": "견습생의 활",
       "weaponType": "Bow",
       "damage": "5",
       "iconPath": "Textures/Item/bow"
@@ -18,14 +19,16 @@
   "armors": [
     {
       "id": "100",
-      "name": "�� ����",
+      "name": "병사 갑옷",
+      "description": "방어력: 15\n무겁기는 하지만... 효과는 좋다!",
       "armorType": "Armor",
       "defence": "15",
       "iconPath": "Textures/Item/armor"
     },
     {
       "id": "101",
-      "name": "�� ����",
+      "name": "병사 투구",
+      "description": "방어력: 5\n무겁기는 하지만... 효과는 좋다!",
       "armorType": "Helmet",
       "defence": "5",
       "iconPath": "Textures/Item/helmets"
@@ -34,7 +37,8 @@
   "consumables": [
     {
       "id": "200",
-      "name": "HP ����",
+      "name": "소형 물약",
+      "description": "회복력: 10\n쓰기는 하지만... 효과는 좋다!",
       "consumableType": "Potion",
       "posionType": "Hp",
       "maxCount": "999",
@@ -43,7 +47,8 @@
     },
     {
       "id": "201",
-      "name": "MP ����",
+      "name": "MP 물약",
+      "description": "회복력: 10\n쓰기는 하지만... 효과는 좋다!",
       "consumableType": "Potion",
       "posionType": "Mp",
       "maxCount": "500",
@@ -54,14 +59,16 @@
   "collections": [
     {
       "id": "1001",
-      "name": "�δ��� ����",
+      "name": "두더지 발톱",
+      "description": "두더지 발톱은 무슨 냄새일까..?",
       "collectionType": "None",
       "maxCount": "999",
       "iconPath": "Textures/Item/moleClaw"
     },
     {
       "id": "1002",
-      "name": "�ν��� ���",
+      "name": "부쉬의 사과",
+      "description": "외형만 보면 썩은것 같지만 맛은 있다.",
       "collectionType": "None",
       "maxCount": "999",
       "iconPath": "Textures/Item/bushApple"

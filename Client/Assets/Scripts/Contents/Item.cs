@@ -38,6 +38,9 @@ public class Item
         set { Info.Equipped = value; }
     }
 
+    public string Name { get; private set; }
+    public string Description { get; private set; }
+
     public ItemType ItemType { get; private set; }
     public bool Stackable { get; protected set; }
 
@@ -112,6 +115,9 @@ public class Item
 
         if (item != null)
         {
+            item.Name = itemData.name;
+            item.Description = itemData.description;
+
             item.ItemDbId = itemInfo.ItemDbId;
             item.Count = itemInfo.Count;
             item.Slot = itemInfo.Slot;

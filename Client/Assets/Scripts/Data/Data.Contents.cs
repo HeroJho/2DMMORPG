@@ -62,6 +62,7 @@ namespace Data
     {
         public int id;
         public string name;
+        public string description;
         public ItemType itemType;
         public string iconPath;
     }
