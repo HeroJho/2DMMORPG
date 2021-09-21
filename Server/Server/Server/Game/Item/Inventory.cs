@@ -53,5 +53,11 @@ namespace Server
 
             return null;
         }
+
+        public Item FindItemBySlot(int slot)
+        {
+            Item item = Items.Values.FirstOrDefault(i => i.Slot == slot);
+            return item;
+        }
     }
 }

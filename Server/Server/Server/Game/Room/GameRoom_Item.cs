@@ -128,6 +128,38 @@ namespace Server
             DbTransaction.RemoveItem(player, item, room);
 
         }
+    
+        public void HandleChangeSlot(Player player, C_ChangeSlot changeSlotPacket)
+        {
+            // 슬롯 같은 경우는 이동 패킷처럼 클라에 먼저 적용하고 서버에 적용
+            GameRoom room = player.Room;
+
+            if (player == null || room == null)
+                return;
+
+            // 메모리 상 이동
+            int itemDbId = changeSlotPacket.ItemDbId;
+            int changeSlot = changeSlotPacket.Slot;
+
+            Item item = player.Inven.Get(itemDbId);
+            if (item == null)
+                return;
+
+            Item changeItem = player.Inven.FindItemBySlot(changeSlot);
+            if(changeItem == null)
+            {
+                item.Slot = changeSlot;
+                DbTransaction.ChangeItemSlotNoti(player, item);
+            }
+            else
+            {
+                changeItem.Slot = item.Slot;
+                item.Slot = changeSlot;
+                DbTransaction.ChangeItemSlotNoti(player, item);
+                DbTransaction.ChangeItemSlotNoti(player, changeItem);
+            }
+
+        }
     }
 
 }

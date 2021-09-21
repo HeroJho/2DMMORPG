@@ -8,9 +8,9 @@ public class UI_Inventory_Item : UI_Base
 {
     [SerializeField]
     Image _icon;
-
     [SerializeField]
-    Image _dragIcon;
+    Image _backGround;
+
     CanvasGroup _canvasGroup;
     Image _frontDragIcon;
     UI_DescriptionBox _descriptionBox;
@@ -20,6 +20,8 @@ public class UI_Inventory_Item : UI_Base
 
     [SerializeField]
     Text _countText;
+
+    public int Slot { get; set; }
 
     public int ItemDbId { get; private set; }
     public int TemplateId { get; private set; }
@@ -59,7 +61,6 @@ public class UI_Inventory_Item : UI_Base
             Description = null;
 
             _icon.gameObject.SetActive(false);
-            _dragIcon.gameObject.SetActive(false);
             _frame.gameObject.SetActive(false);
             _countText.gameObject.SetActive(false);
         }
@@ -88,10 +89,8 @@ public class UI_Inventory_Item : UI_Base
 
             Sprite icon = Managers.Resource.Load<Sprite>(itemData.iconPath);
             _icon.sprite = icon;
-            _dragIcon.sprite = icon;
 
             _icon.gameObject.SetActive(true);
-            _dragIcon.gameObject.SetActive(true);
             _frame.gameObject.SetActive(Equipped);
 
 
@@ -117,7 +116,7 @@ public class UI_Inventory_Item : UI_Base
     public void BindEvent()
     {
         // 오른 클릭시 장착패킷
-        BindEvent(_dragIcon.gameObject, (e) =>
+        BindEvent(_backGround.gameObject, (e) =>
         {
             Data.ItemData itemData = null;
             Managers.Data.ItemDict.TryGetValue(TemplateId, out itemData);
@@ -141,8 +140,11 @@ public class UI_Inventory_Item : UI_Base
         }, Define.UIEvent.RightClick);
 
         // 드래그
-        BindEvent(_dragIcon.gameObject, (e) =>
+        BindEvent(_backGround.gameObject, (e) =>
         {
+            if (ItemDbId == 0)
+                return;
+
             _frontDragIcon.transform.position = e.position;
             _frontDragIcon.sprite = _icon.sprite;
             _frontDragIcon.enabled = true;
@@ -151,23 +153,47 @@ public class UI_Inventory_Item : UI_Base
 
         }, Define.UIEvent.Drag);
         // 드래그를 풀면 제자리로
-        BindEvent(_dragIcon.gameObject, (e) =>
+        BindEvent(_backGround.gameObject, (e) =>
         {
+            if (ItemDbId == 0)
+                return;
+
             _frontDragIcon.enabled = false;
             _frontDragIcon.transform.position = Vector3.zero;
 
         }, Define.UIEvent.Click_Up);
 
-        // 아이템 설명
-        BindEvent(_dragIcon.gameObject, (e) =>
+        
+        // 슬롯 변경 드랍
+        BindEvent(_backGround.gameObject, (e) =>
         {
+            UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
+            if (itemInfo == null || itemInfo.ItemDbId == 0)
+                return;
+
+            Managers.Inven.ChangeSlot(itemInfo.ItemDbId, Slot);
+            UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+            gameSceneUI.InvenUI.RefreshUI();
+
+        }, Define.UIEvent.Drop);
+
+
+        // 아이템 설명
+        BindEvent(_backGround.gameObject, (e) =>
+        {
+            if (ItemDbId == 0)
+                return;
+
             _descriptionBox.WriteNameText(Name);
             _descriptionBox.WriteDescriptionText(Description);
             _descriptionBox.ModifyPosition(e);
 
         }, Define.UIEvent.Enter);
-        BindEvent(_dragIcon.gameObject, (e) =>
+        BindEvent(_backGround.gameObject, (e) =>
         {
+            if (ItemDbId == 0)
+                return;
+
             _descriptionBox.WriteNameText(Name);
             _descriptionBox.WriteDescriptionText(Description);
             _descriptionBox.ClosePosition();

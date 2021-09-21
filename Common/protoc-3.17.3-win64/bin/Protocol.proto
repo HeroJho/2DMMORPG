@@ -46,6 +46,7 @@ enum MsgId{
     C_RESPAWN = 39;
     S_SPAWN_OBSTACLE = 40;
     S_DESPAWN_OBSTACLE = 41;
+    C_CHANGE_SLOT = 42;
 }
 
 enum CreatureState{
@@ -324,6 +325,11 @@ message S_SpawnObstacle{
 
 message S_DespawnObstacle{
     repeated int32 templateId = 1;
+}
+
+message C_ChangeSlot{
+    int32 itemDbId = 1;
+    int32 slot = 2;
 }
 
 message ItemInfo{

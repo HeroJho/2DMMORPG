@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager
@@ -63,5 +64,32 @@ public class InventoryManager
     public void Clear()
     {
         Items.Clear();
+    }
+
+    public void ChangeSlot(int itemDbId, int slot)
+    {
+        Item item = Get(itemDbId);
+
+        Item changeItem = FindItemBySlot(slot);
+        if (changeItem == null)
+        {
+            item.Slot = slot;
+        }
+        else
+        {
+            changeItem.Slot = item.Slot;
+            item.Slot = slot;
+        }
+
+        C_ChangeSlot changeSlotPacket = new C_ChangeSlot();
+        changeSlotPacket.ItemDbId = itemDbId;
+        changeSlotPacket.Slot = slot;
+        Managers.Network.Send(changeSlotPacket);
+    }
+
+    public Item FindItemBySlot(int slot)
+    {
+        Item item = Items.Values.FirstOrDefault(i => i.Slot == slot);
+        return item;
     }
 }

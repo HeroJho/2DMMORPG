@@ -67,6 +67,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CRespawn, MakePacket<C_Respawn>);
             _handler.Add((ushort)MsgId.CRespawn, PacketHandler.C_RespawnHandler);
 
+            _onRecv.Add((ushort)MsgId.CChangeSlot, MakePacket<C_ChangeSlot>);
+            _handler.Add((ushort)MsgId.CChangeSlot, PacketHandler.C_ChangeSlotHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
