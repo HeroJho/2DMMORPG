@@ -14,7 +14,8 @@
         ]
       },
       "title": "채굴 장비 찾기(1)",
-      "description": "이런! 어떻게하지? \n누구십니까? \n지원이군요. 저희는 채굴 장비를 찾고 있습니다. \n그런데 이 끝도 없이 나오는 두더지들 때문에 수색하기가 힘들군요... \n더 이상 두더지를 잡을 힘이 없습니다... \n일단 근방의 두더지를 잡아주시면 됩니다.",
+      "Description": "이런! 어떻게하지? \n누구십니까? \n지원이군요. 저희는 채굴 장비를 찾고 있습니다. \n그런데 이 끝도 없이 나오는 두더지들 때문에 수색하기가 힘들군요... \n더 이상 두더지를 잡을 힘이 없습니다... \n일단 근방의 두더지를 잡아주시면 됩니다.",
+      "CompleteDescription": "아니 벌써 다 잡으셨습니까?",
       "contents": "두더지 잡기",
       "rewards": [
         {
@@ -44,7 +45,7 @@
       "npcId": "2",
       "questType": "Hunting",
       "monsterId": "1",
-      "purposeNumber": "20",
+      "purposeNumber": "10",
       "currentNumber": "0",
       "condition": {
         "level": "1",
@@ -54,6 +55,7 @@
       },
       "title": "채굴 장비 찾기(2)",
       "Description": "실력이 뛰어나군요! \n방금 제가 드린 칼을 사용하면 더욱 수월하게 두더지를 잡을 수 있을 겁니다.",
+      "CompleteDescription": "아니 벌써 다 잡으셨습니까?",
       "contents": "두더지 잡기",
       "rewards": [
         {
@@ -78,7 +80,7 @@
       "npcId": "3",
       "questType": "Hunting",
       "monsterId": "2",
-      "purposeNumber": "10",
+      "purposeNumber": "5",
       "currentNumber": "0",
       "condition": {
         "level": "20",
@@ -87,7 +89,8 @@
         ]
       },
       "title": "음식 구하기(1)",
-      "description": "여어! 여기야!\n너 지원 나온거지?\n아직 쌩쌩한게 도움이 많이 될 것 같아.\n여기 수풀이 울창한게 먹을게 없을 수가 없다는 말이야!\n...\n그런데 이 수풀들 움직인단 말이야?\n아마 수풀로 위장하는 이상한 동물인것 같은데 정말 사나워!\n사실 난 싸움을 그다지 못 한단 말이지..\n 니가 좀 움직이는 수풀들을 잡아주겠어?\n그다음은 같이 먹을걸 찾아보자!",
+      "Description": "여어! 여기야!\n너 지원 나온거지?\n아직 쌩쌩한게 도움이 많이 될 것 같아.\n여기 수풀이 울창한게 먹을게 없을 수가 없다는 말이야!\n...\n그런데 이 수풀들 움직인단 말이야?\n아마 수풀로 위장하는 이상한 동물인것 같은데 정말 사나워!\n사실 난 싸움을 그다지 못 한단 말이지..\n 니가 좀 움직이는 수풀들을 잡아주겠어?\n그다음은 같이 먹을걸 찾아보자!",
+      "CompleteDescription": "너 강하잖아!",
       "contents": "움직이는 수풀 잡기",
       "rewards": [
         {
@@ -117,7 +120,7 @@
       "npcId": "3",
       "questType": "Hunting",
       "monsterId": "2",
-      "purposeNumber": "20",
+      "purposeNumber": "10",
       "currentNumber": "0",
       "condition": {
         "level": "20",
@@ -127,7 +130,42 @@
       },
       "title": "음식 구하기(2)",
       "Description": "너... 정말 쌔구나?\n아냐...\n내가 사람보는 눈이 있거든?\n검술은 형편없지만 몸이 엄청난데? 근육의 밀도가 아주 좋아!\n...\n이런! 이 수풀들은 어디서 나오는거야! 말하는 사이에 또 엄청 나왔네!",
+      "CompleteDescription": "넌 분명 유능한 대원이였을 거야",
       "contents": "움직이는 수풀 잡기",
+      "rewards": [
+        {
+          "exp": "1500",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ],
+      "cutSceneId": "-1"
+
+    },
+    {
+      "id": "5",
+      "npcId": "7",
+      "questType": "Hunting",
+      "monsterId": "3",
+      "purposeNumber": "10",
+      "currentNumber": "0",
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "2005"
+        ]
+      },
+      "title": "훈련(1)-전직 퀘스트",
+      "Description": "촌장한테 얘기 들었다! 기억을 잃었다고?\n나도 기억 못하는거야?\n일단 머쉬맘을 잡든 뭐든 마을먼저 안전을 확보해야해.\n너 정도의 실력자라면 가능하겠지.\n....\n뭐...? 스킬을 사용하는 법이 기억이 안난다고?\n확실히 마법사의 짓은 아니네...\n보통의 기억조작 마법은 능력까지 잃게하지는 못하거든.\n일단 빠르게 스킬부터 익히는게 좋겠어. 너는 옛날부터 배우는게 빨랏지\n간단하게 근처에있는 꼬마나무들 부터 잡으면서 훈련을 해보자고!",
+      "CompleteDescription": "좋아! 감은 여전하구만!",
+      "contents": "꼬마나무",
       "rewards": [
         {
           "exp": "1500",
@@ -164,6 +202,7 @@
       },
       "title": "채굴 장비 찾기(3)",
       "Description": "잠깐...! \n이 두더지 발톱... 정말 단단하지 않나요? \n좋은 채굴 장비가 될 것 같습니다! \n빠르게 모아서 전해주죠!",
+      "CompleteDescription": "제가 발톱을 다듬어 보겠습니다!",
       "contents": "두더지 발톱 모으기",
       "rewards": [
         {
@@ -203,6 +242,7 @@
       },
       "title": "채굴 장비 찾기(4)",
       "Description": "발톱이 작아서 생각보다 많이 필요하겠는데요? \n조금만 더 힘을 냅시다!",
+      "CompleteDescription": "감사합니다! 덕분에 채굴 장비를 마련했습니다!",
       "contents": "두더지 발톱 모으기",
       "rewards": [
         {
@@ -237,6 +277,7 @@
       },
       "title": "음식 구하기(3)",
       "Description": "잠깐!\n엄청난걸 알았어!\n움직이는 수풀들을 잡으면 사과를 떨구네?!\n뭐... 보기에는 그래도 맛은 아주 괜찮아!\n얼른 사과를 모아서 가져다 주자!",
+      "CompleteDescription": "역시 아주 유능해!",
       "contents": "사과 모으기",
       "rewards": [
         {
@@ -276,7 +317,42 @@
       },
       "title": "음식 구하기(4)",
       "Description": "이런! 다들 너무 굶었어!\n벌써 사과가 다 떨어졌어.\n빨리 식량을 보충하자!",
-      "contents": "유령을 도와라",
+      "CompleteDescription": "고마워! 덕분에 충분한 음식을 마련했어! 나중에 여기서 나가면 한잔 하자고!",
+      "contents": "사과 모으기",
+      "rewards": [
+        {
+          "exp": "2000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "50"
+        }
+      ],
+      "cutSceneId": "-1"
+
+    },
+    {
+      "id": "1005",
+      "npcId": "8",
+      "questType": "Collection",
+      "itemId": "1003",
+      "purposeNumber": "10",
+      "currentNumber": "0",
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "2005"
+        ]
+      },
+      "title": "마을 안전확보!(1)",
+      "Description": "Description\nDescription\nDescription\nDescription\nDescription\n",
+      "CompleteDescription": "CompleteDescription\nCompleteDescription\nCompleteDescription\nCompleteDescription\n",
+      "contents": "작은 나무 모으기",
       "rewards": [
         {
           "exp": "2000",
@@ -298,7 +374,6 @@
 
   ],
 
-
   "complete": [
     {
       "id": "2001",
@@ -316,6 +391,7 @@
       },
       "title": "숲속 탈출!!",
       "Description": "일어났나? \n신참이군... 그래 기절하고 난 뒤 나도 최근의 일을 기억 못한다. \n한가지 확실한건 우린 임무 중이였고, 무언가의 습격을 받은 것 같다. \n기억을 잃은거 보니 아마 마법사의 짓이겠지. \n하여튼 깨어난 대원들과 이 근방을 수색했고, 유일하게 여기를 나갈 수 있는 곳은 저기 돌덩이들로 막혀있는 곳 뿐이다. \n그런데 오랫동안 기절해 있었는지 다들 허기져있고 돌덩이들을 치울 장비도 없다. \n 몇몇 대원들에게 먹을 것과 장비가 될만한 걸 찾아오라고 시켰지만...\n 많이 늦어지는군. \n자네도 합류해서 팀원들을 도와라.",
+      "CompleteDescription": "고생했다!\n대원들이 자네 공이 아주 컷다고 하는더군!\n이제 대원들도 힘을 보충했고, 장비도 마련됐으니 돌을 치울 수 있게됐다.\n나는 여기 남아서 수습을 하고 복귀 하도록 하지.\n자네는 먼저 마을로 가서 상황을 파악하도록 해라.",
       "contents": "대원들을 도와라",
       "rewards": [
         {
@@ -339,7 +415,203 @@
       ],
       "cutSceneId": "0"
 
+    },
+
+    {
+      "id": "2002",
+      "npcId": "4",
+      "questType": "Complete",
+      "completeQuestIds": [ "2001" ],
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "2001"
+        ]
+      },
+      "title": "낯선 여자와 대화",
+      "Description": "이럴수가!\n기사님 돌아오셨군요!",
+      "CompleteDescription": "네..?!",
+      "contents": "낯선 여자와 대화하기",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ],
+      "cutSceneId": "-1"
+
+    },
+
+    {
+      "id": "2003",
+      "npcId": "4",
+      "questType": "Complete",
+      "completeQuestIds": [ "2004" ],
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "2002"
+        ]
+      },
+      "title": "낯선 여자의 부탁(1)",
+      "Description": "도대체 어떻게 된거예요?\n.....\n기억을 잃으셨다구요? 정말 혼란스럽네요...\n저를 기억 못하시는거 보니 최소한 이 마을에 도착했을 때 이후로의 기억을 전부 잃으셨나 보군요...\n저한테 무슨일이 있었는지 듣는 것 보다는 촌장님한테 듣는게 좋을 것 같아요.\n기사 대장으로 보이시는 분이 마을에 오시자마자 촌장님과 자세히 얘기를 나눴거든요.\n지금 잠도 못 주무시고 기다리고 있답니다...\n촌장님은 마을 북쪽의 꼭대기에 있으세요.\n아참! 촌장님과 얘기 나누시고 저한테 다시 와주실 수 있나요? 부탁드립니다.",
+      "CompleteDescription": "촌장님과 얘기 나누셨나요?",
+      "contents": "촌장님과 대화하기",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ],
+      "cutSceneId": "-1"
+
+    },
+
+    {
+      "id": "2004",
+      "npcId": "5",
+      "questType": "Complete",
+      "completeQuestIds": [ "2002" ],
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "2002"
+        ]
+      },
+      "title": "촌장님과 대화",
+      "Description": "자네는! 드디어 왔는가!",
+      "CompleteDescription": "뭐라고..?!",
+      "contents": "촌장님과 대화하기",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ],
+      "cutSceneId": "-1"
+
+    },
+
+    {
+      "id": "2005",
+      "npcId": "5",
+      "questType": "Complete",
+      "completeQuestIds": [ "2004" ],
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "2004"
+        ]
+      },
+      "title": "무슨일이 있었지?!",
+      "Description": "그럴수가... 기억을 잃어버렸다니!\n결국 당해버렸군...\n....\n자네들은 영웅 왕국에서 숲이 오염되고 있는 이유를 찾기위해 여기, 외곽의 마을까지 왔었네.\n하지만 자네들이 숲 깊은 곳으로 들어가고 한달이 지나도 나오지 않았네.\n마을에 남아있던 병사들도 찾으러가려고 했지만...\n갑자기 숲으로 들어가는 유일한 입구가 무너져 바위에 막혀버렸지!\n자네들이 전부 죽었다고 판단해서 마을 사람들은 진작에 마을을 떠낫고 남은 병사들만으로는 바위들을 치우기에 역부족이였네.\n그리고 자네들이 들어가기전에 대장으로 보이는 사람에게 숲이 오염되고서부터 숲에 들어간 마을사람들이 돌아오지 못하거나 기억을 잃어서 돌아왔다고 말해줬지.\n아마 마을에서 전설로 내려오던 '머쉬맘'이라는 동물인 것 같다네.",
+      "CompleteDescription": "쿨럭 쿨럭... 머쉬맘이라...",
+      "contents": "자초지종 설명듣기",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ],
+      "cutSceneId": "-1"
+
+    },
+
+    {
+      "id": "2006",
+      "npcId": "5",
+      "questType": "Complete",
+      "completeQuestIds": [ "5" ],
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+          "2005"
+        ]
+      },
+      "title": "머쉬맘을 잡기전에...",
+      "Description": "기억의 사라짐, 숲의 오염... 모든게 머쉬맘이 원인일 수도 있지.\n먼저 머쉬맘을 잡기전에 마을부터 지켜주게나...\n왠지는 모르겠지만 오염된 숲이 마을에 가까워지면서 근처의 몬스터들이 매우 사나워졌다네.\n몬스터가 더 사나워지기전에 마을사람들은 대피를 했지만, 자네들을 기다리던 몇몇마을 사람들과 병사들은 고립이 되어버렸네.\n몬스터가 너무 사나워져서 더이상 대피를 할 수 없게됐어...\n다행히 마을에 남아있던 병사들이 마을을 지켜주고 있지만 상당히 고전하고 있는 모양이야.\n일단 빨리 그들한테 가보게나.\n문제가 해결된다면 그때 내가 머쉬맘에 대해 자세히 알려주겠네.",
+      "CompleteDescription": "이제 마을이 안전해졌군... 마을 주민들도 대피할 수 있겠어!",
+      "contents": "마을을 지키는 병사 돕기",
+      "rewards": [
+        {
+          "exp": "1000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "20"
+        }
+      ],
+      "cutSceneId": "-1"
+
     }
+
 
   ]
 

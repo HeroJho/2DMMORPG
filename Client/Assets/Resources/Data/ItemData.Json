@@ -72,6 +72,14 @@
       "collectionType": "None",
       "maxCount": "999",
       "iconPath": "Textures/Item/bushApple"
+    },
+    {
+      "id": "1003",
+      "name": "작은 나무",
+      "description": "나무향은 중독성이 강하다.",
+      "collectionType": "None",
+      "maxCount": "999",
+      "iconPath": "Textures/Item/treeLog"
     }
   ]
 }

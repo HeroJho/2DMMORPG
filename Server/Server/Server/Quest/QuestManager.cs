@@ -30,7 +30,6 @@ namespace Server
                 return;
 
             Quests.Add(quest.QuestId, quest);
-           
         }
 
         public bool CompleteQuest(int questId)

@@ -131,10 +131,13 @@ public class QuestManager
 
         // 완료가능 > 수행가능 > 수행중 순으로 반환
         Quest quest = npc.FindStateQuest();
-        if (quest == null)
-            return;
 
-        Managers.UI.ShowPopupUI<UI_Quest>().RefreshUI(quest);
+        if (quest == null) // 퀘스트가 없다면 일반 대사
+            Managers.UI.ShowPopupUI<UI_Quest>().RefreshUI(npc);
+        else // 퀘스트의 상황에 맞게 대사
+            Managers.UI.ShowPopupUI<UI_Quest>().RefreshUI(quest);
+
+
     }
 
     public void TryReceiveQuest(Quest quest)
@@ -238,6 +241,13 @@ public class QuestManager
                     if(collectionQuest.CurrentNumber < collectionQuest.PurposeNumber)
                     {
                         collectionQuest.QuestState = QuestState.Proceed;
+
+                        // Proceed로 바꼇다면 Npc퀘스트 마크도 변경
+                        CanCompleteQuests.Remove(collectionQuest.QuestId);
+                        QuestGiver questGiver = Managers.Object.FindNpcWithId(collectionQuest.NpcId).
+                            GetComponent<QuestGiver>();
+
+                        questGiver.RefreshMark();
                     }
                 }
                 break;

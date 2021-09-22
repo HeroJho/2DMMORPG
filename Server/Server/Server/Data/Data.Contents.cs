@@ -155,6 +155,8 @@ namespace Server.Data
         public int id;
         public string name;
         public StatInfo stat;
+        public int searchCellDist;
+        public int chaseCellDist;
         public List<RewardData> rewards;
     }
 

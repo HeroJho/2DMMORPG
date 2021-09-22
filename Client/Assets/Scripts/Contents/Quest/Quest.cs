@@ -22,6 +22,7 @@ public class Quest
     // Descript
     public string Title { get; protected set; }
     public string Description { get; protected set; }
+    public string CompleteDescription { get; protected set; }
     public string Contents { get; protected set; }
 
     // Reward

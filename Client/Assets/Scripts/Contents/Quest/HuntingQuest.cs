@@ -27,6 +27,7 @@ public class HuntingQuest : Quest
 
         Title = questData.title;
         Description = questData.description;
+        CompleteDescription = questData.completeDescription;
         Contents = questData.contents;
 
         foreach (QuestRewardData rewardData in questData.rewards)

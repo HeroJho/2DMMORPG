@@ -258,6 +258,13 @@ public class ObjectManager
         _npcs.Clear();
         MyPlayer = null;
         Managers.Quest.Clear();
+
+        // 장애물
+        foreach (Obstacle obstacle in _obstacles.Values)
+            Managers.Resource.Destroy(obstacle.gameObject);
+        _obstacles.Clear();
+        Managers.Map.RemoveObstacleAll();
+
     }
 
     public void SpawnNpc(ObjectInfo info)
@@ -274,7 +281,7 @@ public class ObjectManager
         // 퀘스트 담기
         QuestGiver questGiver = go.GetComponent<QuestGiver>();
         questGiver.NpcId = info.ObjectId;
-        questGiver.NpcName = npcData.name;
+        questGiver.Init(npcData);
         Managers.Quest.InitQuests(questGiver);
 
         // 위치를 설정
@@ -289,7 +296,6 @@ public class ObjectManager
     {
         ObstacleData obstacleData = null;
         Managers.Data.ObstacleDict.TryGetValue(templateId, out obstacleData);
-
 
         GameObject go = Managers.Resource.Instantiate($"Map/Obstacle/Obstacle_{templateId}");
         Obstacle obstacle = go.GetComponent<Obstacle>();

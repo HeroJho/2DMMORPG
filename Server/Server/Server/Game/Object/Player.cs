@@ -121,8 +121,8 @@ namespace Server
             if (item.ItemDbId == equipPacket.ItemDbId && item.Equipped == equipPacket.Equipped)
                 return;
 
-            // 소모품은 장착 x
-            if (item.ItemType == ItemType.Consumable)
+            // 소모품, 기타탬은 장착 x
+            if (item.ItemType == ItemType.Consumable || item.ItemType == ItemType.Collection)
                 return;
 
             // 착용 요청이라면, 겹치는 부위 해제
@@ -251,8 +251,8 @@ namespace Server
             Stat.Hp = Stat.MaxHp;
             PosInfo.State = CreatureState.Idle;
             PosInfo.MoveDir = MoveDir.Down;
-            PosInfo.PosX = 0;
-            PosInfo.PosY = 0;
+            PosInfo.PosX = -50;
+            PosInfo.PosY = -75;
 
             room.EnterGame(this);
         }

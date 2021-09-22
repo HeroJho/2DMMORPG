@@ -97,13 +97,21 @@ public class UI_Quest : UI_Popup
                     // 퀘스트 표현
                     RewardUI(questInfo);
 
-                    Description(questInfo);
+                    CompleteDescription(questInfo);
                 }
                 break;
 
         }
 
         _questInfo = questInfo;
+    }
+
+    public void RefreshUI(QuestGiver questGiver)
+    {
+        Get<Button>((int)Buttons.Button).gameObject.SetActive(false);
+        Get<Text>((int)Texts.TitleText).text = questGiver.NpcName;
+        Get<Text>((int)Texts.ContentsText).text = questGiver.Description;
+
     }
 
     public void Description(Quest questInfo)
@@ -153,7 +161,64 @@ public class UI_Quest : UI_Popup
                         QuestData questData = null;
                         Managers.Data.QuestDict.TryGetValue(id, out questData);
 
-                        Get<Text>((int)Texts.ContentsText).text += questData.title + "완료하기" +
+                        Get<Text>((int)Texts.ContentsText).text += questData.title + " 완료하기" +
+                            System.Environment.NewLine;
+                    }
+
+                }
+                break;
+
+        }
+    }
+
+    public void CompleteDescription(Quest questInfo)
+    {
+        switch (questInfo.QuestType)
+        {
+            case QuestType.Hunting:
+                {
+                    HuntingQuest huntingQuest = (HuntingQuest)questInfo;
+
+                    Get<Text>((int)Texts.TitleText).text = questInfo.Title;
+                    Get<Text>((int)Texts.ContentsText).text =
+                        questInfo.CompleteDescription +
+                        System.Environment.NewLine +
+                        System.Environment.NewLine +
+                        questInfo.Contents + " " + +huntingQuest.PurposeNumber + " 마리";
+
+                }
+                break;
+            case QuestType.Collection:
+                {
+                    CollectionQuest collectionQuest = (CollectionQuest)questInfo;
+
+                    Get<Text>((int)Texts.TitleText).text = questInfo.Title;
+                    Get<Text>((int)Texts.ContentsText).text =
+                        questInfo.CompleteDescription +
+                        System.Environment.NewLine +
+                        System.Environment.NewLine +
+                        questInfo.Contents + " " + +collectionQuest.PurposeNumber + " 개";
+
+                }
+                break;
+            case QuestType.Complete:
+                {
+                    CompletingQuest collectionQuest = (CompletingQuest)questInfo;
+
+                    Get<Text>((int)Texts.TitleText).text = questInfo.Title;
+                    Get<Text>((int)Texts.ContentsText).text =
+                        questInfo.CompleteDescription +
+                        System.Environment.NewLine +
+                        System.Environment.NewLine +
+                        questInfo.Contents +
+                        System.Environment.NewLine;
+
+                    foreach (int id in collectionQuest.CompleteQuestIds)
+                    {
+                        QuestData questData = null;
+                        Managers.Data.QuestDict.TryGetValue(id, out questData);
+
+                        Get<Text>((int)Texts.ContentsText).text += questData.title + " 완료하기" +
                             System.Environment.NewLine;
                     }
 

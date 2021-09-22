@@ -74,12 +74,15 @@ public class MapManager
 
         // Env
         GameObject tree = Util.FindChild(go, "Tilemap_Env_Collision", true);
-        if (collision != null)
+        if (tree != null)
             tree.SetActive(false);
         GameObject bush = Util.FindChild(go, "Tilemap_Env_NoCollision", true);
-        if (collision != null)
+        if (bush != null)
             bush.SetActive(false);
         GameObject treeLoot = Util.FindChild(go, "EnvObjects", true);
+        GameObject spwan = Util.FindChild(go, "Tilemap_Spawn", true);
+        if (spwan != null)
+            spwan.SetActive(false);
 
         CurrentGrid = go.GetComponent<Grid>();
 
@@ -150,6 +153,13 @@ public class MapManager
                     GameObject obj = Managers.Resource.Instantiate("Map/Env/Building_1", treeLoot.transform);
                     obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
                 }
+                else if (noCollisionEnv_line[x] == '4')
+                {
+                    Vector3 cellPos = Pos2Cell(new Pos(y, x));
+
+                    GameObject obj = Managers.Resource.Instantiate("Map/Env/Building_2", treeLoot.transform);
+                    obj.transform.position = new Vector3(cellPos.x + 0.5f, cellPos.y + 0.5f, 0);
+                }
 
             }
         }
@@ -179,6 +189,10 @@ public class MapManager
         {
             _checkObstacle.Remove(pos);
         }
+    }
+    public void RemoveObstacleAll()
+    {
+        _checkObstacle.Clear();
     }
 
     #region A* PathFinding

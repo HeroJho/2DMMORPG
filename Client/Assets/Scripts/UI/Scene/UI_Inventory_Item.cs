@@ -131,6 +131,8 @@ public class UI_Inventory_Item : UI_Base
                 Managers.Network.Send(useConsumablePacket);
                 return;
             }
+            else if (itemData.itemType == ItemType.Collection)
+                return;
 
             C_EquipItem equipPacket = new C_EquipItem();
             equipPacket.ItemDbId = ItemDbId;

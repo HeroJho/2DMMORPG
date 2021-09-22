@@ -10,6 +10,8 @@
         "speed": "3.0",
         "totalExp": "5"
       },
+      "chaseCellDist": "5",
+      "searchCellDist": "5",
       "prefabPath": "BushMon",
       "rewards": [
         {
@@ -51,9 +53,11 @@
         "level": "1",
         "maxHp": "20",
         "attack": "1",
-        "speed": "3.0",
+        "speed": "4.0",
         "totalExp": "5"
       },
+      "chaseCellDist": "5",
+      "searchCellDist": "5",
       "prefabPath": "Mole",
       "rewards": [
         {
@@ -83,11 +87,44 @@
         "speed": "3.0",
         "totalExp": "20"
       },
+      "chaseCellDist": "5",
+      "searchCellDist": "2",
       "prefabPath": "BushMon",
       "rewards": [
         {
           "probability": "80",
           "itemId": "1002",
+          "count": "5"
+        },
+        {
+          "probability": "5",
+          "itemId": "200",
+          "count": "5"
+        },
+        {
+          "probability": "5",
+          "itemId": "201",
+          "count": "5"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "작은 나무",
+      "stat": {
+        "level": "10",
+        "maxHp": "250",
+        "attack": "5",
+        "speed": "3.0",
+        "totalExp": "20"
+      },
+      "chaseCellDist":"5",
+      "searchCellDist":"5",
+      "prefabPath": "Tree",
+      "rewards": [
+        {
+          "probability": "80",
+          "itemId": "1003",
           "count": "5"
         },
         {

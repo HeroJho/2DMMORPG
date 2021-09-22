@@ -129,16 +129,18 @@ public class MapEditor
                         if (tile.ToString() == "RedBush (UnityEngine.Tilemaps.Tile)")
                         {
                             writer.Write("1");
-                            Debug.Log(tile.ToString());
                         }
                         else if (tile.ToString() == "GreenBush (UnityEngine.Tilemaps.Tile)")
                         {
                             writer.Write("2");
-                            Debug.Log(tile.ToString());
                         }
                         else if (tile.ToString() == "building (UnityEngine.Tilemaps.Tile)")
                         {
                             writer.Write("3");
+                        }
+                        else if (tile.ToString() == "building-thin (UnityEngine.Tilemaps.Tile)")
+                        {
+                            writer.Write("4");
                             Debug.Log(tile.ToString());
                         }
 

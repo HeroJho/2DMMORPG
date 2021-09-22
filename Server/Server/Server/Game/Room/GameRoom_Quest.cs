@@ -46,10 +46,15 @@ namespace Server
             player.Session.Send(addQuestPacket);
 
             // 수집퀘스트인 경우 수락과 동시에 한번 실행
+            // 완료퀘스트도 수락과 동시에 완료 퀘가 있다면 확인
             if (quest.QuestType == QuestType.Collection)
             {
                 CollectionQuest collectionQuest = (CollectionQuest)quest;
                 player.Quest.ProceddWithQuest(collectionQuest.ItemId);
+            }
+            else if(quest.QuestType == QuestType.Complete)
+            {
+                player.Quest.ProceddWithQuest();
             }
 
         }

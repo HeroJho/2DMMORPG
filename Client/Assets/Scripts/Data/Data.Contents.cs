@@ -168,6 +168,7 @@ namespace Data
     {
         public int id;
         public string name;
+        public string Description;
     }
 
     [Serializable]
@@ -197,6 +198,7 @@ namespace Data
         public Condition condition;
         public string title;
         public string description;
+        public string completeDescription;
         public string contents;
         public List<QuestRewardData> rewards;
         public int cutSceneId;

@@ -12,13 +12,21 @@ public class QuestGiver : MonoBehaviour
 
     [SerializeField]
     private TextMeshPro NameBox;
-    public string NpcName { set { NameBox.text = value; } }
+    public string NpcName { get; private set; }
+    public string Description { get; private set; }
 
     public Dictionary<int, Quest> QuestList { get; set; } = new Dictionary<int, Quest>();
 
     public GameObject ProceedingMark;
     public GameObject QuestionMark;
     public GameObject ExclamationMark;
+
+    public void Init(NpcData npcData)
+    {
+        NpcName = npcData.name;
+        NameBox.text = NpcName;
+        Description = npcData.Description;
+    }
 
     public void AddQuest(QuestData questData)
     {

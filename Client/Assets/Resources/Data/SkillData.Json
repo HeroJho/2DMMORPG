@@ -27,8 +27,8 @@
     {
       "id": "3",
       "name": "범위 공격",
-      "cooldown": "5",
-      "damage": "10",
+      "cooldown": "0.5",
+      "damage": "500",
       "mp": "0",
       "skillType": "SkillExplosion",
       "iconPath": "Textures/Skill/Explosion",

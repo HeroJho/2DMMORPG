@@ -31,8 +31,11 @@ namespace Server
             DataManager.MonsterDict.TryGetValue(templateId, out _monsterData);
             Stat.MergeFrom(_monsterData.stat);
             Stat.Hp = _monsterData.stat.MaxHp;
+            _searchCellDist = _monsterData.searchCellDist;
+            _chaseCellDist = _monsterData.chaseCellDist;
             State = CreatureState.Idle;
             Info.TemplateId = templateId;
+
             CellPos = beginPos;
             _beginPos = beginPos;
         }
@@ -64,9 +67,9 @@ namespace Server
             if (Room != null)
                 _job = Room.PushAfter(200, Update);
         }
-                
-        long _nextSearchTick = 0;
-        int _searchCellDist = 3;
+
+        private long _nextSearchTick = 0;
+        private int _searchCellDist = 0;
         public virtual void UpdateIdle()
         {
             if (_nextSearchTick > Environment.TickCount64)
@@ -87,8 +90,8 @@ namespace Server
             State = CreatureState.Moving;
         }
 
-        long _nextMoveTick = 0;
-        int _chaseCellDist = 5;
+        private long _nextMoveTick = 0;
+        private int _chaseCellDist = 0;
         public virtual void UpdateMoving()
         {
             if (_nextMoveTick > Environment.TickCount64)
@@ -143,8 +146,8 @@ namespace Server
             BroadcastMove();
         }
 
-        int _skillRange = 1;
-        long _coolTick = 0;
+        private int _skillRange = 1;
+        private long _coolTick = 0;
         public virtual void UpdateSkill()
         {
             if (_coolTick == 0)
@@ -205,7 +208,7 @@ namespace Server
 
         }
 
-        long _callMoveTick = 0;
+        private long _callMoveTick = 0;
         public virtual void UpdateCallback()
         {
             if (_callMoveTick > Environment.TickCount64)
@@ -223,7 +226,7 @@ namespace Server
 
             // 길찾기 계산 && 추격 범위 검사
             List<Vector2Int> path = Room.Map.FindPath(CellPos, _beginPos, checkObject: true);
-            if (path == null)
+            if (path == null || path.Count < 2)
             {
                 _target = null;
                 State = CreatureState.Callback;

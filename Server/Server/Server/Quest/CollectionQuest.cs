@@ -92,9 +92,10 @@ namespace Server
             {
                 QuestState = QuestState.Cancomplete;
             }
-            else // 수집 퀘스트는 템을 버리거나 할 수 있어서 Cancomplete > Proceed 로 변경 가능
-            {
+            else if(QuestState == QuestState.Cancomplete)
+            {// 수집 퀘스트는 템을 버리거나 할 수 있어서 Cancomplete > Proceed 로 변경 가능
                 QuestState = QuestState.Proceed;
+                player.Quest.CanCompleteQuests.Remove(QuestId);
             }
 
             IsChanged = true;
