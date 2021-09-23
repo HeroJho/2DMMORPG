@@ -92,6 +92,7 @@ namespace Server
                         // 내 정보 전송
                         S_EnterGame enterPacket = new S_EnterGame();
                         enterPacket.Player = player.Info;
+
                         player.Session.Send(enterPacket);
 
                         player.Vision.AllSpawn();

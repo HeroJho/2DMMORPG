@@ -34,27 +34,40 @@ namespace Server.Data
     {
         public int id;
         public string name;
-        public float cooldown;
-        public int damage;
-        public int mp;
+        public int maxPoint;
+        public List<skillPointInfo> skillPointInfos;
         public SkillType skillType;
         public projectileInfo projectile;
         public explosionInfo explosion;
+    }
+    public class skillPointInfo
+    {
+        public float cooldown;
+        public int damage;
+        public int mp;
     }
 
     public class projectileInfo
     {
         public string name;
+        public List<projectilePointInfo> projectilePointInfos;
+        public string prefab;
+    }
+    public class projectilePointInfo
+    {
         public float speed;
         public int range;
-        public string prefab;
     }
 
     public class explosionInfo
     {
         public string name;
-        public int radian;
+        public List<explosionPointInfo> explosionPointInfos;
         public string prefab;
+    }
+    public class explosionPointInfo
+    {
+        public int radian;
     }
 
     [Serializable]

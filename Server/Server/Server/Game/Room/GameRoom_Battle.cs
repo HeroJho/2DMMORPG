@@ -61,92 +61,10 @@ namespace Server
 
         public void HandleSkill(Player player, C_Skill skillPacket)
         {
-            if (player == null)
+            if (player == null || player.Room == null)
                 return;
 
-            Skill skillData = null;
-            if (DataManager.SkillDict.TryGetValue(skillPacket.Info.SkillId, out skillData) == false)
-                return;
-
-            // 스킬 사용 가능 여부 체크
-            ObjectInfo info = player.Info;
-            if (info.PosInfo.State != CreatureState.Idle) // 멈춘 상태에서
-                return;
-
-            // 마나 여부 확인
-            if (player.Mp < skillData.mp)
-                return;
-
-            // 클라 애니메이션 실행
-            info.PosInfo.State = CreatureState.Skill;
-            S_Skill skill = new S_Skill() { Info = new SkillInfo() };
-            skill.ObjectId = info.ObjectId;
-            skill.Info.SkillId = skillData.id;
-            Broadcast(player.CellPos, skill);
-
-            // 쿨타임 확인 or 쿨타임 체크
-            if (!player.Skill.StartCheckCooltime(skillData.id))
-            {
-                Console.WriteLine("FailedSkill");
-                return;
-            }
-
-
-            // 스킬을 사용했으니 Mp 깎음
-            player.UseMp(skillData.mp);
-
-            switch (skillData.skillType)
-            {
-                case SkillType.SkillAuto:
-                    {
-                        // 데미지 판정
-                        Vector2Int skillPos = player.GetFrontCellPos(info.PosInfo.MoveDir);
-                        GameObject go = Map.Find(skillPos);
-
-                        if (go as CreatureObject == null)
-                            return;
-
-                        CreatureObject target = (CreatureObject)go;
-
-                        if (target != null)
-                        {
-                            target.OnDamaged(player, skillData.damage + player.TotalAttack);
-                        }
-                    }
-                    break;
-                case SkillType.SkillProjectile:
-                    {
-                        Arrow arrow = ObjectManager.Instance.Add<Arrow>();
-                        if (arrow == null)
-                            return;
-
-                        arrow.Owner = player;
-                        arrow.Data = skillData;
-
-                        arrow.PosInfo.State = CreatureState.Moving;
-                        arrow.PosInfo.MoveDir = player.PosInfo.MoveDir;
-                        arrow.PosInfo.PosX = player.PosInfo.PosX;
-                        arrow.PosInfo.PosY = player.PosInfo.PosY;
-                        arrow.Speed = skillData.projectile.speed;
-
-                        EnterGame(arrow);
-                    }
-                    break;
-                case SkillType.SkillExplosion:
-                    {
-                        HashSet<GameObject> objects = Map.LoopByCircle(player.CellPos, skillData.explosion.radian);
-
-                        foreach (GameObject obj in objects)
-                        {
-                            if (obj as CreatureObject == null)
-                                continue;
-
-                            CreatureObject co = (CreatureObject)obj;
-                            co.OnDamaged(player, skillData.damage);
-                        }
-                    }
-                    break;
-            }
+            player.Skill.UseSkill(skillPacket.Info.SkillId);
 
         }
 

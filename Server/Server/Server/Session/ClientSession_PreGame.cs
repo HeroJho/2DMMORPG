@@ -105,6 +105,7 @@ namespace Server
                 MyPlayer.Info.PosInfo.PosY = -75;
                 MyPlayer.Stat.MergeFrom(playerInfo.StatInfo);
                 MyPlayer.Session = this;
+
                 
                 // 아이템 정보
                 S_ItemList itemListPacket = new S_ItemList();
@@ -180,8 +181,19 @@ namespace Server
  
                 }
 
+                // TEMP 사용가능한 스킬 and 포인트 정보 전송
+                S_SkillPoint skillPointPacket = new S_SkillPoint();
+                foreach (int key in MyPlayer.Skill.SkillTree.SkillPoints.Keys)
+                {
+                    SkillInfo skillInfo = new SkillInfo();
+                    skillInfo.SkillId = key;
+                    skillInfo.Point = MyPlayer.Skill.SkillTree.SkillPoints[key];
+                    skillPointPacket.SkillInfos.Add(skillInfo);
+                }
+
                 // 퀘스트 같은 경우는 EnterGame할 때 보내줌
                 Send(itemListPacket);
+                Send(skillPointPacket);
             }
 
             ServerState = PlayerServerState.ServerStateGame;

@@ -1,13 +1,13 @@
-﻿using Google.Protobuf.Protocol;
+﻿using Data;
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SkillManager
 {
-    private bool _canUseSKill_01 = true;
-    private bool _canUseSKill_02 = true;
-    private bool _canUseSKill_03 = true;
+    private Dictionary<int, Skill> _coolTimeList = new Dictionary<int, Skill>();
+    public Dictionary<int, int> SkillPointInfos { get; private set; } = new Dictionary<int, int>();
 
     public bool UseSkill(int templateId)
     {
@@ -17,34 +17,13 @@ public class SkillManager
         if (Managers.Object.MyPlayer.State != CreatureState.Idle)
             return false;
 
-        switch (templateId)
-        {
-            case 1:
-                {
-                    if (!_canUseSKill_01)
-                        return false;
-                                            
-                    _canUseSKill_01 = false;
-                }
-                break;
-            case 2:
-                {
-                    if (!_canUseSKill_02)
-                        return false;
-                    
-                    _canUseSKill_02 = false;
-                }
-                break;
-            case 3:
-                {
-                    if (!_canUseSKill_03)
-                        return false;
-                    
-                    _canUseSKill_03 = false;
-                }
-                break;
+        if (_coolTimeList.ContainsKey(templateId))
+            return false;
 
-        }
+        Skill skillData = null;
+        Managers.Data.SkillDict.TryGetValue(templateId, out skillData);
+
+        _coolTimeList.Add(templateId, skillData);
 
         C_Skill skill = new C_Skill() { Info = new SkillInfo() };
         skill.Info.SkillId = templateId;
@@ -55,27 +34,20 @@ public class SkillManager
 
     public void ResetCooltime(int templateId)
     {
-        switch (templateId)
-        {
-            case 1:
-                {
-                    _canUseSKill_01 = true;
-                    Debug.Log("CanUse 01");
-                }
-                break;
-            case 2:
-                {
-                    _canUseSKill_02 = true;
-                    Debug.Log("CanUse 02");
-                }
-                break;
-            case 3:
-                {
-                    _canUseSKill_03 = true;
-                    Debug.Log("CanUse 03");
-                }
-                break;
+        _coolTimeList.Remove(templateId);
+    }
 
-        }
+    public void RefreshSkillPointInfo(int skillId, int point)
+    {
+        if (SkillPointInfos.ContainsKey(skillId))
+            SkillPointInfos[skillId] = point;
+        else
+            SkillPointInfos.Add(skillId, point);
+       
+    }
+
+    public int GetSkillPoint(int skillId)
+    {
+        return SkillPointInfos[skillId] - 1;
     }
 }

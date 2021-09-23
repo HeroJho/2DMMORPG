@@ -180,20 +180,17 @@ namespace Server
                     BroadcastMove();
                 }
 
-                Skill skillData = null;
-                DataManager.SkillDict.TryGetValue(1, out skillData);
-
                 // 데미지 판정
-                _target.OnDamaged(this, skillData.damage + TotalAttack);
+                _target.OnDamaged(this, Stat.Attack + TotalAttack);
 
                 // 스킬 사용 Broadcast
                 S_Skill skill = new S_Skill() { Info = new SkillInfo() };
                 skill.ObjectId = Id;
-                skill.Info.SkillId = skillData.id;
+                skill.Info.SkillId = 1;
                 Room.Broadcast(CellPos, skill);
 
                 // 스킬 쿨타임 적용
-                int collTick = (int)(1000 * skillData.cooldown);
+                int collTick = (int)(1000 * 0.5f);
                 _coolTick = Environment.TickCount64 + collTick;
             }
 

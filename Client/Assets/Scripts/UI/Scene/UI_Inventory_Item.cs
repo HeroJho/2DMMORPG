@@ -196,8 +196,6 @@ public class UI_Inventory_Item : UI_Base
             if (ItemDbId == 0)
                 return;
 
-            _descriptionBox.WriteNameText(Name);
-            _descriptionBox.WriteDescriptionText(Description);
             _descriptionBox.ClosePosition();
 
         }, Define.UIEvent.Exit);

@@ -1,42 +1,108 @@
-{
+Ôªø{
   "skills": [
     {
       "id": "1",
-      "name": "∆Ú≈∏",
-      "cooldown": "0.5",
-      "damage": "10",
-      "mp": "0",
+      "name": "ÌèâÌÉÄ",
+      "maxPoint": "1",
+      "skillPointInfos": [
+        {
+          "cooldown": "0.5",
+          "damage": "10",
+          "mp": "0"
+        }
+      ],
       "skillType": "SkillAuto",
-      "iconPath": "Textures/Skill/Auto"
+      "iconPath": "Textures/Skill/Auto",
+      "description": "ÏπºÏùÑ ÌúòÎëêÎ•∏Îã§."
+
     },
+
     {
       "id": "2",
-      "name": "ø¯∞≈∏Æ ∞¯∞›",
-      "cooldown": "0.5",
-      "damage": "5",
-      "mp": "0",
+      "name": "ÏõêÍ±∞Î¶¨ Í≥µÍ≤©",
+      "maxPoint": "5",
+      "skillPointInfos": [
+        {
+          "cooldown": "1.5",
+          "damage": "5",
+          "mp": "5"
+        },
+        {
+          "cooldown": "1.5",
+          "damage": "6",
+          "mp": "5"
+        },
+        {
+          "cooldown": "1.5",
+          "damage": "7",
+          "mp": "5"
+        },
+        {
+          "cooldown": "1",
+          "damage": "7",
+          "mp": "8"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "10",
+          "mp": "10"
+        }
+      ],
       "skillType": "SkillProjectile",
       "iconPath": "Textures/Skill/Arrow",
+      "description": "ÌôúÏùÑ ÏèúÎã§.",
       "projectile": {
-        "name": "»≠ªÏ",
-        "speed": "25.0",
-        "range": "10",
+        "name": "ÌôîÏÇ¥",
+        "projectilePointInfos": [
+          {
+            "speed": "15.0",
+            "range": "5"
+          },
+          {
+            "speed": "15.0",
+            "range": "6"
+          },
+          {
+            "speed": "20.0",
+            "range": "7"
+          },
+          {
+            "speed": "20.0",
+            "range": "8"
+          },
+          {
+            "speed": "25.0",
+            "range": "10"
+          }
+        ],
         "prefab": "Creature/Arrow"
       }
     },
+
     {
       "id": "3",
-      "name": "π¸¿ß ∞¯∞›",
-      "cooldown": "0.5",
-      "damage": "500",
-      "mp": "0",
+      "name": "Î≤îÏúÑ Í≥µÍ≤©",
+      "maxPoint": "1",
+      "skillPointInfos": [
+        {
+          "cooldown": "0.5",
+          "damage": "10",
+          "mp": "0"
+        }
+      ],
       "skillType": "SkillExplosion",
       "iconPath": "Textures/Skill/Explosion",
+      "description": "ÎßàÎÇòÎ•º ÏùëÏ∂ïÌï¥ÏÑú ÌÑ∞Ìä∏Î¶∞Îã§.",
       "explosion": {
-        "name": "∆¯∆»",
-        "radian": "5",
+        "name": "Ìè≠Ìåî",
+        "explosionPointInfos": [
+          {
+            "radian": "5"
+          }
+        ],
         "prefab": "Effect/Explosion"
       }
     }
+
   ]
 }

@@ -27,7 +27,6 @@ public class UI_ShortcutKey : UI_Base
     Sprite _icon = null;
 
 
-    bool _init = false;
     public override void Init()
     {
         // 드래그 UI가 가림 > 최상위 부모에 생성된 UI로 덮어줌
@@ -35,7 +34,6 @@ public class UI_ShortcutKey : UI_Base
 
         Bind<Image>(typeof(Images));
         Bind<Text>(typeof(Texts));
-
 
         Get<Image>((int)Images.Slot).enabled = true;
 
@@ -47,8 +45,6 @@ public class UI_ShortcutKey : UI_Base
 
 
         BindEvent();
-
-        _init = true;
     }
 
     void BindEvent()
@@ -84,7 +80,7 @@ public class UI_ShortcutKey : UI_Base
         BindEvent(Get<Image>((int)Images.Slot).gameObject, (e) =>
         {
             UI_Inventory_Item itemInfo = e.pointerDrag.GetComponentInParent<UI_Inventory_Item>();
-            UI_Skill_Slot skillInfo = e.pointerDrag.GetComponent<UI_Skill_Slot>();
+            UI_Skill_Slot skillInfo = e.pointerDrag.GetComponentInParent<UI_Skill_Slot>();
             
             UI_ShortcutKey keyInfo = e.pointerDrag.GetComponentInParent<UI_ShortcutKey>();
 
@@ -223,10 +219,11 @@ public class UI_ShortcutKey : UI_Base
                     // 스킬쿨 표시 돌림
                     Skill skillData = null;
                     Managers.Data.SkillDict.TryGetValue(TemplateId, out skillData);
-                     
+                    int point = Managers.Skill.GetSkillPoint(TemplateId);
+
                     if(_coCool != null)
                         StopCoroutine(_coCool);
-                    StartCool(skillData.cooldown);
+                    StartCool(skillData.skillPointInfos[point].cooldown);
 
                 }
                 break;

@@ -393,4 +393,17 @@ class PacketHandler
 		}
 	}
 
+	public static void S_SkillPointHandler(PacketSession session, IMessage packet)
+    {
+		S_SkillPoint skillPointPacket = (S_SkillPoint)packet;
+
+        foreach (SkillInfo info in skillPointPacket.SkillInfos)
+        {
+			Managers.Skill.RefreshSkillPointInfo(info.SkillId, info.Point);
+		}
+
+		// 스킬창 갱신
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.SkillUI.RefreshUI();
+	}
 }

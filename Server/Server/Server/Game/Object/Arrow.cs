@@ -11,10 +11,10 @@ namespace Server
 
         public override void Update()
         {
-            if (Data == null || Data.projectile == null || Owner == null || Room == null)
+            if (Owner == null || Room == null)
                 return;
 
-            int tick = (int)(1000 / Data.projectile.speed);
+            int tick = (int)(1000 / Speed);
             Room.PushAfter(tick, Update);
 
             Vector2Int destPos = GetFrontCellPos(); // 내 앞 좌표
@@ -34,7 +34,7 @@ namespace Server
 
                     if (target != null)
                     {
-                        target.OnDamaged(this, Data.damage + Owner.TotalAttack);
+                        target.OnDamaged(this, Damage + Owner.TotalAttack);
                     }
                 }
 

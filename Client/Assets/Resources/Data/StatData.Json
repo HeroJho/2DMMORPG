@@ -4,7 +4,7 @@
       "level": "1",
       "maxHp": "200",
       "maxMp": "200",
-      "attack": "20",
+      "attack": "1",
       "speed": "10.0",
       "totalExp": "0"
     },

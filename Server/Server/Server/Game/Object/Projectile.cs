@@ -7,7 +7,7 @@ namespace Server
 {
     public class Projectile : CreatureObject
     {
-        public Data.Skill Data { get; set; }
+        public int Damage { get; set; }
 
         public Projectile()
         {

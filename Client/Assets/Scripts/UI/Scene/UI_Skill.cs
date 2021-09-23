@@ -16,14 +16,16 @@ public class UI_Skill : UI_Base
         Button_X
     }
 
+    [SerializeField]
+    GameObject _grid;
+
     public override void Init()
     {
         Bind<Image>(typeof(Images));
         Bind<Button>(typeof(Buttons));
 
-
         BindEvent();
-
+        
     }
 
     void BindEvent()
@@ -41,6 +43,21 @@ public class UI_Skill : UI_Base
             gameObject.SetActive(false);
 
         }, Define.UIEvent.LeftClick);
+
+    }
+
+    public void RefreshUI()
+    {
+        foreach (Transform child in _grid.transform)
+            Destroy(child.gameObject);
+
+        foreach (int skillId in Managers.Skill.SkillPointInfos.Keys)
+        {
+            GameObject go = Managers.Resource.Instantiate("UI/Scene/UI_SkillSlot", _grid.transform);
+            UI_Skill_Slot skillSlot = go.GetComponent<UI_Skill_Slot>();
+
+            skillSlot.SetUI(skillId, Managers.Skill.GetSkillPoint(skillId));
+        }
 
     }
 

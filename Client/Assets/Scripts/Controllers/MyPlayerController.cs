@@ -151,12 +151,10 @@ public class MyPlayerController : PlayerController
 		{
 			case CreatureState.Idle:
 				GetDirInput();
-				GetSkillKeyInput();
 				GetKeyInput();
 				break;
 			case CreatureState.Moving:
 				GetDirInput();
-				GetSkillKeyInput();
 				GetKeyInput();
 				break;
 		}
@@ -199,11 +197,6 @@ public class MyPlayerController : PlayerController
 		{
 			_moveKeyPressed = false;
 		}
-	}
-
-	void GetSkillKeyInput()
-    {
-
 	}
 
 	void GetKeyInput()

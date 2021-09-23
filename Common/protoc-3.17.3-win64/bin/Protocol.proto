@@ -47,6 +47,7 @@ enum MsgId{
     S_SPAWN_OBSTACLE = 40;
     S_DESPAWN_OBSTACLE = 41;
     C_CHANGE_SLOT = 42;
+    S_SKILL_POINT = 43;
 }
 
 enum CreatureState{
@@ -128,6 +129,13 @@ enum QuestType{
     QUEST_TYPE_HUNTING = 1;
     QUEST_TYPE_COLLECTION = 2;
     QUEST_TYPE_COMPLETE = 3;
+}
+
+enum JobClassType{
+    JOBCLASS_TYPE_NONE = 0;
+    JOBCLASS_TYPE_WARRIOR = 1;
+    JOBCLASS_TYPE_HUNTER = 2;
+    JOBCLASS_TYPE_MAGE = 3;
 }
 
 enum QuestState{
@@ -332,6 +340,10 @@ message C_ChangeSlot{
     int32 slot = 2;
 }
 
+message S_SkillPoint{
+    repeated SkillInfo skillInfos = 1;
+}
+
 message ItemInfo{
     int32 itemDbId = 1;
     int32 templateId = 2;
@@ -364,6 +376,7 @@ message PositionInfo{
 
 message SkillInfo{
     int32 skillId = 1;
+    int32 point = 2;
 }
 
 message StatInfo{
@@ -375,6 +388,8 @@ message StatInfo{
     int32 attack = 6;
     float speed = 7;
     int32 totalExp = 8;
+    JobClassType jobClassType = 9;
+
 }
 
 message QuestInfo{
