@@ -18,7 +18,7 @@ namespace Server
 
             // TEMP
             SkillPoints.Add(1, 1);
-            SkillPoints.Add(2, 5);
+            SkillPoints.Add(2, 4);
             SkillPoints.Add(3, 1);
         }
 

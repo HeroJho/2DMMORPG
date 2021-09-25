@@ -34,7 +34,6 @@ namespace Server.Data
     {
         public int id;
         public string name;
-        public int maxPoint;
         public List<skillPointInfo> skillPointInfos;
         public SkillType skillType;
         public projectileInfo projectile;

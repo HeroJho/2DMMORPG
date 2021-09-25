@@ -640,6 +640,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4195949202216322113}
     m_Modifications:
+    - target: {fileID: 2577904030792036455, guid: 905799150a123d04bbab24f0245a6cf1,
+        type: 3}
+      propertyPath: m_Text
+      value: +
+      objectReference: {fileID: 0}
     - target: {fileID: 3941970125932246294, guid: 905799150a123d04bbab24f0245a6cf1,
         type: 3}
       propertyPath: m_Name
@@ -748,6 +753,31 @@ PrefabInstance:
     - target: {fileID: 5374010229150160479, guid: 905799150a123d04bbab24f0245a6cf1,
         type: 3}
       propertyPath: m_Pivot.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6685025122938578077, guid: 905799150a123d04bbab24f0245a6cf1,
+        type: 3}
+      propertyPath: m_Name
+      value: PointUpText
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156229879533599632, guid: 905799150a123d04bbab24f0245a6cf1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156229879533599632, guid: 905799150a123d04bbab24f0245a6cf1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156229879533599632, guid: 905799150a123d04bbab24f0245a6cf1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7156229879533599632, guid: 905799150a123d04bbab24f0245a6cf1,
+        type: 3}
+      propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

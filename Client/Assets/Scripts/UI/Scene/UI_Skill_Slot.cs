@@ -13,6 +13,14 @@ public class UI_Skill_Slot : UI_Base
     {
         Icon,
     }
+    enum Texts
+    {
+        LevelText,
+    }
+    enum Buttons
+    {
+        PointUpButton,
+    }
 
     Image _frontDragIcon;
     Sprite _sprite;
@@ -24,23 +32,41 @@ public class UI_Skill_Slot : UI_Base
 
     }
 
+    bool _isBind = false;
     public void SetUI(int skillId, int point)
     {
         TemplateId = skillId;
+        _point = point;
+        if(!_isBind)
+        {
+            // 드래그 UI가 가림 > 최상위 부모에 생성된 UI로 덮어줌
+            _frontDragIcon = transform.root.GetComponentInChildren<UI_FrontDragIcon>().GetComponent<Image>();
+            _descriptionBox = transform.root.GetComponentInChildren<UI_DescriptionBox>();
 
-        // 드래그 UI가 가림 > 최상위 부모에 생성된 UI로 덮어줌
-        _frontDragIcon = transform.root.GetComponentInChildren<UI_FrontDragIcon>().GetComponent<Image>();
-        _descriptionBox = transform.root.GetComponentInChildren<UI_DescriptionBox>();
+            Bind<Image>(typeof(Images));
+            Bind<Text>(typeof(Texts));
+            Bind<Button>(typeof(Buttons));
 
-
-        Bind<Image>(typeof(Images));
+            BindEvent();
+            _isBind = true;
+        }
 
         Managers.Data.SkillDict.TryGetValue(TemplateId, out _skillData);
 
         _sprite = Managers.Resource.Load<Sprite>(_skillData.iconPath);
         Get<Image>((int)Images.Icon).sprite = _sprite;
 
-        BindEvent();
+        if(_point+1 >= _skillData.skillPointInfos.Count)
+        {
+            Get<Text>((int)Texts.LevelText).text = "Level: MAX";
+            Get<Button>((int)Buttons.PointUpButton).gameObject.SetActive(false);
+        }    
+        else
+        {
+            Get<Text>((int)Texts.LevelText).text = "Level: " + (_point + 1);
+            Get<Button>((int)Buttons.PointUpButton).gameObject.SetActive(true);
+        }
+
     }
 
     void BindEvent()
@@ -70,16 +96,7 @@ public class UI_Skill_Slot : UI_Base
                 return;
 
             _descriptionBox.WriteNameText(_skillData.name);
-            _descriptionBox.WriteDescriptionText(
-                "데미지: " + _skillData.skillPointInfos[_point].damage +
-                System.Environment.NewLine +
-                "쿨타임: " + _skillData.skillPointInfos[_point].cooldown +
-                System.Environment.NewLine +
-                "MP소모량: " + _skillData.skillPointInfos[_point].mp +
-                System.Environment.NewLine +
-                System.Environment.NewLine +
-                _skillData.description
-                );
+            _descriptionBox.WriteSkillDescriptionText(_skillData, _point);
             _descriptionBox.ModifyPosition(e);
 
         }, Define.UIEvent.Enter);
