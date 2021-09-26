@@ -202,6 +202,21 @@ namespace Server
             room.Push(room.HandleChangeSlot, player, changeSlotPacket);
         }
 
+        public static void C_ChangeSkillPointHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_ChangeSkillPoint changeSkillPointPacket = (C_ChangeSkillPoint)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleSkillPoint, player, changeSkillPointPacket);
+        }
 
     }
 }

@@ -207,6 +207,12 @@ public class PlayerController : CreatureController
 
 		GameObject go = Managers.Resource.Instantiate("Effect/ExplosionEffect");
 		go.transform.position = transform.position;
+		// 이펙트 크기 조정
+		go.transform.localScale = new Vector3(
+			Managers.Skill.GetSkillPoint(3) + 2,
+			Managers.Skill.GetSkillPoint(3) + 2, 
+			1);
+
 		go.GetComponent<Animator>().Play("EXPLOSION_START");
 		Destroy(go, 1);
 

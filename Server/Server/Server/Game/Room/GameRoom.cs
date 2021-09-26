@@ -216,6 +216,27 @@ namespace Server
             }
         }
 
+        public void HandleSkillPoint(Player player, C_ChangeSkillPoint changeSkillPointPacket)
+        {
+            if (player == null || player.Room == null)
+                return;
+            GameRoom room = player.Room;
+
+            if (!player.Skill.IncreaseSkillLevel(changeSkillPointPacket.SkillInfo.SkillId))
+                return;
+
+            // S_SkillPoint 패킷 전송
+            S_SkillPoint skillPointPacket = new S_SkillPoint();
+            skillPointPacket.Points = player.Skill.SkillPoint;
+            skillPointPacket.SkillInfos.Add(new SkillInfo()
+            {
+                SkillId = changeSkillPointPacket.SkillInfo.SkillId,
+                Point = changeSkillPointPacket.SkillInfo.Point + 1
+            });
+
+            player.Session.Send(skillPointPacket);
+        }
+
         public void Broadcast(Vector2Int pos, IMessage packet)
         {
             List<Zone> zones = GetAdiacentZones(pos);

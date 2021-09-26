@@ -397,6 +397,7 @@ class PacketHandler
     {
 		S_SkillPoint skillPointPacket = (S_SkillPoint)packet;
 
+		Managers.Skill.MyPoints = skillPointPacket.Points;
         foreach (SkillInfo info in skillPointPacket.SkillInfos)
         {
 			Managers.Skill.RefreshSkillPointInfo(info.SkillId, info.Point);

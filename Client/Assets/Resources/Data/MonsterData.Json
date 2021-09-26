@@ -61,7 +61,7 @@
       "prefabPath": "Mole",
       "rewards": [
         {
-          "probability": "80",
+          "probability": "10",
           "itemId": "1001",
           "count": "5"
         },
@@ -71,7 +71,7 @@
           "count": "5"
         },
         {
-          "probability": "5",
+          "probability": "80",
           "itemId": "201",
           "count": "5"
         }

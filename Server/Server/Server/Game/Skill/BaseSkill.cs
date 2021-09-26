@@ -18,7 +18,7 @@ namespace Server
 
             // TEMP
             SkillPoints.Add(1, 1);
-            SkillPoints.Add(2, 4);
+            SkillPoints.Add(2, 1);
             SkillPoints.Add(3, 1);
         }
 
@@ -44,7 +44,12 @@ namespace Server
                 return;
             // 마나 여부 확인
             if (_player.Mp < skillData.skillPointInfos[point].mp)
+            {// 부족하다면 클라쪽 쿨타임에서 빼줌
+                S_ManageSkill manageSkillPacket = new S_ManageSkill();
+                manageSkillPacket.TemplateId = skillId;
+                _player.Session.Send(manageSkillPacket);
                 return;
+            }
             // 쿨타임 확인 or 쿨타임 체크
             if (!_player.Skill.StartCheckCooltime(skillData.id, skillData.skillPointInfos[point].cooldown))
             {
@@ -116,5 +121,23 @@ namespace Server
             }
         }
 
+        public virtual bool IncreaseSkillLevel(int templateId)
+        {
+            // 해당 스킬이 있는 직업 인지
+            int level = 0;
+            if (!SkillPoints.TryGetValue(templateId, out level))
+                return false;
+
+            // 스킬 MaxLevel인지
+            Skill skillData = null;
+            if (!DataManager.SkillDict.TryGetValue(templateId, out skillData))
+                return false;
+            if (level >= skillData.skillPointInfos.Count)
+                return false;
+
+            // 스킬Level 상승
+            SkillPoints[templateId] = level + 1;
+            return true;
+        }
     }
 }

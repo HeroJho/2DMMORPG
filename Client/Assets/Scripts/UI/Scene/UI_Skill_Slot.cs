@@ -1,4 +1,5 @@
 ﻿using Data;
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +37,7 @@ public class UI_Skill_Slot : UI_Base
     public void SetUI(int skillId, int point)
     {
         TemplateId = skillId;
-        _point = point;
+        _point = point + 1;
         if(!_isBind)
         {
             // 드래그 UI가 가림 > 최상위 부모에 생성된 UI로 덮어줌
@@ -56,14 +57,14 @@ public class UI_Skill_Slot : UI_Base
         _sprite = Managers.Resource.Load<Sprite>(_skillData.iconPath);
         Get<Image>((int)Images.Icon).sprite = _sprite;
 
-        if(_point+1 >= _skillData.skillPointInfos.Count)
+        if(_point >= _skillData.skillPointInfos.Count)
         {
             Get<Text>((int)Texts.LevelText).text = "Level: MAX";
             Get<Button>((int)Buttons.PointUpButton).gameObject.SetActive(false);
         }    
         else
         {
-            Get<Text>((int)Texts.LevelText).text = "Level: " + (_point + 1);
+            Get<Text>((int)Texts.LevelText).text = "Level: " + _point;
             Get<Button>((int)Buttons.PointUpButton).gameObject.SetActive(true);
         }
 
@@ -88,7 +89,6 @@ public class UI_Skill_Slot : UI_Base
 
         }, Define.UIEvent.Click_Up);
 
-
         // 아이템 설명
         BindEvent(Get<Image>((int)Images.Icon).gameObject, (e) =>
         {
@@ -108,6 +108,24 @@ public class UI_Skill_Slot : UI_Base
             _descriptionBox.ClosePosition();
 
         }, Define.UIEvent.Exit);
+
+        // 스킬포인트 버튼
+        BindEvent(Get<Button>((int)Buttons.PointUpButton).gameObject, (e) =>
+        {
+            if (_skillData == null)
+                return;
+
+            C_ChangeSkillPoint changeSkillPointPacket = new C_ChangeSkillPoint();
+            changeSkillPointPacket.SkillInfo = new SkillInfo()
+            {
+                SkillId = TemplateId,
+                Point = _point
+            };           
+
+            Managers.Network.Send(changeSkillPointPacket);
+
+        }, Define.UIEvent.LeftClick);
+
     }
 
 }

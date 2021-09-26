@@ -45,11 +45,27 @@ namespace Server
             SkillTree.UseSkill(skillId);
         }
 
+        public bool IncreaseSkillLevel(int templateId)
+        {
+            // 스킬 포인트가 있는지
+            if (SkillPoint <= 0)
+                return false;
+
+            // 스킬 업
+            if (!SkillTree.IncreaseSkillLevel(templateId))
+                return false;
+
+            // 성공했으니 포인트 --
+            SkillPoint--;
+            
+            return true;
+        }
+
 
         public bool StartCheckCooltime(int templateId, float cooldown)
         {
             return _coolTimeManager.StartCheckCooltime(templateId, cooldown);
-        }
+        }     
 
     }
 }

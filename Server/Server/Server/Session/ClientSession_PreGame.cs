@@ -183,6 +183,7 @@ namespace Server
 
                 // TEMP 사용가능한 스킬 and 포인트 정보 전송
                 S_SkillPoint skillPointPacket = new S_SkillPoint();
+                skillPointPacket.Points = MyPlayer.Skill.SkillPoint;
                 foreach (int key in MyPlayer.Skill.SkillTree.SkillPoints.Keys)
                 {
                     SkillInfo skillInfo = new SkillInfo();

@@ -8,6 +8,7 @@ public class SkillManager
 {
     private Dictionary<int, Skill> _coolTimeList = new Dictionary<int, Skill>();
     public Dictionary<int, int> SkillPointInfos { get; private set; } = new Dictionary<int, int>();
+    public int MyPoints { get; set; }
 
     public bool UseSkill(int templateId)
     {
@@ -20,8 +21,15 @@ public class SkillManager
         if (_coolTimeList.ContainsKey(templateId))
             return false;
 
+        int point = 0;
+        if (!SkillPointInfos.TryGetValue(templateId, out point))
+            return false;
+
+        // 마나 확인
         Skill skillData = null;
         Managers.Data.SkillDict.TryGetValue(templateId, out skillData);
+        if (Managers.Object.MyPlayer.Mp < skillData.skillPointInfos[point - 1].mp)
+            return false;
 
         _coolTimeList.Add(templateId, skillData);
 

@@ -70,6 +70,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CChangeSlot, MakePacket<C_ChangeSlot>);
             _handler.Add((ushort)MsgId.CChangeSlot, PacketHandler.C_ChangeSlotHandler);
 
+            _onRecv.Add((ushort)MsgId.CChangeSkillPoint, MakePacket<C_ChangeSkillPoint>);
+            _handler.Add((ushort)MsgId.CChangeSkillPoint, PacketHandler.C_ChangeSkillPointHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

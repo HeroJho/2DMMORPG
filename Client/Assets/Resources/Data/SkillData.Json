@@ -85,9 +85,29 @@
       "maxPoint": "1",
       "skillPointInfos": [
         {
-          "cooldown": "0.5",
+          "cooldown": "4",
+          "damage": "5",
+          "mp": "10"
+        },
+        {
+          "cooldown": "3.5",
+          "damage": "6",
+          "mp": "10"
+        },
+        {
+          "cooldown": "3.5",
+          "damage": "7",
+          "mp": "10"
+        },
+        {
+          "cooldown": "3",
+          "damage": "8",
+          "mp": "10"
+        },
+        {
+          "cooldown": "2",
           "damage": "10",
-          "mp": "0"
+          "mp": "10"
         }
       ],
       "skillType": "SkillExplosion",
@@ -96,6 +116,18 @@
       "explosion": {
         "name": "폭팔",
         "explosionPointInfos": [
+          {
+            "radian": "2"
+          },
+          {
+            "radian": "3"
+          },
+          {
+            "radian": "3"
+          },
+          {
+            "radian": "4"
+          },
           {
             "radian": "5"
           }

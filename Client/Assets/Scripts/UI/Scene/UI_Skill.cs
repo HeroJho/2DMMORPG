@@ -16,6 +16,11 @@ public class UI_Skill : UI_Base
         Button_X
     }
 
+    enum Texts
+    {
+        PointsText
+    }
+
     [SerializeField]
     GameObject _grid;
 
@@ -25,7 +30,7 @@ public class UI_Skill : UI_Base
         Bind<Button>(typeof(Buttons));
 
         BindEvent();
-        
+
     }
 
     void BindEvent()
@@ -46,8 +51,17 @@ public class UI_Skill : UI_Base
 
     }
 
+    bool _isInit = false;
     public void RefreshUI()
     {
+        if(!_isInit)
+        {
+            Bind<Text>(typeof(Texts));
+            _isInit = true;
+        }
+
+        Get<Text>((int)Texts.PointsText).text = "Points: " + Managers.Skill.MyPoints;
+
         foreach (Transform child in _grid.transform)
             Destroy(child.gameObject);
 

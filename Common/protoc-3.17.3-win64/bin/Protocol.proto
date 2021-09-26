@@ -48,6 +48,7 @@ enum MsgId{
     S_DESPAWN_OBSTACLE = 41;
     C_CHANGE_SLOT = 42;
     S_SKILL_POINT = 43;
+    C_CHANGE_SKILL_POINT = 44;
 }
 
 enum CreatureState{
@@ -341,7 +342,12 @@ message C_ChangeSlot{
 }
 
 message S_SkillPoint{
-    repeated SkillInfo skillInfos = 1;
+    int32 points = 1;
+    repeated SkillInfo skillInfos = 2;
+}
+
+message C_ChangeSkillPoint{
+    SkillInfo skillInfo = 1;
 }
 
 message ItemInfo{
