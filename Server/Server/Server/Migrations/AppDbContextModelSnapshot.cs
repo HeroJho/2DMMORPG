@@ -92,6 +92,9 @@ namespace Server.Migrations
                     b.Property<int>("Hp")
                         .HasColumnType("int");
 
+                    b.Property<int>("JobClassType")
+                        .HasColumnType("int");
+
                     b.Property<int>("Level")
                         .HasColumnType("int");
 
@@ -109,6 +112,9 @@ namespace Server.Migrations
 
                     b.Property<float>("Speed")
                         .HasColumnType("real");
+
+                    b.Property<int>("StatPoints")
+                        .HasColumnType("int");
 
                     b.Property<int>("TotalExp")
                         .HasColumnType("int");
@@ -150,6 +156,30 @@ namespace Server.Migrations
                     b.ToTable("Quest");
                 });
 
+            modelBuilder.Entity("Server.DB.SkillDb", b =>
+                {
+                    b.Property<int>("SkillDbId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OwnerDbId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SkillLevelData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SkillPoints")
+                        .HasColumnType("int");
+
+                    b.HasKey("SkillDbId");
+
+                    b.HasIndex("OwnerDbId")
+                        .IsUnique();
+
+                    b.ToTable("Skill");
+                });
+
             modelBuilder.Entity("Server.DB.ItemDb", b =>
                 {
                     b.HasOne("Server.DB.PlayerDb", "Owner")
@@ -181,6 +211,17 @@ namespace Server.Migrations
                     b.Navigation("Owner");
                 });
 
+            modelBuilder.Entity("Server.DB.SkillDb", b =>
+                {
+                    b.HasOne("Server.DB.PlayerDb", "Owner")
+                        .WithOne("Skills")
+                        .HasForeignKey("Server.DB.SkillDb", "OwnerDbId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
+                });
+
             modelBuilder.Entity("Server.DB.AccountDb", b =>
                 {
                     b.Navigation("Players");
@@ -191,6 +232,8 @@ namespace Server.Migrations
                     b.Navigation("Items");
 
                     b.Navigation("Quests");
+
+                    b.Navigation("Skills");
                 });
 #pragma warning restore 612, 618
         }

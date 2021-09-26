@@ -210,7 +210,8 @@ namespace Server
             {
                 Ex -= LevelUpExp;
                 Level++;
-                if(Room != null)
+                LevelUp();
+                if (Room != null)
                 {
                     S_LevelUp levelUpPacket = new S_LevelUp();
                     levelUpPacket.Id = Id;
@@ -224,6 +225,16 @@ namespace Server
             changeExPacket.LevelEx = LevelUpExp;
 
             Session.Send(changeExPacket);
+        }
+
+        public void LevelUp()
+        {
+            // 풀피 풀마나
+            RecoveryHp(Stat.MaxHp);
+            RecoveryMp(Stat.MaxMp);
+            // 스킬 포인트 5 지급
+            Skill.GetSkillPoints(5);
+            
         }
 
         public void RecoveryMp(int mp)

@@ -8,8 +8,9 @@ namespace Server
 {
     public class SkillManager
     {
-        private SkillCoolTimeManager _coolTimeManager;
+        public int SkillDbId { get; set; }
         private Player _player;
+        private SkillCoolTimeManager _coolTimeManager;
         public BaseSkill SkillTree { get; private set; }
         public int SkillPoint { get; set; }
 
@@ -17,9 +18,6 @@ namespace Server
         {
             _player = player;
             _coolTimeManager = new SkillCoolTimeManager(player);
-
-            // TEMP
-            SkillPoint = 10;
 
             switch (player.JobClassType)
             {
@@ -61,6 +59,15 @@ namespace Server
             return true;
         }
 
+        public void GetSkillPoints(int points)
+        {
+            SkillPoint += points;
+
+            // S_SkillPoint 패킷 전송
+            S_SkillPoint skillPointPacket = new S_SkillPoint();
+            skillPointPacket.Points = SkillPoint;
+            _player.Session.Send(skillPointPacket);
+        }
 
         public bool StartCheckCooltime(int templateId, float cooldown)
         {

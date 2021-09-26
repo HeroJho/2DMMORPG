@@ -25,6 +25,18 @@ namespace Server.DB
                 playerDb.Mp = player.Stat.Mp;
                 playerDb.Level = player.Stat.Level;
                 playerDb.TotalExp = player.Stat.TotalExp;
+
+                playerDb.JobClassType = (int)player.Stat.JobClassType;
+                playerDb.StatPoints = player.Stat.StatPoints;                
+            }
+
+            SkillDb skillDb = new SkillDb();
+            {
+                skillDb.SkillDbId = player.Skill.SkillDbId;
+                skillDb.SkillPoints = player.Skill.SkillPoint;
+                ConvertIntStringData converData = new ConvertIntStringData();
+                converData.SkillPoints = player.Skill.SkillTree.SkillPoints;
+                skillDb.ConvertIntToString(converData);
             }
 
             // You (Db)
@@ -38,12 +50,15 @@ namespace Server.DB
                     db.Entry(playerDb).Property(nameof(PlayerDb.Level)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.TotalExp)).IsModified = true;
 
+                    db.Entry(skillDb).State = EntityState.Unchanged;
+                    db.Entry(skillDb).Property(nameof(SkillDb.SkillPoints)).IsModified = true;
+                    db.Entry(skillDb).Property(nameof(SkillDb.SkillLevelData)).IsModified = true;
+
                     bool success = db.SaveChangesEx();
                     if (success)
                     {// 성공했다면 일감을 나한테 돌려줘
                      // Me (GameRoom)
-                        room.Push(() => Console.WriteLine($"Hp Saved({playerDb.Hp})"));
-                        room.Push(() => Console.WriteLine($"Mp Saved({playerDb.Mp})"));
+                        room.Push(() => Console.WriteLine($"({playerDb.PlayerDbId})'s Info is saved"));
                     }
                 }
             });

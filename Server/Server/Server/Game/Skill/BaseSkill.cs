@@ -9,17 +9,13 @@ namespace Server
     public class BaseSkill
     {
         // 스킬 ID, Point
-        public Dictionary<int, int> SkillPoints { get; private set; } = new Dictionary<int, int>();
+        public Dictionary<int, int> SkillPoints { get; set; } = new Dictionary<int, int>();
         Player _player;
 
         public BaseSkill(Player player)
         {
             _player = player;
 
-            // TEMP
-            SkillPoints.Add(1, 1);
-            SkillPoints.Add(2, 1);
-            SkillPoints.Add(3, 1);
         }
 
         public virtual void UseSkill(int skillId)

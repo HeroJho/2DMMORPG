@@ -395,6 +395,7 @@ message StatInfo{
     float speed = 7;
     int32 totalExp = 8;
     JobClassType jobClassType = 9;
+    int32 statPoints = 10;
 
 }
 

@@ -109,6 +109,8 @@ namespace Server
                 
                 // 아이템 정보
                 S_ItemList itemListPacket = new S_ItemList();
+                // 스킬 정보
+                S_SkillPoint skillPointPacket = new S_SkillPoint();
 
                 using (AppDbContext db = new AppDbContext())
                 {
@@ -164,6 +166,7 @@ namespace Server
                                                
                     }
 
+
                     // Loading Obstacle
                     foreach (ObstacleData obstacleData in DataManager.ObstacleDict.Values)
                     {
@@ -177,19 +180,28 @@ namespace Server
 
                         MyPlayer.Obstacle.Add(obstacle);
                     }
-                    
- 
-                }
 
-                // TEMP 사용가능한 스킬 and 포인트 정보 전송
-                S_SkillPoint skillPointPacket = new S_SkillPoint();
-                skillPointPacket.Points = MyPlayer.Skill.SkillPoint;
-                foreach (int key in MyPlayer.Skill.SkillTree.SkillPoints.Keys)
-                {
-                    SkillInfo skillInfo = new SkillInfo();
-                    skillInfo.SkillId = key;
-                    skillInfo.Point = MyPlayer.Skill.SkillTree.SkillPoints[key];
-                    skillPointPacket.SkillInfos.Add(skillInfo);
+
+                    // Loading SkillInfo
+                    SkillDb skills = db.Skills
+                        .Where(s => s.OwnerDbId == MyPlayer.PlayerDbId)
+                        .FirstOrDefault();
+
+                    MyPlayer.Skill.SkillDbId = skills.SkillDbId;
+                    ConvertIntStringData convertData = new ConvertIntStringData();
+                    convertData = skills.ConvertStringToInt();
+                    MyPlayer.Skill.SkillPoint = skills.SkillPoints;
+                    MyPlayer.Skill.SkillTree.SkillPoints = convertData.SkillPoints;
+
+                    skillPointPacket.Points = MyPlayer.Skill.SkillPoint;
+                    foreach (int key in MyPlayer.Skill.SkillTree.SkillPoints.Keys)
+                    {
+                        SkillInfo skillInfo = new SkillInfo();
+                        skillInfo.SkillId = key;
+                        skillInfo.Point = MyPlayer.Skill.SkillTree.SkillPoints[key];
+                        skillPointPacket.SkillInfos.Add(skillInfo);
+                    }
+
                 }
 
                 // 퀘스트 같은 경우는 EnterGame할 때 보내줌
@@ -241,13 +253,36 @@ namespace Server
                         Attack = stat.Attack,
                         Speed = stat.Speed,
                         TotalExp = 0,
+                        JobClassType = (int)JobClassType.None,
+                        StatPoints = 0,
                         AccountDbId = AccountDbId // 저장해둔 AccountDbId 사용
                     };
+                    {
+                        db.Players.Add(newPlayerDb);
+                        bool success = db.SaveChangesEx();
+                        if (success == false)
+                            return; // TODO
+                    }
 
-                    db.Players.Add(newPlayerDb);
-                    bool success = db.SaveChangesEx();
-                    if (success == false)
-                        return; // TODO
+                    //스킬 기본설정
+                    ConvertIntStringData convertData = new ConvertIntStringData();
+                    {
+                        convertData.SkillPoints.Add(1, 1);
+                        convertData.SkillPoints.Add(2, 1);
+                        convertData.SkillPoints.Add(3, 1);
+                    }
+                    SkillDb newSkillDb = new SkillDb();
+                    {
+                        newSkillDb.OwnerDbId = newPlayerDb.PlayerDbId;
+                        newSkillDb.SkillPoints = 0;
+                        newSkillDb.ConvertIntToString(convertData);
+                    }
+                    {
+                        db.Skills.Add(newSkillDb);
+                        bool success = db.SaveChangesEx();
+                        if (success == false)
+                            return; // TODO
+                    }
 
                     // 메모리 추가
                     LobbyPlayerInfo lobbyPlayer = new LobbyPlayerInfo()
@@ -263,7 +298,10 @@ namespace Server
                             MaxMp = stat.MaxMp,
                             Attack = stat.Attack,
                             Speed = stat.Speed,
-                            TotalExp = 0
+                            TotalExp = 0,
+                            JobClassType = (int)JobClassType.None,
+                            StatPoints = 0,
+                            SkillPoints = 0,
                         }
                     };
 

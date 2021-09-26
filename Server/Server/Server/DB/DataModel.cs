@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -32,10 +33,14 @@ namespace Server.DB
         public int MaxMp { get; set; }
         public int Attack { get; set; }
         public float Speed { get; set; }
+
         public int TotalExp { get; set; }
+        public int JobClassType { get; set; }
+        public int StatPoints { get; set; }
 
         public ICollection<ItemDb> Items { get; set; }
         public ICollection<QuestDb> Quests { get; set; }
+        public SkillDb Skills { get; set; }
 
     }
 
@@ -68,6 +73,31 @@ namespace Server.DB
         [ForeignKey("Owner")]
         public int OwnerDbId { get; set; }
         public PlayerDb Owner { get; set; }
+    }
+
+    [Table("Skill")]
+    public class SkillDb
+    {
+        public int SkillDbId { get; set; }
+        public int SkillPoints { get; set; }
+        public string SkillLevelData { get; set; }
+
+        public void ConvertIntToString(ConvertIntStringData data)
+        {
+            SkillLevelData = JsonConvert.SerializeObject(data);
+        }
+        public ConvertIntStringData ConvertStringToInt()
+        {
+            return JsonConvert.DeserializeObject<ConvertIntStringData>(SkillLevelData);
+        }
+
+        [ForeignKey("Owner")]
+        public int OwnerDbId { get; set; }
+        public PlayerDb Owner { get; set; }
+    }
+    public class ConvertIntStringData
+    {
+        public Dictionary<int, int> SkillPoints = new Dictionary<int, int>();
     }
 
 }
