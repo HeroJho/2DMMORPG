@@ -41,6 +41,8 @@ namespace Server
                         {
                             PlayerDbId = playerDb.PlayerDbId,
                             Name = playerDb.PlayerName,
+                            PosX = playerDb.PosX,
+                            PosY = playerDb.PosY,
                             StatInfo = new StatInfo()
                             {                               
                                 Level = playerDb.Level,
@@ -101,8 +103,8 @@ namespace Server
                 MyPlayer.Info.Name = playerInfo.Name;
                 MyPlayer.Info.PosInfo.State = CreatureState.Idle;
                 MyPlayer.Info.PosInfo.MoveDir = MoveDir.Down;
-                MyPlayer.Info.PosInfo.PosX = -50;
-                MyPlayer.Info.PosInfo.PosY = -75;
+                MyPlayer.Info.PosInfo.PosX = playerInfo.PosX;
+                MyPlayer.Info.PosInfo.PosY = playerInfo.PosY;
                 MyPlayer.Stat.MergeFrom(playerInfo.StatInfo);
                 MyPlayer.Session = this;
 
@@ -289,6 +291,8 @@ namespace Server
                     {
                         PlayerDbId = newPlayerDb.PlayerDbId,
                         Name = createPacket.Name,
+                        PosX = -50,
+                        PosY = -75,
                         StatInfo = new StatInfo()
                         {
                             Level = stat.Level,
@@ -301,7 +305,6 @@ namespace Server
                             TotalExp = 0,
                             JobClassType = (int)JobClassType.None,
                             StatPoints = 0,
-                            SkillPoints = 0,
                         }
                     };
 

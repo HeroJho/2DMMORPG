@@ -96,6 +96,7 @@ namespace Server
                         arrow.PosInfo.PosY = _player.PosInfo.PosY;
                         arrow.Speed = skillData.projectile.projectilePointInfos[point].speed;
                         arrow.Damage = skillData.skillPointInfos[point].damage;
+                        arrow.Range = skillData.projectile.projectilePointInfos[point].range;
 
                         room.EnterGame(arrow);
                     }

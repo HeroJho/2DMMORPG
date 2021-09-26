@@ -110,6 +110,12 @@ namespace Server.Migrations
                     b.Property<string>("PlayerName")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("PosX")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PosY")
+                        .HasColumnType("int");
+
                     b.Property<float>("Speed")
                         .HasColumnType("real");
 

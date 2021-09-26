@@ -26,6 +26,9 @@ namespace Server.DB
         public int AccountDbId { get; set; }
         public AccountDb Account { get; set; }
 
+        public int PosX { get; set; }
+        public int PosY { get; set; }
+
         public int Level { get; set; }
         public int Hp { get; set; }
         public int Mp { get; set; }

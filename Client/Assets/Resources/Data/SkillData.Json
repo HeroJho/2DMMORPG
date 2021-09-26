@@ -56,15 +56,15 @@
         "projectilePointInfos": [
           {
             "speed": "15.0",
-            "range": "5"
+            "range": "4"
           },
           {
             "speed": "15.0",
-            "range": "6"
+            "range": "5"
           },
           {
             "speed": "20.0",
-            "range": "7"
+            "range": "6"
           },
           {
             "speed": "20.0",

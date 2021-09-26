@@ -9,13 +9,23 @@ namespace Server
     {
         public CreatureObject Owner { get; set; } // 주인
 
+        IJob _job = null;
+        int _rangeCount = 1;
         public override void Update()
         {
             if (Owner == null || Room == null)
                 return;
 
             int tick = (int)(1000 / Speed);
-            Room.PushAfter(tick, Update);
+            _job = Room.PushAfter(tick, Update);
+                        
+            if (_rangeCount > Range)
+            {
+                _job.Cancel = true;
+                Room.Push(Room.LeaveGame, Id);
+                return;
+            }
+            _rangeCount++;
 
             Vector2Int destPos = GetFrontCellPos(); // 내 앞 좌표
             if (Room.Map.ApplyMove(this, destPos, collision: false))
@@ -38,6 +48,7 @@ namespace Server
                     }
                 }
 
+                _job.Cancel = true;
                 Room.Push(Room.LeaveGame, Id);
             }
 

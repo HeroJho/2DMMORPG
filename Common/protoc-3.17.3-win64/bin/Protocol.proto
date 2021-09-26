@@ -361,7 +361,9 @@ message ItemInfo{
 message LobbyPlayerInfo{
     int32 playerDbId = 1;
     string name = 2;
-    StatInfo statInfo = 3; 
+    int32 posX = 3;
+    int32 posY = 4;
+    StatInfo statInfo = 5; 
 }
 
 message ObjectInfo{

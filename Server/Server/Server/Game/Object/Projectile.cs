@@ -8,6 +8,7 @@ namespace Server
     public class Projectile : CreatureObject
     {
         public int Damage { get; set; }
+        public int Range { get; set; }
 
         public Projectile()
         {

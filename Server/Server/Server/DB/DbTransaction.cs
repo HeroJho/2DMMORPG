@@ -20,6 +20,9 @@ namespace Server.DB
             // Me (GameRoom)
             PlayerDb playerDb = new PlayerDb();
             {
+                playerDb.PosX = player.PosInfo.PosX;
+                playerDb.PosY = player.PosInfo.PosY;
+
                 playerDb.PlayerDbId = player.PlayerDbId;
                 playerDb.Hp = player.Stat.Hp;
                 playerDb.Mp = player.Stat.Mp;
@@ -45,10 +48,17 @@ namespace Server.DB
                 using (AppDbContext db = new AppDbContext())
                 {
                     db.Entry(playerDb).State = EntityState.Unchanged;
+
+                    db.Entry(playerDb).Property(nameof(PlayerDb.PosX)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.PosY)).IsModified = true;
+
                     db.Entry(playerDb).Property(nameof(PlayerDb.Hp)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.Mp)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.Level)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.TotalExp)).IsModified = true;
+
+                    db.Entry(playerDb).Property(nameof(PlayerDb.JobClassType)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.StatPoints)).IsModified = true;
 
                     db.Entry(skillDb).State = EntityState.Unchanged;
                     db.Entry(skillDb).Property(nameof(SkillDb.SkillPoints)).IsModified = true;
