@@ -89,7 +89,13 @@ namespace Server.Migrations
                     b.Property<int>("Attack")
                         .HasColumnType("int");
 
+                    b.Property<int>("Defence")
+                        .HasColumnType("int");
+
                     b.Property<int>("Hp")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Int")
                         .HasColumnType("int");
 
                     b.Property<int>("JobClassType")
@@ -120,6 +126,9 @@ namespace Server.Migrations
                         .HasColumnType("real");
 
                     b.Property<int>("StatPoints")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Str")
                         .HasColumnType("int");
 
                     b.Property<int>("TotalExp")

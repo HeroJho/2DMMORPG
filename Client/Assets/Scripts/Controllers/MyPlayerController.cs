@@ -16,6 +16,7 @@ public class MyPlayerController : PlayerController
 		{ 
 			base.Stat = value;
 
+			UpdateMpBar();
 			RefreshAdditionanlStat();
 			AddExBar();
 			InitLevelUI();

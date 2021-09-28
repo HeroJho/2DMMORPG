@@ -49,6 +49,8 @@ enum MsgId{
     C_CHANGE_SLOT = 42;
     S_SKILL_POINT = 43;
     C_CHANGE_SKILL_POINT = 44;
+    S_STAT_POINT = 45;
+    C_CHANGE_STAT_POINT = 46;
 }
 
 enum CreatureState{
@@ -350,6 +352,14 @@ message C_ChangeSkillPoint{
     SkillInfo skillInfo = 1;
 }
 
+message S_StatPoint{
+    StatInfo statInfo = 1;
+}
+
+message C_ChangeStatPoint{
+    int32 stat = 1;
+}
+
 message ItemInfo{
     int32 itemDbId = 1;
     int32 templateId = 2;
@@ -391,13 +401,16 @@ message StatInfo{
     int32 level = 1;
     int32 hp = 2;
     int32 mp = 3;
-    int32 maxHp = 4;
-    int32 maxMp = 5;
+    int32 str = 4;
+    int32 int = 5;
     int32 attack = 6;
-    float speed = 7;
-    int32 totalExp = 8;
-    JobClassType jobClassType = 9;
-    int32 statPoints = 10;
+    int32 defence = 7;
+    int32 maxHp = 8;
+    int32 maxMp = 9;
+    float speed = 10;
+    int32 totalExp = 11;
+    JobClassType jobClassType = 12;
+    int32 statPoints = 13;
 
 }
 

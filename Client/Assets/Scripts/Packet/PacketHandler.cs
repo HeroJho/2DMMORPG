@@ -407,4 +407,17 @@ class PacketHandler
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.SkillUI.RefreshUI();
 	}
+
+	public static void S_StatPointHandler(PacketSession session, IMessage packet)
+	{
+		S_StatPoint statPointPacket = (S_StatPoint)packet;
+
+		Managers.Object.MyPlayer.Stat = statPointPacket.StatInfo;
+
+		// 스텟창 갱신
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.StatUI.RefreshUI();
+	}
+
+
 }

@@ -44,7 +44,7 @@ namespace Server
         public int ArmorDefence { get; private set; }
 
         public override int TotalAttack { get { return Stat.Attack + WeaponDamage; } }
-        public override int TotalDefence { get { return ArmorDefence; } }
+        public override int TotalDefence { get { return Stat.Defence + ArmorDefence; } }
 
         public Player()
         {
@@ -230,11 +230,30 @@ namespace Server
         public void LevelUp()
         {
             // 풀피 풀마나
+            Stat.MaxHp += 10;
+            Stat.MaxMp += 10;
+            Stat.Str += 5;
+            Stat.Int += 5;
             RecoveryHp(Stat.MaxHp);
             RecoveryMp(Stat.MaxMp);
+
             // 스킬 포인트 5 지급
-            Skill.GetSkillPoints(5);
-            
+            Skill.GetSkillPoints(1);
+            GetStatPoints(10);
+        }
+
+        public void GetStatPoints(int points)
+        {
+            if (points <= 0)
+                return;
+
+            Stat.StatPoints += points;
+
+            // S_StatPoint 패킷 전송
+            S_StatPoint statPointPacket = new S_StatPoint();
+            statPointPacket.StatInfo = Stat;
+
+            Session.Send(statPointPacket);
         }
 
         public void RecoveryMp(int mp)

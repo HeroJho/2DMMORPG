@@ -118,6 +118,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SSkillPoint, MakePacket<S_SkillPoint>);
             _handler.Add((ushort)MsgId.SSkillPoint, PacketHandler.S_SkillPointHandler);
 
+            _onRecv.Add((ushort)MsgId.SStatPoint, MakePacket<S_StatPoint>);
+            _handler.Add((ushort)MsgId.SStatPoint, PacketHandler.S_StatPointHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

@@ -21,12 +21,23 @@ public class UI_Stat : UI_Base
         Slot_Shield_BG
 
     }
-
     enum Texts
     {
         NameText,
         AttackValueText,
-        DefenceValueText
+        DefenceValueText,
+        HPValueText,
+        MPValueText,
+        STRValueText,
+        INTValueText,
+        StatPointText
+    }
+    enum Buttons
+    {
+        HPUpButton,
+        MPUpButton,
+        STRUpButton,
+        INTUpButton
     }
 
     bool _init = false;
@@ -34,6 +45,7 @@ public class UI_Stat : UI_Base
     {
         Bind<Image>(typeof(Images));
         Bind<Text>(typeof(Texts));
+        Bind<Button>(typeof(Buttons));
 
         // 아이콘이 진해서 일단 꺼둠
         Get<Image>((int)Images.Slot_Armor).enabled = false;
@@ -104,8 +116,15 @@ public class UI_Stat : UI_Base
         Get<Text>((int)Texts.NameText).text = player.name;
 
         int totalDamage = player.Stat.Attack + player.WeaponDamage;
+        int totalDefence = player.Stat.Attack + player.ArmorDefence;
         Get<Text>((int)Texts.AttackValueText).text = $"{totalDamage}(+{player.WeaponDamage})";
-        Get<Text>((int)Texts.DefenceValueText).text = $"{player.ArmorDefence}";
+        Get<Text>((int)Texts.DefenceValueText).text = $"{totalDefence}(+{player.ArmorDefence})";
+        Get<Text>((int)Texts.HPValueText).text = $"{player.Stat.Hp}/{player.Stat.MaxHp}";
+        Get<Text>((int)Texts.MPValueText).text = $"{player.Stat.Mp}/{player.Stat.MaxMp}";
+        Get<Text>((int)Texts.STRValueText).text = $"{player.Stat.Str}";
+        Get<Text>((int)Texts.INTValueText).text = $"{player.Stat.Int}";
+
+        Get<Text>((int)Texts.StatPointText).text = $"Points: {player.Stat.StatPoints}";
     }
 
     public void BindEvent()
@@ -225,6 +244,51 @@ public class UI_Stat : UI_Base
             Managers.Network.Send(equipPacket);
 
         }, Define.UIEvent.Drop);
+
+        BindEvent(Get<Button>((int)Buttons.HPUpButton).gameObject, (e) =>
+        {
+            if (Managers.Object.MyPlayer.Stat.StatPoints <= 0)
+                return;
+
+            C_ChangeStatPoint changeStatPointPacket = new C_ChangeStatPoint();
+            changeStatPointPacket.Stat = 1;
+
+            Managers.Network.Send(changeStatPointPacket);
+
+        }, Define.UIEvent.LeftClick);
+        BindEvent(Get<Button>((int)Buttons.MPUpButton).gameObject, (e) =>
+        {
+            if (Managers.Object.MyPlayer.Stat.StatPoints <= 0)
+                return;
+
+            C_ChangeStatPoint changeStatPointPacket = new C_ChangeStatPoint();
+            changeStatPointPacket.Stat = 2;
+
+            Managers.Network.Send(changeStatPointPacket);
+
+        }, Define.UIEvent.LeftClick);
+        BindEvent(Get<Button>((int)Buttons.STRUpButton).gameObject, (e) =>
+        {
+            if (Managers.Object.MyPlayer.Stat.StatPoints <= 0)
+                return;
+
+            C_ChangeStatPoint changeStatPointPacket = new C_ChangeStatPoint();
+            changeStatPointPacket.Stat = 3;
+
+            Managers.Network.Send(changeStatPointPacket);
+
+        }, Define.UIEvent.LeftClick);
+        BindEvent(Get<Button>((int)Buttons.INTUpButton).gameObject, (e) =>
+        {
+            if (Managers.Object.MyPlayer.Stat.StatPoints <= 0)
+                return;
+
+            C_ChangeStatPoint changeStatPointPacket = new C_ChangeStatPoint();
+            changeStatPointPacket.Stat = 4;
+
+            Managers.Network.Send(changeStatPointPacket);
+
+        }, Define.UIEvent.LeftClick);
 
     }
 }

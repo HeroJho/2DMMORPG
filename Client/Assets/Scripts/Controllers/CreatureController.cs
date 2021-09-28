@@ -20,6 +20,7 @@ public class CreatureController : BaseController
 			base.Stat = value;
 
 			UpdateHpBar();
+
 		}
 	}
 

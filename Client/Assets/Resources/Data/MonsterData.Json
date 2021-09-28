@@ -52,7 +52,7 @@
       "stat": {
         "level": "1",
         "maxHp": "20",
-        "attack": "0",
+        "attack": "2",
         "speed": "4.0",
         "totalExp": "5"
       },

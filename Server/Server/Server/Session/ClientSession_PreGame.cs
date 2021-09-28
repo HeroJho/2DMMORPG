@@ -44,7 +44,7 @@ namespace Server
                             PosX = playerDb.PosX,
                             PosY = playerDb.PosY,
                             StatInfo = new StatInfo()
-                            {                               
+                            {
                                 Level = playerDb.Level,
                                 TotalExp = playerDb.TotalExp,
                                 Hp = playerDb.Hp,
@@ -52,7 +52,11 @@ namespace Server
                                 Mp = playerDb.Mp,
                                 MaxMp = playerDb.MaxMp,
                                 Attack = playerDb.Attack,
-                                Speed = playerDb.Speed
+                                Defence = playerDb.Defence,
+                                Str = playerDb.Str,
+                                Int = playerDb.Int,
+                                Speed = playerDb.Speed,
+                                StatPoints = playerDb.StatPoints
                             }
                         };
 
@@ -253,6 +257,9 @@ namespace Server
                         MaxHp = stat.MaxHp,
                         MaxMp = stat.MaxMp,
                         Attack = stat.Attack,
+                        Defence = stat.Defence,
+                        Str = stat.Str,
+                        Int = stat.Int,
                         Speed = stat.Speed,
                         TotalExp = 0,
                         JobClassType = (int)JobClassType.None,
@@ -301,6 +308,9 @@ namespace Server
                             Mp = stat.Mp,
                             MaxMp = stat.MaxMp,
                             Attack = stat.Attack,
+                            Defence = stat.Defence,
+                            Str = stat.Str,
+                            Int = stat.Int,
                             Speed = stat.Speed,
                             TotalExp = 0,
                             JobClassType = (int)JobClassType.None,

@@ -3,9 +3,9 @@
     {
       "id": "1",
       "name": "조영웅의 검",
-      "description": "공격력: 1000\n아무나 사용할 수 없는 검이다. 자칫 어둠의 힘에 잡아먹힐 수도...",
+      "description": "공격력: 99\n아무나 사용할 수 없는 검이다. 자칫 어둠의 힘에 잡아먹힐 수도...",
       "weaponType": "Sword",
-      "damage": "1000",
+      "damage": "99",
       "iconPath": "Textures/Item/sword"
     },
     {

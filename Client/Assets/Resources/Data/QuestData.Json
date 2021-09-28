@@ -182,6 +182,67 @@
       ],
       "cutSceneId": "-1"
 
+    },
+
+
+
+    {
+      "id": "6",
+      "npcId": "99",
+      "questType": "Hunting",
+      "monsterId": "1",
+      "purposeNumber": "0",
+      "currentNumber": "0",
+      "condition": {
+        "level": "1",
+        "completeQuests": [
+
+        ]
+      },
+      "title": "Test",
+      "Description": "Description\nDescription\nDescription\nDescription\nDescription\n",
+      "CompleteDescription": "CompleteDescription\nCompleteDescription\nCompleteDescription\nCompleteDescription\n",
+      "contents": "TestGetItem",
+      "rewards": [
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "1",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "2",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "100",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "101",
+          "count": "0"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "200",
+          "count": "500"
+        },
+        {
+          "exp": "0",
+          "gold": "0",
+          "itemId": "201",
+          "count": "500"
+        }
+      ],
+      "cutSceneId": "-1"
+
     }
 
   ],
@@ -370,6 +431,7 @@
       "cutSceneId": "-1"
 
     }
+
 
 
   ],

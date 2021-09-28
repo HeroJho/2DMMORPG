@@ -237,6 +237,46 @@ namespace Server
             player.Session.Send(skillPointPacket);
         }
 
+        public void HandleStatPoint(Player player, C_ChangeStatPoint changeStatPointPacket)
+        {
+            if (player == null || player.Room == null)
+                return;
+            GameRoom room = player.Room;
+
+            // 포인트 확인
+            if (player.Stat.StatPoints <= 0)
+                return;
+
+            // 스텟당 오르는 능력치 계수
+            switch (changeStatPointPacket.Stat)
+            {
+                case 1:
+                    player.Stat.MaxHp += 10;
+                    break;
+                case 2:
+                    player.Stat.MaxMp += 10;
+                    break;
+                case 3:
+                    player.Stat.Str += 1;
+                    break;
+                case 4:
+                    player.Stat.Int += 1;
+                    break;
+                default:
+                    break;
+            }
+
+            // 포인트 감소
+            player.Stat.StatPoints--;
+
+            // S_StatPoint 패킷 전송
+            S_StatPoint statPointPacket = new S_StatPoint();
+            statPointPacket.StatInfo = player.Stat;
+          
+            player.Session.Send(statPointPacket);
+        }
+
+
         public void Broadcast(Vector2Int pos, IMessage packet)
         {
             List<Zone> zones = GetAdiacentZones(pos);

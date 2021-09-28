@@ -24,8 +24,14 @@ namespace Server.DB
                 playerDb.PosY = player.PosInfo.PosY;
 
                 playerDb.PlayerDbId = player.PlayerDbId;
+                playerDb.Attack = player.Stat.Attack;
+                playerDb.Defence = player.Stat.Defence;
+                playerDb.MaxHp = player.Stat.MaxHp;
+                playerDb.MaxMp = player.Stat.MaxMp;
                 playerDb.Hp = player.Stat.Hp;
                 playerDb.Mp = player.Stat.Mp;
+                playerDb.Str = player.Stat.Str;
+                playerDb.Int = player.Stat.Int;
                 playerDb.Level = player.Stat.Level;
                 playerDb.TotalExp = player.Stat.TotalExp;
 
@@ -52,11 +58,17 @@ namespace Server.DB
                     db.Entry(playerDb).Property(nameof(PlayerDb.PosX)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.PosY)).IsModified = true;
 
+                    db.Entry(playerDb).Property(nameof(PlayerDb.Attack)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.Defence)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.Hp)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.Mp)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.MaxHp)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.MaxMp)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.Str)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.Int)).IsModified = true;
+
                     db.Entry(playerDb).Property(nameof(PlayerDb.Level)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.TotalExp)).IsModified = true;
-
                     db.Entry(playerDb).Property(nameof(PlayerDb.JobClassType)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.StatPoints)).IsModified = true;
 

@@ -73,6 +73,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CChangeSkillPoint, MakePacket<C_ChangeSkillPoint>);
             _handler.Add((ushort)MsgId.CChangeSkillPoint, PacketHandler.C_ChangeSkillPointHandler);
 
+            _onRecv.Add((ushort)MsgId.CChangeStatPoint, MakePacket<C_ChangeStatPoint>);
+            _handler.Add((ushort)MsgId.CChangeStatPoint, PacketHandler.C_ChangeStatPointHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
