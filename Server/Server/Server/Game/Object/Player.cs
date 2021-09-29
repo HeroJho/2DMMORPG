@@ -13,7 +13,17 @@ namespace Server
         public SkillManager Skill { get; private set; }
         public QuestManager Quest { get; private set; }
         public ObstacleManager Obstacle { get; private set; }
-        public JobClassType JobClassType { get; private set; }
+        public JobClassType JobClassType 
+        { 
+            get
+            {
+                return Stat.JobClassType;
+            }
+            set
+            {
+                Stat.JobClassType = value;
+            }
+        }
 
         public Inventory Inven { get; private set; } = new Inventory();
 
@@ -225,6 +235,21 @@ namespace Server
             changeExPacket.LevelEx = LevelUpExp;
 
             Session.Send(changeExPacket);
+        }
+
+        public void UpClass(int classGrade)
+        {
+            if(classGrade == 1)
+            {// 1차 전직
+                Stat.CanUpClass = true;
+                S_ClassUp classUpPacket = new S_ClassUp();
+                Session.Send(classUpPacket);
+            }
+            else if(classGrade == 2)
+            {// 2차 전직
+
+            }
+
         }
 
         public void LevelUp()

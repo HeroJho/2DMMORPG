@@ -42,6 +42,7 @@ namespace Server.DB
 
         public int TotalExp { get; set; }
         public int JobClassType { get; set; }
+        public bool CanUpClass { get; set; }
         public int StatPoints { get; set; }
 
         public ICollection<ItemDb> Items { get; set; }

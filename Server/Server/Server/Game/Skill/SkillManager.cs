@@ -25,10 +25,12 @@ namespace Server
                     SkillTree = new BaseSkill(player);
                     break;
                 case JobClassType.Warrior:
+                    SkillTree = new WarriorSkill(player);
                     break;
                 case JobClassType.Hunter:
                     break;
                 case JobClassType.Mage:
+                    SkillTree = new MageSkill(player);
                     break;
                 default:
                     break;
@@ -73,6 +75,25 @@ namespace Server
         {
             return _coolTimeManager.StartCheckCooltime(templateId, cooldown);
         }     
+
+        public void ClassSkillUp(JobClassType classType)
+        {
+
+            switch (classType)
+            {
+                case JobClassType.Warrior:
+                    SkillTree = new WarriorSkill(_player);
+                    break;
+                case JobClassType.Hunter:
+                    break;
+                case JobClassType.Mage:
+                    SkillTree = new MageSkill(_player);
+                    break;
+                default:
+                    break;
+            }
+
+        }
 
     }
 }

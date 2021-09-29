@@ -247,6 +247,7 @@ namespace Server.Data
         public int gold;
         public int itemId;
         public int count; // 얼마나
+        public int upClass;
     }
 
     public class HuntingQuestData : QuestData

@@ -51,6 +51,8 @@ enum MsgId{
     C_CHANGE_SKILL_POINT = 44;
     S_STAT_POINT = 45;
     C_CHANGE_STAT_POINT = 46;
+    S_CLASS_UP = 47;
+    C_CLASS_UP = 48;
 }
 
 enum CreatureState{
@@ -360,6 +362,14 @@ message C_ChangeStatPoint{
     int32 stat = 1;
 }
 
+message S_ClassUp{
+    
+}
+
+message C_ClassUp{
+    JobClassType classType = 1;
+}
+
 message ItemInfo{
     int32 itemDbId = 1;
     int32 templateId = 2;
@@ -411,6 +421,7 @@ message StatInfo{
     int32 totalExp = 11;
     JobClassType jobClassType = 12;
     int32 statPoints = 13;
+    bool canUpClass = 14;
 
 }
 

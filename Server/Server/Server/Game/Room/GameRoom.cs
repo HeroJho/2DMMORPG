@@ -276,6 +276,44 @@ namespace Server
             player.Session.Send(statPointPacket);
         }
 
+        public void HandleClassUp(Player player, C_ClassUp classUpPacket)
+        {
+            if (player == null || player.Room == null)
+                return;
+
+            if (player.Stat.CanUpClass == false)
+                return;
+            // 초보자가 아니라면 return > 이 패킷은 1차 전직때만 사용됨
+            if (player.JobClassType != JobClassType.None)
+                return;
+
+            // 전직 진행
+            switch (classUpPacket.ClassType)
+            {
+                case JobClassType.Warrior:
+                    player.JobClassType = JobClassType.Warrior;
+                    break;
+                case JobClassType.Hunter:
+                    break;
+                case JobClassType.Mage:
+                    player.JobClassType = JobClassType.Mage;
+                    break;
+                default:
+                    break;
+            }
+
+            // 스킬 업글
+            player.Skill.ClassSkillUp(classUpPacket.ClassType);
+
+            // 업글 불가
+            player.Stat.CanUpClass = false;
+
+            // 직업, 스킬업글 여부 갱신
+            S_StatPoint statPointPacket = new S_StatPoint();
+            statPointPacket.StatInfo = player.Stat;
+
+            player.Session.Send(statPointPacket);
+        }
 
         public void Broadcast(Vector2Int pos, IMessage packet)
         {

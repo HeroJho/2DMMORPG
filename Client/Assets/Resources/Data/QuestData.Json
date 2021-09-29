@@ -22,19 +22,22 @@
           "exp": "100",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "100",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
-          "itemId": "200",
-          "count": "20"
+          "itemId": "0",
+          "count": "0",
+          "upClass": "1"
         }
       ],
       "cutSceneId": "-1"
@@ -62,13 +65,15 @@
           "exp": "500",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -97,19 +102,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "100",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "50"
+          "count": "50",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -137,13 +145,15 @@
           "exp": "1500",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -171,13 +181,15 @@
           "exp": "1500",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -208,37 +220,43 @@
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "2",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "100",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "101",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "500"
+          "count": "500",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "201",
-          "count": "500"
+          "count": "500",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -270,19 +288,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -310,13 +331,15 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -345,19 +368,22 @@
           "exp": "2000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -385,13 +411,15 @@
           "exp": "2000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "50"
+          "count": "50",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -419,13 +447,15 @@
           "exp": "2000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "50"
+          "count": "50",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -460,19 +490,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "0"
@@ -499,19 +532,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -538,19 +574,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -577,19 +616,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -616,19 +658,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"
@@ -655,19 +700,22 @@
           "exp": "1000",
           "gold": "0",
           "itemId": "0",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "1",
-          "count": "0"
+          "count": "0",
+          "upClass": "0"
         },
         {
           "exp": "0",
           "gold": "0",
           "itemId": "200",
-          "count": "20"
+          "count": "20",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"

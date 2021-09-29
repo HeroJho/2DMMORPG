@@ -414,9 +414,22 @@ class PacketHandler
 
 		Managers.Object.MyPlayer.Stat = statPointPacket.StatInfo;
 
+		Debug.Log($"Can I Upgrade Class? :{Managers.Object.MyPlayer.Stat.CanUpClass}");
+		Debug.Log($"MyClass is {Managers.Object.MyPlayer.Stat.JobClassType}");
+
 		// 스텟창 갱신
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.StatUI.RefreshUI();
+	}
+
+	public static void S_ClassUpHandler(PacketSession session, IMessage packet)
+	{
+		S_ClassUp classUpPacket = (S_ClassUp)packet;
+
+		Managers.Object.MyPlayer.Stat.CanUpClass = true;
+
+		Managers.UI.ShowPopupUI<UI_ClassUp>();
+
 	}
 
 

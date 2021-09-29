@@ -56,7 +56,11 @@ namespace Server
                                 Str = playerDb.Str,
                                 Int = playerDb.Int,
                                 Speed = playerDb.Speed,
-                                StatPoints = playerDb.StatPoints
+                                StatPoints = playerDb.StatPoints,
+
+                                JobClassType = (JobClassType)playerDb.JobClassType,
+                                CanUpClass = playerDb.CanUpClass
+
                             }
                         };
 
@@ -263,6 +267,7 @@ namespace Server
                         Speed = stat.Speed,
                         TotalExp = 0,
                         JobClassType = (int)JobClassType.None,
+                        CanUpClass = false,
                         StatPoints = 0,
                         AccountDbId = AccountDbId // 저장해둔 AccountDbId 사용
                     };
@@ -313,7 +318,8 @@ namespace Server
                             Int = stat.Int,
                             Speed = stat.Speed,
                             TotalExp = 0,
-                            JobClassType = (int)JobClassType.None,
+                            JobClassType = JobClassType.None,
+                            CanUpClass = false,
                             StatPoints = 0,
                         }
                     };

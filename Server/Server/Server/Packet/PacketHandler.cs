@@ -234,6 +234,21 @@ namespace Server
             room.Push(room.HandleStatPoint, player, changeStatPointPacket);
         }
 
+        public static void C_ClassUpHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_ClassUp classUpPacket = (C_ClassUp)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleClassUp, player, classUpPacket);
+        }
 
     }
 }

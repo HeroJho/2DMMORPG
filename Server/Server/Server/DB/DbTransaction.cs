@@ -36,6 +36,7 @@ namespace Server.DB
                 playerDb.TotalExp = player.Stat.TotalExp;
 
                 playerDb.JobClassType = (int)player.Stat.JobClassType;
+                playerDb.CanUpClass = player.Stat.CanUpClass;
                 playerDb.StatPoints = player.Stat.StatPoints;                
             }
 
@@ -70,6 +71,7 @@ namespace Server.DB
                     db.Entry(playerDb).Property(nameof(PlayerDb.Level)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.TotalExp)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.JobClassType)).IsModified = true;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.CanUpClass)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.StatPoints)).IsModified = true;
 
                     db.Entry(skillDb).State = EntityState.Unchanged;

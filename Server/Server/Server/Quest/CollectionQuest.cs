@@ -130,6 +130,7 @@ namespace Server
                 {
                     player.GetEx(rewardData.exp);
                 }
+ 
             }
 
             QuestState = QuestState.Complete;

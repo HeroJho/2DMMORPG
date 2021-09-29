@@ -89,6 +89,9 @@ namespace Server.Migrations
                     b.Property<int>("Attack")
                         .HasColumnType("int");
 
+                    b.Property<bool>("CanUpClass")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Defence")
                         .HasColumnType("int");
 
