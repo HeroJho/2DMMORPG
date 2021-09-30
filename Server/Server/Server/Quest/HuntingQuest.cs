@@ -107,6 +107,11 @@ namespace Server
                 {
                     player.GetEx(rewardData.exp);
                 }
+                else if (rewardData.upClass != 0)
+                {
+                    player.UpClass(rewardData.upClass);
+                }
+
             }
 
             QuestState = QuestState.Complete;
