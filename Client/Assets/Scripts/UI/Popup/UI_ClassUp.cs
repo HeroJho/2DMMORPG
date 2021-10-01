@@ -36,6 +36,9 @@ public class UI_ClassUp : UI_Popup
             C_ClassUp classUpPacket = new C_ClassUp();
             classUpPacket.ClassType = JobClassType.Warrior;
 
+            Managers.Network.Send(classUpPacket);
+            Managers.UI.ClosePopupUI(this);
+
         }, Define.UIEvent.LeftClick);
         BindEvent(Get<Image>((int)Images.Class_Mage).gameObject, (e) =>
         {
@@ -44,6 +47,9 @@ public class UI_ClassUp : UI_Popup
 
             C_ClassUp classUpPacket = new C_ClassUp();
             classUpPacket.ClassType = JobClassType.Mage;
+
+            Managers.Network.Send(classUpPacket);
+            Managers.UI.ClosePopupUI(this);
 
         }, Define.UIEvent.LeftClick);
 

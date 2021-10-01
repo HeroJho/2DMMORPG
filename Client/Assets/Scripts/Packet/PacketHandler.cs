@@ -430,6 +430,9 @@ class PacketHandler
 
 		Managers.UI.ShowPopupUI<UI_ClassUp>();
 
+		// 전직 아이콘
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.ClassUp.gameObject.SetActive(true);
 	}
 
 

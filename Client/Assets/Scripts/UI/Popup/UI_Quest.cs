@@ -37,7 +37,7 @@ public class UI_Quest : UI_Popup
         BindEvent();
     }
 
-    void BindEvent()
+    private void BindEvent()
     {
         // X 버튼
         BindEvent(Get<Button>((int)Buttons.CloseButton).gameObject, (e) =>
@@ -65,6 +65,9 @@ public class UI_Quest : UI_Popup
 
     public void RefreshUI(Quest questInfo)
     {
+        foreach (Transform child in _grid.transform)
+            Destroy(child.gameObject);
+
         // 퀘스트 상태에 따른 UI상태 변화
         switch (questInfo.QuestState)
         {
@@ -108,10 +111,12 @@ public class UI_Quest : UI_Popup
 
     public void RefreshUI(QuestGiver questGiver)
     {
+        foreach (Transform child in _grid.transform)
+            Destroy(child.gameObject);
+
         Get<Button>((int)Buttons.Button).gameObject.SetActive(false);
         Get<Text>((int)Texts.TitleText).text = questGiver.NpcName;
         Get<Text>((int)Texts.ContentsText).text = questGiver.Description;
-
     }
 
     public void Description(Quest questInfo)
@@ -230,7 +235,7 @@ public class UI_Quest : UI_Popup
 
     public void RewardUI(Quest questInfo)
     {
-        foreach(QuestRewardData rewardData in questInfo.Rewards)
+        foreach (QuestRewardData rewardData in questInfo.Rewards)
         {
             GameObject go = Managers.Resource.Instantiate("UI/Popup/UI_RewardSlot", _grid.transform);
             UI_RewardSlot rewardSlot = go.GetComponent<UI_RewardSlot>();

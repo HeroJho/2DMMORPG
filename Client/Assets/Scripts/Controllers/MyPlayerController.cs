@@ -11,15 +11,22 @@ public class MyPlayerController : PlayerController
 
     public override StatInfo Stat 
 	{
-		get { return base.Stat; }
+		get { return base._stat; }
 		set 
 		{ 
-			base.Stat = value;
+			base._stat = value;
 
 			UpdateMpBar();
 			RefreshAdditionanlStat();
 			AddExBar();
 			InitLevelUI();
+
+			if (_gameSceneUI == null)
+				return;
+			if (Stat.CanUpClass)
+				_gameSceneUI.ClassUp.gameObject.SetActive(true);
+			else
+				_gameSceneUI.ClassUp.gameObject.SetActive(false);
 		}
 	}
 
@@ -45,6 +52,11 @@ public class MyPlayerController : PlayerController
 		RefreshAdditionanlStat();
 		AddExBar();
 		InitLevelUI();
+
+		if (Stat.CanUpClass)
+			_gameSceneUI.ClassUp.gameObject.SetActive(true);
+		else
+			_gameSceneUI.ClassUp.gameObject.SetActive(false);
 	}
 
     protected override void AddHpBar()

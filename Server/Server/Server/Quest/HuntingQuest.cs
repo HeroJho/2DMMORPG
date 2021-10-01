@@ -107,6 +107,7 @@ namespace Server
                 {
                     player.GetEx(rewardData.exp);
                 }
+                // TEMP
                 else if (rewardData.upClass != 0)
                 {
                     player.UpClass(rewardData.upClass);

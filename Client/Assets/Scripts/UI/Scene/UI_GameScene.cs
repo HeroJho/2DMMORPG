@@ -16,6 +16,7 @@ public class UI_GameScene : UI_Scene
     public UI_ShortcutKeys ShortcutKeyUI { get; private set; }
     public UI_Skill SkillUI { get; private set; }
     public UI_QuestPanel QuestUI { get; private set; }
+    public UI_CanClassUp ClassUp { get; private set; }
 
     public UI_DescriptionBox DescriptionBox { get; private set; }
 
@@ -33,10 +34,12 @@ public class UI_GameScene : UI_Scene
         SkillUI = GetComponentInChildren<UI_Skill>();
         QuestUI = GetComponentInChildren<UI_QuestPanel>();
         DescriptionBox = GetComponentInChildren<UI_DescriptionBox>();
+        ClassUp = GetComponentInChildren<UI_CanClassUp>();
 
         StatUI.gameObject.SetActive(false);
         InvenUI.gameObject.SetActive(false);
         SkillUI.gameObject.SetActive(false);
+        ClassUp.gameObject.SetActive(false);
     }
 
     void BindEvent()

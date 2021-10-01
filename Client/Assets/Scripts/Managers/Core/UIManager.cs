@@ -7,6 +7,10 @@ public class UIManager
     int _order = 10;
 
     Stack<UI_Popup> _popupStack = new Stack<UI_Popup>();
+    UI_Quest _uiQuest = null;
+    UI_ClassUp _uiClassUp = null;
+
+
     public UI_Scene SceneUI { get; private set; } = null;
 
     public GameObject Root
@@ -56,11 +60,29 @@ public class UIManager
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
+        // 퀘스트 창과 전직 창은 중복 생성 불가
+        if(name == "UI_Quest")
+        {
+            if(_uiQuest != null)
+                return _uiQuest as T;
+        }
+        else if(name == "UI_ClassUp")
+        {
+            if (_uiClassUp != null)
+                return _uiClassUp as T;
+        }
+
         GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
         T popup = Util.GetOrAddComponent<T>(go);
         _popupStack.Push(popup);
 
         go.transform.SetParent(Root.transform);
+
+        // 퀘스트 창과 전직 창은 중복 생성 불가
+        if (name == "UI_Quest")
+            _uiQuest = popup as UI_Quest;
+        else if (name == "UI_ClassUp")
+            _uiClassUp = popup as UI_ClassUp;
 
         return popup;
     }
