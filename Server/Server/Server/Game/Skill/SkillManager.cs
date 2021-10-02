@@ -19,18 +19,22 @@ namespace Server
             _player = player;
             _coolTimeManager = new SkillCoolTimeManager(player);
 
-            switch (player.JobClassType)
+        }
+
+        public void SetSkillTree()
+        {
+            switch (_player.JobClassType)
             {
                 case JobClassType.None:
-                    SkillTree = new BaseSkill(player);
+                    SkillTree = new BaseSkill(_player);
                     break;
                 case JobClassType.Warrior:
-                    SkillTree = new WarriorSkill(player);
+                    SkillTree = new WarriorSkill(_player);
                     break;
                 case JobClassType.Hunter:
                     break;
                 case JobClassType.Mage:
-                    SkillTree = new MageSkill(player);
+                    SkillTree = new MageSkill(_player);
                     break;
                 default:
                     break;
@@ -83,11 +87,13 @@ namespace Server
             {
                 case JobClassType.Warrior:
                     SkillTree = new WarriorSkill(_player);
+                    SkillTree.FirstAddSkill();
                     break;
                 case JobClassType.Hunter:
                     break;
                 case JobClassType.Mage:
                     SkillTree = new MageSkill(_player);
+                    SkillTree.FirstAddSkill();
                     break;
                 default:
                     break;

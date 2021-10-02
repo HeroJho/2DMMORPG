@@ -308,7 +308,7 @@ namespace Server
             // 업글 불가
             player.Stat.CanUpClass = false;
 
-            // 직업, 스킬업글 여부 갱신
+            // 직업, 직업업글 여부 갱신
             S_StatPoint statPointPacket = new S_StatPoint();
             statPointPacket.StatInfo = player.Stat;
 

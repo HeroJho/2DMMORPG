@@ -115,6 +115,8 @@ namespace Server
                 MyPlayer.Info.PosInfo.PosY = playerInfo.PosY;
                 MyPlayer.Stat.MergeFrom(playerInfo.StatInfo);
                 MyPlayer.Session = this;
+                // ClassType에 따라 Tree클래스 설정
+                MyPlayer.Skill.SetSkillTree();
 
                 
                 // 아이템 정보
@@ -282,8 +284,6 @@ namespace Server
                     ConvertIntStringData convertData = new ConvertIntStringData();
                     {
                         convertData.SkillPoints.Add(1, 1);
-                        convertData.SkillPoints.Add(2, 1);
-                        convertData.SkillPoints.Add(3, 1);
                     }
                     SkillDb newSkillDb = new SkillDb();
                     {

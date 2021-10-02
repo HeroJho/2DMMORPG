@@ -10,11 +10,16 @@ namespace Server
     {
         // 스킬 ID, Point
         public Dictionary<int, int> SkillPoints { get; set; } = new Dictionary<int, int>();
-        Player _player;
+        protected Player _player;
 
         public BaseSkill(Player player)
         {
             _player = player;
+
+        }
+
+        public virtual void FirstAddSkill()
+        {
 
         }
 
@@ -63,13 +68,19 @@ namespace Server
             // 스킬을 사용했으니 Mp 깎음
             _player.UseMp(skillData.skillPointInfos[point].mp);
 
+            // 스킬 상세 구현
+            SkillInfo(skillData, point);
+        }
+
+        public virtual void SkillInfo(Skill skillData, int point)
+        {
             switch (skillData.skillType)
             {
                 case SkillType.SkillAuto:
                     {
                         // 데미지 판정
-                        Vector2Int skillPos = _player.GetFrontCellPos(info.PosInfo.MoveDir);
-                        GameObject go = room.Map.Find(skillPos);
+                        Vector2Int skillPos = _player.GetFrontCellPos(_player.Info.PosInfo.MoveDir);
+                        GameObject go = _player.Room.Map.Find(skillPos);
 
                         if (go as CreatureObject == null)
                             return;
@@ -82,39 +93,7 @@ namespace Server
                         }
                     }
                     break;
-                case SkillType.SkillProjectile:
-                    {
-                        Arrow arrow = ObjectManager.Instance.Add<Arrow>();
-                        if (arrow == null)
-                            return;
 
-                        arrow.Owner = _player;
-
-                        arrow.PosInfo.State = CreatureState.Moving;
-                        arrow.PosInfo.MoveDir = _player.PosInfo.MoveDir;
-                        arrow.PosInfo.PosX = _player.PosInfo.PosX;
-                        arrow.PosInfo.PosY = _player.PosInfo.PosY;
-                        arrow.Speed = skillData.projectile.projectilePointInfos[point].speed;
-                        arrow.Damage = skillData.skillPointInfos[point].damage;
-                        arrow.Range = skillData.projectile.projectilePointInfos[point].range;
-
-                        room.EnterGame(arrow);
-                    }
-                    break;
-                case SkillType.SkillExplosion:
-                    {
-                        HashSet<GameObject> objects = room.Map.LoopByCircle(_player.CellPos, skillData.explosion.explosionPointInfos[point].radian);
-
-                        foreach (GameObject obj in objects)
-                        {
-                            if (obj as CreatureObject == null)
-                                continue;
-
-                            CreatureObject co = (CreatureObject)obj;
-                            co.OnDamaged(_player, skillData.skillPointInfos[point].damage);
-                        }
-                    }
-                    break;
             }
         }
 
