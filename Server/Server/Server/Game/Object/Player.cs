@@ -53,7 +53,30 @@ namespace Server
         public int WeaponDamage { get; private set; }
         public int ArmorDefence { get; private set; }
 
-        public override int TotalAttack { get { return Stat.Attack + WeaponDamage; } }
+        public override int TotalAttack 
+        { 
+            get 
+            {
+                int totalAttack = Stat.Attack + WeaponDamage;
+
+                switch (JobClassType)
+                {
+                    case JobClassType.Warrior:
+                        totalAttack += Stat.Str;
+                        break;
+                    case JobClassType.Hunter:
+                        break;
+                    case JobClassType.Mage:
+                        totalAttack += Stat.Int;
+                        break;
+                    default:
+                        break;
+                }
+
+                return totalAttack;
+            } 
+        }
+
         public override int TotalDefence { get { return Stat.Defence + ArmorDefence; } }
 
         public Player()
@@ -255,12 +278,40 @@ namespace Server
         public void LevelUp()
         {
             // 풀피 풀마나
-            Stat.MaxHp += 10;
-            Stat.MaxMp += 10;
-            Stat.Str += 5;
-            Stat.Int += 5;
             RecoveryHp(Stat.MaxHp);
             RecoveryMp(Stat.MaxMp);
+            // 직업별로 레벨업 스텟상승
+            switch (JobClassType)
+            {
+                case JobClassType.None:
+                    {
+                        Stat.MaxHp += 5;
+                        Stat.MaxMp += 5;
+                        Stat.Str += 1;
+                        Stat.Int += 1;
+                    }
+                    break;
+                case JobClassType.Warrior:
+                    {
+                        Stat.MaxHp += 10;
+                        Stat.MaxMp += 5;
+                        Stat.Str += 2;
+                        Stat.Int += 1;
+                    }
+                    break;
+                case JobClassType.Mage:
+                    {
+                        Stat.MaxHp += 5;
+                        Stat.MaxMp += 10;
+                        Stat.Str += 1;
+                        Stat.Int += 2;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+
 
             // 스킬 포인트 5 지급
             Skill.GetSkillPoints(1);

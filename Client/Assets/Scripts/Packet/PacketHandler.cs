@@ -414,9 +414,6 @@ class PacketHandler
 
 		Managers.Object.MyPlayer.Stat = statPointPacket.StatInfo;
 
-		Debug.Log($"Can I Upgrade Class? :{Managers.Object.MyPlayer.Stat.CanUpClass}");
-		Debug.Log($"MyClass is {Managers.Object.MyPlayer.Stat.JobClassType}");
-
 		// 스텟창 갱신
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.StatUI.RefreshUI();

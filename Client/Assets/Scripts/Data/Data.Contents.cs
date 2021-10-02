@@ -47,7 +47,6 @@ namespace Data
     {
         public string name;
         public List<explosionPointInfo> explosionPointInfos;
-        public string prefab;
     }
     [Serializable]
     public class explosionPointInfo

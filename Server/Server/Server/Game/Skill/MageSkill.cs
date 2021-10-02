@@ -17,7 +17,7 @@ namespace Server
         public override void FirstAddSkill()
         {
             // 전직할 시 추가되는 스킬 정보
-            SkillPoints.Add(3, 1);
+            SkillPoints.Add(2002, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
 

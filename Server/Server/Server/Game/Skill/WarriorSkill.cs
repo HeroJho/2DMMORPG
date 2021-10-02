@@ -1,6 +1,5 @@
 ﻿using Google.Protobuf.Protocol;
 using Server.Data;
-using Server.DB;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +17,7 @@ namespace Server
         public override void FirstAddSkill()
         {
             // 전직할 시 추가되는 스킬 정보
-            SkillPoints.Add(2, 1);
+            SkillPoints.Add(2001, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
 

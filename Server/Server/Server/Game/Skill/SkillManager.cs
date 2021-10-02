@@ -82,17 +82,21 @@ namespace Server
 
         public void ClassSkillUp(JobClassType classType)
         {
+            Dictionary<int, int> tempSkillPoints = SkillTree.SkillPoints;
 
             switch (classType)
             {
                 case JobClassType.Warrior:
+                    
                     SkillTree = new WarriorSkill(_player);
+                    SkillTree.SkillPoints = tempSkillPoints;
                     SkillTree.FirstAddSkill();
                     break;
                 case JobClassType.Hunter:
                     break;
                 case JobClassType.Mage:
                     SkillTree = new MageSkill(_player);
+                    SkillTree.SkillPoints = tempSkillPoints;
                     SkillTree.FirstAddSkill();
                     break;
                 default:

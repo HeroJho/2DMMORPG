@@ -1,9 +1,8 @@
 ﻿{
   "skills": [
     {
-      "id": "1",
+      "id": "1001",
       "name": "평타",
-      "maxPoint": "1",
       "skillPointInfos": [
         {
           "cooldown": "0.5",
@@ -18,9 +17,8 @@
     },
 
     {
-      "id": "2",
-      "name": "원거리 공격",
-      "maxPoint": "5",
+      "id": "2001",
+      "name": "활 쏘기",
       "skillPointInfos": [
         {
           "cooldown": "1.5",
@@ -80,9 +78,8 @@
     },
 
     {
-      "id": "3",
+      "id": "2002",
       "name": "범위 공격",
-      "maxPoint": "1",
       "skillPointInfos": [
         {
           "cooldown": "4",
@@ -131,8 +128,8 @@
           {
             "radian": "5"
           }
-        ],
-        "prefab": "Effect/Explosion"
+        ]
+
       }
     }
 

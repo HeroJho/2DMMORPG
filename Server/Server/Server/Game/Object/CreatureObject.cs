@@ -91,6 +91,8 @@ namespace Server
 			if (Room == null)
 				return;
 
+            Console.WriteLine(damage);
+
 			// 데미지 보정
 			damage = Math.Max(damage - TotalDefence, 0);
 

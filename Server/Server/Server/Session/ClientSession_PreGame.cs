@@ -283,7 +283,7 @@ namespace Server
                     //스킬 기본설정
                     ConvertIntStringData convertData = new ConvertIntStringData();
                     {
-                        convertData.SkillPoints.Add(1, 1);
+                        convertData.SkillPoints.Add(1001, 1);
                     }
                     SkillDb newSkillDb = new SkillDb();
                     {

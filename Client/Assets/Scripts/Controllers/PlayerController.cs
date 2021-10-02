@@ -148,15 +148,15 @@ public class PlayerController : CreatureController
 
 	public override void UseSkill(int skillId)
     {
-		if(skillId == 1)
+		if(skillId == 1001)
         {
 			_coSkill = StartCoroutine("CoStartPunch");
         }
-		else if(skillId == 2)
+		else if(skillId == 2001)
         {
 			_coSkill = StartCoroutine("CoStartShootArrow");
         }
-		else if(skillId == 3)
+		else if(skillId == 2002)
         {
 			_coSkill = StartCoroutine("CoStartExplosion");
         }
@@ -209,8 +209,8 @@ public class PlayerController : CreatureController
 		go.transform.position = transform.position;
 		// 이펙트 크기 조정
 		go.transform.localScale = new Vector3(
-			Managers.Skill.GetSkillPoint(3) + 2,
-			Managers.Skill.GetSkillPoint(3) + 2, 
+			Managers.Skill.GetSkillPoint(2002) + 2,
+			Managers.Skill.GetSkillPoint(2002) + 2, 
 			1);
 
 		go.GetComponent<Animator>().Play("EXPLOSION_START");
