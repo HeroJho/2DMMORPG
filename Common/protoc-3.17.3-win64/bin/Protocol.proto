@@ -53,6 +53,7 @@ enum MsgId{
     C_CHANGE_STAT_POINT = 46;
     S_CLASS_UP = 47;
     C_CLASS_UP = 48;
+    S_CONDITION = 49;
 }
 
 enum CreatureState{
@@ -85,6 +86,13 @@ enum SkillType{
     SKILL_AUTO = 1;
     SKILL_PROJECTILE = 2;
     SKILL_EXPLOSION = 3;
+}
+
+enum ConditionType{
+    CONDITION_NONE = 0;
+    CONDITION_CHILLED = 1;
+    CONDITION_POISON = 2;
+    CONDITION_STUN = 3;
 }
 
 enum PlayerServerState{
@@ -370,6 +378,11 @@ message C_ClassUp{
     JobClassType classType = 1;
 }
 
+message S_Condition{
+    int32 id = 1;
+    ConditionInfo conditionInfo = 2;
+}
+
 message ItemInfo{
     int32 itemDbId = 1;
     int32 templateId = 2;
@@ -422,11 +435,16 @@ message StatInfo{
     JobClassType jobClassType = 12;
     int32 statPoints = 13;
     bool canUpClass = 14;
-
 }
 
 message QuestInfo{
     repeated int32 quests = 1;
     repeated int32 canCompleteQuests = 2;
     repeated int32 completedQuests = 3;
+}
+
+message ConditionInfo{
+    ConditionType conditionType = 1;
+    int32 time = 2;
+    int32 value = 3;
 }

@@ -45,6 +45,7 @@ namespace Server
                     if (target != null)
                     {
                         target.OnDamaged(this, Damage + Owner.TotalAttack);
+                        target.Condition.SlowSpeed(2, 5);
                     }
                 }
 

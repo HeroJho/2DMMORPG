@@ -124,6 +124,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SClassUp, MakePacket<S_ClassUp>);
             _handler.Add((ushort)MsgId.SClassUp, PacketHandler.S_ClassUpHandler);
 
+            _onRecv.Add((ushort)MsgId.SCondition, MakePacket<S_Condition>);
+            _handler.Add((ushort)MsgId.SCondition, PacketHandler.S_ConditionHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

@@ -8,6 +8,7 @@ namespace Server
     public class CreatureObject : GameObject
     {
 		public StatInfo Stat { get; private set; } = new StatInfo();
+		public Condition Condition { get; private set; }
 
 		public virtual int TotalAttack { get { return Stat.Attack; } }
 		public virtual int TotalDefence { get { return 0; } }
@@ -39,6 +40,7 @@ namespace Server
 		public CreatureObject()
 		{
 			Info.StatInfo = Stat;
+			Condition = new Condition(this);
 		}
 
 		public MoveDir GetDirFromVec(Vector2Int dir)
@@ -90,8 +92,6 @@ namespace Server
 		{
 			if (Room == null)
 				return;
-
-            Console.WriteLine(damage);
 
 			// 데미지 보정
 			damage = Math.Max(damage - TotalDefence, 0);

@@ -63,9 +63,9 @@ namespace Server
                     break;
             }
 
-            // 5프레임 (0.2초마다 한번씩 Update)
+            // 10프레임 (0.1초마다 한번씩 Update)
             if (Room != null)
-                _job = Room.PushAfter(200, Update);
+                _job = Room.PushAfter(100, Update);
         }
 
         private long _nextSearchTick = 0;
@@ -254,6 +254,9 @@ namespace Server
                 _job.Cancel = true;
                 _job = null;
             }
+
+            // 버프 전부 해제
+            Condition.BackCondition();
 
             GameObject owner = attacker.GetOwner();
 

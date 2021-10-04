@@ -21,7 +21,7 @@
       "name": "활 쏘기",
       "skillPointInfos": [
         {
-          "cooldown": "1.5",
+          "cooldown": "0.5",
           "damage": "5",
           "mp": "5"
         },

@@ -53,7 +53,7 @@
         "level": "1",
         "maxHp": "20",
         "attack": "2",
-        "speed": "4.0",
+        "speed": "5.0",
         "totalExp": "5"
       },
       "chaseCellDist": "5",
