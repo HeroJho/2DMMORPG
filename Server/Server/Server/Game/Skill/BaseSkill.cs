@@ -78,6 +78,9 @@ namespace Server
             {
                 case SkillType.SkillAuto:
                     {
+                        if (skillData.id != 1001)
+                            break;
+
                         // 데미지 판정
                         Vector2Int skillPos = _player.GetFrontCellPos(_player.Info.PosInfo.MoveDir);
                         GameObject go = _player.Room.Map.Find(skillPos);
@@ -91,6 +94,29 @@ namespace Server
                         {
                             target.OnDamaged(_player, skillData.skillPointInfos[point].damage + _player.TotalAttack);
                         }
+                    }
+                    break;
+                case SkillType.SkillProjectile:
+                    {
+                        if (skillData.id != 1002)
+                            break;
+
+                        Arrow arrow = ObjectManager.Instance.Add<Arrow>();
+                        if (arrow == null)
+                            return;
+
+                        arrow.Owner = _player;
+                        arrow.Info.TemplateId = skillData.id;
+
+                        arrow.PosInfo.State = CreatureState.Moving;
+                        arrow.PosInfo.MoveDir = _player.PosInfo.MoveDir;
+                        arrow.PosInfo.PosX = _player.PosInfo.PosX;
+                        arrow.PosInfo.PosY = _player.PosInfo.PosY;
+                        arrow.Speed = skillData.projectile.projectilePointInfos[point].speed;
+                        arrow.Damage = skillData.skillPointInfos[point].damage;
+                        arrow.Range = skillData.projectile.projectilePointInfos[point].range;
+
+                        _player.Room.EnterGame(arrow);
                     }
                     break;
 

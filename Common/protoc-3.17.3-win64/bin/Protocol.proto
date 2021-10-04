@@ -88,13 +88,6 @@ enum SkillType{
     SKILL_EXPLOSION = 3;
 }
 
-enum ConditionType{
-    CONDITION_NONE = 0;
-    CONDITION_CHILLED = 1;
-    CONDITION_POISON = 2;
-    CONDITION_STUN = 3;
-}
-
 enum PlayerServerState{
     SERVER_STATE_LOGIN = 0;
     SERVER_STATE_LOBBY = 1;
@@ -158,6 +151,13 @@ enum QuestState{
     QUEST_STATE_PROCEED = 3;
     QUEST_STATE_CANCOMPLETE = 4;
     QUEST_STATE_COMPLETE = 5;
+}
+
+enum ConditionType{
+    CONDITION_NONE = 0;
+    CONDITION_CHILLED = 1;
+    CONDITION_POISON = 2;
+    CONDITION_STUN = 3;
 }
 
 message S_EnterGame{

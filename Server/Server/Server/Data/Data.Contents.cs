@@ -36,8 +36,10 @@ namespace Server.Data
         public string name;
         public List<skillPointInfo> skillPointInfos;
         public SkillType skillType;
+        public List<ConditionInfo> conditions;
         public projectileInfo projectile;
         public explosionInfo explosion;
+
     }
     public class skillPointInfo
     {

@@ -284,6 +284,7 @@ namespace Server
                     ConvertIntStringData convertData = new ConvertIntStringData();
                     {
                         convertData.SkillPoints.Add(1001, 1);
+                        convertData.SkillPoints.Add(1002, 1);
                     }
                     SkillDb newSkillDb = new SkillDb();
                     {

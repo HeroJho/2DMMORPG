@@ -45,14 +45,33 @@ namespace Server
                     if (target != null)
                     {
                         target.OnDamaged(this, Damage + Owner.TotalAttack);
-                        target.Condition.SlowSpeed(2, 5);
                     }
                 }
 
                 _job.Cancel = true;
                 Room.Push(Room.LeaveGame, Id);
+                return;
             }
 
+            // 몬스터 스피드가 빨라서 투사 1틱에 몬스터 2틱할 때 관통 문제
+            if (!Room.Map.CanGo(GetBackCellPos(), true))
+            {
+                GameObject go = Room.Map.Find(GetBackCellPos());
+                CreatureObject co = go as CreatureObject;
+                if (co != null && co != Owner)
+                {
+                    CreatureObject target = (CreatureObject)go;
+
+                    if (target != null)
+                    {
+                        target.OnDamaged(this, Damage + Owner.TotalAttack);
+                    }
+
+                    _job.Cancel = true;
+                    Room.Push(Room.LeaveGame, Id);
+                    return;
+                }
+            }
         }
 
         public override GameObject GetOwner()

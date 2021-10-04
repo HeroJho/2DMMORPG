@@ -59,7 +59,6 @@ namespace Server
 		{
 			return GetFrontCellPos(PosInfo.MoveDir);
 		}
-
 		public Vector2Int GetFrontCellPos(MoveDir dir)
 		{
 			Vector2Int cellPos = CellPos;
@@ -82,6 +81,34 @@ namespace Server
 
 			return cellPos;
 		}
+		public Vector2Int GetBackCellPos()
+		{
+			return GetBackCellPos(PosInfo.MoveDir);
+		}
+
+		public Vector2Int GetBackCellPos(MoveDir dir)
+		{
+			Vector2Int cellPos = CellPos;
+
+			switch (dir)
+			{
+				case MoveDir.Up:
+					cellPos -= Vector2Int.up;
+					break;
+				case MoveDir.Down:
+					cellPos -= Vector2Int.down;
+					break;
+				case MoveDir.Left:
+					cellPos -= Vector2Int.left;
+					break;
+				case MoveDir.Right:
+					cellPos -= Vector2Int.right;
+					break;
+			}
+
+			return cellPos;
+		}
+
 
 		public virtual void Update()
 		{

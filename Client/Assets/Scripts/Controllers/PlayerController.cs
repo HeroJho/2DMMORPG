@@ -152,10 +152,14 @@ public class PlayerController : CreatureController
         {
 			_coSkill = StartCoroutine("CoStartPunch");
         }
-		else if(skillId == 2001)
+		else if(skillId == 1002)
         {
 			_coSkill = StartCoroutine("CoStartShootArrow");
         }
+		else if (skillId == 2001)
+		{
+			_coSkill = StartCoroutine("CoStartShootArrow");
+		}
 		else if(skillId == 2002)
         {
 			_coSkill = StartCoroutine("CoStartExplosion");

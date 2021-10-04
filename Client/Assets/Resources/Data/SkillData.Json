@@ -17,33 +17,33 @@
     },
 
     {
-      "id": "2001",
+      "id": "1002",
       "name": "활 쏘기",
       "skillPointInfos": [
         {
-          "cooldown": "0.5",
+          "cooldown": "2",
           "damage": "5",
-          "mp": "5"
+          "mp": "0"
         },
         {
           "cooldown": "1.5",
           "damage": "6",
-          "mp": "5"
+          "mp": "0"
         },
         {
           "cooldown": "1.5",
           "damage": "7",
-          "mp": "5"
+          "mp": "0"
         },
         {
           "cooldown": "1",
           "damage": "7",
-          "mp": "8"
+          "mp": "0"
         },
         {
           "cooldown": "0.5",
           "damage": "10",
-          "mp": "10"
+          "mp": "0"
         }
       ],
       "skillType": "SkillProjectile",
@@ -73,7 +73,95 @@
             "range": "10"
           }
         ],
-        "prefab": "Creature/Arrow"
+        "prefab": "SKill/Arrow"
+      }
+    },
+
+    {
+      "id": "2001",
+      "name": "아이스 볼",
+      "skillPointInfos": [
+        {
+          "cooldown": "0.5",
+          "damage": "5",
+          "mp": "5"
+        },
+        {
+          "cooldown": "1.5",
+          "damage": "6",
+          "mp": "5"
+        },
+        {
+          "cooldown": "1.5",
+          "damage": "7",
+          "mp": "5"
+        },
+        {
+          "cooldown": "1",
+          "damage": "7",
+          "mp": "8"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "1",
+          "mp": "10"
+        }
+      ],
+      "skillType": "SkillProjectile",
+      "iconPath": "Textures/Skill/IceBall",
+      "description": "마나를 차갑게 만들어 압축한다.",
+      "conditions": [
+        {
+          "conditionType": "ConditionChilled",
+          "time": "2",
+          "value": "1"
+        },
+        {
+          "conditionType": "ConditionChilled",
+          "time": "3",
+          "value": "1"
+        },
+        {
+          "conditionType": "ConditionChilled",
+          "time": "3",
+          "value": "2"
+        },
+        {
+          "conditionType": "ConditionChilled",
+          "time": "4",
+          "value": "2"
+        },
+        {
+          "conditionType": "ConditionChilled",
+          "time": "5",
+          "value": "3"
+        }
+      ],
+      "projectile": {
+        "name": "아이스 볼",
+        "projectilePointInfos": [
+          {
+            "speed": "15.0",
+            "range": "4"
+          },
+          {
+            "speed": "15.0",
+            "range": "5"
+          },
+          {
+            "speed": "20.0",
+            "range": "6"
+          },
+          {
+            "speed": "20.0",
+            "range": "8"
+          },
+          {
+            "speed": "10.0",
+            "range": "10"
+          }
+        ],
+        "prefab": "Skill/IceBall"
       }
     },
 
@@ -132,6 +220,8 @@
 
       }
     }
+
+
 
   ]
 }

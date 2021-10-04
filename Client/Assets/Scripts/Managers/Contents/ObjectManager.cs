@@ -113,14 +113,29 @@ public class ObjectManager
                 break;
             case GameObjectType.Projectile:
                 {
-                    GameObject go = Managers.Resource.Instantiate($"Creature/Arrow");
-                    go.name = "Arrow";
-                    _objects.Add(info.ObjectId, go);
+                    if(info.TemplateId == 1002)
+                    {
+                        GameObject go = Managers.Resource.Instantiate($"Skill/Arrow");
+                        go.name = "Arrow";
+                        _objects.Add(info.ObjectId, go);
 
-                    ArrowController ac = go.GetComponent<ArrowController>();
-                    ac.PosInfo = info.PosInfo;
-                    ac.Stat = info.StatInfo;
-                    ac.SyncPos();
+                        ArrowController ac = go.GetComponent<ArrowController>();
+                        ac.PosInfo = info.PosInfo;
+                        ac.Stat = info.StatInfo;
+                        ac.SyncPos();
+                    }
+                    else if(info.TemplateId == 2001)
+                    {
+                        GameObject go = Managers.Resource.Instantiate($"Skill/IceBall");
+                        go.name = "IceBall";
+                        _objects.Add(info.ObjectId, go);
+
+                        ArrowController ac = go.GetComponent<ArrowController>();
+                        ac.PosInfo = info.PosInfo;
+                        ac.Stat = info.StatInfo;
+                        ac.SyncPos();
+                    }
+                    
                 }
                 break;
             case GameObjectType.Item:

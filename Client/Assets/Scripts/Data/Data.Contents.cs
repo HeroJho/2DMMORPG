@@ -16,9 +16,11 @@ namespace Data
         public List<skillPointInfo> skillPointInfos;
         public SkillType skillType;
         public string iconPath;
+        public string description;
+        public List<ConditionInfo> conditions;
         public projectileInfo projectile;
         public explosionInfo explosion;
-        public string description;
+
     }
     [Serializable]
     public class skillPointInfo

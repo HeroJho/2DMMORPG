@@ -17,6 +17,7 @@ namespace Server
         public override void FirstAddSkill()
         {
             // 전직할 시 추가되는 스킬 정보
+            SkillPoints.Add(2001, 1);
             SkillPoints.Add(2002, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
@@ -39,8 +40,37 @@ namespace Server
 
             switch (skillData.skillType)
             {
+                case SkillType.SkillProjectile:
+                    {
+                        if (skillData.id != 2001)
+                            break;
+
+                        IceBall iceBall = ObjectManager.Instance.Add<IceBall>();
+                        if (iceBall == null)
+                            return;
+
+                        iceBall.Owner = _player;
+                        iceBall.Info.TemplateId = skillData.id;
+
+                        iceBall.PosInfo.State = CreatureState.Moving;
+                        iceBall.PosInfo.MoveDir = _player.PosInfo.MoveDir;
+                        iceBall.PosInfo.PosX = _player.PosInfo.PosX;
+                        iceBall.PosInfo.PosY = _player.PosInfo.PosY;
+                        iceBall.Speed = skillData.projectile.projectilePointInfos[point].speed;
+                        iceBall.Damage = skillData.skillPointInfos[point].damage;
+                        iceBall.Range = skillData.projectile.projectilePointInfos[point].range;
+
+                        iceBall.ConditionInfo.Time = skillData.conditions[point].Time;
+                        iceBall.ConditionInfo.Value = skillData.conditions[point].Value;
+
+                        _player.Room.EnterGame(iceBall);
+                    }
+                    break;
                 case SkillType.SkillExplosion:
                     {
+                        if (skillData.id != 2002)
+                            break;
+
                         HashSet<GameObject> objects = _player.Room.Map.LoopByCircle(_player.CellPos, skillData.explosion.explosionPointInfos[point].radian);
 
                         foreach (GameObject obj in objects)
@@ -53,7 +83,6 @@ namespace Server
                         }
                     }
                     break;
-
 
             }
         }
