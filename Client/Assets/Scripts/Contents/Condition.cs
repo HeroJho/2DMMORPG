@@ -44,6 +44,9 @@ public class Condition : MonoBehaviour
         _originSpeed = _creatureController.Speed;
         _creatureController.Speed -= slowValue;
 
+        if (_creatureController.Speed <= 0)
+            _creatureController.Speed = 1;
+
         // 시간후에 원래속도 되돌림
         _slowJob = StartCoroutine(CoolTime(timeValue, () =>
         {

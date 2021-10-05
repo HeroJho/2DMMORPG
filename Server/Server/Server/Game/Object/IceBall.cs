@@ -8,11 +8,9 @@ namespace Server
     public class IceBall : Projectile
     {
         public CreatureObject Owner { get; set; } // 주인
-        public ConditionInfo ConditionInfo { get; set; } = new ConditionInfo();
 
         IJob _job = null;
         int _rangeCount = 1;
-
         public override void Update()
         {
             if (Owner == null || Room == null)
@@ -31,7 +29,7 @@ namespace Server
 
             Vector2Int destPos = GetFrontCellPos(); // 내 앞 좌표
             if (Room.Map.ApplyMove(this, destPos, collision: false))
-            {// 몬스터 스피드가 빨라서 투사 1틱에 몬스터 2틱할 때 관통 문제
+            {
                 S_Move movePacket = new S_Move();
                 movePacket.ObjectId = Id;
                 movePacket.PosInfo = PosInfo;
@@ -48,6 +46,8 @@ namespace Server
                     {
                         target.OnDamaged(this, Damage + Owner.TotalAttack);
                         target.Condition.SlowSpeed(ConditionInfo.Value, ConditionInfo.Time);
+                        //target.Condition.SlowAttackSpeed(1, 5);
+                        target.Condition.Chilled(_skillData, _skillLevel);
                     }
                 }
 

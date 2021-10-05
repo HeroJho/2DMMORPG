@@ -88,7 +88,7 @@
       "purposeNumber": "5",
       "currentNumber": "0",
       "condition": {
-        "level": "20",
+        "level": "1",
         "completeQuests": [
           "1002"
         ]
@@ -131,7 +131,7 @@
       "purposeNumber": "10",
       "currentNumber": "0",
       "condition": {
-        "level": "20",
+        "level": "1",
         "completeQuests": [
           "3"
         ]
@@ -274,7 +274,7 @@
       "purposeNumber": "5",
       "currentNumber": "0",
       "condition": {
-        "level": "10",
+        "level": "1",
         "completeQuests": [
           "2"
         ]
@@ -314,10 +314,10 @@
       "npcId": "2",
       "questType": "Collection",
       "itemId": "1001",
-      "purposeNumber": "10",
+      "purposeNumber": "5",
       "currentNumber": "0",
       "condition": {
-        "level": "10",
+        "level": "1",
         "completeQuests": [
           "1001"
         ]
@@ -351,10 +351,10 @@
       "npcId": "3",
       "questType": "Collection",
       "itemId": "1002",
-      "purposeNumber": "20",
+      "purposeNumber": "5",
       "currentNumber": "0",
       "condition": {
-        "level": "20",
+        "level": "10",
         "completeQuests": [
           "4"
         ]
@@ -394,10 +394,10 @@
       "npcId": "3",
       "questType": "Collection",
       "itemId": "1002",
-      "purposeNumber": "30",
+      "purposeNumber": "5",
       "currentNumber": "0",
       "condition": {
-        "level": "20",
+        "level": "10",
         "completeQuests": [
           "1003"
         ]

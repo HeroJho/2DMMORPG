@@ -54,6 +54,7 @@
         "maxHp": "20",
         "attack": "2",
         "speed": "5.0",
+        "attackSpeed": "0.5",
         "totalExp": "5"
       },
       "chaseCellDist": "5",
@@ -85,6 +86,7 @@
         "maxHp": "250",
         "attack": "5",
         "speed": "3.0",
+        "attackSpeed": "0.5",
         "totalExp": "20"
       },
       "chaseCellDist": "5",
@@ -116,6 +118,7 @@
         "maxHp": "250",
         "attack": "5",
         "speed": "3.0",
+        "attackSpeed": "0.5",
         "totalExp": "20"
       },
       "chaseCellDist":"5",

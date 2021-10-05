@@ -431,10 +431,11 @@ message StatInfo{
     int32 maxHp = 8;
     int32 maxMp = 9;
     float speed = 10;
-    int32 totalExp = 11;
-    JobClassType jobClassType = 12;
-    int32 statPoints = 13;
-    bool canUpClass = 14;
+    float attackSpeed = 11;
+    int32 totalExp = 12;
+    JobClassType jobClassType = 13;
+    int32 statPoints = 14;
+    bool canUpClass = 15;
 }
 
 message QuestInfo{

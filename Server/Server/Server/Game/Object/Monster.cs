@@ -190,7 +190,7 @@ namespace Server
                 Room.Broadcast(CellPos, skill);
 
                 // 스킬 쿨타임 적용
-                int collTick = (int)(1000 * 0.5f);
+                int collTick = (int)(1000 * Stat.AttackSpeed);
                 _coolTick = Environment.TickCount64 + collTick;
             }
 

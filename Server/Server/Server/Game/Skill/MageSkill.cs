@@ -56,12 +56,7 @@ namespace Server
                         iceBall.PosInfo.MoveDir = _player.PosInfo.MoveDir;
                         iceBall.PosInfo.PosX = _player.PosInfo.PosX;
                         iceBall.PosInfo.PosY = _player.PosInfo.PosY;
-                        iceBall.Speed = skillData.projectile.projectilePointInfos[point].speed;
-                        iceBall.Damage = skillData.skillPointInfos[point].damage;
-                        iceBall.Range = skillData.projectile.projectilePointInfos[point].range;
-
-                        iceBall.ConditionInfo.Time = skillData.conditions[point].Time;
-                        iceBall.ConditionInfo.Value = skillData.conditions[point].Value;
+                        iceBall.Init(skillData, point);
 
                         _player.Room.EnterGame(iceBall);
                     }
