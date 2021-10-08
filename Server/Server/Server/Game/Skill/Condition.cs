@@ -13,44 +13,61 @@ namespace Server
         public Condition(CreatureObject creatureObj)
         {
             _creatureObj = creatureObj;
+           
         }
 
         public void Chilled(Skill skillData, int skillLevel)
         {
             int time = skillData.conditions[skillLevel].Time;
             int value = skillData.conditions[skillLevel].Value;
+
+            SlowSpeed(value, time);
+            SlowAttackSpeed(value, time);
+
+            SendConditionPacket(ConditionType.ConditionChilled, time);
         }
 
+        public void SendConditionPacket(ConditionType conditionType, int timeValue)
+        {
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null)
+                return;
+
+            S_ChangeConditionInfo changeCondition = new S_ChangeConditionInfo();
+
+            changeCondition.Id = _creatureObj.Id;
+
+            changeCondition.ConditionType = conditionType;
+            changeCondition.Time = timeValue;
+            changeCondition.MoveSpeed = _creatureObj.Speed;
+            changeCondition.AttackSpeed = _creatureObj.Stat.Attack;
+
+            room.Broadcast(_creatureObj.CellPos, changeCondition);
+        }
 
 
         IJob _slowJob;
         float _originSpeed; 
         public void SlowSpeed(int slowValue, int timeValue)
         {
-            if (_slowJob != null)
-                return;
-
             GameRoom room = _creatureObj.Room;
             if (_creatureObj == null || room == null)
                 return;
 
-            // 원래 속도 저장 후 감소
+            // 중복되면 이전거는 취소 되고 시간도 초기화하고 진행
+            if (_slowJob != null)
+            {
+                _creatureObj.Speed = _originSpeed;
+                _slowJob.Cancel = true;
+                _slowJob = null;
+            }
+
+            // 속도 감소
             _originSpeed = _creatureObj.Speed;
             _creatureObj.Speed -= slowValue;
 
             if (_creatureObj.Speed <= 0)
-                _creatureObj.Speed = 1;
-
-            //패킷을 보낸다
-            S_Condition conditionPacket = new S_Condition();
-            conditionPacket.Id = _creatureObj.Id;
-            conditionPacket.ConditionInfo = new ConditionInfo()
-            {
-                ConditionType = ConditionType.ConditionChilled,
-                Time = timeValue,
-                Value = slowValue
-            };
-            room.Broadcast(_creatureObj.CellPos, conditionPacket);            
+                _creatureObj.Speed = 1;           
 
             // 시간후에 원래속도 되돌림
             _slowJob = room.PushAfter(timeValue * 1000, () =>
@@ -68,20 +85,17 @@ namespace Server
             if (_creatureObj == null || room == null)
                 return;
 
+            // 중복되면 이전거는 취소 되고 시간도 초기화하고 진행
+            if (_slowAtteckJob != null)
+            {
+                _creatureObj.Stat.AttackSpeed = _originAtteckSpeed;
+                _slowAtteckJob.Cancel = true;
+                _slowAtteckJob = null;
+            }
+
             // 원래 속도 저장 후 감소
             _originAtteckSpeed = _creatureObj.Stat.AttackSpeed;
             _creatureObj.Stat.AttackSpeed += slowValue;
-
-            //패킷을 보낸다
-            S_Condition conditionPacket = new S_Condition();
-            conditionPacket.Id = _creatureObj.Id;
-            conditionPacket.ConditionInfo = new ConditionInfo()
-            {
-                ConditionType = ConditionType.ConditionChilled,
-                Time = timeValue,
-                Value = slowValue
-            };
-            room.Broadcast(_creatureObj.CellPos, conditionPacket);
 
             // 시간후에 원래속도 되돌림
             _slowAtteckJob = room.PushAfter(timeValue * 1000, () =>
@@ -117,6 +131,12 @@ namespace Server
                 _slowJob.Cancel = true;
                 _slowJob = null;
             }    
+            if(_slowAtteckJob != null)
+            {
+                _creatureObj.Stat.AttackSpeed = _originAtteckSpeed;
+                _slowAtteckJob.Cancel = true;
+                _slowAtteckJob = null;
+            }  
 
 
         }

@@ -432,19 +432,18 @@ class PacketHandler
 		gameSceneUI.ClassUp.gameObject.SetActive(true);
 	}
 
-	public static void S_ConditionHandler(PacketSession session, IMessage packet)
+	public static void S_ChangeConditionInfoHandler(PacketSession session, IMessage packet)
     {
-		S_Condition conditionPacket = (S_Condition)packet;
+		S_ChangeConditionInfo changeConditionPacket = (S_ChangeConditionInfo)packet;
 
-		GameObject go = Managers.Object.FindById(conditionPacket.Id);
+		GameObject go = Managers.Object.FindById(changeConditionPacket.Id);
 		if (go == null)
 			return;
 		Condition condition = go.GetComponent<Condition>();
 		if (condition == null)
 			return;
 
-		ConditionInfo conditionInfo = conditionPacket.ConditionInfo;
-		condition.StartBuff(conditionInfo.ConditionType, conditionInfo.Value, conditionInfo.Time);
+		condition.UpdateCondition(changeConditionPacket);
 	}
 
 }

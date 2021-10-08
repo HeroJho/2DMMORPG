@@ -7,53 +7,70 @@ using UnityEngine;
 public class Condition : MonoBehaviour
 {
 
-    CreatureController _creatureController;
-    SpriteRenderer _spriteRenderer;
+    private CreatureController _creatureController;
+    private SpriteRenderer _spriteRenderer;
+
+    private Animator _posionEffect;
+
+    private float _attackSpeed = 0;
 
     public void Start()
     {
         _creatureController = GetComponent<CreatureController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 일일히 크리쳐한테 파싱 ㄴㄴ
+        _posionEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Poision", gameObject.transform).GetComponent<Animator>();
+
+        _posionEffect.gameObject.SetActive(false);
     }
 
-    public void StartBuff(ConditionType type, int value, int time)
+    public void UpdateCondition(S_ChangeConditionInfo changeConditionPacket)
     {
-        switch (type)
+        int timeValue = changeConditionPacket.Time;
+        ConditionType conditionType = changeConditionPacket.ConditionType;
+
+        switch (conditionType)
         {
             case ConditionType.ConditionChilled:
-                SlowSpeed(value, time);
+                Chilled(changeConditionPacket.MoveSpeed, changeConditionPacket.AttackSpeed, timeValue);
                 break;
             case ConditionType.ConditionPoison:
                 break;
             case ConditionType.ConditionStun:
                 break;
+            default:
+                break;
         }
     }
 
-    Coroutine _slowJob = null;
-    float _originSpeed;
-    public void SlowSpeed(int slowValue, int timeValue)
+    Coroutine _chilledAnim = null;
+    public void Chilled(float slowMoveValue, float slowAttackVlaue, int timeValue)
     {
-        if (_slowJob != null)
-            return;
+        if(_chilledAnim != null)
+        {
+            StopCoroutine(_chilledAnim);
+            _chilledAnim = null;
+        }
 
-        // 애니
+        SlowSpeed(slowMoveValue, timeValue);
+        SlowAttackSpeed(slowAttackVlaue, timeValue);
+
+        // 이펙트
         _spriteRenderer.color = new Color(0, 255, 255);
-
-        // 원래 속도 저장 후 감소
-        _originSpeed = _creatureController.Speed;
-        _creatureController.Speed -= slowValue;
-
-        if (_creatureController.Speed <= 0)
-            _creatureController.Speed = 1;
+        _posionEffect.gameObject.SetActive(true);
+        _posionEffect.Play("BUFF_POISON");
 
         // 시간후에 원래속도 되돌림
-        _slowJob = StartCoroutine(CoolTime(timeValue, () =>
+        _chilledAnim = StartCoroutine(CoolTime(timeValue, () =>
         {
-            _creatureController.Speed = _originSpeed;
             _spriteRenderer.color = new Color(255, 255, 255);
+            _posionEffect.gameObject.SetActive(false);
         }));
     }
+
+
+    // 쿨타임 메서드
     IEnumerator CoolTime(int timeValue, Action func)
     {
 
@@ -63,8 +80,38 @@ public class Condition : MonoBehaviour
         _slowJob = null;
     }
 
-    public void SlowAttackSpeed(int slowValue, int timeValue)
+
+
+    Coroutine _slowJob = null;
+    float _originSpeed;
+    public void SlowSpeed(float slowMoveValue, int timeValue)
     {
+        if (_slowJob != null)
+        {
+            StopCoroutine(_slowJob);
+            _slowJob = null;
+        }
+
+        // 원래 속도 저장 후 감소
+        _originSpeed = _creatureController.Speed;
+        _creatureController.Speed = slowMoveValue;
+
+        // 시간후에 원래속도 되돌림
+        _slowJob = StartCoroutine(CoolTime(timeValue, () =>
+        {
+            _creatureController.Speed = _originSpeed;
+        }));
+    }
+
+    Coroutine _slowAttackJob = null;
+    float _originAttackSpeed;
+    public void SlowAttackSpeed(float slowValue, int timeValue)
+    {
+        if (_slowAttackJob != null)
+        {
+            StopCoroutine(_slowAttackJob);
+            _slowAttackJob = null;
+        }
 
     }
 

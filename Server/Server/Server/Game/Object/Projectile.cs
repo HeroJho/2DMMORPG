@@ -8,7 +8,7 @@ namespace Server
 {
     public class Projectile : CreatureObject
     {
-        public ConditionInfo ConditionInfo { get; set; } = new ConditionInfo();
+        //public ConditionInfo ConditionInfo { get; set; } = new ConditionInfo();
         public int Damage { get; set; }
         public int Range { get; set; }
         protected Skill _skillData = null;
@@ -28,11 +28,11 @@ namespace Server
             Damage = skillData.skillPointInfos[point].damage;
             Range = skillData.projectile.projectilePointInfos[point].range;
 
-            if (skillData.conditions != null)
-            {
-                ConditionInfo.Time = skillData.conditions[point].Time;
-                ConditionInfo.Value = skillData.conditions[point].Value;
-            }
+            //if (skillData.conditions != null)
+            //{
+            //    ConditionInfo.Time = skillData.conditions[point].Time;
+            //    ConditionInfo.Value = skillData.conditions[point].Value;
+            //}
 
         }
 

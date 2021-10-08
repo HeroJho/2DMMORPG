@@ -45,7 +45,7 @@ namespace Server
                     if (target != null)
                     {
                         target.OnDamaged(this, Damage + Owner.TotalAttack);
-                        target.Condition.SlowSpeed(ConditionInfo.Value, ConditionInfo.Time);
+                        //target.Condition.SlowSpeed(ConditionInfo.Value, ConditionInfo.Time);
                         //target.Condition.SlowAttackSpeed(1, 5);
                         target.Condition.Chilled(_skillData, _skillLevel);
                     }
@@ -68,7 +68,7 @@ namespace Server
                     if (target != null)
                     {
                         target.OnDamaged(this, Damage + Owner.TotalAttack);
-                        target.Condition.SlowSpeed(ConditionInfo.Value, ConditionInfo.Time);
+                        //target.Condition.SlowSpeed(ConditionInfo.Value, ConditionInfo.Time);
                     }
 
                     _job.Cancel = true;
