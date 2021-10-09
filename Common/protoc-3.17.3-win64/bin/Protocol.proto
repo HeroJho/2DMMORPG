@@ -77,8 +77,9 @@ enum GameObjectType{
     PLAYER = 1;
     MONSTER = 2;
     PROJECTILE = 3;
-    ITEM = 4;
-    NPC = 5;
+    SUMMONING = 4;
+    ITEM = 5;
+    NPC = 6;
 }
 
 enum SkillType{
@@ -86,6 +87,7 @@ enum SkillType{
     SKILL_AUTO = 1;
     SKILL_PROJECTILE = 2;
     SKILL_EXPLOSION = 3;
+    SKILL_SUMMONING = 4;
 }
 
 enum PlayerServerState{
@@ -450,5 +452,7 @@ message QuestInfo{
 message ConditionInfo{
     ConditionType conditionType = 1;
     int32 time = 2;
-    int32 value = 3;
+    int32 moveSpeedValue = 3;
+    int32 attackSpeedValue = 4;
+    int32 tickDamageValue = 5;
 }

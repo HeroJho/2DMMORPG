@@ -19,10 +19,11 @@ namespace Server
         public void Chilled(Skill skillData, int skillLevel)
         {
             int time = skillData.conditions[skillLevel].Time;
-            int value = skillData.conditions[skillLevel].Value;
+            int moveSlowValue = skillData.conditions[skillLevel].MoveSpeedValue;
+            int AttackSlowValue = skillData.conditions[skillLevel].AttackSpeedValue;
 
-            SlowSpeed(value, time);
-            SlowAttackSpeed(value, time);
+            SlowSpeed(moveSlowValue, time);
+            SlowAttackSpeed(AttackSlowValue, time);
 
             SendConditionPacket(ConditionType.ConditionChilled, time);
         }

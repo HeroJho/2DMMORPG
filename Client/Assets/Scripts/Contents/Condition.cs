@@ -9,6 +9,7 @@ public class Condition : MonoBehaviour
 
     private CreatureController _creatureController;
     private SpriteRenderer _spriteRenderer;
+    private Animator _animator;
 
     private Animator _posionEffect;
 
@@ -18,6 +19,7 @@ public class Condition : MonoBehaviour
     {
         _creatureController = GetComponent<CreatureController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
 
         // 일일히 크리쳐한테 파싱 ㄴㄴ
         _posionEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Poision", gameObject.transform).GetComponent<Animator>();
@@ -45,7 +47,7 @@ public class Condition : MonoBehaviour
     }
 
     Coroutine _chilledAnim = null;
-    public void Chilled(float slowMoveValue, float slowAttackVlaue, int timeValue)
+    public void Chilled(float slowMoveValue, float slowAttackValue, int timeValue)
     {
         if(_chilledAnim != null)
         {
@@ -54,18 +56,17 @@ public class Condition : MonoBehaviour
         }
 
         SlowSpeed(slowMoveValue, timeValue);
-        SlowAttackSpeed(slowAttackVlaue, timeValue);
+        SlowAttackSpeed(slowAttackValue, timeValue);
 
         // 이펙트
         _spriteRenderer.color = new Color(0, 255, 255);
-        _posionEffect.gameObject.SetActive(true);
-        _posionEffect.Play("BUFF_POISON");
+        _animator.SetFloat("AttackSpeed", 0.5f);
 
         // 시간후에 원래속도 되돌림
         _chilledAnim = StartCoroutine(CoolTime(timeValue, () =>
         {
             _spriteRenderer.color = new Color(255, 255, 255);
-            _posionEffect.gameObject.SetActive(false);
+            _animator.SetFloat("AttackSpeed", 1);
         }));
     }
 
@@ -89,6 +90,7 @@ public class Condition : MonoBehaviour
         if (_slowJob != null)
         {
             StopCoroutine(_slowJob);
+            _creatureController.Speed = _originSpeed;
             _slowJob = null;
         }
 
@@ -105,13 +107,23 @@ public class Condition : MonoBehaviour
 
     Coroutine _slowAttackJob = null;
     float _originAttackSpeed;
-    public void SlowAttackSpeed(float slowValue, int timeValue)
+    public void SlowAttackSpeed(float slowAttackValue, int timeValue)
     {
         if (_slowAttackJob != null)
         {
             StopCoroutine(_slowAttackJob);
+            _creatureController.Stat.AttackSpeed = _originAttackSpeed;
             _slowAttackJob = null;
         }
+
+        _originAttackSpeed = _creatureController.Stat.AttackSpeed;
+        _creatureController.Stat.AttackSpeed = slowAttackValue;
+
+        // 시간후에 원래속도 되돌림
+        _slowAttackJob = StartCoroutine(CoolTime(timeValue, () =>
+        {
+            _creatureController.Stat.AttackSpeed = _originAttackSpeed;
+        }));
 
     }
 

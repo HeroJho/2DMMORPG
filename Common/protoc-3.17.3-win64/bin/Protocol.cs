@@ -98,62 +98,64 @@ namespace Google.Protobuf.Protocol {
             "KAUSLAoMam9iQ2xhc3NUeXBlGA0gASgOMhYudHV0b3JpYWwuSm9iQ2xhc3NU",
             "eXBlEhIKCnN0YXRQb2ludHMYDiABKAUSEgoKY2FuVXBDbGFzcxgPIAEoCCJP",
             "CglRdWVzdEluZm8SDgoGcXVlc3RzGAEgAygFEhkKEWNhbkNvbXBsZXRlUXVl",
-            "c3RzGAIgAygFEhcKD2NvbXBsZXRlZFF1ZXN0cxgDIAMoBSJcCg1Db25kaXRp",
-            "b25JbmZvEi4KDWNvbmRpdGlvblR5cGUYASABKA4yFy50dXRvcmlhbC5Db25k",
-            "aXRpb25UeXBlEgwKBHRpbWUYAiABKAUSDQoFdmFsdWUYAyABKAUqoAcKBU1z",
-            "Z0lkEhAKDFNfRU5URVJfR0FNRRAAEhAKDFNfTEVBVkVfR0FNRRABEgsKB1Nf",
-            "U1BBV04QAhINCglTX0RFU1BBV04QAxIKCgZDX01PVkUQBBIKCgZTX01PVkUQ",
-            "BRILCgdDX1NLSUxMEAYSCwoHU19TS0lMTBAHEg8KC1NfQ0hBTkdFX0hQEAgS",
-            "DwoLU19DSEFOR0VfTVAQCRIJCgVTX0RJRRAKEg8KC1NfQ09OTkVDVEVEEAsS",
-            "CwoHQ19MT0dJThAMEgsKB1NfTE9HSU4QDRIQCgxDX0VOVEVSX0dBTUUQDhIT",
-            "Cg9DX0NSRUFURV9QTEFZRVIQDxITCg9TX0NSRUFURV9QTEFZRVIQEBIPCgtT",
-            "X0lURU1fTElTVBAREg4KClNfQUREX0lURU0QEhIQCgxDX0VRVUlQX0lURU0Q",
-            "ExIQCgxTX0VRVUlQX0lURU0QFBIPCgtTX0NIQU5HRV9FWBAVEg4KClNfTEVW",
-            "RUxfVVAQFhIKCgZTX1BJTkcQFxIKCgZDX1BPTkcQGBISCg5TX01BTkFHRV9T",
-            "S0lMTBAZEhoKFlNfU0VUX0NPVU5UX0NPTlNVTUFCTEUQGhIaChZDX1NFVF9D",
-            "T1VOVF9DT05TVU1BQkxFEBsSEwoPQ19HRVRfRFJPUF9JVEVNEBwSEQoNQ19S",
-            "RU1PVkVfSVRFTRAdEhEKDVNfUkVNT1ZFX0lURU0QHhIPCgtTX1NQQVdOX05Q",
-            "QxAfEg8KC0NfQUREX1FVRVNUECASDwoLU19BRERfUVVFU1QQIRIbChdTX1JF",
-            "RlJFU0hfSFVOVElOR19RVUVTVBAiEhgKFFNfQ0FOX0NPTVBMRVRFX1FVRVNU",
-            "ECMSGAoUQ19UUllfQ09NUExFVEVfUVVFU1QQJBIUChBTX0NPTVBMRVRFX1FV",
-            "RVNUECUSDQoJU19SRVNQQVdOECYSDQoJQ19SRVNQQVdOECcSFAoQU19TUEFX",
-            "Tl9PQlNUQUNMRRAoEhYKElNfREVTUEFXTl9PQlNUQUNMRRApEhEKDUNfQ0hB",
-            "TkdFX1NMT1QQKhIRCg1TX1NLSUxMX1BPSU5UECsSGAoUQ19DSEFOR0VfU0tJ",
-            "TExfUE9JTlQQLBIQCgxTX1NUQVRfUE9JTlQQLRIXChNDX0NIQU5HRV9TVEFU",
-            "X1BPSU5UEC4SDgoKU19DTEFTU19VUBAvEg4KCkNfQ0xBU1NfVVAQMBIbChdT",
-            "X0NIQU5HRV9DT05ESVRJT05fSU5GTxAxKlYKDUNyZWF0dXJlU3RhdGUSCAoE",
-            "SURMRRAAEgoKBk1PVklORxABEgkKBVNLSUxMEAISCAoEREVBRBADEgwKCENB",
-            "TExCQUNLEAQSDAoIQ1VUU0NFTkUQBSowCgdNb3ZlRGlyEgYKAlVQEAASCAoE",
-            "RE9XThABEggKBExFRlQQAhIJCgVSSUdIVBADKlYKDkdhbWVPYmplY3RUeXBl",
-            "EggKBE5PTkUQABIKCgZQTEFZRVIQARILCgdNT05TVEVSEAISDgoKUFJPSkVD",
-            "VElMRRADEggKBElURU0QBBIHCgNOUEMQBSpWCglTa2lsbFR5cGUSDgoKU0tJ",
-            "TExfTk9ORRAAEg4KClNLSUxMX0FVVE8QARIUChBTS0lMTF9QUk9KRUNUSUxF",
-            "EAISEwoPU0tJTExfRVhQTE9TSU9OEAMqWgoRUGxheWVyU2VydmVyU3RhdGUS",
-            "FgoSU0VSVkVSX1NUQVRFX0xPR0lOEAASFgoSU0VSVkVSX1NUQVRFX0xPQkJZ",
-            "EAESFQoRU0VSVkVSX1NUQVRFX0dBTUUQAip9CghJdGVtVHlwZRISCg5JVEVN",
-            "X1RZUEVfTk9ORRAAEhQKEElURU1fVFlQRV9XRUFQT04QARITCg9JVEVNX1RZ",
-            "UEVfQVJNT1IQAhIYChRJVEVNX1RZUEVfQ09OU1VNQUJMRRADEhgKFElURU1f",
-            "VFlQRV9DT0xMRUNUSU9OEAQqTgoKV2VhcG9uVHlwZRIUChBXRUFQT05fVFlQ",
-            "RV9OT05FEAASFQoRV0VBUE9OX1RZUEVfU1dPUkQQARITCg9XRUFQT05fVFlQ",
-            "RV9CT1cQAipjCglBcm1vclR5cGUSEwoPQVJNT1JfVFlQRV9OT05FEAASFQoR",
-            "QVJNT1JfVFlQRV9IRUxNRVQQARIUChBBUk1PUl9UWVBFX0FSTU9SEAISFAoQ",
-            "QVJNT1JfVFlQRV9CT09UUxADKkYKDkNvbnN1bWFibGVUeXBlEhgKFENPTlNV",
-            "TUFCTEVfVFlQRV9OT05FEAASGgoWQ09OU1VNQUJMRV9UWVBFX1BPVElPThAB",
-            "KkoKClBvc2lvblR5cGUSFAoQUE9TSU9OX1RZUEVfTk9ORRAAEhIKDlBPU0lP",
-            "Tl9UWVBFX0hQEAESEgoOUE9TSU9OX1RZUEVfTVAQAioqCg5Db2xsZWN0aW9u",
-            "VHlwZRIYChRDT0xMRUNUSU9OX1RZUEVfTk9ORRAAKmwKCVF1ZXN0VHlwZRIT",
-            "Cg9RVUVTVF9UWVBFX05PTkUQABIWChJRVUVTVF9UWVBFX0hVTlRJTkcQARIZ",
-            "ChVRVUVTVF9UWVBFX0NPTExFQ1RJT04QAhIXChNRVUVTVF9UWVBFX0NPTVBM",
-            "RVRFEAMqcwoMSm9iQ2xhc3NUeXBlEhYKEkpPQkNMQVNTX1RZUEVfTk9ORRAA",
-            "EhkKFUpPQkNMQVNTX1RZUEVfV0FSUklPUhABEhgKFEpPQkNMQVNTX1RZUEVf",
-            "SFVOVEVSEAISFgoSSk9CQ0xBU1NfVFlQRV9NQUdFEAMqqwEKClF1ZXN0U3Rh",
-            "dGUSFAoQUVVFU1RfU1RBVEVfTk9ORRAAEhwKGFFVRVNUX1NUQVRFX0NBTk5P",
-            "VEFDQ0FQVBABEhkKFVFVRVNUX1NUQVRFX0NBTkFDQ0FQVBACEhcKE1FVRVNU",
-            "X1NUQVRFX1BST0NFRUQQAxIbChdRVUVTVF9TVEFURV9DQU5DT01QTEVURRAE",
-            "EhgKFFFVRVNUX1NUQVRFX0NPTVBMRVRFEAUqZAoNQ29uZGl0aW9uVHlwZRIS",
-            "Cg5DT05ESVRJT05fTk9ORRAAEhUKEUNPTkRJVElPTl9DSElMTEVEEAESFAoQ",
-            "Q09ORElUSU9OX1BPSVNPThACEhIKDkNPTkRJVElPTl9TVFVOEANCG6oCGEdv",
-            "b2dsZS5Qcm90b2J1Zi5Qcm90b2NvbGIGcHJvdG8z"));
+            "c3RzGAIgAygFEhcKD2NvbXBsZXRlZFF1ZXN0cxgDIAMoBSKYAQoNQ29uZGl0",
+            "aW9uSW5mbxIuCg1jb25kaXRpb25UeXBlGAEgASgOMhcudHV0b3JpYWwuQ29u",
+            "ZGl0aW9uVHlwZRIMCgR0aW1lGAIgASgFEhYKDm1vdmVTcGVlZFZhbHVlGAMg",
+            "ASgFEhgKEGF0dGFja1NwZWVkVmFsdWUYBCABKAUSFwoPdGlja0RhbWFnZVZh",
+            "bHVlGAUgASgFKqAHCgVNc2dJZBIQCgxTX0VOVEVSX0dBTUUQABIQCgxTX0xF",
+            "QVZFX0dBTUUQARILCgdTX1NQQVdOEAISDQoJU19ERVNQQVdOEAMSCgoGQ19N",
+            "T1ZFEAQSCgoGU19NT1ZFEAUSCwoHQ19TS0lMTBAGEgsKB1NfU0tJTEwQBxIP",
+            "CgtTX0NIQU5HRV9IUBAIEg8KC1NfQ0hBTkdFX01QEAkSCQoFU19ESUUQChIP",
+            "CgtTX0NPTk5FQ1RFRBALEgsKB0NfTE9HSU4QDBILCgdTX0xPR0lOEA0SEAoM",
+            "Q19FTlRFUl9HQU1FEA4SEwoPQ19DUkVBVEVfUExBWUVSEA8SEwoPU19DUkVB",
+            "VEVfUExBWUVSEBASDwoLU19JVEVNX0xJU1QQERIOCgpTX0FERF9JVEVNEBIS",
+            "EAoMQ19FUVVJUF9JVEVNEBMSEAoMU19FUVVJUF9JVEVNEBQSDwoLU19DSEFO",
+            "R0VfRVgQFRIOCgpTX0xFVkVMX1VQEBYSCgoGU19QSU5HEBcSCgoGQ19QT05H",
+            "EBgSEgoOU19NQU5BR0VfU0tJTEwQGRIaChZTX1NFVF9DT1VOVF9DT05TVU1B",
+            "QkxFEBoSGgoWQ19TRVRfQ09VTlRfQ09OU1VNQUJMRRAbEhMKD0NfR0VUX0RS",
+            "T1BfSVRFTRAcEhEKDUNfUkVNT1ZFX0lURU0QHRIRCg1TX1JFTU9WRV9JVEVN",
+            "EB4SDwoLU19TUEFXTl9OUEMQHxIPCgtDX0FERF9RVUVTVBAgEg8KC1NfQURE",
+            "X1FVRVNUECESGwoXU19SRUZSRVNIX0hVTlRJTkdfUVVFU1QQIhIYChRTX0NB",
+            "Tl9DT01QTEVURV9RVUVTVBAjEhgKFENfVFJZX0NPTVBMRVRFX1FVRVNUECQS",
+            "FAoQU19DT01QTEVURV9RVUVTVBAlEg0KCVNfUkVTUEFXThAmEg0KCUNfUkVT",
+            "UEFXThAnEhQKEFNfU1BBV05fT0JTVEFDTEUQKBIWChJTX0RFU1BBV05fT0JT",
+            "VEFDTEUQKRIRCg1DX0NIQU5HRV9TTE9UECoSEQoNU19TS0lMTF9QT0lOVBAr",
+            "EhgKFENfQ0hBTkdFX1NLSUxMX1BPSU5UECwSEAoMU19TVEFUX1BPSU5UEC0S",
+            "FwoTQ19DSEFOR0VfU1RBVF9QT0lOVBAuEg4KClNfQ0xBU1NfVVAQLxIOCgpD",
+            "X0NMQVNTX1VQEDASGwoXU19DSEFOR0VfQ09ORElUSU9OX0lORk8QMSpWCg1D",
+            "cmVhdHVyZVN0YXRlEggKBElETEUQABIKCgZNT1ZJTkcQARIJCgVTS0lMTBAC",
+            "EggKBERFQUQQAxIMCghDQUxMQkFDSxAEEgwKCENVVFNDRU5FEAUqMAoHTW92",
+            "ZURpchIGCgJVUBAAEggKBERPV04QARIICgRMRUZUEAISCQoFUklHSFQQAypl",
+            "Cg5HYW1lT2JqZWN0VHlwZRIICgROT05FEAASCgoGUExBWUVSEAESCwoHTU9O",
+            "U1RFUhACEg4KClBST0pFQ1RJTEUQAxINCglTVU1NT05JTkcQBBIICgRJVEVN",
+            "EAUSBwoDTlBDEAYqawoJU2tpbGxUeXBlEg4KClNLSUxMX05PTkUQABIOCgpT",
+            "S0lMTF9BVVRPEAESFAoQU0tJTExfUFJPSkVDVElMRRACEhMKD1NLSUxMX0VY",
+            "UExPU0lPThADEhMKD1NLSUxMX1NVTU1PTklORxAEKloKEVBsYXllclNlcnZl",
+            "clN0YXRlEhYKElNFUlZFUl9TVEFURV9MT0dJThAAEhYKElNFUlZFUl9TVEFU",
+            "RV9MT0JCWRABEhUKEVNFUlZFUl9TVEFURV9HQU1FEAIqfQoISXRlbVR5cGUS",
+            "EgoOSVRFTV9UWVBFX05PTkUQABIUChBJVEVNX1RZUEVfV0VBUE9OEAESEwoP",
+            "SVRFTV9UWVBFX0FSTU9SEAISGAoUSVRFTV9UWVBFX0NPTlNVTUFCTEUQAxIY",
+            "ChRJVEVNX1RZUEVfQ09MTEVDVElPThAEKk4KCldlYXBvblR5cGUSFAoQV0VB",
+            "UE9OX1RZUEVfTk9ORRAAEhUKEVdFQVBPTl9UWVBFX1NXT1JEEAESEwoPV0VB",
+            "UE9OX1RZUEVfQk9XEAIqYwoJQXJtb3JUeXBlEhMKD0FSTU9SX1RZUEVfTk9O",
+            "RRAAEhUKEUFSTU9SX1RZUEVfSEVMTUVUEAESFAoQQVJNT1JfVFlQRV9BUk1P",
+            "UhACEhQKEEFSTU9SX1RZUEVfQk9PVFMQAypGCg5Db25zdW1hYmxlVHlwZRIY",
+            "ChRDT05TVU1BQkxFX1RZUEVfTk9ORRAAEhoKFkNPTlNVTUFCTEVfVFlQRV9Q",
+            "T1RJT04QASpKCgpQb3Npb25UeXBlEhQKEFBPU0lPTl9UWVBFX05PTkUQABIS",
+            "Cg5QT1NJT05fVFlQRV9IUBABEhIKDlBPU0lPTl9UWVBFX01QEAIqKgoOQ29s",
+            "bGVjdGlvblR5cGUSGAoUQ09MTEVDVElPTl9UWVBFX05PTkUQACpsCglRdWVz",
+            "dFR5cGUSEwoPUVVFU1RfVFlQRV9OT05FEAASFgoSUVVFU1RfVFlQRV9IVU5U",
+            "SU5HEAESGQoVUVVFU1RfVFlQRV9DT0xMRUNUSU9OEAISFwoTUVVFU1RfVFlQ",
+            "RV9DT01QTEVURRADKnMKDEpvYkNsYXNzVHlwZRIWChJKT0JDTEFTU19UWVBF",
+            "X05PTkUQABIZChVKT0JDTEFTU19UWVBFX1dBUlJJT1IQARIYChRKT0JDTEFT",
+            "U19UWVBFX0hVTlRFUhACEhYKEkpPQkNMQVNTX1RZUEVfTUFHRRADKqsBCgpR",
+            "dWVzdFN0YXRlEhQKEFFVRVNUX1NUQVRFX05PTkUQABIcChhRVUVTVF9TVEFU",
+            "RV9DQU5OT1RBQ0NBUFQQARIZChVRVUVTVF9TVEFURV9DQU5BQ0NBUFQQAhIX",
+            "ChNRVUVTVF9TVEFURV9QUk9DRUVEEAMSGwoXUVVFU1RfU1RBVEVfQ0FOQ09N",
+            "UExFVEUQBBIYChRRVUVTVF9TVEFURV9DT01QTEVURRAFKmQKDUNvbmRpdGlv",
+            "blR5cGUSEgoOQ09ORElUSU9OX05PTkUQABIVChFDT05ESVRJT05fQ0hJTExF",
+            "RBABEhQKEENPTkRJVElPTl9QT0lTT04QAhISCg5DT05ESVRJT05fU1RVThAD",
+            "QhuqAhhHb29nbGUuUHJvdG9idWYuUHJvdG9jb2xiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Google.Protobuf.Protocol.MsgId), typeof(global::Google.Protobuf.Protocol.CreatureState), typeof(global::Google.Protobuf.Protocol.MoveDir), typeof(global::Google.Protobuf.Protocol.GameObjectType), typeof(global::Google.Protobuf.Protocol.SkillType), typeof(global::Google.Protobuf.Protocol.PlayerServerState), typeof(global::Google.Protobuf.Protocol.ItemType), typeof(global::Google.Protobuf.Protocol.WeaponType), typeof(global::Google.Protobuf.Protocol.ArmorType), typeof(global::Google.Protobuf.Protocol.ConsumableType), typeof(global::Google.Protobuf.Protocol.PosionType), typeof(global::Google.Protobuf.Protocol.CollectionType), typeof(global::Google.Protobuf.Protocol.QuestType), typeof(global::Google.Protobuf.Protocol.JobClassType), typeof(global::Google.Protobuf.Protocol.QuestState), typeof(global::Google.Protobuf.Protocol.ConditionType), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -214,7 +216,7 @@ namespace Google.Protobuf.Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.SkillInfo), global::Google.Protobuf.Protocol.SkillInfo.Parser, new[]{ "SkillId", "Point" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.StatInfo), global::Google.Protobuf.Protocol.StatInfo.Parser, new[]{ "Level", "Hp", "Mp", "Str", "Int", "Attack", "Defence", "MaxHp", "MaxMp", "Speed", "AttackSpeed", "TotalExp", "JobClassType", "StatPoints", "CanUpClass" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.QuestInfo), global::Google.Protobuf.Protocol.QuestInfo.Parser, new[]{ "Quests", "CanCompleteQuests", "CompletedQuests" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.ConditionInfo), global::Google.Protobuf.Protocol.ConditionInfo.Parser, new[]{ "ConditionType", "Time", "Value" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Google.Protobuf.Protocol.ConditionInfo), global::Google.Protobuf.Protocol.ConditionInfo.Parser, new[]{ "ConditionType", "Time", "MoveSpeedValue", "AttackSpeedValue", "TickDamageValue" }, null, null, null, null)
           }));
     }
     #endregion
@@ -295,8 +297,9 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("PLAYER")] Player = 1,
     [pbr::OriginalName("MONSTER")] Monster = 2,
     [pbr::OriginalName("PROJECTILE")] Projectile = 3,
-    [pbr::OriginalName("ITEM")] Item = 4,
-    [pbr::OriginalName("NPC")] Npc = 5,
+    [pbr::OriginalName("SUMMONING")] Summoning = 4,
+    [pbr::OriginalName("ITEM")] Item = 5,
+    [pbr::OriginalName("NPC")] Npc = 6,
   }
 
   public enum SkillType {
@@ -304,6 +307,7 @@ namespace Google.Protobuf.Protocol {
     [pbr::OriginalName("SKILL_AUTO")] SkillAuto = 1,
     [pbr::OriginalName("SKILL_PROJECTILE")] SkillProjectile = 2,
     [pbr::OriginalName("SKILL_EXPLOSION")] SkillExplosion = 3,
+    [pbr::OriginalName("SKILL_SUMMONING")] SkillSummoning = 4,
   }
 
   public enum PlayerServerState {
@@ -13175,7 +13179,9 @@ namespace Google.Protobuf.Protocol {
     public ConditionInfo(ConditionInfo other) : this() {
       conditionType_ = other.conditionType_;
       time_ = other.time_;
-      value_ = other.value_;
+      moveSpeedValue_ = other.moveSpeedValue_;
+      attackSpeedValue_ = other.attackSpeedValue_;
+      tickDamageValue_ = other.tickDamageValue_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -13209,15 +13215,39 @@ namespace Google.Protobuf.Protocol {
       }
     }
 
-    /// <summary>Field number for the "value" field.</summary>
-    public const int ValueFieldNumber = 3;
-    private int value_;
+    /// <summary>Field number for the "moveSpeedValue" field.</summary>
+    public const int MoveSpeedValueFieldNumber = 3;
+    private int moveSpeedValue_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public int Value {
-      get { return value_; }
+    public int MoveSpeedValue {
+      get { return moveSpeedValue_; }
       set {
-        value_ = value;
+        moveSpeedValue_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "attackSpeedValue" field.</summary>
+    public const int AttackSpeedValueFieldNumber = 4;
+    private int attackSpeedValue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int AttackSpeedValue {
+      get { return attackSpeedValue_; }
+      set {
+        attackSpeedValue_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "tickDamageValue" field.</summary>
+    public const int TickDamageValueFieldNumber = 5;
+    private int tickDamageValue_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int TickDamageValue {
+      get { return tickDamageValue_; }
+      set {
+        tickDamageValue_ = value;
       }
     }
 
@@ -13238,7 +13268,9 @@ namespace Google.Protobuf.Protocol {
       }
       if (ConditionType != other.ConditionType) return false;
       if (Time != other.Time) return false;
-      if (Value != other.Value) return false;
+      if (MoveSpeedValue != other.MoveSpeedValue) return false;
+      if (AttackSpeedValue != other.AttackSpeedValue) return false;
+      if (TickDamageValue != other.TickDamageValue) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -13248,7 +13280,9 @@ namespace Google.Protobuf.Protocol {
       int hash = 1;
       if (ConditionType != global::Google.Protobuf.Protocol.ConditionType.ConditionNone) hash ^= ConditionType.GetHashCode();
       if (Time != 0) hash ^= Time.GetHashCode();
-      if (Value != 0) hash ^= Value.GetHashCode();
+      if (MoveSpeedValue != 0) hash ^= MoveSpeedValue.GetHashCode();
+      if (AttackSpeedValue != 0) hash ^= AttackSpeedValue.GetHashCode();
+      if (TickDamageValue != 0) hash ^= TickDamageValue.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -13275,9 +13309,17 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(16);
         output.WriteInt32(Time);
       }
-      if (Value != 0) {
+      if (MoveSpeedValue != 0) {
         output.WriteRawTag(24);
-        output.WriteInt32(Value);
+        output.WriteInt32(MoveSpeedValue);
+      }
+      if (AttackSpeedValue != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(AttackSpeedValue);
+      }
+      if (TickDamageValue != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(TickDamageValue);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -13297,9 +13339,17 @@ namespace Google.Protobuf.Protocol {
         output.WriteRawTag(16);
         output.WriteInt32(Time);
       }
-      if (Value != 0) {
+      if (MoveSpeedValue != 0) {
         output.WriteRawTag(24);
-        output.WriteInt32(Value);
+        output.WriteInt32(MoveSpeedValue);
+      }
+      if (AttackSpeedValue != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(AttackSpeedValue);
+      }
+      if (TickDamageValue != 0) {
+        output.WriteRawTag(40);
+        output.WriteInt32(TickDamageValue);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -13317,8 +13367,14 @@ namespace Google.Protobuf.Protocol {
       if (Time != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Time);
       }
-      if (Value != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Value);
+      if (MoveSpeedValue != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(MoveSpeedValue);
+      }
+      if (AttackSpeedValue != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(AttackSpeedValue);
+      }
+      if (TickDamageValue != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TickDamageValue);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -13338,8 +13394,14 @@ namespace Google.Protobuf.Protocol {
       if (other.Time != 0) {
         Time = other.Time;
       }
-      if (other.Value != 0) {
-        Value = other.Value;
+      if (other.MoveSpeedValue != 0) {
+        MoveSpeedValue = other.MoveSpeedValue;
+      }
+      if (other.AttackSpeedValue != 0) {
+        AttackSpeedValue = other.AttackSpeedValue;
+      }
+      if (other.TickDamageValue != 0) {
+        TickDamageValue = other.TickDamageValue;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -13365,7 +13427,15 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 24: {
-            Value = input.ReadInt32();
+            MoveSpeedValue = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            AttackSpeedValue = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            TickDamageValue = input.ReadInt32();
             break;
           }
         }
@@ -13392,7 +13462,15 @@ namespace Google.Protobuf.Protocol {
             break;
           }
           case 24: {
-            Value = input.ReadInt32();
+            MoveSpeedValue = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            AttackSpeedValue = input.ReadInt32();
+            break;
+          }
+          case 40: {
+            TickDamageValue = input.ReadInt32();
             break;
           }
         }

@@ -114,27 +114,37 @@
         {
           "conditionType": "ConditionChilled",
           "time": "5",
-          "value": "3"
+          "moveSpeedValue": "3",
+          "attackSpeedValue": "1",
+          "tickDamageValue": "0"
         },
         {
           "conditionType": "ConditionChilled",
           "time": "3",
-          "value": "1"
+          "moveSpeedValue": "3",
+          "attackSpeedValue": "1",
+          "tickDamageValue": "0"
         },
         {
           "conditionType": "ConditionChilled",
           "time": "3",
-          "value": "2"
+          "moveSpeedValue": "3",
+          "attackSpeedValue": "1",
+          "tickDamageValue": "0"
         },
         {
           "conditionType": "ConditionChilled",
           "time": "4",
-          "value": "2"
+          "moveSpeedValue": "3",
+          "attackSpeedValue": "1",
+          "tickDamageValue": "0"
         },
         {
           "conditionType": "ConditionChilled",
           "time": "5",
-          "value": "3"
+          "moveSpeedValue": "3",
+          "attackSpeedValue": "1",
+          "tickDamageValue": "0"
         }
       ],
       "projectile": {
@@ -167,7 +177,7 @@
 
     {
       "id": "2002",
-      "name": "범위 공격",
+      "name": "폭팔",
       "skillPointInfos": [
         {
           "cooldown": "4",
@@ -198,6 +208,62 @@
       "skillType": "SkillExplosion",
       "iconPath": "Textures/Skill/Explosion",
       "description": "마나를 응축해서 터트린다.",
+      "explosion": {
+        "name": "폭팔",
+        "explosionPointInfos": [
+          {
+            "radian": "2"
+          },
+          {
+            "radian": "3"
+          },
+          {
+            "radian": "3"
+          },
+          {
+            "radian": "4"
+          },
+          {
+            "radian": "5"
+          }
+        ]
+
+      }
+    },
+
+    {
+      "id": "2003",
+      "name": "독 구름",
+      "skillPointInfos": [
+        {
+          "cooldown": "4",
+          "damage": "5",
+          "mp": "10"
+        },
+        {
+          "cooldown": "3.5",
+          "damage": "6",
+          "mp": "10"
+        },
+        {
+          "cooldown": "3.5",
+          "damage": "7",
+          "mp": "10"
+        },
+        {
+          "cooldown": "3",
+          "damage": "8",
+          "mp": "10"
+        },
+        {
+          "cooldown": "2",
+          "damage": "10",
+          "mp": "10"
+        }
+      ],
+      "skillType": "SkillExplosion",
+      "iconPath": "Textures/Skill/Poison",
+      "description": "독가스를 살포한다.",
       "explosion": {
         "name": "폭팔",
         "explosionPointInfos": [

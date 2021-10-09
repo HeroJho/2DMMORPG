@@ -78,6 +78,27 @@ namespace Server
                         }
                     }
                     break;
+                case SkillType.SkillSummoning:
+                    {
+                        if (skillData.id != 2003)
+                            break;
+
+                        IceBall iceBall = ObjectManager.Instance.Add<IceBall>();
+                        if (iceBall == null)
+                            return;
+
+                        iceBall.Owner = _player;
+                        iceBall.Info.TemplateId = skillData.id;
+
+                        iceBall.PosInfo.State = CreatureState.Moving;
+                        iceBall.PosInfo.MoveDir = _player.PosInfo.MoveDir;
+                        iceBall.PosInfo.PosX = _player.PosInfo.PosX;
+                        iceBall.PosInfo.PosY = _player.PosInfo.PosY;
+                        iceBall.Init(skillData, point);
+
+                        _player.Room.EnterGame(iceBall);
+                    }
+                    break;
 
             }
         }

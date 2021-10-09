@@ -164,6 +164,10 @@ public class PlayerController : CreatureController
         {
 			_coSkill = StartCoroutine("CoStartExplosion");
         }
+		else if(skillId == 2003)
+        {
+			_coSkill = StartCoroutine("CoStartPoisonSmokeReady");
+        }
     }
 
 	public virtual void LevelUp(int level)
@@ -228,7 +232,32 @@ public class PlayerController : CreatureController
 		CheckUpdatedFlag();
 	}
 
-    public override void OnDamaged()
+	IEnumerator CoStartPoisonSmokeReady()
+	{
+		_rangedSkill = false;
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		GameObject go = Managers.Resource.Instantiate("Effect/PoisonSmokeReadyEffect");
+		go.transform.position = transform.position;
+		// 이펙트 크기 조정
+		go.transform.localScale = new Vector3(
+			Managers.Skill.GetSkillPoint(2003) + 2,
+			Managers.Skill.GetSkillPoint(2003) + 2,
+			1);
+
+		go.GetComponent<Animator>().Play("POISON_SMOKE_READY_EFFECT_START");
+		//go.GetComponent<Animator>().Get
+		Destroy(go, 1);
+
+		yield return new WaitForSeconds(0.5f);
+
+		State = CreatureState.Idle;
+		_coSkill = null;
+
+		CheckUpdatedFlag();
+	}
+
+	public override void OnDamaged()
 	{
 		Debug.Log("Player HIT !");
 	}
