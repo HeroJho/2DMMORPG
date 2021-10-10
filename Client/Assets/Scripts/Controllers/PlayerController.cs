@@ -169,7 +169,11 @@ public class PlayerController : CreatureController
         {
 			_coSkill = StartCoroutine("CoStartPoisonSmokeReady");
         }
-    }
+		else if (skillId == 2004)
+		{
+			_coSkill = StartCoroutine("CoStartSmash");
+		}
+	}
 
 	public virtual void LevelUp(int level)
     {
@@ -250,6 +254,51 @@ public class PlayerController : CreatureController
 		Destroy(go, 2);
 
 		yield return new WaitForSeconds(2f);
+
+		State = CreatureState.Idle;
+		_coSkill = null;
+
+		CheckUpdatedFlag();
+	}
+
+	IEnumerator CoStartSmash()
+	{
+		_rangedSkill = false;
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/SmashEffect");
+		go.transform.position = transform.position;
+
+		// 이펙트 크기 방향 조정
+		int skillLevel = Managers.Skill.GetSkillPoint(2004);
+		Skill skillData = null;
+		Managers.Data.SkillDict.TryGetValue(2004, out skillData);
+		int radian = skillData.explosion.explosionPointInfos[skillLevel].radian;
+		go.transform.localScale = new Vector3(
+			radian,
+			radian,
+			1);
+		switch (Dir)
+		{
+			case MoveDir.Up:
+				go.transform.rotation = Quaternion.Euler(0, 0, -90);
+				break;
+			case MoveDir.Down:
+				go.transform.rotation = Quaternion.Euler(0, 0, 90);
+				break;
+			case MoveDir.Left:
+				go.transform.rotation = Quaternion.Euler(0, 0, 0);
+				break;
+			case MoveDir.Right:
+				go.transform.rotation = Quaternion.Euler(0, 0, -180);
+				break;
+		}
+
+
+		go.GetComponent<Animator>().Play("SMASH_START");
+		Destroy(go, 1);
+
+		yield return new WaitForSeconds(1f);
 
 		State = CreatureState.Idle;
 		_coSkill = null;

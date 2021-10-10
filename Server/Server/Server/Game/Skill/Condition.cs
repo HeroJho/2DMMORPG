@@ -158,13 +158,37 @@ namespace Server
             _creatureObj.OnDamaged(speller, damageValue);
         }
 
-        public void Stun(int timeValue)
+        IJob _stunJob;
+        CreatureState _previousState;
+        public void Stun(int timeValue, int stunChanceValue)
         {
             GameRoom room = _creatureObj.Room;
             if (_creatureObj == null || room == null)
                 return;
 
+            // 확률
+            int rand = new Random().Next(0, 101);
+            if (rand >= stunChanceValue)
+                return;
 
+            if (_stunJob != null)
+            {
+                _creatureObj.State = _previousState;
+                _stunJob.Cancel = true;
+                _stunJob = null;
+            }
+
+            _previousState = _creatureObj.State;
+            _creatureObj.State = CreatureState.Stun;
+
+            // 지속시간이 끝나면 종료
+            _stunJob = room.PushAfter(timeValue * 1000, () =>
+            {
+                _stunJob = null;
+                _creatureObj.State = _previousState;
+            });
+
+            SendConditionPacket(ConditionType.ConditionStun, timeValue);
         }
 
         public void BackCondition()
@@ -188,6 +212,12 @@ namespace Server
                 _tickJob.Cancel = true;
                 _tickDamageJob = null;
                 _tickJob = null;
+            }
+            if (_stunJob != null)
+            {
+                _creatureObj.State = _previousState;
+                _stunJob.Cancel = true;
+                _stunJob = null;
             }
 
 

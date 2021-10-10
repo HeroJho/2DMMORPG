@@ -327,6 +327,104 @@
         ]
 
       }
+    },
+
+    {
+      "id": "2004",
+      "name": "쓰메쉬!",
+      "skillPointInfos": [
+        {
+          "cooldown": "1",
+          "damage": "10",
+          "mp": "10"
+        },
+        {
+          "cooldown": "1",
+          "damage": "15",
+          "mp": "10"
+        },
+        {
+          "cooldown": "1",
+          "damage": "20",
+          "mp": "15"
+        },
+        {
+          "cooldown": "1",
+          "damage": "25",
+          "mp": "20"
+        },
+        {
+          "cooldown": "1",
+          "damage": "30",
+          "mp": "20"
+        }
+      ],
+      "skillType": "SkillExplosion",
+      "iconPath": "Textures/Skill/Smash",
+      "description": "검을 통해 열기를 방풀한다.",
+      "conditions": [
+        {
+          "conditionType": "ConditionStun",
+          "time": "2",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickDamageValue": "0",
+          "stunChanceValue": "10"
+        },
+        {
+          "conditionType": "ConditionStun",
+          "time": "2",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickDamageValue": "0",
+          "stunChanceValue": "15"
+        },
+        {
+          "conditionType": "ConditionStun",
+          "time": "2",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickDamageValue": "0",
+          "stunChanceValue": "20"
+        },
+        {
+          "conditionType": "ConditionStun",
+          "time": "3",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickDamageValue": "0",
+          "stunChanceValue": "20"
+        },
+        {
+          "conditionType": "ConditionStun",
+          "time": "3",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickDamageValue": "0",
+          "stunChanceValue": "30"
+        }
+      ],
+      "explosion": {
+        "name": "폭팔",
+        "explosionPointInfos": [
+          {
+            "radian": "2"
+          },
+          {
+            "radian": "3"
+          },
+          {
+            "radian": "3"
+          },
+          {
+            "radian": "4"
+          },
+          {
+            "radian": "5"
+          }
+        ]
+
+      }
     }
 
 

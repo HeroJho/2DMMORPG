@@ -12,6 +12,7 @@ public class Condition : MonoBehaviour
     private Animator _animator;
 
     private Animator _posionEffect;
+    private Animator _stunEffect;
 
     private float _attackSpeed = 0;
 
@@ -23,8 +24,10 @@ public class Condition : MonoBehaviour
 
         // 일일히 크리쳐한테 파싱 ㄴㄴ
         _posionEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Poision", gameObject.transform).GetComponent<Animator>();
+        _stunEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Stun", gameObject.transform).GetComponent<Animator>();
 
         _posionEffect.gameObject.SetActive(false);
+        _stunEffect.gameObject.SetActive(false);
     }
 
     public void UpdateCondition(S_ChangeConditionInfo changeConditionPacket)
@@ -41,6 +44,7 @@ public class Condition : MonoBehaviour
                 Poison(changeConditionPacket.Time);
                 break;
             case ConditionType.ConditionStun:
+                Stun(changeConditionPacket.Time);
                 break;
             default:
                 break;
@@ -153,9 +157,28 @@ public class Condition : MonoBehaviour
 
     }
 
+    Coroutine _stunAnim = null;
+    CreatureState _previousState;
     public void Stun(int timeValue)
     {
+        if (_stunAnim != null)
+        {
+            StopCoroutine(_stunAnim);
+            _stunAnim = null;
+        }
 
+        _previousState = _creatureController.State;
+        _creatureController.State = CreatureState.Stun;
+
+        // 이펙트
+        _stunEffect.gameObject.SetActive(true);
+
+        // 시간후에 원래속도 되돌림
+        _stunAnim = StartCoroutine(CoolTime(timeValue, () =>
+        {
+            _stunEffect.gameObject.SetActive(false);
+            _creatureController.State = _previousState;
+        }));
     }
 
     public void BackCondition()

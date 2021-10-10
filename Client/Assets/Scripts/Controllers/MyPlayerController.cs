@@ -154,7 +154,10 @@ public class MyPlayerController : PlayerController
 			CellPos = TestPos;
         }
 
-		if (State == CreatureState.Dead)
+		if (State == CreatureState.Dead &&
+			State == CreatureState.Skill &&
+			State == CreatureState.Stun &&
+			State == CreatureState.Cutscene)
 			return;
 
 		GetUIKeyInput();

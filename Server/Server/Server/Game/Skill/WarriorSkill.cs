@@ -17,7 +17,7 @@ namespace Server
         public override void FirstAddSkill()
         {
             // 전직할 시 추가되는 스킬 정보
-            //SkillPoints.Add(2001, 1);
+            SkillPoints.Add(2004, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
 
@@ -39,9 +39,21 @@ namespace Server
 
             switch (skillData.skillType)
             {
-                
+                case SkillType.SkillExplosion:
+                    {
+                        if (skillData.id != 2004)
+                            break;
 
+                        HashSet<CreatureObject> objects = _player.Room.Map.LoopByOval<CreatureObject>(_player.CellPos, _player.Dir, skillData.explosion.explosionPointInfos[point].radian);
 
+                        foreach (CreatureObject co in objects)
+                        {
+                            co.OnDamaged(_player, skillData.skillPointInfos[point].damage);
+                            co.Condition.Stun(skillData.conditions[point].Time, skillData.conditions[point].StunChanceValue);
+                        }
+
+                    }
+                    break;
             }
         }
 

@@ -39,10 +39,6 @@ namespace Server
                 return;
             point -= 1;
 
-            // 스킬 사용 가능 여부 체크
-            ObjectInfo info = _player.Info;
-            if (info.PosInfo.State != CreatureState.Idle) // 멈춘 상태에서
-                return;
             // 마나 여부 확인
             if (_player.Mp < skillData.skillPointInfos[point].mp)
             {// 부족하다면 클라쪽 쿨타임에서 빼줌
@@ -59,9 +55,9 @@ namespace Server
             }
 
             // 클라 애니메이션 실행
-            info.PosInfo.State = CreatureState.Skill;
+            _player.Info.PosInfo.State = CreatureState.Skill;
             S_Skill skill = new S_Skill() { Info = new SkillInfo() };
-            skill.ObjectId = info.ObjectId;
+            skill.ObjectId = _player.Info.ObjectId;
             skill.Info.SkillId = skillData.id;
             room.Broadcast(_player.CellPos, skill);
 

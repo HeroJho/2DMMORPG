@@ -87,7 +87,6 @@ namespace Server
             switch (classType)
             {
                 case JobClassType.Warrior:
-                    
                     SkillTree = new WarriorSkill(_player);
                     SkillTree.SkillPoints = tempSkillPoints;
                     SkillTree.FirstAddSkill();

@@ -19,6 +19,16 @@ namespace Server
             PositionInfo movePosInfo = movePacket.PosInfo;
             ObjectInfo info = player.Info;
 
+            // 상태확인
+            if (player.State == CreatureState.Dead &&
+                player.State == CreatureState.Skill &&
+                player.State == CreatureState.Stun &&
+                player.State == CreatureState.Cutscene)
+                return;
+
+            // 스킬 방향전환을 위해 방향은 바뀌면 항상 변경
+            if (info.PosInfo.MoveDir != movePosInfo.MoveDir)
+                info.PosInfo.MoveDir = movePosInfo.MoveDir;
 
             // 상태만 바껴도 패킷을 보내기 때문에 한번 체크
             if (movePosInfo.PosX != info.PosInfo.PosX || movePosInfo.PosY != info.PosInfo.PosY)
@@ -62,6 +72,10 @@ namespace Server
         public void HandleSkill(Player player, C_Skill skillPacket)
         {
             if (player == null || player.Room == null)
+                return;
+
+            // 스킬 사용 가능 여부 체크
+            if (player.State != CreatureState.Idle) // 멈춘 상태에서
                 return;
 
             player.Skill.UseSkill(skillPacket.Info.SkillId);

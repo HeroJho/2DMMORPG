@@ -245,6 +245,97 @@ namespace Server
 
         }
 
+        public HashSet<T> LoopByOval<T>(Vector2Int cellPos, MoveDir dir, int rad) where T : GameObject
+        {
+            HashSet<T> objects = new HashSet<T>();
+
+            int arrayX = cellPos.x - MinX;
+            int arrayY = MaxY - cellPos.y;
+
+            switch (dir)
+            {
+                case MoveDir.Up:
+                    {
+                        for (int x = -rad; x < rad; x++)
+                        {
+                            for (int y = 0; y < rad; y++)
+                            {
+                                if (x == 0 && y == 0)
+                                    continue;
+
+                                GameObject obj = Find(arrayY - y, arrayX + x);
+                                if (obj != null && obj is T)
+                                {
+                                    T objT = obj as T;
+                                    objects.Add(objT);
+                                }
+                            }
+                        }
+
+                    }
+                    break;
+                case MoveDir.Down:
+                    {
+                        for (int x = -rad; x < rad; x++)
+                        {
+                            for (int y = 0; y < rad; y++)
+                            {
+                                if (x == 0 && y == 0)
+                                    continue;
+
+                                GameObject obj = Find(arrayY + y, arrayX + x);
+                                if (obj != null && obj is T)
+                                {
+                                    T objT = obj as T;
+                                    objects.Add(objT);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case MoveDir.Left:
+                    {
+                        for (int y = -rad; y < rad; y++)
+                        {
+                            for (int x = 0; x < rad; x++)
+                            {
+                                if (x == 0 && y == 0)
+                                    continue;
+
+                                GameObject obj = Find(arrayY + y, arrayX - x);
+                                if (obj != null && obj is T)
+                                {
+                                    T objT = obj as T;
+                                    objects.Add(objT);
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case MoveDir.Right:
+                    {
+                        for (int y = -rad; y < rad; y++)
+                        {
+                            for (int x = 0; x < rad; x++)
+                            {
+                                if (x == 0 && y == 0)
+                                    continue;
+
+                                GameObject obj = Find(arrayY + y, arrayX + x);
+                                if (obj != null && obj is T)
+                                {
+                                    T objT = obj as T;
+                                    objects.Add(objT);
+                                }
+                            }
+                        }
+                    }
+                    break;
+            }
+
+            return objects;
+        }
+
         public bool CanGo(Vector2Int cellPos, bool checkObject = true)
         {
             if (cellPos.x < MinX || cellPos.x > MaxX)

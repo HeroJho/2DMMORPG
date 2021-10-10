@@ -63,6 +63,7 @@ enum CreatureState{
     DEAD = 3;
     CALLBACK = 4;
     CUTSCENE = 5;
+    STUN = 6;
 }
 
 enum MoveDir{
@@ -455,4 +456,5 @@ message ConditionInfo{
     int32 moveSpeedValue = 3;
     int32 attackSpeedValue = 4;
     int32 tickDamageValue = 5;
+    int32 stunChanceValue = 6;
 }
