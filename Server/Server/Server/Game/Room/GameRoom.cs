@@ -18,6 +18,7 @@ namespace Server
         Dictionary<int, Player> _players = new Dictionary<int, Player>();
         Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
         Dictionary<int, Projectile> _projectiles = new Dictionary<int, Projectile>();
+        Dictionary<int, Summoning> _summonings = new Dictionary<int, Summoning>();
         Dictionary<int, Item> _Items = new Dictionary<int, Item>();
 
         Dictionary<int, Npc> _npc = new Dictionary<int, Npc>();
@@ -123,6 +124,16 @@ namespace Server
                         projectile.Update();
                     }
                     break;
+                case GameObjectType.Summoning:
+                    {
+                        Summoning summoning = (Summoning)gameObject;
+                        _summonings.Add(summoning.Id, summoning);
+                        summoning.Room = this;
+
+                        GetZone(summoning.CellPos).Summonings.Add(summoning);
+                        summoning.Update();
+                    }
+                    break;
                 case GameObjectType.Item:
                     {
                         Item item = (Item)gameObject;
@@ -190,6 +201,17 @@ namespace Server
                         cellPos = projectile.CellPos;
                         Map.ApplyLeave(projectile);
                         projectile.Room = null;
+                    }
+                    break;
+                case GameObjectType.Summoning:
+                    {
+                        Summoning summoning = null;
+                        if (_summonings.Remove(objectId, out summoning) == false)
+                            return;
+
+                        cellPos = summoning.CellPos;
+                        Map.ApplyLeave(summoning);
+                        summoning.Room = null;
                     }
                     break;
                 case GameObjectType.Item:

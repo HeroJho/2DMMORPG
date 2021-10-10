@@ -8,7 +8,6 @@ namespace Server
 {
     public class Projectile : CreatureObject
     {
-        //public ConditionInfo ConditionInfo { get; set; } = new ConditionInfo();
         public int Damage { get; set; }
         public int Range { get; set; }
         protected Skill _skillData = null;

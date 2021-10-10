@@ -65,6 +65,17 @@ namespace Server
 
                     objects.Add(projectile);
                 }
+                foreach (Summoning summoning in zone.Summonings)
+                {
+                    int dx = summoning.CellPos.x - cellPos.x;
+                    int dy = summoning.CellPos.y - cellPos.y;
+                    if (Math.Abs(dx) > GameRoom.VisionCells)
+                        continue;
+                    if (Math.Abs(dy) > GameRoom.VisionCells)
+                        continue;
+
+                    objects.Add(summoning);
+                }
                 foreach (Item item in zone.Items)
                 {
                     int dx = item.CellPos.x - cellPos.x;

@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 5651588411077580221}
   - component: {fileID: 8034313801638782937}
   - component: {fileID: 9019827942064598044}
+  - component: {fileID: 1505816116551853537}
   m_Layer: 0
-  m_Name: PoisonSmokeEffect
+  m_Name: PoisonSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,3 +102,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1505816116551853537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8795514089881200054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b98f1a7c985d2b459ef115a68045ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -20,6 +20,7 @@ namespace Data
         public List<ConditionInfo> conditions;
         public projectileInfo projectile;
         public explosionInfo explosion;
+        public summoningInfo summoning;
 
     }
     [Serializable]
@@ -55,6 +56,20 @@ namespace Data
     {
         public int radian;
     }
+
+    [Serializable]
+    public class summoningInfo
+    {
+        public string name;
+        public List<summoningPointInfo> summoningPointInfos;
+    }
+    [Serializable]
+    public class summoningPointInfo
+    {
+        public int radian;
+        public int duration;
+    }
+
 
     [Serializable]
     public class SkillData : ILoader<int, Skill>

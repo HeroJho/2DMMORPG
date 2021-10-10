@@ -13,6 +13,7 @@ namespace Server
         public HashSet<Player> Players { get; set; } = new HashSet<Player>();
         public HashSet<Monster> Monsters { get; set; } = new HashSet<Monster>();
         public HashSet<Projectile> Projectiles { get; set; } = new HashSet<Projectile>();
+        public HashSet<Summoning> Summonings { get; set; } = new HashSet<Summoning>();
         public HashSet<Item> Items { get; set; } = new HashSet<Item>();
 
         public Zone(int y ,int x)
@@ -35,6 +36,9 @@ namespace Server
                     break;
                 case GameObjectType.Projectile:
                     Projectiles.Remove((Projectile)gameObject);
+                    break;
+                case GameObjectType.Summoning:
+                    Summonings.Remove((Summoning)gameObject);
                     break;
                 case GameObjectType.Item:
                     Items.Remove((Item)gameObject);

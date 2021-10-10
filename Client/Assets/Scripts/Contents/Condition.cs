@@ -38,6 +38,7 @@ public class Condition : MonoBehaviour
                 Chilled(changeConditionPacket.MoveSpeed, changeConditionPacket.AttackSpeed, timeValue);
                 break;
             case ConditionType.ConditionPoison:
+                Poison(changeConditionPacket.Time);
                 break;
             case ConditionType.ConditionStun:
                 break;
@@ -70,6 +71,26 @@ public class Condition : MonoBehaviour
         }));
     }
 
+    Coroutine _poisonAnim = null;
+    public void Poison(int timeValue)
+    {
+        if (_poisonAnim != null)
+        {
+            StopCoroutine(_poisonAnim);
+            _poisonAnim = null;
+        }
+
+        // 이펙트
+        _spriteRenderer.color = new Color(0, 255, 255);
+        _posionEffect.gameObject.SetActive(true);
+
+        // 시간후에 원래속도 되돌림
+        _poisonAnim = StartCoroutine(CoolTime(timeValue, () =>
+        {
+            _spriteRenderer.color = new Color(255, 255, 255);
+            _posionEffect.gameObject.SetActive(false);
+        }));
+    }
 
     // 쿨타임 메서드
     IEnumerator CoolTime(int timeValue, Action func)

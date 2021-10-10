@@ -135,7 +135,35 @@ public class ObjectManager
                         ac.Stat = info.StatInfo;
                         ac.SyncPos();
                     }
+
                     
+                }
+                break;
+            case GameObjectType.Summoning:
+                {
+                    if (info.TemplateId == 2003)
+                    {
+                        GameObject go = Managers.Resource.Instantiate($"Skill/PoisonSmoke");
+                        go.name = "PoisonSmoke";
+
+                        // 이펙트 크기 조정
+                        int skillLevel = Managers.Skill.GetSkillPoint(2003);
+                        Skill skillData = null;
+                        Managers.Data.SkillDict.TryGetValue(2003, out skillData);
+                        int radian = skillData.summoning.summoningPointInfos[skillLevel].radian;
+                        go.transform.localScale = new Vector3(
+                            radian,
+                            radian,
+                            1);
+
+                        _objects.Add(info.ObjectId, go);
+
+                        SummoningController sc = go.GetComponent<SummoningController>();
+                        sc.PosInfo = info.PosInfo;
+                        sc.Stat = info.StatInfo;
+                        sc.SyncPos();
+                    }
+
                 }
                 break;
             case GameObjectType.Item:

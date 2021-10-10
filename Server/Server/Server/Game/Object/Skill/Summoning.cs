@@ -8,9 +8,9 @@ namespace Server
 {
     public class Summoning : CreatureObject
     {
-        //public ConditionInfo ConditionInfo { get; set; } = new ConditionInfo();
         public int Damage { get; set; }
-        public int Range { get; set; }
+        public int Duration { get; set; }
+        public int Radian { get; set; }
         protected Skill _skillData = null;
         protected int _skillLevel;
 
@@ -24,10 +24,9 @@ namespace Server
             _skillData = skillData;
             _skillLevel = point;
 
-            Speed = skillData.projectile.projectilePointInfos[point].speed;
             Damage = skillData.skillPointInfos[point].damage;
-            Range = skillData.projectile.projectilePointInfos[point].range;
-
+            Duration = Environment.TickCount + skillData.summoning.summoningPointInfos[point].duration * 1000;
+            Radian = skillData.summoning.summoningPointInfos[point].radian;
         }
 
         public override void Update()

@@ -28,6 +28,19 @@ namespace Server
             SendConditionPacket(ConditionType.ConditionChilled, time);
         }
 
+        public void Poison(Skill skillData, int skillLevel, GameObject speller)
+        {
+            if(speller == null || speller.Room == null)
+                return;
+
+            int time = skillData.conditions[skillLevel].Time;
+            int damageValue = skillData.conditions[skillLevel].TickDamageValue;
+
+            TickDamage(damageValue, time, speller);
+
+            SendConditionPacket(ConditionType.ConditionPoison, time);
+        }
+
         public void SendConditionPacket(ConditionType conditionType, int timeValue)
         {
             GameRoom room = _creatureObj.Room;
@@ -106,13 +119,43 @@ namespace Server
             });
         }
 
-        public void TickDamage(int damageValue, int timeValue)
+        IJob _tickDamageJob;
+        IJob _tickJob;
+        int _currentTickDamage = 0;
+        public void TickDamage(int damageValue, int timeValue, GameObject speller)
         {
             GameRoom room = _creatureObj.Room;
-            if (_creatureObj == null || room == null)
+            if (_creatureObj == null || room == null || speller == null)
                 return;
 
+            // 현재 데미지 보다 작거나 같으면 중첩 X > 종료
+            if(_currentTickDamage >= damageValue)
+                return;
 
+            // 속도 감소
+            _currentTickDamage = damageValue;
+
+            // 초당 틱 반복 감소 시작
+            UpdateTick(_currentTickDamage, speller);
+
+            // 지속시간이 끝나면 종료
+            _tickDamageJob = room.PushAfter(timeValue * 1000, () =>
+            {
+                _tickDamageJob = null;
+                _tickJob.Cancel = true;
+                _tickJob = null;
+                _currentTickDamage = 0;
+            });
+        }
+        void UpdateTick(int damageValue, GameObject speller)
+        {
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null || speller == null)
+                return;
+
+            _tickJob = room.PushAfter(1000, UpdateTick, damageValue, speller);
+
+            _creatureObj.OnDamaged(speller, damageValue);
         }
 
         public void Stun(int timeValue)
@@ -137,7 +180,15 @@ namespace Server
                 _creatureObj.Stat.AttackSpeed = _originAtteckSpeed;
                 _slowAtteckJob.Cancel = true;
                 _slowAtteckJob = null;
-            }  
+            }
+            if (_tickDamageJob != null)
+            {
+                _currentTickDamage = 0;
+                _tickDamageJob.Cancel = true;
+                _tickJob.Cancel = true;
+                _tickDamageJob = null;
+                _tickJob = null;
+            }
 
 
         }

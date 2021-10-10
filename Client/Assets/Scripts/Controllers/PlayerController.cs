@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.Protocol;
+﻿using Data;
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -213,18 +214,23 @@ public class PlayerController : CreatureController
 		_rangedSkill = false;
 		State = CreatureState.Skill; // 서버에서 허락을 맡음
 
-		GameObject go = Managers.Resource.Instantiate("Effect/ExplosionEffect");
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/ExplosionEffect");
 		go.transform.position = transform.position;
+		
 		// 이펙트 크기 조정
+		int skillLevel = Managers.Skill.GetSkillPoint(2002);
+		Skill skillData = null;
+		Managers.Data.SkillDict.TryGetValue(2002, out skillData);
+		int radian = skillData.explosion.explosionPointInfos[skillLevel].radian;
 		go.transform.localScale = new Vector3(
-			Managers.Skill.GetSkillPoint(2002) + 2,
-			Managers.Skill.GetSkillPoint(2002) + 2, 
+			radian,
+			radian,
 			1);
 
 		go.GetComponent<Animator>().Play("EXPLOSION_START");
 		Destroy(go, 1);
 
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(1f);
 
 		State = CreatureState.Idle;
 		_coSkill = null;
@@ -237,19 +243,13 @@ public class PlayerController : CreatureController
 		_rangedSkill = false;
 		State = CreatureState.Skill; // 서버에서 허락을 맡음
 
-		GameObject go = Managers.Resource.Instantiate("Effect/PoisonSmokeReadyEffect");
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/PoisonSmokeReadyEffect");
 		go.transform.position = transform.position;
-		// 이펙트 크기 조정
-		go.transform.localScale = new Vector3(
-			Managers.Skill.GetSkillPoint(2003) + 2,
-			Managers.Skill.GetSkillPoint(2003) + 2,
-			1);
 
 		go.GetComponent<Animator>().Play("POISON_SMOKE_READY_EFFECT_START");
-		//go.GetComponent<Animator>().Get
-		Destroy(go, 1);
+		Destroy(go, 2);
 
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(2f);
 
 		State = CreatureState.Idle;
 		_coSkill = null;

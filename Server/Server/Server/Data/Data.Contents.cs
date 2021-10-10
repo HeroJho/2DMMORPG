@@ -39,6 +39,7 @@ namespace Server.Data
         public List<ConditionInfo> conditions;
         public projectileInfo projectile;
         public explosionInfo explosion;
+        public summoningInfo summoning;
 
     }
     public class skillPointInfo
@@ -70,6 +71,19 @@ namespace Server.Data
     {
         public int radian;
     }
+
+    public class summoningInfo
+    {
+        public string name;
+        public List<summoningPointInfo> summoningPointInfos;
+    }
+    public class summoningPointInfo
+    {
+        public int radian;
+        public int duration;
+    }
+
+
 
     [Serializable]
     public class SkillData : ILoader<int, Skill>

@@ -146,9 +146,9 @@ namespace Server
             PuseItems.Remove(addedItem);
         }
 
-        public HashSet<GameObject> LoopByCircle(Vector2Int cellPos, int rad)
+        public HashSet<T> LoopByCircle<T>(Vector2Int cellPos, int rad) where T : GameObject
         {
-            HashSet<GameObject> objects = new HashSet<GameObject>();
+            HashSet<T> objects = new HashSet<T>();
 
             int x = cellPos.x - MinX;
             int y = MaxY - cellPos.y;
@@ -168,8 +168,11 @@ namespace Server
                     }
 
                     GameObject obj = Find(depY--, depX++);
-                    if (obj != null)
-                        objects.Add(obj);
+                    if (obj != null && obj is T)
+                    {
+                        T objT = obj as T;
+                        objects.Add(objT);
+                    }
                 }
                 depY++;
                 depX--;
@@ -186,8 +189,11 @@ namespace Server
                     }
 
                     GameObject obj = Find(depY--, depX--);
-                    if (obj != null)
-                        objects.Add(obj);
+                    if (obj != null && obj is T)
+                    {
+                        T objT = obj as T;
+                        objects.Add(objT);
+                    }
                 }
                 depY++;
                 depX++;
@@ -204,8 +210,11 @@ namespace Server
                     }
 
                     GameObject obj = Find(depY++, depX--);
-                    if (obj != null)
-                        objects.Add(obj);
+                    if (obj != null && obj is T)
+                    {
+                        T objT = obj as T;
+                        objects.Add(objT);
+                    }
                 }
                 depY--;
                 depX++;
@@ -222,8 +231,11 @@ namespace Server
                     }
 
                     GameObject obj = Find(depY++, depX++);
-                    if (obj != null)
-                        objects.Add(obj);
+                    if (obj != null && obj is T)
+                    {
+                        T objT = obj as T;
+                        objects.Add(objT);
+                    }
                 }
 
                 rad--;
