@@ -18,6 +18,9 @@ namespace Server
 
         public void Chilled(Skill skillData, int skillLevel)
         {
+            if (_creatureObj.State == CreatureState.Dead)
+                return;
+
             int time = skillData.conditions[skillLevel].Time;
             int moveSlowValue = skillData.conditions[skillLevel].MoveSpeedValue;
             int AttackSlowValue = skillData.conditions[skillLevel].AttackSpeedValue;
@@ -31,6 +34,8 @@ namespace Server
         public void Poison(Skill skillData, int skillLevel, GameObject speller)
         {
             if(speller == null || speller.Room == null)
+                return;
+            if (_creatureObj.State == CreatureState.Dead)
                 return;
 
             int time = skillData.conditions[skillLevel].Time;
@@ -68,6 +73,9 @@ namespace Server
             if (_creatureObj == null || room == null)
                 return;
 
+            if (_creatureObj.State == CreatureState.Dead)
+                return;
+
             // 중복되면 이전거는 취소 되고 시간도 초기화하고 진행
             if (_slowJob != null)
             {
@@ -99,6 +107,9 @@ namespace Server
             if (_creatureObj == null || room == null)
                 return;
 
+            if (_creatureObj.State == CreatureState.Dead)
+                return;
+
             // 중복되면 이전거는 취소 되고 시간도 초기화하고 진행
             if (_slowAtteckJob != null)
             {
@@ -128,8 +139,11 @@ namespace Server
             if (_creatureObj == null || room == null || speller == null)
                 return;
 
+            if (_creatureObj.State == CreatureState.Dead)
+                return;
+
             // 현재 데미지 보다 작거나 같으면 중첩 X > 종료
-            if(_currentTickDamage >= damageValue)
+            if (_currentTickDamage >= damageValue)
                 return;
 
             // 속도 감소
@@ -155,7 +169,11 @@ namespace Server
 
             _tickJob = room.PushAfter(1000, UpdateTick, damageValue, speller);
 
-            _creatureObj.OnDamaged(speller, damageValue);
+            CreatureObject co = (CreatureObject)speller;
+
+            // 틱 데미지는 백분율 해서 고정피해로 적용
+            int damage = Math.Max((damageValue / 100) * co.TotalAttack, 1); 
+            _creatureObj.OnDamaged(speller, damage, true);
         }
 
         IJob _stunJob;
@@ -164,6 +182,8 @@ namespace Server
         {
             GameRoom room = _creatureObj.Room;
             if (_creatureObj == null || room == null)
+                return;
+            if (_creatureObj.State == CreatureState.Dead)
                 return;
 
             // 확률

@@ -90,6 +90,7 @@ namespace Server
                         poisonSmoke.PosInfo.MoveDir = _player.PosInfo.MoveDir;
                         poisonSmoke.PosInfo.PosX = _player.PosInfo.PosX;
                         poisonSmoke.PosInfo.PosY = _player.PosInfo.PosY;
+                        poisonSmoke.Stat.Level = point; // 클라 크기조절 용
                         poisonSmoke.Init(skillData, point);
 
                         // 스킬시전 시간 후에 생성

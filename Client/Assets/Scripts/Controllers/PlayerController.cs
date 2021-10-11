@@ -147,31 +147,31 @@ public class PlayerController : CreatureController
 		base.UpdateController();
 	}
 
-	public override void UseSkill(int skillId)
+	public override void UseSkill(int skillId, int skillLevel)
     {
 		if(skillId == 1001)
         {
-			_coSkill = StartCoroutine("CoStartPunch");
+			_coSkill = StartCoroutine("CoStartPunch", skillLevel);
         }
 		else if(skillId == 1002)
         {
-			_coSkill = StartCoroutine("CoStartShootArrow");
+			_coSkill = StartCoroutine("CoStartShootArrow", skillLevel);
         }
 		else if (skillId == 2001)
 		{
-			_coSkill = StartCoroutine("CoStartShootArrow");
+			_coSkill = StartCoroutine("CoStartShootArrow", skillLevel);
 		}
 		else if(skillId == 2002)
         {
-			_coSkill = StartCoroutine("CoStartExplosion");
+			_coSkill = StartCoroutine("CoStartExplosion", skillLevel);
         }
 		else if(skillId == 2003)
         {
-			_coSkill = StartCoroutine("CoStartPoisonSmokeReady");
+			_coSkill = StartCoroutine("CoStartPoisonSmokeReady", skillLevel);
         }
 		else if (skillId == 2004)
 		{
-			_coSkill = StartCoroutine("CoStartSmash");
+			_coSkill = StartCoroutine("CoStartSmash", skillLevel);
 		}
 	}
 
@@ -190,7 +190,7 @@ public class PlayerController : CreatureController
 		
 	}
 
-	IEnumerator CoStartPunch()
+	IEnumerator CoStartPunch(int skillLevel)
 	{
 		// 대기 시간
 		_rangedSkill = false;
@@ -202,7 +202,7 @@ public class PlayerController : CreatureController
 		CheckUpdatedFlag();
 	}
 
-    IEnumerator CoStartShootArrow()
+    IEnumerator CoStartShootArrow(int skillLevel)
     {
         _rangedSkill = true;
 		State = CreatureState.Skill;
@@ -213,7 +213,7 @@ public class PlayerController : CreatureController
 		CheckUpdatedFlag();
     }
 
-	IEnumerator CoStartExplosion()
+	IEnumerator CoStartExplosion(int skillLevel)
     {
 		_rangedSkill = false;
 		State = CreatureState.Skill; // 서버에서 허락을 맡음
@@ -222,7 +222,6 @@ public class PlayerController : CreatureController
 		go.transform.position = transform.position;
 		
 		// 이펙트 크기 조정
-		int skillLevel = Managers.Skill.GetSkillPoint(2002);
 		Skill skillData = null;
 		Managers.Data.SkillDict.TryGetValue(2002, out skillData);
 		int radian = skillData.explosion.explosionPointInfos[skillLevel].radian;
@@ -242,7 +241,7 @@ public class PlayerController : CreatureController
 		CheckUpdatedFlag();
 	}
 
-	IEnumerator CoStartPoisonSmokeReady()
+	IEnumerator CoStartPoisonSmokeReady(int skillLevel)
 	{
 		_rangedSkill = false;
 		State = CreatureState.Skill; // 서버에서 허락을 맡음
@@ -261,7 +260,7 @@ public class PlayerController : CreatureController
 		CheckUpdatedFlag();
 	}
 
-	IEnumerator CoStartSmash()
+	IEnumerator CoStartSmash(int skillLevel)
 	{
 		_rangedSkill = false;
 		State = CreatureState.Skill; // 서버에서 허락을 맡음
@@ -270,7 +269,6 @@ public class PlayerController : CreatureController
 		go.transform.position = transform.position;
 
 		// 이펙트 크기 방향 조정
-		int skillLevel = Managers.Skill.GetSkillPoint(2004);
 		Skill skillData = null;
 		Managers.Data.SkillDict.TryGetValue(2004, out skillData);
 		int radian = skillData.explosion.explosionPointInfos[skillLevel].radian;

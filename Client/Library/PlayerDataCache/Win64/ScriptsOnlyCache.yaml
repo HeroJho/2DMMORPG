@@ -15,6 +15,7 @@ ScriptsOnlyBuild:
     - Obstacle
     - PlayerController
     - QuestGiver
+    - SummoningController
     - TreeController
     - UI_CanClassUp
     - UI_ClassUp
@@ -79,10 +80,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -219,61 +218,63 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12888}
     - Class: 114
-      Script: {instanceID: 12980}
+      Script: {instanceID: 12926}
     - Class: 114
-      Script: {instanceID: 13166}
+      Script: {instanceID: 12982}
     - Class: 114
-      Script: {instanceID: 13244}
+      Script: {instanceID: 13168}
     - Class: 114
-      Script: {instanceID: 13416}
+      Script: {instanceID: 13246}
     - Class: 114
-      Script: {instanceID: 13504}
+      Script: {instanceID: 13418}
     - Class: 114
-      Script: {instanceID: 13552}
+      Script: {instanceID: 13506}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13554}
     - Class: 114
-      Script: {instanceID: 13572}
+      Script: {instanceID: 13568}
     - Class: 114
-      Script: {instanceID: 13576}
+      Script: {instanceID: 13574}
     - Class: 114
-      Script: {instanceID: 13650}
+      Script: {instanceID: 13578}
     - Class: 114
-      Script: {instanceID: 13654}
+      Script: {instanceID: 13652}
     - Class: 114
       Script: {instanceID: 13656}
     - Class: 114
-      Script: {instanceID: 13688}
+      Script: {instanceID: 13658}
     - Class: 114
-      Script: {instanceID: 13914}
+      Script: {instanceID: 13690}
     - Class: 114
-      Script: {instanceID: 13976}
+      Script: {instanceID: 13916}
     - Class: 114
-      Script: {instanceID: 14046}
+      Script: {instanceID: 13978}
     - Class: 114
-      Script: {instanceID: 14218}
+      Script: {instanceID: 14048}
     - Class: 114
-      Script: {instanceID: 14306}
+      Script: {instanceID: 14220}
     - Class: 114
-      Script: {instanceID: 14330}
+      Script: {instanceID: 14308}
     - Class: 114
-      Script: {instanceID: 14350}
+      Script: {instanceID: 14332}
     - Class: 114
-      Script: {instanceID: 14364}
+      Script: {instanceID: 14352}
     - Class: 114
-      Script: {instanceID: 14520}
+      Script: {instanceID: 14366}
     - Class: 114
-      Script: {instanceID: 14536}
+      Script: {instanceID: 14522}
     - Class: 114
-      Script: {instanceID: 14652}
+      Script: {instanceID: 14538}
     - Class: 114
-      Script: {instanceID: 14706}
+      Script: {instanceID: 14654}
     - Class: 114
-      Script: {instanceID: 14732}
+      Script: {instanceID: 14708}
     - Class: 114
-      Script: {instanceID: 14750}
+      Script: {instanceID: 14734}
     - Class: 114
-      Script: {instanceID: 14778}
+      Script: {instanceID: 14752}
+    - Class: 114
+      Script: {instanceID: 14780}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -807,6 +808,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SummoningController
   - hash:
       serializedVersion: 2
       Hash: 204ea02909ea3f738dafe3ff633d2a93

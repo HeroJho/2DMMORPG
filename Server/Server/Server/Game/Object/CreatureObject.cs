@@ -115,13 +115,14 @@ namespace Server
 
 		}
 
-		public virtual void OnDamaged(GameObject attacker, int damage)
+		public virtual void OnDamaged(GameObject attacker, int damage, bool trueDamage = false)
 		{
 			if (Room == null)
 				return;
 
 			// 데미지 보정
-			damage = Math.Max(damage - TotalDefence, 0);
+			if(trueDamage == false)
+				damage = Math.Max(damage - TotalDefence, 0);
 
 			Hp -= damage;
 
@@ -140,6 +141,8 @@ namespace Server
 		{
 			if (Room == null)
 				return;
+
+			Condition.BackCondition();
 
 			S_Die diePacket = new S_Die();
 			diePacket.ObjectId = Id;

@@ -15,6 +15,7 @@ namespace Server
             if (Owner == null || Room == null)
                 return;
 
+            // 0.5초마다 체크
             int tick = (int)(1000 / 500);
             _job = Room.PushAfter(tick, Update);
 

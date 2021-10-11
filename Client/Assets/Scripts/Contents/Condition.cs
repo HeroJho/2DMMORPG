@@ -182,7 +182,34 @@ public class Condition : MonoBehaviour
     }
 
     public void BackCondition()
-    { 
-        
+    {
+        if(_chilledAnim != null)
+            StopCoroutine(_chilledAnim);
+        if (_poisonAnim != null)
+            StopCoroutine(_poisonAnim);
+        if (_stunAnim != null)
+            StopCoroutine(_stunAnim);
+        _chilledAnim = null;
+        _poisonAnim = null;
+        _stunAnim = null;
+
+        _spriteRenderer.color = new Color(255, 255, 255);
+        _posionEffect.gameObject.SetActive(false);
+        _stunEffect.gameObject.SetActive(false);
+
+
+        if (_slowJob != null)
+        {
+            _creatureController.Speed = _originSpeed;
+            StopCoroutine(_slowJob);
+            _slowJob = null;
+        }
+        if (_slowAttackJob != null)
+        {
+            _creatureController.Stat.AttackSpeed = _originAttackSpeed;
+            StopCoroutine(_slowAttackJob);
+            _slowAttackJob = null;
+        }
+
     }
 }

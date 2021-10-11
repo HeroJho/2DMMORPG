@@ -71,7 +71,7 @@ class PacketHandler
 		if (cc == null)
 			return;
 
-		cc.UseSkill(skillPacket.Info.SkillId);
+		cc.UseSkill(skillPacket.Info.SkillId, skillPacket.Info.Point);
 
 	}
 

@@ -147,7 +147,7 @@ public class ObjectManager
                         go.name = "PoisonSmoke";
 
                         // 이펙트 크기 조정
-                        int skillLevel = Managers.Skill.GetSkillPoint(2003);
+                        int skillLevel = info.StatInfo.Level;
                         Skill skillData = null;
                         Managers.Data.SkillDict.TryGetValue(2003, out skillData);
                         int radian = skillData.summoning.summoningPointInfos[skillLevel].radian;

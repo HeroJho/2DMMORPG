@@ -59,6 +59,7 @@ namespace Server
             S_Skill skill = new S_Skill() { Info = new SkillInfo() };
             skill.ObjectId = _player.Info.ObjectId;
             skill.Info.SkillId = skillData.id;
+            skill.Info.Point = point;
             room.Broadcast(_player.CellPos, skill);
 
             // 스킬을 사용했으니 Mp 깎음

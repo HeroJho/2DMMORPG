@@ -6,6 +6,7 @@ using UnityEngine;
 public class CreatureController : BaseController
 {
 	HpBar _hpBar;
+	Condition _condition;
 
 	public CreatureController()
 	{
@@ -39,6 +40,7 @@ public class CreatureController : BaseController
 		base.Init();
 
 		AddHpBar();
+		_condition = GetComponent<Condition>();
     }
 
 	protected virtual void AddHpBar()
@@ -76,15 +78,17 @@ public class CreatureController : BaseController
 
 	public virtual void OnDead()
     {
-		State = CreatureState.Dead;
+		// 모든 컨디션 초기화
+		_condition.BackCondition();
 
+		State = CreatureState.Dead;
 		GameObject effect = Managers.Resource.Instantiate("Effect/DieEffect");
 		effect.transform.position = transform.position;
 		effect.GetComponent<Animator>().Play("START");
 		GameObject.Destroy(effect, 0.5f);
 	}
 
-	public virtual void UseSkill(int skillId)
+	public virtual void UseSkill(int skillId, int skillLevel)
 	{
 		
 	}
