@@ -173,6 +173,10 @@ public class PlayerController : CreatureController
 		{
 			_coSkill = StartCoroutine("CoStartSmash", skillLevel);
 		}
+		else if (skillId == 2005)
+		{
+			_coSkill = StartCoroutine("CoStartHealZoneReady", skillLevel);
+		}
 	}
 
 	public virtual void LevelUp(int level)
@@ -250,6 +254,25 @@ public class PlayerController : CreatureController
 		go.transform.position = transform.position;
 
 		go.GetComponent<Animator>().Play("POISON_SMOKE_READY_EFFECT_START");
+		Destroy(go, 2);
+
+		yield return new WaitForSeconds(2f);
+
+		State = CreatureState.Idle;
+		_coSkill = null;
+
+		CheckUpdatedFlag();
+	}
+
+	IEnumerator CoStartHealZoneReady(int skillLevel)
+	{
+		_rangedSkill = false;
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/HealZoneReadyEffect");
+		go.transform.position = transform.position;
+
+		go.GetComponent<Animator>().Play("HEAL_ZONE_READY_EFFECT_START");
 		Destroy(go, 2);
 
 		yield return new WaitForSeconds(2f);

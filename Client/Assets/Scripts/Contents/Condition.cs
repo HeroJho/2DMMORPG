@@ -13,6 +13,7 @@ public class Condition : MonoBehaviour
 
     private Animator _posionEffect;
     private Animator _stunEffect;
+    private Animator _healingEffect;
 
     private float _attackSpeed = 0;
 
@@ -25,9 +26,11 @@ public class Condition : MonoBehaviour
         // 일일히 크리쳐한테 파싱 ㄴㄴ
         _posionEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Poision", gameObject.transform).GetComponent<Animator>();
         _stunEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Stun", gameObject.transform).GetComponent<Animator>();
+        _healingEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_Healing", gameObject.transform).GetComponent<Animator>();
 
         _posionEffect.gameObject.SetActive(false);
         _stunEffect.gameObject.SetActive(false);
+        _healingEffect.gameObject.SetActive(false);
     }
 
     public void UpdateCondition(S_ChangeConditionInfo changeConditionPacket)
@@ -45,6 +48,9 @@ public class Condition : MonoBehaviour
                 break;
             case ConditionType.ConditionStun:
                 Stun(changeConditionPacket.Time);
+                break;
+            case ConditionType.ConditionHealing:
+                Healing(changeConditionPacket.Time);
                 break;
             default:
                 break;
@@ -93,6 +99,25 @@ public class Condition : MonoBehaviour
         {
             _spriteRenderer.color = new Color(255, 255, 255);
             _posionEffect.gameObject.SetActive(false);
+        }));
+    }
+
+    Coroutine _healingAnim = null;
+    public void Healing(int timeValue)
+    {
+        if (_healingAnim != null)
+        {
+            StopCoroutine(_healingAnim);
+            _healingAnim = null;
+        }
+
+        // 이펙트
+        _healingEffect.gameObject.SetActive(true);
+
+        // 시간후에 원래속도 되돌림
+        _healingAnim = StartCoroutine(CoolTime(timeValue, () =>
+        {
+            _healingEffect.gameObject.SetActive(false);
         }));
     }
 
@@ -187,15 +212,19 @@ public class Condition : MonoBehaviour
             StopCoroutine(_chilledAnim);
         if (_poisonAnim != null)
             StopCoroutine(_poisonAnim);
+        if (_healingAnim != null)
+            StopCoroutine(_healingAnim);
         if (_stunAnim != null)
             StopCoroutine(_stunAnim);
         _chilledAnim = null;
         _poisonAnim = null;
+        _healingAnim = null;
         _stunAnim = null;
 
         _spriteRenderer.color = new Color(255, 255, 255);
         _posionEffect.gameObject.SetActive(false);
         _stunEffect.gameObject.SetActive(false);
+        _healingEffect.gameObject.SetActive(false);
 
 
         if (_slowJob != null)

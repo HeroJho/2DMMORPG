@@ -62,6 +62,7 @@ namespace Data
     {
         public string name;
         public List<summoningPointInfo> summoningPointInfos;
+        public string prefab;
     }
     [Serializable]
     public class summoningPointInfo
@@ -69,6 +70,7 @@ namespace Data
         public int radian;
         public int duration;
     }
+
 
 
     [Serializable]

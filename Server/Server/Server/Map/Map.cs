@@ -146,12 +146,23 @@ namespace Server
             PuseItems.Remove(addedItem);
         }
 
-        public HashSet<T> LoopByCircle<T>(Vector2Int cellPos, int rad) where T : GameObject
+        public HashSet<T> LoopByCircle<T>(Vector2Int cellPos, int rad, bool includeInit = false) where T : GameObject
         {
             HashSet<T> objects = new HashSet<T>();
 
             int x = cellPos.x - MinX;
             int y = MaxY - cellPos.y;
+
+            // 요청자리 포함할거냐
+            if(includeInit)
+            {
+                GameObject obj = Find(y, x);
+                if (obj != null && obj is T)
+                {
+                    T objT = obj as T;
+                    objects.Add(objT);
+                }
+            }
 
             while (rad > 0)
             {

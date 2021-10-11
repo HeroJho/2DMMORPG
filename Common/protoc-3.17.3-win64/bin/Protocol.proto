@@ -89,6 +89,7 @@ enum SkillType{
     SKILL_PROJECTILE = 2;
     SKILL_EXPLOSION = 3;
     SKILL_SUMMONING = 4;
+    SKILL_BUFF = 5;
 }
 
 enum PlayerServerState{
@@ -161,6 +162,7 @@ enum ConditionType{
     CONDITION_CHILLED = 1;
     CONDITION_POISON = 2;
     CONDITION_STUN = 3;
+    CONDITION_HEALING = 4;
 }
 
 message S_EnterGame{
@@ -455,6 +457,7 @@ message ConditionInfo{
     int32 time = 2;
     int32 moveSpeedValue = 3;
     int32 attackSpeedValue = 4;
-    int32 tickDamageValue = 5;
+    int32 tickValue = 5;
     int32 stunChanceValue = 6;
+    int32 commonValue = 7;
 }

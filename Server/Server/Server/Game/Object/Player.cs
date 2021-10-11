@@ -90,9 +90,31 @@ namespace Server
 
         }
 
-        public override void OnDamaged(GameObject attacker, int damage, bool fiexdDamage = false)
+        public override void OnDamaged(GameObject attacker, int damage, bool trueDamage = false)
         {
-            base.OnDamaged(attacker, damage);
+            if (Room == null)
+                return;
+
+            int totalDamage = damage;
+
+            // 데미지 보정
+            if (trueDamage == false)
+                totalDamage = Math.Max(damage - TotalDefence, 0);
+
+            // 버프 효과 적용
+            totalDamage = Condition.PlayerBuffDamage(totalDamage);
+                      
+            Hp -= totalDamage;
+
+            S_ChangeHp changeHpPacket = new S_ChangeHp();
+            changeHpPacket.ObjectId = Id;
+            changeHpPacket.Hp = Hp;
+            Room.Broadcast(CellPos, changeHpPacket);
+
+            if (Hp <= 0)
+            {
+                OnDead(attacker);
+            }
 
         }
 

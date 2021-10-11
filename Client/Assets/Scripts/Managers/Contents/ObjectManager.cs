@@ -115,7 +115,10 @@ public class ObjectManager
                 {
                     if(info.TemplateId == 1002)
                     {
-                        GameObject go = Managers.Resource.Instantiate($"Skill/Arrow");
+                        Skill skillData = null;
+                        Managers.Data.SkillDict.TryGetValue(1002, out skillData);
+
+                        GameObject go = Managers.Resource.Instantiate(skillData.projectile.prefab);
                         go.name = "Arrow";
                         _objects.Add(info.ObjectId, go);
 
@@ -126,7 +129,10 @@ public class ObjectManager
                     }
                     else if(info.TemplateId == 2001)
                     {
-                        GameObject go = Managers.Resource.Instantiate($"Skill/IceBall");
+                        Skill skillData = null;
+                        Managers.Data.SkillDict.TryGetValue(2001, out skillData);
+
+                        GameObject go = Managers.Resource.Instantiate(skillData.projectile.prefab);
                         go.name = "IceBall";
                         _objects.Add(info.ObjectId, go);
 
@@ -143,13 +149,37 @@ public class ObjectManager
                 {
                     if (info.TemplateId == 2003)
                     {
-                        GameObject go = Managers.Resource.Instantiate($"Skill/PoisonSmoke");
+                        Skill skillData = null;
+                        Managers.Data.SkillDict.TryGetValue(2003, out skillData);
+
+                        GameObject go = Managers.Resource.Instantiate(skillData.summoning.prefab);
                         go.name = "PoisonSmoke";
 
                         // 이펙트 크기 조정
                         int skillLevel = info.StatInfo.Level;
+                        int radian = skillData.summoning.summoningPointInfos[skillLevel].radian;
+                        go.transform.localScale = new Vector3(
+                            radian,
+                            radian,
+                            1);
+
+                        _objects.Add(info.ObjectId, go);
+
+                        SummoningController sc = go.GetComponent<SummoningController>();
+                        sc.PosInfo = info.PosInfo;
+                        sc.Stat = info.StatInfo;
+                        sc.SyncPos();
+                    }
+                    else if (info.TemplateId == 2005)
+                    {
                         Skill skillData = null;
-                        Managers.Data.SkillDict.TryGetValue(2003, out skillData);
+                        Managers.Data.SkillDict.TryGetValue(2005, out skillData);
+
+                        GameObject go = Managers.Resource.Instantiate(skillData.summoning.prefab);
+                        go.name = "HealZone";
+
+                        // 이펙트 크기 조정
+                        int skillLevel = info.StatInfo.Level;
                         int radian = skillData.summoning.summoningPointInfos[skillLevel].radian;
                         go.transform.localScale = new Vector3(
                             radian,

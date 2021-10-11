@@ -120,11 +120,11 @@ namespace Server
 			if (Room == null)
 				return;
 
-			// 데미지 보정
-			if(trueDamage == false)
-				damage = Math.Max(damage - TotalDefence, 0);
+            // 데미지 보정
+            if (trueDamage == false)
+                damage = Math.Max(damage - TotalDefence, 0);
 
-			Hp -= damage;
+            Hp -= damage;
 
 			S_ChangeHp changeHpPacket = new S_ChangeHp();
 			changeHpPacket.ObjectId = Id;

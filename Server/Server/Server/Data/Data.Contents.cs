@@ -40,6 +40,7 @@ namespace Server.Data
         public projectileInfo projectile;
         public explosionInfo explosion;
         public summoningInfo summoning;
+        public buffInfo buff;
 
     }
     public class skillPointInfo
@@ -53,7 +54,6 @@ namespace Server.Data
     {
         public string name;
         public List<projectilePointInfo> projectilePointInfos;
-        public string prefab;
     }
     public class projectilePointInfo
     {
@@ -65,7 +65,6 @@ namespace Server.Data
     {
         public string name;
         public List<explosionPointInfo> explosionPointInfos;
-        public string prefab;
     }
     public class explosionPointInfo
     {
@@ -83,6 +82,16 @@ namespace Server.Data
         public int duration;
     }
 
+    public class buffInfo
+    {
+        public string name;
+        public List<buffPointInfo> buffPointInfos;
+    }
+    public class buffPointInfo
+    {
+        public int radian;
+        public int duration;
+    }
 
 
     [Serializable]
