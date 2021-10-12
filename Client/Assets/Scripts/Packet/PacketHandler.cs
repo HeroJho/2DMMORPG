@@ -77,9 +77,9 @@ class PacketHandler
 
 	public static void S_ChangeHpHandler(PacketSession session, IMessage packet)
     {
-		S_ChangeHp changeHpMpPacket = (S_ChangeHp)packet;
+		S_ChangeHp changeHpPacket = (S_ChangeHp)packet;
 
-		GameObject go = Managers.Object.FindById(changeHpMpPacket.ObjectId);
+		GameObject go = Managers.Object.FindById(changeHpPacket.ObjectId);
 		if (go == null)
 			return;
 
@@ -87,14 +87,16 @@ class PacketHandler
 		if(cc == null)
 			return;
 
-		cc.Hp = changeHpMpPacket.Hp;
+		cc.Stat.MaxHp = changeHpPacket.MaxHp;
+		cc.Hp = changeHpPacket.Hp;
+
 	}
 
 	public static void S_ChangeMpHandler(PacketSession session, IMessage packet)
 	{
-		S_ChangeMp changeHpMpPacket = (S_ChangeMp)packet;
+		S_ChangeMp changeMpPacket = (S_ChangeMp)packet;
 
-		GameObject go = Managers.Object.FindById(changeHpMpPacket.ObjectId);
+		GameObject go = Managers.Object.FindById(changeMpPacket.ObjectId);
 		if (go == null)
 			return;
 
@@ -102,7 +104,9 @@ class PacketHandler
 		if (pc == null)
 			return;
 
-		pc.Mp = changeHpMpPacket.Mp;
+		pc.Stat.MaxMp = changeMpPacket.MaxMp;
+		pc.Mp = changeMpPacket.Mp;
+
 	}
 
 	public static void S_DieHandler(PacketSession session, IMessage packet)

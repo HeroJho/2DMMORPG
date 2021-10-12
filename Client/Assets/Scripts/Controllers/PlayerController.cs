@@ -11,6 +11,18 @@ public class PlayerController : CreatureController
 	protected Coroutine _coSkill;
 	protected bool _rangedSkill = false;
 
+	public override StatInfo Stat
+	{
+		get { return base._stat; }
+		set
+		{
+			base._stat = value;
+
+			UpdateMpBar();
+			UpdateHpBar();
+		}
+	}
+
 	public int Mp
 	{
         get { return Stat.Mp; }
@@ -177,6 +189,16 @@ public class PlayerController : CreatureController
 		{
 			_coSkill = StartCoroutine("CoStartHealZoneReady", skillLevel);
 		}
+		else if (skillId == 2006)
+		{
+			_coSkill = StartCoroutine("CoStartMagicGuardReady", skillLevel);
+		}
+		else if (skillId == 2007)
+		{
+			_coSkill = StartCoroutine("CoStartHyperBodyReady", skillLevel);
+		}
+
+
 	}
 
 	public virtual void LevelUp(int level)
@@ -317,6 +339,44 @@ public class PlayerController : CreatureController
 
 
 		go.GetComponent<Animator>().Play("SMASH_START");
+		Destroy(go, 1);
+
+		yield return new WaitForSeconds(1f);
+
+		State = CreatureState.Idle;
+		_coSkill = null;
+
+		CheckUpdatedFlag();
+	}
+
+	IEnumerator CoStartMagicGuardReady(int skillLevel)
+	{
+		_rangedSkill = false;
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/MagicGuardReadyEffect");
+		go.transform.position = transform.position;
+
+		go.GetComponent<Animator>().Play("BUFF_MAGIC_GUARD_READY_EFFECT_START");
+		Destroy(go, 1);
+
+		yield return new WaitForSeconds(1f);
+
+		State = CreatureState.Idle;
+		_coSkill = null;
+
+		CheckUpdatedFlag();
+	}
+
+	IEnumerator CoStartHyperBodyReady(int skillLevel)
+	{
+		_rangedSkill = false;
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/HyperBodyReadyEffect");
+		go.transform.position = transform.position;
+
+		go.GetComponent<Animator>().Play("BUFF_HYPER_BODY_READY_EFFECT_START");
 		Destroy(go, 1);
 
 		yield return new WaitForSeconds(1f);

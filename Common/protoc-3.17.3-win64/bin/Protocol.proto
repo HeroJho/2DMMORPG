@@ -163,6 +163,7 @@ enum ConditionType{
     CONDITION_POISON = 2;
     CONDITION_STUN = 3;
     CONDITION_HEALING = 4;
+    CONDITION_BUFF = 5;
 }
 
 message S_EnterGame{
@@ -204,11 +205,13 @@ message S_Skill{
 message S_ChangeHp{
     int32 objectId = 1;
     int32 hp = 2;
+    int32 maxHp = 3;
 }
 
 message S_ChangeMp{
     int32 objectId = 1;
     int32 mp = 2;
+    int32 maxMp = 3;
 }
 
 message S_Die{
@@ -389,6 +392,7 @@ message S_ChangeConditionInfo{
     int32 time = 3;
     float moveSpeed = 4;
     float attackSpeed = 5;
+    int32 skillId = 6;
 }
 
 message ItemInfo{

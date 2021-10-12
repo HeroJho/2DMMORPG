@@ -18,6 +18,7 @@ namespace Server
         {
             // 전직할 시 추가되는 스킬 정보
             SkillPoints.Add(2004, 1);
+            SkillPoints.Add(2007, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
 
@@ -51,6 +52,16 @@ namespace Server
                             co.Condition.Stun(skillData.conditions[point].Time, skillData.conditions[point].StunChanceValue);
                             co.OnDamaged(_player, skillData.skillPointInfos[point].damage);
                         }
+
+                    }
+                    break;
+                case SkillType.SkillBuff:
+                    {
+                        if (skillData.id == 2007)
+                        {
+                            _player.Condition.HyperBody(skillData, point);
+                        }
+
 
                     }
                     break;

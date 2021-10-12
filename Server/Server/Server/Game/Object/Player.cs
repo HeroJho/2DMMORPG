@@ -41,7 +41,7 @@ namespace Server
         public int Mp
         {
             get { return Stat.Mp; }
-            set { Stat.Mp = Math.Clamp(value, 0, Stat.MaxMp); }
+            set { Stat.Mp = Math.Clamp(value, 0, TotalMaxMp); }
         }
 
         public int Ex 
@@ -76,8 +76,9 @@ namespace Server
                 return totalAttack;
             } 
         }
-
         public override int TotalDefence { get { return Stat.Defence + ArmorDefence; } }
+        public override int TotalMaxHp { get { return Stat.MaxHp + Condition.BuffMaxHp(); } }
+        public int TotalMaxMp { get { return Stat.MaxMp + Condition.BuffMaxMp(); } }
 
         public Player()
         {
@@ -106,10 +107,7 @@ namespace Server
                       
             Hp -= totalDamage;
 
-            S_ChangeHp changeHpPacket = new S_ChangeHp();
-            changeHpPacket.ObjectId = Id;
-            changeHpPacket.Hp = Hp;
-            Room.Broadcast(CellPos, changeHpPacket);
+            UpdateHpMpStat();
 
             if (Hp <= 0)
             {
@@ -128,10 +126,7 @@ namespace Server
             if (Mp < 0)
                 Mp = 0;
 
-            S_ChangeMp changeHpPacket = new S_ChangeMp();
-            changeHpPacket.ObjectId = Id;
-            changeHpPacket.Mp = Mp;
-            Room.Broadcast(CellPos, changeHpPacket);
+            UpdateHpMpStat();
         }
 
         public override void OnDead(GameObject attacker)
@@ -294,8 +289,8 @@ namespace Server
         public void LevelUp()
         {
             // 풀피 풀마나
-            RecoveryHp(Stat.MaxHp);
-            RecoveryMp(Stat.MaxMp);
+            RecoveryHp(TotalMaxHp);
+            RecoveryMp(TotalMaxMp);
             // 직업별로 레벨업 스텟상승
             switch (JobClassType)
             {
@@ -342,10 +337,7 @@ namespace Server
             Stat.StatPoints += points;
 
             // S_StatPoint 패킷 전송
-            S_StatPoint statPointPacket = new S_StatPoint();
-            statPointPacket.StatInfo = Stat;
-
-            Session.Send(statPointPacket);
+            UpdateClientStat();
         }
 
         public void RecoveryMp(int mp)
@@ -376,13 +368,43 @@ namespace Server
             GameRoom room = Room;
             room.LeaveGame(Id);
 
-            Stat.Hp = Stat.MaxHp;
+            Stat.Hp = TotalMaxHp;
+            Stat.Mp = TotalMaxMp;
             PosInfo.State = CreatureState.Idle;
             PosInfo.MoveDir = MoveDir.Down;
             PosInfo.PosX = -50;
             PosInfo.PosY = -75;
 
             room.EnterGame(this);
+        }
+
+        public override void UpdateClientStat()
+        {
+            // S_StatPoint 패킷 전송
+            S_StatPoint statPointPacket = new S_StatPoint();
+            statPointPacket.StatInfo = new StatInfo(Stat);
+            statPointPacket.StatInfo.MaxHp = TotalMaxHp;
+            statPointPacket.StatInfo.MaxMp = TotalMaxMp;
+
+            Session.Send(statPointPacket);
+        }
+
+        public override void UpdateHpMpStat()
+        {
+            if (Room == null)
+                return;
+
+            S_ChangeHp changeHp = new S_ChangeHp();
+            changeHp.ObjectId = Id;
+            changeHp.Hp = Hp;
+            changeHp.MaxHp = TotalMaxHp;
+            S_ChangeMp changeMp = new S_ChangeMp();
+            changeMp.ObjectId = Id;
+            changeMp.Mp = Mp;
+            changeMp.MaxMp = TotalMaxMp;
+
+            Room.Broadcast(CellPos, changeHp);
+            Room.Broadcast(CellPos, changeMp);
         }
     }
 }

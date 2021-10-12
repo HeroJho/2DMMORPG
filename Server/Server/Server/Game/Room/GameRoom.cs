@@ -292,10 +292,8 @@ namespace Server
             player.Stat.StatPoints--;
 
             // S_StatPoint 패킷 전송
-            S_StatPoint statPointPacket = new S_StatPoint();
-            statPointPacket.StatInfo = player.Stat;
-          
-            player.Session.Send(statPointPacket);
+            player.UpdateClientStat(); 
+            player.UpdateHpMpStat();
         }
 
         public void HandleClassUp(Player player, C_ClassUp classUpPacket)
@@ -331,10 +329,7 @@ namespace Server
             player.Stat.CanUpClass = false;
 
             // 직업, 직업업글 여부 갱신
-            S_StatPoint statPointPacket = new S_StatPoint();
-            statPointPacket.StatInfo = player.Stat;
-
-            player.Session.Send(statPointPacket);
+            player.UpdateClientStat();
         }
 
         public void Broadcast(Vector2Int pos, IMessage packet)

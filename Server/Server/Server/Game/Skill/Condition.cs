@@ -62,7 +62,7 @@ namespace Server
         }
 
         IJob _magicGuardJob;
-        int _magicGuardValue = 0;
+        float _magicGuardValue = 0;
         public void MagicGuard(Skill skillData, int skillLevel)
         {
             GameRoom room = _creatureObj.Room;
@@ -88,11 +88,53 @@ namespace Server
                 _magicGuardValue = 0;
                 _magicGuardJob = null;
             });
+
+            SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
+        }
+
+        IJob _hyperBodyJob;
+        int _hyperMaxHp = 0;
+        public void HyperBody(Skill skillData, int skillLevel)
+        {
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null)
+                return;
+            if (_creatureObj.State == CreatureState.Dead)
+                return;
+
+            // 중복되면 이전거는 취소 되고 시간도 초기화하고 진행
+            if (_hyperBodyJob != null)
+            {
+                _hyperMaxHp = 0;
+                _hyperBodyJob.Cancel = true;
+                _hyperBodyJob = null;
+            }
+
+            int time = skillData.conditions[skillLevel].Time;
+            int plusValue = (int)(_creatureObj.Stat.MaxHp * (skillData.conditions[skillLevel].CommonValue * 0.01f));
+            Console.WriteLine(plusValue);
+            if(plusValue != 0)
+            {
+                _hyperMaxHp = plusValue;
+                _creatureObj.UpdateHpMpStat();
+            }
+
+            // 시간후에 원래속도 되돌림
+            _hyperBodyJob = room.PushAfter(time * 1000, () =>
+            {
+                _hyperMaxHp = 0;
+                if (_creatureObj.TotalMaxHp < _creatureObj.Stat.Hp)
+                    _creatureObj.Stat.Hp = _creatureObj.TotalMaxHp;
+
+                _creatureObj.UpdateHpMpStat();
+                _hyperBodyJob = null;
+            });
+
+            SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
         }
 
 
-
-        public void SendConditionPacket(ConditionType conditionType, int timeValue)
+        public void SendConditionPacket(ConditionType conditionType, int timeValue, int skillId = 0)
         {
             GameRoom room = _creatureObj.Room;
             if (_creatureObj == null || room == null)
@@ -106,6 +148,7 @@ namespace Server
             changeCondition.Time = timeValue;
             changeCondition.MoveSpeed = _creatureObj.Speed;
             changeCondition.AttackSpeed = _creatureObj.Stat.Attack;
+            changeCondition.SkillId = skillId;
 
             room.Broadcast(_creatureObj.CellPos, changeCondition);
         }
@@ -338,6 +381,18 @@ namespace Server
                 _stunJob.Cancel = true;
                 _stunJob = null;
             }
+            if (_magicGuardJob != null)
+            {
+                _magicGuardValue = 0;
+                _magicGuardJob.Cancel = true;
+                _magicGuardJob = null;
+            }
+            if (_hyperBodyJob != null)
+            {
+                _hyperMaxHp = 0;
+                _hyperBodyJob.Cancel = true;
+                _hyperBodyJob = null;
+            }
 
 
         }
@@ -352,10 +407,12 @@ namespace Server
             Player player = (Player)_creatureObj;
             int totalDamage = damage;
 
-            if(_magicGuardJob != null)
+            if(_magicGuardJob != null && _magicGuardValue != 0)
             {
-                int minusDamage = totalDamage * (_magicGuardValue/100);
+                int minusDamage = (int)(totalDamage * (_magicGuardValue * 0.01f));
                 int minusMp = damage - minusDamage;
+
+                Console.WriteLine($"totalDamage: {damage}, minusDamage: {minusDamage}, minusMp: {minusMp}");
 
                 if(player.Mp >= minusMp && minusDamage != 0)
                 {
@@ -365,6 +422,20 @@ namespace Server
             }
 
             return totalDamage;
+        }
+
+        public int BuffMaxHp()
+        {
+            int totalMaxHp = 0;
+            totalMaxHp += _hyperMaxHp;
+
+            return totalMaxHp;
+        }
+        public int BuffMaxMp()
+        {
+            int totalMaxMp = 0;
+
+            return totalMaxMp;
         }
 
     }

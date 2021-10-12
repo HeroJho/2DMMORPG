@@ -21,6 +21,7 @@ namespace Server
             SkillPoints.Add(2002, 1);
             SkillPoints.Add(2003, 1);
             SkillPoints.Add(2005, 1);
+            SkillPoints.Add(2006, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
 
@@ -127,7 +128,18 @@ namespace Server
                                 _player.Room.EnterGame(healZone);
                             });
                         }
+
                         
+                    }
+                    break;
+                case SkillType.SkillBuff:
+                    {
+                        if (skillData.id == 2006)
+                        {
+                            _player.Condition.MagicGuard(skillData, point);
+                        }
+
+
                     }
                     break;
 

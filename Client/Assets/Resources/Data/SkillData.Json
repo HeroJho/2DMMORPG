@@ -538,6 +538,172 @@
         ],
         "prefab": "Skill/HealZone"
       }
+    },
+
+    {
+      "id": "2006",
+      "name": "매직 가드",
+      "skillPointInfos": [
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "50"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "100"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "100"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "100"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "150"
+        }
+      ],
+      "skillType": "SkillBuff",
+      "iconPath": "Textures/Skill/MagicGuard",
+      "description": "피해량 일부를 마나로 소모합니다.",
+      "conditions": [
+        {
+          "conditionType": "ConditionBuff",
+          "time": "30",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "30"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "40",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "35"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "50",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "40"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "60",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "60"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "80",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "80"
+        }
+      ]
+
+    },
+
+    {
+      "id": "2007",
+      "name": "하이퍼 바디",
+      "skillPointInfos": [
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "20"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "30"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "30"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "30"
+        },
+        {
+          "cooldown": "0.5",
+          "damage": "0",
+          "mp": "40"
+        }
+      ],
+      "skillType": "SkillBuff",
+      "iconPath": "Textures/Skill/HyperBody",
+      "description": "최대 체력을 일정량 증가 시킵니다.",
+      "conditions": [
+        {
+          "conditionType": "ConditionBuff",
+          "time": "30",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "30"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "40",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "35"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "50",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "40"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "60",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "60"
+        },
+        {
+          "conditionType": "ConditionBuff",
+          "time": "80",
+          "moveSpeedValue": "0",
+          "attackSpeedValue": "0",
+          "tickValue": "0",
+          "stunChanceValue": "0",
+          "commonValue": "80"
+        }
+      ]
+
     }
 
   ]

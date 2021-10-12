@@ -12,6 +12,7 @@ namespace Server
 
 		public virtual int TotalAttack { get { return Stat.Attack; } }
 		public virtual int TotalDefence { get { return 0; } }
+		public virtual int TotalMaxHp { get { return Stat.MaxHp + Condition.BuffMaxHp(); } }
 
 		public float Speed
 		{
@@ -22,7 +23,7 @@ namespace Server
 		public int Hp
 		{
 			get { return Stat.Hp; }
-			set { Stat.Hp = Math.Clamp(value, 0, Stat.MaxHp); }
+			set { Stat.Hp = Math.Clamp(value, 0, TotalMaxHp); }
 		}
 
 		public MoveDir Dir
@@ -126,10 +127,7 @@ namespace Server
 
             Hp -= damage;
 
-			S_ChangeHp changeHpPacket = new S_ChangeHp();
-			changeHpPacket.ObjectId = Id;
-			changeHpPacket.Hp = Hp;
-			Room.Broadcast(CellPos, changeHpPacket);
+			UpdateHpMpStat();
 
 			if (Hp <= 0)
 			{
@@ -168,10 +166,22 @@ namespace Server
 
 			Hp += recovery;
 
-			S_ChangeHp changeHpPacket = new S_ChangeHp();
-			changeHpPacket.ObjectId = Id;
-			changeHpPacket.Hp = Hp;
-			Room.Broadcast(CellPos, changeHpPacket);
+			UpdateHpMpStat();
+		}
+
+		public virtual void UpdateClientStat()
+		{
+
+		}
+
+		public virtual void UpdateHpMpStat()
+		{
+			S_ChangeHp changeHp = new S_ChangeHp();
+			changeHp.ObjectId = Id;
+			changeHp.Hp = Hp;
+			changeHp.MaxHp = TotalMaxHp;
+
+			Room.Broadcast(CellPos, changeHp);
 		}
 	}
 }

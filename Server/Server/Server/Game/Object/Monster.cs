@@ -300,7 +300,7 @@ namespace Server
             if (room == null)
                 return;
 
-            Stat.Hp = Stat.MaxHp;
+            Stat.Hp = TotalMaxHp;
             PosInfo.State = CreatureState.Idle;
             PosInfo.MoveDir = MoveDir.Down;
             CellPos = randPos;
