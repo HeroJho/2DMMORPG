@@ -91,7 +91,6 @@ namespace Server
 
             SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
         }
-
         IJob _hyperBodyJob;
         int _hyperMaxHp = 0;
         public void HyperBody(Skill skillData, int skillLevel)
@@ -128,6 +127,45 @@ namespace Server
 
                 _creatureObj.UpdateHpMpStat();
                 _hyperBodyJob = null;
+            });
+
+            SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
+        }
+
+        IJob _ironBodyJob;
+        int _ironBodyValue = 0;
+        public void IronBody(Skill skillData, int skillLevel)
+        {
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null)
+                return;
+            if (_creatureObj.State == CreatureState.Dead)
+                return;
+
+            // 중복되면 이전거는 취소 되고 시간도 초기화하고 진행
+            if (_ironBodyJob != null)
+            {
+                _ironBodyValue = 0;
+                _ironBodyJob.Cancel = true;
+                _ironBodyJob = null;
+            }
+
+            int time = skillData.conditions[skillLevel].Time;
+            int plusValue = (int)(_creatureObj.Stat.MaxHp * (skillData.conditions[skillLevel].CommonValue * 0.01f));
+            Console.WriteLine(plusValue);
+            if (plusValue != 0)
+            {
+                _ironBodyValue = plusValue;
+                _creatureObj.UpdateClientStat();
+            }
+
+            // 시간후에 원래속도 되돌림
+            _ironBodyJob = room.PushAfter(time * 1000, () =>
+            {
+                _ironBodyValue = 0;
+
+                _creatureObj.UpdateClientStat();
+                _ironBodyJob = null;
             });
 
             SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
@@ -393,6 +431,12 @@ namespace Server
                 _hyperBodyJob.Cancel = true;
                 _hyperBodyJob = null;
             }
+            if (_ironBodyJob != null)
+            {
+                _ironBodyValue = 0;
+                _ironBodyJob.Cancel = true;
+                _ironBodyJob = null;
+            }
 
 
         }
@@ -424,6 +468,13 @@ namespace Server
             return totalDamage;
         }
 
+        public int BuffDefence()
+        {
+            int totalDefence = 0;
+            totalDefence += _ironBodyValue;
+
+            return totalDefence;
+        }
         public int BuffMaxHp()
         {
             int totalMaxHp = 0;

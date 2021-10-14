@@ -76,7 +76,7 @@ namespace Server
                 return totalAttack;
             } 
         }
-        public override int TotalDefence { get { return Stat.Defence + ArmorDefence; } }
+        public override int TotalDefence { get { return Stat.Defence + ArmorDefence + Condition.BuffDefence(); } }
         public override int TotalMaxHp { get { return Stat.MaxHp + Condition.BuffMaxHp(); } }
         public int TotalMaxMp { get { return Stat.MaxMp + Condition.BuffMaxMp(); } }
 
@@ -385,6 +385,7 @@ namespace Server
             statPointPacket.StatInfo = new StatInfo(Stat);
             statPointPacket.StatInfo.MaxHp = TotalMaxHp;
             statPointPacket.StatInfo.MaxMp = TotalMaxMp;
+            statPointPacket.StatInfo.Defence = Stat.Defence + Condition.BuffDefence();
 
             Session.Send(statPointPacket);
         }

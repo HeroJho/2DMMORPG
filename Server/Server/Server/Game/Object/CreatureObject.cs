@@ -11,7 +11,7 @@ namespace Server
 		public Condition Condition { get; private set; }
 
 		public virtual int TotalAttack { get { return Stat.Attack; } }
-		public virtual int TotalDefence { get { return 0; } }
+		public virtual int TotalDefence { get { return Stat.Defence + Condition.BuffDefence(); } }
 		public virtual int TotalMaxHp { get { return Stat.MaxHp + Condition.BuffMaxHp(); } }
 
 		public float Speed

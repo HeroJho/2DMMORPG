@@ -197,6 +197,10 @@ public class PlayerController : CreatureController
 		{
 			_coSkill = StartCoroutine("CoStartHyperBodyReady", skillLevel);
 		}
+		else if (skillId == 2008)
+		{
+			_coSkill = StartCoroutine("CoStartIronBodyReady", skillLevel);
+		}
 
 
 	}
@@ -374,7 +378,7 @@ public class PlayerController : CreatureController
 		State = CreatureState.Skill; // 서버에서 허락을 맡음
 
 		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/HyperBodyReadyEffect");
-		go.transform.position = transform.position;
+		go.transform.position = transform.position + new Vector3(0, -0.7f, 0); ;
 
 		go.GetComponent<Animator>().Play("BUFF_HYPER_BODY_READY_EFFECT_START");
 		Destroy(go, 1);
@@ -386,6 +390,26 @@ public class PlayerController : CreatureController
 
 		CheckUpdatedFlag();
 	}
+
+	IEnumerator CoStartIronBodyReady(int skillLevel)
+	{
+		_rangedSkill = false;
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/IronBodyReadyEffect");
+		go.transform.position = transform.position + new Vector3(0, -0.7f, 0);
+
+		go.GetComponent<Animator>().Play("BUFF_IRON_BODY_READY_EFFECT_START");
+		Destroy(go, 1);
+
+		yield return new WaitForSeconds(1f);
+
+		State = CreatureState.Idle;
+		_coSkill = null;
+
+		CheckUpdatedFlag();
+	}
+
 
 	public override void OnDamaged()
 	{

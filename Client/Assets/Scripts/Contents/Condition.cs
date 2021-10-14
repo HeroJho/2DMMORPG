@@ -16,6 +16,7 @@ public class Condition : MonoBehaviour
     private Animator _healingEffect;
     private Animator _magicGuardEffect;
     private Animator _hyperBodyEffect;
+    private Animator _ironBodyEffect;
 
     private float _attackSpeed = 0;
 
@@ -31,6 +32,7 @@ public class Condition : MonoBehaviour
         _healingEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_Healing", gameObject.transform).GetComponent<Animator>();
         _magicGuardEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_MagicGuard", gameObject.transform).GetComponent<Animator>();
         _hyperBodyEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_HyperBody", gameObject.transform).GetComponent<Animator>();
+        _ironBodyEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_IronBody", gameObject.transform).GetComponent<Animator>();
 
 
         _posionEffect.gameObject.SetActive(false);
@@ -38,6 +40,7 @@ public class Condition : MonoBehaviour
         _healingEffect.gameObject.SetActive(false);
         _magicGuardEffect.gameObject.SetActive(false);
         _hyperBodyEffect.gameObject.SetActive(false);
+        _ironBodyEffect.gameObject.SetActive(false);
     }
 
     public void UpdateCondition(S_ChangeConditionInfo changeConditionPacket)
@@ -62,8 +65,10 @@ public class Condition : MonoBehaviour
             case ConditionType.ConditionBuff:
                 if(changeConditionPacket.SkillId == 2006)
                     MagicGuard(changeConditionPacket.Time);
-                if (changeConditionPacket.SkillId == 2007)
+                else if (changeConditionPacket.SkillId == 2007)
                     HyperBody(changeConditionPacket.Time);
+                else if (changeConditionPacket.SkillId == 2008)
+                    IronBody(changeConditionPacket.Time);
                 break;
             default:
                 break;
@@ -172,6 +177,25 @@ public class Condition : MonoBehaviour
         }));
     }
 
+    Coroutine _ironBodyAnim = null;
+    public void IronBody(int timeValue)
+    {
+        if (_ironBodyAnim != null)
+        {
+            StopCoroutine(_ironBodyAnim);
+            _ironBodyAnim = null;
+        }
+
+        // 이펙트
+        _ironBodyEffect.gameObject.SetActive(true);
+
+        // 시간후에 원래속도 되돌림
+        _ironBodyAnim = StartCoroutine(CoolTime(timeValue, () =>
+        {
+            _ironBodyEffect.gameObject.SetActive(false);
+        }));
+    }
+
     // 쿨타임 메서드
     IEnumerator CoolTime(int timeValue, Action func)
     {
@@ -271,12 +295,15 @@ public class Condition : MonoBehaviour
             StopCoroutine(_magicGuardAnim);
         if (_hyperBodyAnim != null)
             StopCoroutine(_hyperBodyAnim);
+        if (_ironBodyAnim != null)
+            StopCoroutine(_ironBodyAnim);
         _chilledAnim = null;
         _poisonAnim = null;
         _healingAnim = null;
         _stunAnim = null;
         _magicGuardAnim = null;
         _hyperBodyAnim = null;
+        _ironBodyAnim = null;
 
         _spriteRenderer.color = new Color(255, 255, 255);
         _posionEffect.gameObject.SetActive(false);
@@ -284,6 +311,7 @@ public class Condition : MonoBehaviour
         _healingEffect.gameObject.SetActive(false);
         _magicGuardEffect.gameObject.SetActive(false);
         _hyperBodyEffect.gameObject.SetActive(false);
+        _ironBodyEffect.gameObject.SetActive(false);
 
 
         if (_slowJob != null)

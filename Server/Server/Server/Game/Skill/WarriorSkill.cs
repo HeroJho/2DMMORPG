@@ -19,6 +19,7 @@ namespace Server
             // 전직할 시 추가되는 스킬 정보
             SkillPoints.Add(2004, 1);
             SkillPoints.Add(2007, 1);
+            SkillPoints.Add(2008, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
 
@@ -61,6 +62,11 @@ namespace Server
                         {
                             _player.Condition.HyperBody(skillData, point);
                         }
+                        else if (skillData.id == 2008)
+                        {
+                            _player.Condition.IronBody(skillData, point);
+                        }
+
 
 
                     }
