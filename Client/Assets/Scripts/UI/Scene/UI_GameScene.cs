@@ -16,8 +16,10 @@ public class UI_GameScene : UI_Scene
     public UI_ShortcutKeys ShortcutKeyUI { get; private set; }
     public UI_Skill SkillUI { get; private set; }
     public UI_QuestPanel QuestUI { get; private set; }
-    public UI_CanClassUp ClassUp { get; private set; }
+    public UI_BuffPanel BuffUI { get; private set; }
 
+
+    public UI_CanClassUp ClassUp { get; private set; }
     public UI_DescriptionBox DescriptionBox { get; private set; }
 
     public override void Init()
@@ -33,8 +35,10 @@ public class UI_GameScene : UI_Scene
         ShortcutKeyUI = GetComponentInChildren<UI_ShortcutKeys>();
         SkillUI = GetComponentInChildren<UI_Skill>();
         QuestUI = GetComponentInChildren<UI_QuestPanel>();
-        DescriptionBox = GetComponentInChildren<UI_DescriptionBox>();
+        BuffUI = GetComponentInChildren<UI_BuffPanel>();
+
         ClassUp = GetComponentInChildren<UI_CanClassUp>();
+        DescriptionBox = GetComponentInChildren<UI_DescriptionBox>();
 
         StatUI.gameObject.SetActive(false);
         InvenUI.gameObject.SetActive(false);

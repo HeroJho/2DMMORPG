@@ -10,6 +10,7 @@ public class Condition : MonoBehaviour
     private CreatureController _creatureController;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+    private UI_GameScene _gameSceneUI;
 
     private Animator _posionEffect;
     private Animator _stunEffect;
@@ -22,6 +23,7 @@ public class Condition : MonoBehaviour
 
     public void Start()
     {
+        _gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
         _creatureController = GetComponent<CreatureController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
@@ -69,6 +71,8 @@ public class Condition : MonoBehaviour
                     HyperBody(changeConditionPacket.Time);
                 else if (changeConditionPacket.SkillId == 2008)
                     IronBody(changeConditionPacket.Time);
+
+                _gameSceneUI.BuffUI.AddBuff(changeConditionPacket.SkillId, changeConditionPacket.Time);
                 break;
             default:
                 break;

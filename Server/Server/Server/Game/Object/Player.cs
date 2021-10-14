@@ -347,10 +347,7 @@ namespace Server
 
             Mp += mp;
 
-            S_ChangeMp changeMpPacket = new S_ChangeMp();
-            changeMpPacket.ObjectId = Id;
-            changeMpPacket.Mp = Mp;
-            Room.Broadcast(CellPos, changeMpPacket);
+            UpdateHpMpStat();
         }
 
         public void BecomeGhost()

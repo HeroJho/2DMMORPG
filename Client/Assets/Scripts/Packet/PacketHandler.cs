@@ -90,6 +90,9 @@ class PacketHandler
 		cc.Stat.MaxHp = changeHpPacket.MaxHp;
 		cc.Hp = changeHpPacket.Hp;
 
+		// 스텟창 갱신
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.StatUI.RefreshUI();
 	}
 
 	public static void S_ChangeMpHandler(PacketSession session, IMessage packet)
@@ -107,6 +110,9 @@ class PacketHandler
 		pc.Stat.MaxMp = changeMpPacket.MaxMp;
 		pc.Mp = changeMpPacket.Mp;
 
+		// 스텟창 갱신
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.StatUI.RefreshUI();
 	}
 
 	public static void S_DieHandler(PacketSession session, IMessage packet)

@@ -116,7 +116,7 @@ public class UI_Stat : UI_Base
         Get<Text>((int)Texts.NameText).text = player.name;
 
         int totalDamage = player.Stat.Attack + player.WeaponDamage;
-        int totalDefence = player.Stat.Attack + player.ArmorDefence;
+        int totalDefence = player.Stat.Defence + player.ArmorDefence;
         Get<Text>((int)Texts.AttackValueText).text = $"{totalDamage}(+{player.WeaponDamage})";
         Get<Text>((int)Texts.DefenceValueText).text = $"{totalDefence}(+{player.ArmorDefence})";
         Get<Text>((int)Texts.HPValueText).text = $"{player.Stat.Hp}/{player.Stat.MaxHp}";
