@@ -17,6 +17,8 @@ ScriptsOnlyBuild:
     - QuestGiver
     - SummoningController
     - TreeController
+    - UI_Buff
+    - UI_BuffPanel
     - UI_CanClassUp
     - UI_ClassUp
     - UI_DescriptionBox
@@ -114,6 +116,10 @@ ScriptsOnlyBuild:
     - Class: 23
       Script: {instanceID: 0}
     - Class: 28
+      Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
+    - Class: 43
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
@@ -216,65 +222,69 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12786}
     - Class: 114
-      Script: {instanceID: 12888}
+      Script: {instanceID: 12818}
     - Class: 114
-      Script: {instanceID: 12926}
+      Script: {instanceID: 12890}
     - Class: 114
-      Script: {instanceID: 12982}
+      Script: {instanceID: 12928}
     - Class: 114
-      Script: {instanceID: 13168}
+      Script: {instanceID: 12984}
     - Class: 114
-      Script: {instanceID: 13246}
+      Script: {instanceID: 13170}
     - Class: 114
-      Script: {instanceID: 13418}
+      Script: {instanceID: 13248}
     - Class: 114
-      Script: {instanceID: 13506}
+      Script: {instanceID: 13420}
     - Class: 114
-      Script: {instanceID: 13554}
+      Script: {instanceID: 13508}
     - Class: 114
-      Script: {instanceID: 13568}
+      Script: {instanceID: 13556}
     - Class: 114
-      Script: {instanceID: 13574}
+      Script: {instanceID: 13570}
     - Class: 114
-      Script: {instanceID: 13578}
+      Script: {instanceID: 13576}
     - Class: 114
-      Script: {instanceID: 13652}
+      Script: {instanceID: 13580}
     - Class: 114
-      Script: {instanceID: 13656}
+      Script: {instanceID: 13654}
     - Class: 114
       Script: {instanceID: 13658}
     - Class: 114
-      Script: {instanceID: 13690}
+      Script: {instanceID: 13660}
     - Class: 114
-      Script: {instanceID: 13916}
+      Script: {instanceID: 13692}
     - Class: 114
-      Script: {instanceID: 13978}
+      Script: {instanceID: 13918}
     - Class: 114
-      Script: {instanceID: 14048}
+      Script: {instanceID: 13980}
     - Class: 114
-      Script: {instanceID: 14220}
+      Script: {instanceID: 14050}
     - Class: 114
-      Script: {instanceID: 14308}
+      Script: {instanceID: 14222}
     - Class: 114
-      Script: {instanceID: 14332}
+      Script: {instanceID: 14310}
     - Class: 114
-      Script: {instanceID: 14352}
+      Script: {instanceID: 14334}
+    - Class: 114
+      Script: {instanceID: 14354}
     - Class: 114
       Script: {instanceID: 14366}
     - Class: 114
-      Script: {instanceID: 14522}
+      Script: {instanceID: 14370}
     - Class: 114
-      Script: {instanceID: 14538}
+      Script: {instanceID: 14526}
     - Class: 114
-      Script: {instanceID: 14654}
+      Script: {instanceID: 14542}
     - Class: 114
-      Script: {instanceID: 14708}
+      Script: {instanceID: 14658}
     - Class: 114
-      Script: {instanceID: 14734}
+      Script: {instanceID: 14712}
     - Class: 114
-      Script: {instanceID: 14752}
+      Script: {instanceID: 14738}
     - Class: 114
-      Script: {instanceID: 14780}
+      Script: {instanceID: 14756}
+    - Class: 114
+      Script: {instanceID: 14784}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -762,7 +772,7 @@ ScriptsOnlyBuild:
     className: ScrollRect
   - hash:
       serializedVersion: 2
-      Hash: 73e580d4097087b6ba95ff5e7110655a
+      Hash: c0bcd6eaf24c85f59228dd596c76b22f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: QuestGiver
@@ -784,6 +794,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: CinemachineComposer
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_BuffPanel
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1114,6 +1130,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_StyleSheet
+  - hash:
+      serializedVersion: 2
+      Hash: 2fadadfa91f815a312098843bbd47938
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_Buff
   - hash:
       serializedVersion: 2
       Hash: 9b28d530eb7b341ecd3d2968ce697630

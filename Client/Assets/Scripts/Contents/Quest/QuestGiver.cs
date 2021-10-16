@@ -2,7 +2,6 @@
 using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +9,6 @@ public class QuestGiver : MonoBehaviour
 {
     public int NpcId { get; set; }
 
-    [SerializeField]
-    private TextMeshPro NameBox;
     public string NpcName { get; private set; }
     public string Description { get; private set; }
 
@@ -23,8 +20,6 @@ public class QuestGiver : MonoBehaviour
 
     public void Init(NpcData npcData)
     {
-        NpcName = npcData.name;
-        NameBox.text = NpcName;
         Description = npcData.Description;
     }
 

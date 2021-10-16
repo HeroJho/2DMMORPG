@@ -1,12 +1,29 @@
 ﻿using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CreatureController : BaseController
 {
 	HpBar _hpBar;
 	Condition _condition;
+
+	private TextMeshPro _nameBox = null;
+	public string Name 
+	{
+		get
+        {
+			return Name;
+        }
+		set
+        {
+			if(_nameBox == null)
+				_nameBox = Managers.Resource.Instantiate("UI/NameBox", gameObject.transform).GetComponentInChildren<TextMeshPro>();
+
+			_nameBox.text = value;
+        }
+	}
 
 	public CreatureController()
 	{

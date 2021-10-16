@@ -71,6 +71,7 @@ public class ObjectManager
                         _objects.Add(info.ObjectId, go);
 
                         MyPlayer = go.GetComponent<MyPlayerController>();
+                        MyPlayer.Name = info.Name;
                         MyPlayer.Id = info.ObjectId;
                         MyPlayer.PosInfo = info.PosInfo;
                         MyPlayer.Stat = info.StatInfo;
@@ -89,6 +90,7 @@ public class ObjectManager
                         _objects.Add(info.ObjectId, go);
 
                         PlayerController pc = go.GetComponent<PlayerController>();
+                        pc.Name = info.Name;
                         pc.Id = info.ObjectId;
                         pc.PosInfo = info.PosInfo;
                         pc.Stat = info.StatInfo;
@@ -106,6 +108,7 @@ public class ObjectManager
                     _objects.Add(info.ObjectId, go);
 
                     MonsterController mc = go.GetComponent<MonsterController>();
+                    mc.Name = monsterData.name;
                     mc.PosInfo = info.PosInfo;
                     mc.Stat = info.StatInfo;
                     mc.SyncPos();
@@ -361,6 +364,7 @@ public class ObjectManager
 
         // 위치를 설정
         NpcController nc = go.GetComponent<NpcController>();
+        nc.Name = info.Name;
         nc.PosInfo = info.PosInfo;
         nc.State = CreatureState.Idle;
         nc.SyncPos();
