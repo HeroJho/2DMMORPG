@@ -360,6 +360,16 @@ namespace Server
             return null;
         }
 
+        public Player FindPlayerById(int id)
+        {
+            Player player = null;
+
+            if (_players.TryGetValue(id, out player) == false)
+                return null;
+
+            return player;
+        }
+
         public Zone GetZone(Vector2Int cellPos)
         {
             int x = (cellPos.x - Map.MinX) / ZoneCells;

@@ -17,6 +17,10 @@ namespace Server.DB
             if (player == null || room == null)
                 return;
 
+            // Hp같은 경우는 버프로 MaxHp가 증가해서 초과 할 수도 있음
+            if (player.Hp > player.Stat.MaxHp)
+                player.Hp = player.Stat.MaxHp;
+
             // Me (GameRoom)
             PlayerDb playerDb = new PlayerDb();
             {

@@ -395,6 +395,10 @@ message S_ChangeConditionInfo{
     int32 skillId = 6;
 }
 
+message C_InvitePlayer{
+    int32 playerId = 1;
+}
+
 message ItemInfo{
     int32 itemDbId = 1;
     int32 templateId = 2;

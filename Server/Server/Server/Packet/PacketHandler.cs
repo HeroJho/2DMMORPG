@@ -250,5 +250,21 @@ namespace Server
             room.Push(room.HandleClassUp, player, classUpPacket);
         }
 
+        public static void C_InvitePlayerHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_InvitePlayer invitePlayerPacket = (C_InvitePlayer)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleInvitePlayerToParty, player, invitePlayerPacket);
+        }
+
     }
 }

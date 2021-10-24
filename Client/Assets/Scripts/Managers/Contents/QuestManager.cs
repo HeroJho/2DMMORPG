@@ -121,13 +121,12 @@ public class QuestManager
 
     }
 
-    public void ViewQuest(Vector3Int cellPos)
+    public void ViewQuest(NpcController nc)
     {
-        GameObject go = Managers.Object.FindNpc(cellPos);
-        if (go == null)
+        if (nc == null)
             return;
 
-        QuestGiver npc = go.GetComponent<QuestGiver>();
+        QuestGiver npc = nc.GetComponent<QuestGiver>();
 
         // 완료가능 > 수행가능 > 수행중 순으로 반환
         Quest quest = npc.FindStateQuest();

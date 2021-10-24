@@ -238,9 +238,26 @@ public class MyPlayerController : PlayerController
 			}
         }
 		
+		// 바로 앞 오브젝트와 상호작용
 		if(Input.GetKeyDown(KeyCode.Space))
         {
-			Managers.Quest.ViewQuest(GetFrontCellPos());
+			GameObject go = Managers.Object.FindNpc(GetFrontCellPos());
+			if (go == null)
+				return;
+
+			if(go.GetComponent<NpcController>())
+            {
+				NpcController nc = go.GetComponent<NpcController>();
+				Managers.Quest.ViewQuest(nc);
+			}
+            else if (go.GetComponent<PlayerController>())
+            {
+				// TODO : Player상호작용 창 띄우기
+				// 파티 신청하기
+				C_InvitePlayer invitePlayerPacket = new C_InvitePlayer();
+				invitePlayerPacket.PlayerId = go.GetComponent<PlayerController>().Id;
+			}
+
         }
 
 	}

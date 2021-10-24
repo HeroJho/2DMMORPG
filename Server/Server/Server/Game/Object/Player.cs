@@ -13,6 +13,7 @@ namespace Server
         public SkillManager Skill { get; private set; }
         public QuestManager Quest { get; private set; }
         public ObstacleManager Obstacle { get; private set; }
+        public Communication Communication { get; private set; }
         public JobClassType JobClassType 
         { 
             get
@@ -88,6 +89,7 @@ namespace Server
             Skill = new SkillManager(this);
             Quest = new QuestManager(this);
             Obstacle = new ObstacleManager();
+            Communication = new Communication(this);
 
         }
 
