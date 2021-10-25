@@ -38,20 +38,28 @@ namespace Server
 
         public void InvitePlayerToParty(Player player)
         {
-
             // 파티가 없다면 만들어서 초대
             if(Party == null)
                 MakeParty();
             // 파티장이 아니라면 초대 불가능
             if (Party.LeaderPlayer != _player)
+            {
+                Console.WriteLine("You're not Leader!");
                 return;
+            }
+
             // 이미 가입한 플레이어다
-            if (Party.AddPlayer(player))
+            if (!Party.AddPlayer(player))
+            {
+                Console.WriteLine("This Player is already in Party!");
                 return;
+            }
+                
             // 가입한 플레이어의 Party를 지금 Party로 저장
             player.Communication.Party = Party;
 
             Party.SendPartyInfo();
+
         }
 
         public void ResetCommunication()

@@ -241,7 +241,7 @@ public class MyPlayerController : PlayerController
 		// 바로 앞 오브젝트와 상호작용
 		if(Input.GetKeyDown(KeyCode.Space))
         {
-			GameObject go = Managers.Object.FindNpc(GetFrontCellPos());
+			GameObject go = Managers.Object.FindCollsion(GetFrontCellPos());
 			if (go == null)
 				return;
 
@@ -256,8 +256,9 @@ public class MyPlayerController : PlayerController
 				// 파티 신청하기
 				C_InvitePlayer invitePlayerPacket = new C_InvitePlayer();
 				invitePlayerPacket.PlayerId = go.GetComponent<PlayerController>().Id;
+				Managers.Network.Send(invitePlayerPacket);
 			}
-
+			
         }
 
 	}

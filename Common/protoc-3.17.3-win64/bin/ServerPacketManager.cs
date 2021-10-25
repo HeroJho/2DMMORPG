@@ -79,6 +79,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CClassUp, MakePacket<C_ClassUp>);
             _handler.Add((ushort)MsgId.CClassUp, PacketHandler.C_ClassUpHandler);
 
+            _onRecv.Add((ushort)MsgId.CInvitePlayer, MakePacket<C_InvitePlayer>);
+            _handler.Add((ushort)MsgId.CInvitePlayer, PacketHandler.C_InvitePlayerHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

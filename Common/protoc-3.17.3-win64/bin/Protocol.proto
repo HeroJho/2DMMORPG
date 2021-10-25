@@ -54,6 +54,7 @@ enum MsgId{
     S_CLASS_UP = 47;
     C_CLASS_UP = 48;
     S_CHANGE_CONDITION_INFO = 49;
+    C_INVITE_PLAYER = 50;
 }
 
 enum CreatureState{
