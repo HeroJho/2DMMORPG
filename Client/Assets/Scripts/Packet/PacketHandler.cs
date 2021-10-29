@@ -456,4 +456,18 @@ class PacketHandler
 		condition.UpdateCondition(changeConditionPacket);
 	}
 
+	public static void S_PartyListHandler(PacketSession session, IMessage packet)
+	{
+		S_PartyList partyListPacket = (S_PartyList)packet;
+
+		List<ObjectInfo> infos = new List<ObjectInfo>();
+		foreach (ObjectInfo info in partyListPacket.PlayerInfos)
+        {
+			infos.Add(info);
+		}
+
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.PartyPanelUI.SetPartyInfos(infos);
+	}
+
 }

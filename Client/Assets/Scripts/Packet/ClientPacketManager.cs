@@ -127,6 +127,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SChangeConditionInfo, MakePacket<S_ChangeConditionInfo>);
             _handler.Add((ushort)MsgId.SChangeConditionInfo, PacketHandler.S_ChangeConditionInfoHandler);
 
+            _onRecv.Add((ushort)MsgId.SPartyList, MakePacket<S_PartyList>);
+            _handler.Add((ushort)MsgId.SPartyList, PacketHandler.S_PartyListHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

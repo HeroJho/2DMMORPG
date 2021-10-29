@@ -17,6 +17,8 @@ public class UI_GameScene : UI_Scene
     public UI_Skill SkillUI { get; private set; }
     public UI_QuestPanel QuestUI { get; private set; }
     public UI_BuffPanel BuffUI { get; private set; }
+    public UI_InteractionPanel InteractionUI { get; private set; }
+    public UI_PartyPanel PartyPanelUI { get; private set; }
 
 
     public UI_CanClassUp ClassUp { get; private set; }
@@ -36,6 +38,8 @@ public class UI_GameScene : UI_Scene
         SkillUI = GetComponentInChildren<UI_Skill>();
         QuestUI = GetComponentInChildren<UI_QuestPanel>();
         BuffUI = GetComponentInChildren<UI_BuffPanel>();
+        InteractionUI = GetComponentInChildren<UI_InteractionPanel>();
+        PartyPanelUI = GetComponentInChildren<UI_PartyPanel>();
 
         ClassUp = GetComponentInChildren<UI_CanClassUp>();
         DescriptionBox = GetComponentInChildren<UI_DescriptionBox>();
@@ -44,6 +48,7 @@ public class UI_GameScene : UI_Scene
         InvenUI.gameObject.SetActive(false);
         SkillUI.gameObject.SetActive(false);
         ClassUp.gameObject.SetActive(false);
+        InteractionUI.gameObject.SetActive(false);
     }
 
     void BindEvent()

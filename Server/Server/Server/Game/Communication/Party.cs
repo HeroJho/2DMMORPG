@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Google.Protobuf.Protocol;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -33,13 +34,19 @@ namespace Server
 
         public void SendPartyInfo()
         {
+            if (PartyList.Count <= 0)
+                return;
+
             Console.WriteLine("Party List: ");
+            S_PartyList partyListPacket = new S_PartyList();
             foreach (Player player in PartyList.Values)
             {
-                // TODO : 파티정보 패킷 전송
-                //player.Session.Send();
+                partyListPacket.PlayerInfos.Add(player.Info);
+            }
 
-                Console.WriteLine($"id : {player.Id}");
+            foreach (Player player in PartyList.Values)
+            {
+                player.Session.Send(partyListPacket);
             }
         }
 

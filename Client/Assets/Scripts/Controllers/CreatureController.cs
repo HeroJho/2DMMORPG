@@ -9,18 +9,20 @@ public class CreatureController : BaseController
 	HpBar _hpBar;
 	Condition _condition;
 
+	string _name = null;
 	private TextMeshPro _nameBox = null;
 	public string Name 
 	{
 		get
         {
-			return Name;
+			return _name;
         }
 		set
         {
 			if(_nameBox == null)
 				_nameBox = Managers.Resource.Instantiate("UI/NameBox", gameObject.transform).GetComponentInChildren<TextMeshPro>();
 
+			_name = value;
 			_nameBox.text = value;
         }
 	}

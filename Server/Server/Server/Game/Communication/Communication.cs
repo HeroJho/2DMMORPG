@@ -25,6 +25,7 @@ namespace Server
 
             // 내가 만들었으니 파티장은 나
             Party = new Party(_player);
+            Party.AddPlayer(_player);
 
             Party.SendPartyInfo();
         }
@@ -48,6 +49,13 @@ namespace Server
                 return;
             }
 
+            // 4인 이상이다
+            if (Party.PartyList.Count >= 4)
+            {
+                Console.WriteLine("Pull Party!");
+                return;
+            }
+
             // 이미 가입한 플레이어다
             if (!Party.AddPlayer(player))
             {
@@ -61,6 +69,17 @@ namespace Server
             Party.SendPartyInfo();
 
         }
+
+        public void SendPartyInfo()
+        {
+            // 파티가 없다면 보내지 않음
+            if (Party == null)
+                return;
+
+            Party.SendPartyInfo();
+        }
+
+
 
         public void ResetCommunication()
         {

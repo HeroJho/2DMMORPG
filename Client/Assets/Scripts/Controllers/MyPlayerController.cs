@@ -252,11 +252,10 @@ public class MyPlayerController : PlayerController
 			}
             else if (go.GetComponent<PlayerController>())
             {
-				// TODO : Player상호작용 창 띄우기
-				// 파티 신청하기
-				C_InvitePlayer invitePlayerPacket = new C_InvitePlayer();
-				invitePlayerPacket.PlayerId = go.GetComponent<PlayerController>().Id;
-				Managers.Network.Send(invitePlayerPacket);
+				_gameSceneUI.InteractionUI.SetPlayerInfo(go.GetComponent<PlayerController>());
+				
+				if(_gameSceneUI.InteractionUI.gameObject.activeSelf == false)
+					_gameSceneUI.InteractionUI.gameObject.SetActive(true);
 			}
 			
         }
