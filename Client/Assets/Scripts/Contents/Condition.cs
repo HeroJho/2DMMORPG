@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Condition : MonoBehaviour
 {
-
     private CreatureController _creatureController;
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
@@ -72,7 +71,9 @@ public class Condition : MonoBehaviour
                 else if (changeConditionPacket.SkillId == 2008)
                     IronBody(changeConditionPacket.Time);
 
-                _gameSceneUI.BuffUI.AddBuff(changeConditionPacket.SkillId, changeConditionPacket.Time);
+                // 버프UI는 내 플레어만 띄우면 됨
+                if (Managers.Object.MyPlayer.Id == changeConditionPacket.Id)
+                    _gameSceneUI.BuffUI.AddBuff(changeConditionPacket.SkillId, changeConditionPacket.Time);
                 break;
             default:
                 break;

@@ -405,6 +405,9 @@ namespace Server
 
             Room.Broadcast(CellPos, changeHp);
             Room.Broadcast(CellPos, changeMp);
+
+            // 파티의 경우 VisionCube범위가 아니더라도 체력 정보가 정송 돼야함
+            Communication.SendPartyInfo();
         }
     }
 }

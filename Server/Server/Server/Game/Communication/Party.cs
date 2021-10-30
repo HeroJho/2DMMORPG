@@ -37,11 +37,17 @@ namespace Server
             if (PartyList.Count <= 0)
                 return;
 
-            Console.WriteLine("Party List: ");
             S_PartyList partyListPacket = new S_PartyList();
+            partyListPacket.LeaderPlayer = new ObjectInfo(LeaderPlayer.Info);
+            // 버퍼에 따른 맥스치를 보내줘야 함 > 해당 버프를 사용시 이 함수 실행
+            partyListPacket.LeaderPlayer.StatInfo.MaxHp = LeaderPlayer.TotalMaxHp;
+            partyListPacket.LeaderPlayer.StatInfo.MaxMp = LeaderPlayer.TotalMaxMp;
             foreach (Player player in PartyList.Values)
             {
-                partyListPacket.PlayerInfos.Add(player.Info);
+                ObjectInfo obj = new ObjectInfo(player.Info);
+                obj.StatInfo.MaxHp = player.TotalMaxHp;
+                obj.StatInfo.MaxMp = player.TotalMaxMp;
+                partyListPacket.PlayerInfos.Add(obj);
             }
 
             foreach (Player player in PartyList.Values)

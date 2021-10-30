@@ -176,6 +176,7 @@ namespace Server
 
 		public virtual void UpdateHpMpStat()
 		{
+			// 몬스터의 경우는 MP가 없다
 			S_ChangeHp changeHp = new S_ChangeHp();
 			changeHp.ObjectId = Id;
 			changeHp.Hp = Hp;

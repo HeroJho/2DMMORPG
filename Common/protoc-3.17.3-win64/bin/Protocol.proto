@@ -402,7 +402,8 @@ message C_InvitePlayer{
 }
 
 message S_PartyList{
-    repeated ObjectInfo playerInfos = 1;
+    ObjectInfo leaderPlayer = 1;
+    repeated ObjectInfo playerInfos = 2;
 }
 
 message ItemInfo{

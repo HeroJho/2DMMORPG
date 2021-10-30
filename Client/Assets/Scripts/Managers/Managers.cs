@@ -15,6 +15,7 @@ public class Managers : MonoBehaviour
     SkillManager _skill = new SkillManager();
     QuestManager _quest = new QuestManager();
     CutSceneManager _cutScene;
+    CommunicationManager _communication = new CommunicationManager();
 
 
 
@@ -25,6 +26,8 @@ public class Managers : MonoBehaviour
     public static SkillManager Skill { get { return Instance._skill; } }
     public static QuestManager Quest { get { return Instance._quest; } }
     public static CutSceneManager CutScene { get { return Instance._cutScene; } }
+    public static CommunicationManager Communication { get { return Instance._communication; } }
+    
     #endregion
 
     #region Core

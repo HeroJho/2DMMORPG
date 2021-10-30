@@ -111,14 +111,14 @@ namespace Server
 
             int time = skillData.conditions[skillLevel].Time;
             int plusValue = (int)(_creatureObj.Stat.MaxHp * (skillData.conditions[skillLevel].CommonValue * 0.01f));
-            Console.WriteLine(plusValue);
+
             if(plusValue != 0)
             {
                 _hyperMaxHp = plusValue;
                 _creatureObj.UpdateHpMpStat();
             }
 
-            // 시간후에 원래속도 되돌림
+            // 시간후에 체력으로 되돌림
             _hyperBodyJob = room.PushAfter(time * 1000, () =>
             {
                 _hyperMaxHp = 0;

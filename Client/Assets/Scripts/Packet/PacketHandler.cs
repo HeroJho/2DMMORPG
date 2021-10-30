@@ -460,14 +460,16 @@ class PacketHandler
 	{
 		S_PartyList partyListPacket = (S_PartyList)packet;
 
-		List<ObjectInfo> infos = new List<ObjectInfo>();
+		Managers.Communication.Party.LeaderPlayer = partyListPacket.LeaderPlayer;
+
 		foreach (ObjectInfo info in partyListPacket.PlayerInfos)
         {
-			infos.Add(info);
+			Managers.Communication.Party.AddPlayer(info);
 		}
 
-		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-		gameSceneUI.PartyPanelUI.SetPartyInfos(infos);
-	}
+        // 이젠 커뮤니티 매니저를 거쳐서 UI 표시
+        UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+        gameSceneUI.PartyPanelUI.SetPartyInfos();
+    }
 
 }
