@@ -58,21 +58,13 @@ namespace Server
                     break;
                 case SkillType.SkillBuff:
                     {
-                        if (skillData.id == 2007)
-                        {
-                            _player.Condition.HyperBody(skillData, point);
-                        }
-                        else if (skillData.id == 2008)
-                        {
-                            _player.Condition.IronBody(skillData, point);
-                        }
-
-
+                        UseBuff(skillData, point);
 
                     }
                     break;
             }
         }
+
 
     }
 }

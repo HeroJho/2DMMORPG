@@ -84,13 +84,7 @@ namespace Server.Data
 
     public class buffInfo
     {
-        public string name;
-        public List<buffPointInfo> buffPointInfos;
-    }
-    public class buffPointInfo
-    {
-        public int radian;
-        public int duration;
+        public bool canShare;
     }
 
 

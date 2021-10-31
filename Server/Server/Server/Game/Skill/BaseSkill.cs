@@ -71,6 +71,9 @@ namespace Server
 
         public virtual void SkillInfo(Skill skillData, int point)
         {
+            if (_player == null || _player.Room == null)
+                return;
+
             switch (skillData.skillType)
             {
                 case SkillType.SkillAuto:
@@ -136,5 +139,56 @@ namespace Server
             SkillPoints[templateId] = level + 1;
             return true;
         }
+
+        public void UseBuff(Skill skillData, int point)
+        {
+            if (_player == null || _player.Room == null)
+                return;
+
+            // 공유가능한 버프이다
+            if (_player.Communication.Party != null && skillData.buff.canShare)
+            {
+                foreach (Player party in _player.Communication.Party.PartyList.Values)
+                {
+                    if (party == null || party.Room == null)
+                        return;
+
+                    switch (skillData.id)
+                    {
+                        case 2006:
+                            party.Condition.MagicGuard(skillData, point);
+                            break;
+                        case 2007:
+                            party.Condition.HyperBody(skillData, point);
+                            break;
+                        case 2008:
+                            party.Condition.IronBody(skillData, point);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+            else
+            {
+                switch (skillData.id)
+                {
+                    case 2006:
+                        _player.Condition.MagicGuard(skillData, point);
+                        break;
+                    case 2007:
+                        _player.Condition.HyperBody(skillData, point);
+                        break;
+                    case 2008:
+                        _player.Condition.IronBody(skillData, point);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }
+
     }
 }

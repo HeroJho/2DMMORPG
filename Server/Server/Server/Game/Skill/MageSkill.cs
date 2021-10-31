@@ -134,14 +134,11 @@ namespace Server
                     break;
                 case SkillType.SkillBuff:
                     {
-                        if (skillData.id == 2006)
-                        {
-                            _player.Condition.MagicGuard(skillData, point);
-                        }
-
+                        UseBuff(skillData, point);
 
                     }
                     break;
+
 
             }
         }

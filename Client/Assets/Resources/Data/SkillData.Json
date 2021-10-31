@@ -619,7 +619,10 @@
           "stunChanceValue": "0",
           "commonValue": "80"
         }
-      ]
+      ],
+      "buff": {
+        "canShare": "false" 
+      }
 
     },
 
@@ -702,7 +705,10 @@
           "stunChanceValue": "0",
           "commonValue": "80"
         }
-      ]
+      ],
+      "buff": {
+        "canShare": "true"
+      }
 
     },
 
@@ -785,7 +791,10 @@
           "stunChanceValue": "0",
           "commonValue": "80"
         }
-      ]
+      ],
+      "buff": {
+        "canShare": "true"
+      }
 
     }
 

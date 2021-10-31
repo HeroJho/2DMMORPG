@@ -30,7 +30,6 @@ namespace Server
 
             SendConditionPacket(ConditionType.ConditionChilled, time);
         }
-
         public void Poison(Skill skillData, int skillLevel, GameObject speller)
         {
             if(speller == null || speller.Room == null)
@@ -45,7 +44,6 @@ namespace Server
 
             SendConditionPacket(ConditionType.ConditionPoison, time);
         }
-
         public void Healing(Skill skillData, int skillLevel, GameObject speller)
         {
             if (speller == null || speller.Room == null)
@@ -60,6 +58,7 @@ namespace Server
 
             SendConditionPacket(ConditionType.ConditionHealing, time);
         }
+
 
         IJob _magicGuardJob;
         float _magicGuardValue = 0;
@@ -131,7 +130,6 @@ namespace Server
 
             SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
         }
-
         IJob _ironBodyJob;
         int _ironBodyValue = 0;
         public void IronBody(Skill skillData, int skillLevel)
@@ -488,6 +486,7 @@ namespace Server
 
             return totalMaxMp;
         }
+
 
     }
 }

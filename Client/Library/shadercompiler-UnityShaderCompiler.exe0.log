@@ -4,7 +4,3 @@ Cmd: preprocessCompute
   insize=1953 outsize=1957 ok=1
 Cmd: preprocessCompute
   insize=1953 outsize=1957 ok=1
-Cmd: preprocessCompute
-  insize=1953 outsize=1957 ok=1
-Cmd: preprocessCompute
-  insize=1953 outsize=1957 ok=1
