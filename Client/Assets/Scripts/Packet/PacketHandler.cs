@@ -462,9 +462,17 @@ class PacketHandler
 
 		Managers.Communication.Party.LeaderPlayer = partyListPacket.LeaderPlayer;
 
-		foreach (ObjectInfo info in partyListPacket.PlayerInfos)
+		if(partyListPacket.PlayerInfos != null)
+		{
+			Managers.Communication.Party.PartyList.Clear();
+			foreach (ObjectInfo info in partyListPacket.PlayerInfos)
+			{
+				Managers.Communication.Party.AddPlayer(info);
+			}
+		}
+		else
         {
-			Managers.Communication.Party.AddPlayer(info);
+			Managers.Communication.Party.PartyList.Clear();
 		}
 
         // 이젠 커뮤니티 매니저를 거쳐서 UI 표시

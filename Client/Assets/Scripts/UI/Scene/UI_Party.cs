@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UI_Party : UI_Base
 {
-    public PlayerController Pc { get; set; }
+    public ObjectInfo ObjInfo { get; set; } = null;
 
     [SerializeField]
     private Text _name;
@@ -14,14 +14,19 @@ public class UI_Party : UI_Base
     private Slider _hpBar;
     [SerializeField]
     private Slider _mpBar;
+    [SerializeField]
+    private Button _quitButton;
+    public GameObject LeaderMark;
 
     public override void Init()
     {
-        
+
+        BindEvent();
     }
 
     public void SetInfo(ObjectInfo objInfo)
     {
+        ObjInfo = objInfo;
         _name.text = objInfo.Name;
         SetHpBar(objInfo.StatInfo.Hp, objInfo.StatInfo.MaxHp);
         SetMpBar(objInfo.StatInfo.Mp, objInfo.StatInfo.MaxMp);
@@ -49,5 +54,20 @@ public class UI_Party : UI_Base
         ratio = Mathf.Clamp(ratio, 0, 1);
         _mpBar.value = ratio;
     }
+
+    void BindEvent()
+    {
+        BindEvent(_quitButton.gameObject, (e) =>
+        {
+            if (ObjInfo == null)
+                return;
+
+            C_QuitParty quitPartyPacket = new C_QuitParty();
+            quitPartyPacket.Id = ObjInfo.ObjectId;
+            Managers.Network.Send(quitPartyPacket);
+
+        }, Define.UIEvent.LeftClick);
+    }
+
 
 }

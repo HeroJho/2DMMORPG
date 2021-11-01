@@ -23,10 +23,10 @@ namespace Server
             if (Duration > Environment.TickCount) // 지속 시간일 때
             {
                 HashSet<Player> objects = Room.Map.LoopByCircle<Player>(CellPos, Radian, true);
-
+               
                 foreach (Player co in objects)
                 {
-                    if(co == Owner)
+                    if((Owner as Player).Communication.Party != null && (Owner as Player).Communication.Party.FindPlayerById(co.Id) != null)
                         co.Condition.Healing(_skillData, _skillLevel, Owner);
                 }
             }

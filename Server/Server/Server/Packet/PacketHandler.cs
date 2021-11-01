@@ -266,5 +266,21 @@ namespace Server
             room.Push(room.HandleInvitePlayerToParty, player, invitePlayerPacket);
         }
 
+        public static void C_QuitPartyHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_QuitParty quitPartyPacket = (C_QuitParty)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleQuitParty, player, quitPartyPacket);
+        }
+
     }
 }

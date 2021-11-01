@@ -153,9 +153,11 @@ namespace Server
         public void OnLeaveGame()
         {
             // DB 연동
-
             DbTransaction.SavePlayerStatus_AllInOne(this, Room);
             DbTransaction.SavePlayerQuests_AllInOne(this, Room);
+
+            if (Communication.Party != null)
+                Communication.RemoveParty();
         }
 
         public void HandleEquipItem(C_EquipItem equipPacket)

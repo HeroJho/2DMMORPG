@@ -55,7 +55,8 @@ enum MsgId{
     C_CLASS_UP = 48;
     S_CHANGE_CONDITION_INFO = 49;
     C_INVITE_PLAYER = 50;
-    S_Party_LIst = 51;
+    S_PARTY_LIST = 51;
+    C_QUIT_PARTY = 52;
 }
 
 enum CreatureState{
@@ -404,6 +405,10 @@ message C_InvitePlayer{
 message S_PartyList{
     ObjectInfo leaderPlayer = 1;
     repeated ObjectInfo playerInfos = 2;
+}
+
+message C_QuitParty{
+    int32 id = 1;
 }
 
 message ItemInfo{

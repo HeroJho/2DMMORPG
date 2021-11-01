@@ -23,13 +23,38 @@ namespace Server
                 return false;
 
             PartyList.Add(player.Id, player);
-
+            SendPartyInfo();
             return true;
+        }
+
+        public Player FindPlayerById(int id)
+        {
+            Player player = null;
+            if (PartyList.TryGetValue(id, out player) == false)
+                return null;
+
+            return player;
         }
         
         public void RemovePlayer(int playerId)
         {
+            Player tempPlayer = null;
+            if (PartyList.Remove(playerId, out tempPlayer) == false)
+                return;
 
+            tempPlayer.Communication.Party = null;
+
+            // 만약 파티장 이였다면 다음 사람으로 바꿔줌
+            if (LeaderPlayer.Id == playerId)
+            {
+                foreach (Player player in PartyList.Values)
+                    LeaderPlayer = player;
+            }
+
+            // 파티에서 삭제가 됐다면 어쨋든 파티원 전부 사라지는 패킷 전송
+            S_PartyList partyListPacket = new S_PartyList();
+            tempPlayer.Session.Send(partyListPacket);
+            SendPartyInfo();
         }
 
         public void SendPartyInfo()

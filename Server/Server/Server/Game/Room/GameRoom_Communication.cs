@@ -26,5 +26,24 @@ namespace Server
             player.Communication.InvitePlayerToParty(playerInvited);
         }
 
+        public void HandleQuitParty(Player player, C_QuitParty quitPartyPacket)
+        {
+            GameRoom room = player.Room;
+            if (player == null || room == null)
+                return;
+
+            // 자기 자신인가? >> 탈퇴
+            if(quitPartyPacket.Id == player.Id)
+            {
+                player.Communication.RemoveParty();
+                return;
+            }
+
+            // 파티장 인가? >> 강퇴
+            if(player.Communication.KickParty(quitPartyPacket.Id) == false)
+                Console.WriteLine("You're not Leader!");
+
+        }
+
     }
 }

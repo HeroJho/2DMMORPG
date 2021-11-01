@@ -61,7 +61,7 @@ public class UI_GameScene : UI_Scene
             if (keyInfo != null)
                 keyInfo.RemoveSlot();
 
-        },Define.UIEvent.Drop);
+        }, Define.UIEvent.Drop);
 
         BindEvent(Get<Image>((int)Images.DropPanel).gameObject, (e) =>
         {

@@ -720,32 +720,32 @@ PrefabInstance:
     - target: {fileID: 7017880221752844257, guid: 2c46f6c5efcdc164d9c64711b071bf02,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017880221752844257, guid: 2c46f6c5efcdc164d9c64711b071bf02,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017880221752844257, guid: 2c46f6c5efcdc164d9c64711b071bf02,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017880221752844257, guid: 2c46f6c5efcdc164d9c64711b071bf02,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017880221752844257, guid: 2c46f6c5efcdc164d9c64711b071bf02,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 145
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7017880221752844257, guid: 2c46f6c5efcdc164d9c64711b071bf02,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7276967895021204997, guid: 2c46f6c5efcdc164d9c64711b071bf02,
         type: 3}

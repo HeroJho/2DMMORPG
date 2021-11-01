@@ -10,18 +10,7 @@ public class Party
 
     public void AddPlayer(ObjectInfo objInfo)
     {
-        if (PartyList.ContainsKey(objInfo.ObjectId))
-        {
-            PartyList[objInfo.ObjectId] = objInfo;
-            return;
-        }
-
         PartyList.Add(objInfo.ObjectId, objInfo);
-    }
-
-    public void RemovePlayer(int id)
-    {
-        PartyList.Remove(id);
     }
 
 }
