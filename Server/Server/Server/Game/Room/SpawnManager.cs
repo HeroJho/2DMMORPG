@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -31,11 +32,15 @@ namespace Server
 
             _room = room;
 
+            // 스포너 정보를 Json에서 빼옴
             _monsterId = int.Parse(monsterId);
+            MonsterData data = null;
+            DataManager.MonsterDict.TryGetValue(_monsterId, out data);
+
             _spawnPos = new Vector2Int(int.Parse(x), int.Parse(y));
-            _maxCount = 3;
-            _genDelay = 5000;
-            _rangth = 4;
+            _maxCount = data.maxCount;
+            _genDelay = data.genDelay;
+            _rangth = data.rangth;
 
             MinX = _spawnPos.x - _rangth;
             MaxX = _spawnPos.x + _rangth;

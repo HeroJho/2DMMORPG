@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.IO;
+using Data;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -99,12 +100,10 @@ public class MapEditor
                         if (tile.ToString() == "RedTree (UnityEngine.Tilemaps.Tile)")
                         {
                             writer.Write("1");
-                            Debug.Log(tile.ToString());
                         }
                         else if (tile.ToString() == "GreenTree (UnityEngine.Tilemaps.Tile)")
                         {
                             writer.Write("2");
-                            Debug.Log(tile.ToString());
                         }
 
                     }
@@ -141,7 +140,6 @@ public class MapEditor
                         else if (tile.ToString() == "building-thin (UnityEngine.Tilemaps.Tile)")
                         {
                             writer.Write("4");
-                            Debug.Log(tile.ToString());
                         }
 
 

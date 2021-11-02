@@ -46,6 +46,7 @@
         }
       ]
     },
+
     {
       "id": "1",
       "name": "두더지",
@@ -59,6 +60,9 @@
       },
       "chaseCellDist": "5",
       "searchCellDist": "5",
+      "maxCount": "3",
+      "genDelay": "5000",
+      "rangth": "4",
       "prefabPath": "Mole",
       "rewards": [
         {
@@ -78,6 +82,7 @@
         }
       ]
     },
+
     {
       "id": "2",
       "name": "수풀 몬스터",
@@ -91,6 +96,9 @@
       },
       "chaseCellDist": "5",
       "searchCellDist": "2",
+      "maxCount": "3",
+      "genDelay": "5000",
+      "rangth": "4",
       "prefabPath": "BushMon",
       "rewards": [
         {
@@ -121,9 +129,47 @@
         "attackSpeed": "0.5",
         "totalExp": "20"
       },
-      "chaseCellDist":"5",
-      "searchCellDist":"5",
+      "chaseCellDist": "5",
+      "searchCellDist": "5",
+      "maxCount": "3",
+      "genDelay": "5000",
+      "rangth": "4",
       "prefabPath": "Tree",
+      "rewards": [
+        {
+          "probability": "80",
+          "itemId": "1003",
+          "count": "5"
+        },
+        {
+          "probability": "5",
+          "itemId": "200",
+          "count": "5"
+        },
+        {
+          "probability": "5",
+          "itemId": "201",
+          "count": "5"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "name": "반반",
+      "stat": {
+        "level": "10",
+        "maxHp": "250",
+        "attack": "5",
+        "speed": "3.0",
+        "attackSpeed": "0.5",
+        "totalExp": "20"
+      },
+      "chaseCellDist": "5",
+      "searchCellDist": "5",
+      "maxCount": "1",
+      "genDelay": "30000",
+      "rangth": "4",
+      "prefabPath": "BanBan",
       "rewards": [
         {
           "probability": "80",

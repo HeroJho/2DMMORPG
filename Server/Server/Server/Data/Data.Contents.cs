@@ -188,6 +188,9 @@ namespace Server.Data
         public StatInfo stat;
         public int searchCellDist;
         public int chaseCellDist;
+        public int maxCount;
+        public int genDelay;
+        public int rangth;
         public List<RewardData> rewards;
     }
 
