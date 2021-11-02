@@ -8,6 +8,7 @@ public class CreatureController : BaseController
 {
 	HpBar _hpBar;
 	Condition _condition;
+	public ChatBox ChatBox { get; private set; }
 
 	string _name = null;
 	private TextMeshPro _nameBox = null;
@@ -60,6 +61,8 @@ public class CreatureController : BaseController
 
 		AddHpBar();
 		_condition = GetComponent<Condition>();
+		ChatBox = Managers.Resource.Instantiate("UI/ChatBox", gameObject.transform).GetComponent<ChatBox>();
+
     }
 
 	protected virtual void AddHpBar()

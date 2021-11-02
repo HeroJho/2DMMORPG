@@ -57,6 +57,8 @@ enum MsgId{
     C_INVITE_PLAYER = 50;
     S_PARTY_LIST = 51;
     C_QUIT_PARTY = 52;
+    S_CHAT = 53;
+    C_CHAT = 54;
 }
 
 enum CreatureState{
@@ -409,6 +411,15 @@ message S_PartyList{
 
 message C_QuitParty{
     int32 id = 1;
+}
+
+message C_Chat{
+    string str = 2;
+}
+
+message S_Chat{
+    int32 id = 1;
+    string str = 2;
 }
 
 message ItemInfo{

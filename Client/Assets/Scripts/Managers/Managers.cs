@@ -16,7 +16,7 @@ public class Managers : MonoBehaviour
     QuestManager _quest = new QuestManager();
     CutSceneManager _cutScene;
     CommunicationManager _communication = new CommunicationManager();
-
+    ChatManager _chat = new ChatManager();
 
 
     public static InventoryManager Inven { get { return Instance._inven; } }
@@ -27,7 +27,8 @@ public class Managers : MonoBehaviour
     public static QuestManager Quest { get { return Instance._quest; } }
     public static CutSceneManager CutScene { get { return Instance._cutScene; } }
     public static CommunicationManager Communication { get { return Instance._communication; } }
-    
+    public static ChatManager Chat { get { return Instance._chat; } }
+
     #endregion
 
     #region Core

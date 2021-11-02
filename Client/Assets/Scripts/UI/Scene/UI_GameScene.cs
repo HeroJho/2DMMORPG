@@ -19,7 +19,7 @@ public class UI_GameScene : UI_Scene
     public UI_BuffPanel BuffUI { get; private set; }
     public UI_InteractionPanel InteractionUI { get; private set; }
     public UI_PartyPanel PartyPanelUI { get; private set; }
-
+    public UI_ChatInputBox ChatInputBoxUI { get; private set; }
 
     public UI_CanClassUp ClassUp { get; private set; }
     public UI_DescriptionBox DescriptionBox { get; private set; }
@@ -40,6 +40,7 @@ public class UI_GameScene : UI_Scene
         BuffUI = GetComponentInChildren<UI_BuffPanel>();
         InteractionUI = GetComponentInChildren<UI_InteractionPanel>();
         PartyPanelUI = GetComponentInChildren<UI_PartyPanel>();
+        ChatInputBoxUI = GetComponentInChildren<UI_ChatInputBox>();
 
         ClassUp = GetComponentInChildren<UI_CanClassUp>();
         DescriptionBox = GetComponentInChildren<UI_DescriptionBox>();

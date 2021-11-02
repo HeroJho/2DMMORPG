@@ -45,5 +45,21 @@ namespace Server
 
         }
 
+        public void HandleChat(Player player, C_Chat chatPacket)
+        {
+            GameRoom room = player.Room;
+            if (player == null || room == null)
+                return;
+
+            string str = chatPacket.Str;
+            if (str.Length <= 0)
+                return;
+
+            S_Chat schatPacket = new S_Chat();
+            schatPacket.Id = player.Id;
+            schatPacket.Str = str;
+            room.Broadcast(player.CellPos, schatPacket);
+        }
+
     }
 }

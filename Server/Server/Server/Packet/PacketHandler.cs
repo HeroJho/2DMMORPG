@@ -282,5 +282,21 @@ namespace Server
             room.Push(room.HandleQuitParty, player, quitPartyPacket);
         }
 
+        public static void C_ChatHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_Chat chatPacket = (C_Chat)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleChat, player, chatPacket);
+        }
+
     }
 }

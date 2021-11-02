@@ -480,4 +480,11 @@ class PacketHandler
         gameSceneUI.PartyPanelUI.SetPartyInfos();
     }
 
+	public static void S_ChatHandler(PacketSession session, IMessage packet)
+    {
+		S_Chat chatPacket = (S_Chat)packet;
+
+		Managers.Chat.SendChatToBox(chatPacket.Id, chatPacket.Str);
+    }
+
 }

@@ -218,8 +218,18 @@ public class MyPlayerController : PlayerController
 
 	void GetKeyInput()
     {
+		// 엔터치면 채팅 서버 전송
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			_gameSceneUI.ChatInputBoxUI.GetInputField.Select();
+			Managers.Chat.SendChatToServer();
+		}
+		// 채팅을 치고 있을 땐 다른 키입력 x
+		if (_gameSceneUI.ChatInputBoxUI.GetInputField.isFocused)
+			return;
+
 		// 아이템 먹기
-		if(Input.GetKeyDown(KeyCode.Z))
+		if (Input.GetKeyDown(KeyCode.Z))
         {
 			ItemController item = Managers.Object.FindItemFromGround(CellPos);
 
@@ -257,14 +267,17 @@ public class MyPlayerController : PlayerController
 				if(_gameSceneUI.InteractionUI.gameObject.activeSelf == false)
 					_gameSceneUI.InteractionUI.gameObject.SetActive(true);
 			}
-			
         }
 
 	}
 
 	void GetUIKeyInput()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+		// 채팅을 치고 있을 땐 다른 키입력 x
+		if (_gameSceneUI.ChatInputBoxUI.GetInputField.isFocused)
+			return;
+
+		if (Input.GetKeyDown(KeyCode.I))
         {
 			UI_Inventory invenUI = _gameSceneUI.InvenUI;
 
@@ -312,6 +325,9 @@ public class MyPlayerController : PlayerController
 
 	void GetQuickSlotInput()
 	{ // 단축키
+	  // 채팅을 치고 있을 땐 다른 키입력 x
+		if (_gameSceneUI.ChatInputBoxUI.GetInputField.isFocused)
+			return;
 
 		if (Input.GetKeyDown(KeyCode.Q))
 			_gameSceneUI.ShortcutKeyUI.GetKeyQ();

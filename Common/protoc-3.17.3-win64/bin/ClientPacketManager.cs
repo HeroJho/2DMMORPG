@@ -130,6 +130,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SPartyList, MakePacket<S_PartyList>);
             _handler.Add((ushort)MsgId.SPartyList, PacketHandler.S_PartyListHandler);
 
+            _onRecv.Add((ushort)MsgId.SChat, MakePacket<S_Chat>);
+            _handler.Add((ushort)MsgId.SChat, PacketHandler.S_ChatHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
