@@ -268,43 +268,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13924}
     - Class: 114
-      Script: {instanceID: 13952}
+      Script: {instanceID: 13934}
     - Class: 114
-      Script: {instanceID: 13988}
+      Script: {instanceID: 13954}
     - Class: 114
-      Script: {instanceID: 14058}
+      Script: {instanceID: 13990}
     - Class: 114
-      Script: {instanceID: 14086}
+      Script: {instanceID: 14060}
     - Class: 114
-      Script: {instanceID: 14232}
+      Script: {instanceID: 14088}
     - Class: 114
-      Script: {instanceID: 14318}
+      Script: {instanceID: 14234}
     - Class: 114
-      Script: {instanceID: 14322}
+      Script: {instanceID: 14320}
     - Class: 114
-      Script: {instanceID: 14346}
+      Script: {instanceID: 14324}
     - Class: 114
-      Script: {instanceID: 14366}
+      Script: {instanceID: 14348}
     - Class: 114
-      Script: {instanceID: 14378}
+      Script: {instanceID: 14368}
     - Class: 114
-      Script: {instanceID: 14382}
+      Script: {instanceID: 14380}
     - Class: 114
-      Script: {instanceID: 14538}
+      Script: {instanceID: 14384}
     - Class: 114
-      Script: {instanceID: 14554}
+      Script: {instanceID: 14540}
     - Class: 114
-      Script: {instanceID: 14670}
+      Script: {instanceID: 14556}
     - Class: 114
-      Script: {instanceID: 14724}
+      Script: {instanceID: 14672}
     - Class: 114
-      Script: {instanceID: 14750}
+      Script: {instanceID: 14726}
     - Class: 114
-      Script: {instanceID: 14768}
+      Script: {instanceID: 14752}
     - Class: 114
-      Script: {instanceID: 14798}
+      Script: {instanceID: 14770}
     - Class: 114
-      Script: {instanceID: 22210}
+      Script: {instanceID: 14800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1092,6 +1092,12 @@ ScriptsOnlyBuild:
     className: TreeController
   - hash:
       serializedVersion: 2
+      Hash: 48f68bdfe80f5052800718ad0296078b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChatBox
+  - hash:
+      serializedVersion: 2
       Hash: 6939772cb3ce775a8e8d99f332534491
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -1324,12 +1330,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 48f68bdfe80f5052800718ad0296078b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ChatBox
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game.unity

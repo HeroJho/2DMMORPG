@@ -55,8 +55,19 @@ namespace Server
             for (int i = 0; i < _maxCount; i++)
             {
                 Vector2Int? randPos = GetPos();
-                Monster monster = ObjectManager.Instance.Add<Monster>();
-                monster.Init(_monsterId, this, randPos.Value);
+                Monster monster = null;
+
+                if (_monsterId == 4)
+                {
+                    monster = ObjectManager.Instance.Add<BanBan>();
+                    monster.Init(_monsterId, this, randPos.Value);
+                }
+                else
+                {
+                    monster = ObjectManager.Instance.Add<Monster>();
+                    monster.Init(_monsterId, this, randPos.Value);
+                }
+
 
                 _room.EnterGame(monster);
 

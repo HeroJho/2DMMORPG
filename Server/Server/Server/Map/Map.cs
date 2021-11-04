@@ -374,6 +374,7 @@ namespace Server
             if (posInfo.PosY < MinY || posInfo.PosY > MaxY)
                 return false;
 
+            // 이동 장소에 오브젝트가 있냐
             if (CanGo(dest, checkObjects) == false)
                 return false;
 
@@ -448,7 +449,6 @@ namespace Server
                     }
                     break;
             }
-
 
             // 실제 좌표 이동
             posInfo.PosX = dest.x;

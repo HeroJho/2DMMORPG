@@ -168,7 +168,7 @@
       "searchCellDist": "5",
       "maxCount": "1",
       "genDelay": "30000",
-      "rangth": "4",
+      "rangth": "1",
       "prefabPath": "BanBan",
       "rewards": [
         {
