@@ -58,17 +58,11 @@ namespace Server
                 Monster monster = null;
 
                 if (_monsterId == 4)
-                {
                     monster = ObjectManager.Instance.Add<BanBan>();
-                    monster.Init(_monsterId, this, randPos.Value);
-                }
                 else
-                {
                     monster = ObjectManager.Instance.Add<Monster>();
-                    monster.Init(_monsterId, this, randPos.Value);
-                }
 
-
+                monster.Init(_monsterId, randPos.Value, this);
                 _room.EnterGame(monster);
 
                 _monsters.Add(monster);

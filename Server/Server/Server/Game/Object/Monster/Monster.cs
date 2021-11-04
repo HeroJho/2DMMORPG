@@ -22,7 +22,7 @@ namespace Server
 
         }
 
-        public virtual void Init(int templateId, Spawner spawner, Vector2Int beginPos)
+        public virtual void Init(int templateId, Vector2Int beginPos, Spawner spawner = null)
         {
             _spawner = spawner;
 
@@ -108,14 +108,29 @@ namespace Server
             }
 
             //추격 범위를 벗어났냐
-            if (_spawner.MaxX + _chaseCellDist < CellPos.x || _spawner.MinX - _chaseCellDist > CellPos.x ||
-               _spawner.MaxY + _chaseCellDist < CellPos.y || _spawner.MinY - _chaseCellDist > CellPos.y)
+            if(_spawner != null)
             {
-                _target = null;
-                State = CreatureState.Callback;
-                BroadcastMove();
-                return;
+                if (_spawner.MaxX + _chaseCellDist < CellPos.x || _spawner.MinX - _chaseCellDist > CellPos.x ||
+                    _spawner.MaxY + _chaseCellDist < CellPos.y || _spawner.MinY - _chaseCellDist > CellPos.y)
+                {
+                    _target = null;
+                    State = CreatureState.Callback;
+                    BroadcastMove();
+                    return;
+                }
             }
+            else
+            {
+                if (_beginPos.x + 5 + _chaseCellDist < CellPos.x || _beginPos.x - 5 - _chaseCellDist > CellPos.x ||
+                    _beginPos.y + 5 + _chaseCellDist < CellPos.y || _beginPos.y - 5 - _chaseCellDist > CellPos.y)
+                {
+                    _target = null;
+                    State = CreatureState.Callback;
+                    BroadcastMove();
+                    return;
+                }
+            }
+
 
             // 길찾기 계산 && 추격 범위 검사
             List<Vector2Int> path = Room.Map.FindPath(CellPos, _target.CellPos, checkObject: true);

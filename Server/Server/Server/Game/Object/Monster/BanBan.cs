@@ -10,7 +10,7 @@ namespace Server
     {
         public enum SkillState { None, Skill_1, Skill_2, Skill_3 }
 
-        public override void Init(int templateId, Spawner spawner, Vector2Int beginPos)
+        public virtual void Init(int templateId, Vector2Int beginPos, Spawner spawner = null)
         {
             _spawner = spawner;
 
@@ -141,12 +141,11 @@ namespace Server
                 skill.Info.SkillId = 1;
                 Room.Broadcast(CellPos, skill);
 
-                State = CreatureState.Moving;
-
                 // 스킬 쿨타임 적용
                 int collTick = (int)(1000 * Stat.AttackSpeed);
                 _coolTick = Environment.TickCount64 + collTick;
 
+                State = CreatureState.Moving;
             }
 
             if (_coolTick > Environment.TickCount64)
@@ -187,7 +186,7 @@ namespace Server
                     else
                         return false;
                 case SkillState.Skill_1:
-                    Skill_1();
+                    Skill_5();
                     return true;
                 case SkillState.Skill_2:
                     Skill_2();
@@ -238,8 +237,44 @@ namespace Server
                 Room.PushAfter(i * 300, ShootIceBall, PosInfo.MoveDir);
             }
         }
+        void Skill_4()
+        {
+            PoisonSmoke poisonSmoke = ObjectManager.Instance.Add<PoisonSmoke>();
+            if (poisonSmoke == null)
+                return;
 
-        void ShootIceBall(MoveDir dir)
+            poisonSmoke.Owner = this;
+            poisonSmoke.Info.TemplateId = 2003;
+
+            Skill skillData = null;
+            DataManager.SkillDict.TryGetValue(2003, out skillData);
+
+            poisonSmoke.PosInfo.State = CreatureState.Idle;
+            poisonSmoke.PosInfo.MoveDir = PosInfo.MoveDir;
+            poisonSmoke.PosInfo.PosX = PosInfo.PosX;
+            poisonSmoke.PosInfo.PosY = PosInfo.PosY;
+            poisonSmoke.Stat.Level = 4; // 클라 크기조절 용
+            poisonSmoke.Init(skillData, 4);
+
+            // 스킬시전 시간 후에 생성
+            Room.PushAfter(1500, () =>
+            {
+                Room.EnterGame(poisonSmoke);
+            });
+        }
+        void Skill_5()
+        {
+            Monster monster = ObjectManager.Instance.Add<Monster>();
+
+            Vector2Int pos = GetRandomPos(CellPos).Value;
+
+            monster.Init(3, pos);
+
+            Room.EnterGame(monster);
+        }
+
+
+        private void ShootIceBall(MoveDir dir)
         {
             IceBall iceBall = ObjectManager.Instance.Add<IceBall>();
             if (iceBall == null)
@@ -259,5 +294,33 @@ namespace Server
 
             Room.EnterGame(iceBall);
         }
+
+        private Vector2Int? GetRandomPos(Vector2Int cellPos)
+        {
+            int MinX = cellPos.x - 4;
+            int MaxX = cellPos.x + 4;
+            int MinY = cellPos.y - 4;
+            int MaxY = cellPos.y + 4;
+
+            int radX = new Random().Next(MinX, MaxX);
+            int radY = new Random().Next(MinY, MaxY);
+            Vector2Int? randPos = new Vector2Int(radX, radY);
+
+            int tryCount = 0; // 10번만 시도
+            while (!Room.Map.CanGo(randPos.Value, checkObject: true))
+            {
+                tryCount++;
+                radX = new Random().Next(MinX, MaxX);
+                radY = new Random().Next(MinY, MaxY);
+                randPos = new Vector2Int(radX, radY);
+
+                if (tryCount > 10)
+                    return null;
+            }
+
+            return randPos;
+        }
+
+
     }
 }
