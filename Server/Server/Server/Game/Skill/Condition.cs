@@ -441,7 +441,6 @@ namespace Server
         }
 
         IJob _stunJob;
-        CreatureState _previousState;
         public void Stun(int timeValue, int stunChanceValue)
         {
             GameRoom room = _creatureObj.Room;
@@ -457,21 +456,33 @@ namespace Server
 
             if (_stunJob != null)
             {
-                _creatureObj.State = _previousState;
+                _creatureObj.State = CreatureState.Idle;
                 _stunJob.Cancel = true;
                 _stunJob = null;
             }
 
-            _previousState = _creatureObj.State;
             _creatureObj.State = CreatureState.Stun;
 
             // 지속시간이 끝나면 종료
             _stunJob = room.PushAfter(timeValue * 1000, () =>
             {
                 _stunJob = null;
-                _creatureObj.State = _previousState;
+                _creatureObj.State = CreatureState.Idle;
             });
 
+            Skill skillData = new Skill();
+            skillData.id = 9999;
+            ConditionInfo condition = new ConditionInfo();
+            condition.Time = timeValue;
+            skillData.conditions = new List<ConditionInfo>();
+            skillData.conditions.Add(condition);
+
+            ConditionInfo info = new ConditionInfo()
+            {
+                Time = timeValue
+            };
+
+            ManageBuffOrCondition(skillData, timeValue, info, ConditionType.ConditionStun);
             SendConditionPacket(ConditionType.ConditionStun, timeValue);
         }
 
@@ -507,7 +518,7 @@ namespace Server
             }
             if (_stunJob != null)
             {
-                _creatureObj.State = _previousState;
+                _creatureObj.State = CreatureState.Idle;
                 _stunJob.Cancel = true;
                 _stunJob = null;
             }

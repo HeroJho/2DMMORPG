@@ -311,16 +311,15 @@ public class Condition : MonoBehaviour
     }
 
     Coroutine _stunAnim = null;
-    CreatureState _previousState;
     public void Stun(int timeValue)
     {
         if (_stunAnim != null)
         {
             StopCoroutine(_stunAnim);
             _stunAnim = null;
+            _creatureController.State = CreatureState.Idle;
         }
 
-        _previousState = _creatureController.State;
         _creatureController.State = CreatureState.Stun;
 
         // 이펙트
@@ -330,7 +329,7 @@ public class Condition : MonoBehaviour
         _stunAnim = StartCoroutine(CoolTime(timeValue, () =>
         {
             _stunEffect.gameObject.SetActive(false);
-            _creatureController.State = _previousState;
+            _creatureController.State = CreatureState.Idle;
         }));
     }
 

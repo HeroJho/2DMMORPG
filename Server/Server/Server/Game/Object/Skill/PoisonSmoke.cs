@@ -26,8 +26,23 @@ namespace Server
 
                 foreach (CreatureObject co in objects)
                 {
-                    if(co != Owner)
-                        co.Condition.Poison(_skillData, _skillLevel, Owner);
+                    if(Owner is Player)
+                    {
+                        Player player = Owner as Player;
+                        if(co != Owner && player.Communication.Party == null)
+                            co.Condition.Poison(_skillData, _skillLevel, Owner);
+                        else if (co != Owner && player.Communication.Party.FindPlayerById(co.Id) == null)
+                            co.Condition.Poison(_skillData, _skillLevel, Owner);
+
+
+                    }
+                    else if(Owner is BanBan)
+                    {
+                        BanBan banban = Owner as BanBan;
+                        if (co != Owner && !(co is Monster))
+                            co.Condition.Poison(_skillData, _skillLevel, Owner);
+                    }
+
                 }
             }
             else // 지속시간이 끝낫을 때

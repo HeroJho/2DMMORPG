@@ -9,6 +9,7 @@ namespace Server
     public class BanBan : Monster
     {
         public enum SkillState { None, Skill_1, Skill_2, Skill_3 }
+        public List<Monster> Minions = new List<Monster>();
 
         public virtual void Init(int templateId, Vector2Int beginPos, Spawner spawner = null)
         {
@@ -134,6 +135,8 @@ namespace Server
 
                 // 데미지 판정
                 _target.OnDamaged(this, Stat.Attack + TotalAttack);
+                // 평타에 일정확률로 기절
+                _target.Condition.Stun(3, 25);
 
                 // 스킬 사용 Broadcast
                 S_Skill skill = new S_Skill() { Info = new SkillInfo() };
@@ -186,13 +189,13 @@ namespace Server
                     else
                         return false;
                 case SkillState.Skill_1:
-                    Skill_5();
+                    //Skill_5();
                     return true;
                 case SkillState.Skill_2:
-                    Skill_2();
+                    Skill_1();
                     return true;
                 case SkillState.Skill_3:
-                    Skill_3();
+                    Skill_8();
                     return true;
                 default:
                     return false;
@@ -201,7 +204,7 @@ namespace Server
 
         public SkillState ChooseRandomSkill()
         {
-            int rand = new Random().Next(0, 100);
+            int rand = new Random().Next(0, 101);
             if (rand < 20)
             {
                 return SkillState.Skill_1;
@@ -218,18 +221,18 @@ namespace Server
             return SkillState.None;
         }
 
-        void Skill_1()
+        void Skill_1() // 전방으로 아이스볼을 한 번 발사한다
         {
             ShootIceBall(PosInfo.MoveDir);
         }
-        void Skill_2()
+        void Skill_2() // 십자가 모양으로 아이스볼을 발사한다
         {
             ShootIceBall(MoveDir.Down);
             ShootIceBall(MoveDir.Up);
             ShootIceBall(MoveDir.Left);
             ShootIceBall(MoveDir.Right);
         }
-        void Skill_3()
+        void Skill_3() // 전방으로 아이스볼을 5번 발사한다
         {
             for (int i = 1; i < 5; i++)
             {
@@ -237,7 +240,7 @@ namespace Server
                 Room.PushAfter(i * 300, ShootIceBall, PosInfo.MoveDir);
             }
         }
-        void Skill_4()
+        void Skill_4() // 독가스
         {
             PoisonSmoke poisonSmoke = ObjectManager.Instance.Add<PoisonSmoke>();
             if (poisonSmoke == null)
@@ -262,17 +265,58 @@ namespace Server
                 Room.EnterGame(poisonSmoke);
             });
         }
-        void Skill_5()
+        void Skill_5() // 랜덤하게 몬스터를 소환한다
         {
             Monster monster = ObjectManager.Instance.Add<Monster>();
 
-            Vector2Int pos = GetRandomPos(CellPos).Value;
+            Vector2Int? pos = GetRandomPos(CellPos);
+            if (pos == null)
+                return;
 
-            monster.Init(3, pos);
+            int rand = new Random().Next(1, 4); // 1~3
+            monster.Init(rand, pos.Value);
+            Minions.Add(monster);
 
             Room.EnterGame(monster);
         }
+        void Skill_6() // 소환한 몬스터들에게 IronBody버프를 걸어준다
+        {
+            for (int i = 0; i < Minions.Count; i++)
+            {
+                Monster monster = Minions[i];
 
+                if (monster.Room == null)
+                    Minions.Remove(monster);
+
+                Skill skillData = null;
+                if (DataManager.SkillDict.TryGetValue(2008, out skillData) == false)
+                    return;
+
+                monster.Condition.IronBody(skillData, 2);
+                Console.WriteLine(monster.TotalDefence);
+            }
+        }
+        void Skill_7() // 원형으로 스턴 + 피 10
+        {
+            HashSet<CreatureObject> objects = Room.Map.LoopByCircle<CreatureObject>(CellPos, 5);
+            foreach (CreatureObject co in objects)
+            {
+                int damage = co.Hp - 10;
+                co.OnDamaged(this, damage, true);
+                co.Condition.Stun(5, 100);
+            }
+        }
+        void Skill_8() // 회복
+        {
+            Skill skillData = new Skill();
+            ConditionInfo condition = new ConditionInfo();
+            condition.Time = 10;
+            condition.TickValue = 500;
+            skillData.conditions = new List<ConditionInfo>();
+            skillData.conditions.Add(condition);
+
+            Condition.Healing(skillData, 0, this);
+        }
 
         private void ShootIceBall(MoveDir dir)
         {
