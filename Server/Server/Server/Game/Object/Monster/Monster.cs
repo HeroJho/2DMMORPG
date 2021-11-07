@@ -306,7 +306,9 @@ namespace Server
 
                 GameRoom room = Room;
                 room.LeaveGame(Id);
-                _spawner.Dead(this);
+
+                if(_spawner != null)
+                    _spawner.Dead(this);
             }
         }
 

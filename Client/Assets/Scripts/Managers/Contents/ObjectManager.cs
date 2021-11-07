@@ -95,6 +95,19 @@ public class ObjectManager
                         pc.PosInfo = info.PosInfo;
                         pc.Stat = info.StatInfo;
                         MyPlayer.SyncPos();
+
+                        // 컨디션
+                        if(info.ConditionInfos.Count > 0)
+                        {
+                            Condition condition = pc.GetComponent<Condition>();
+                            foreach (ConditionInfo conditionInfo in info.ConditionInfos)
+                            {
+                                condition.UpdateCondition(conditionInfo.ConditionType, info.ObjectId, conditionInfo.Id, conditionInfo.Time,
+                                    conditionInfo.AttackSpeedValue, conditionInfo.MoveSpeedValue);
+                            }
+                        }
+
+
                     }
                 }
                 break;
@@ -112,6 +125,18 @@ public class ObjectManager
                     mc.PosInfo = info.PosInfo;
                     mc.Stat = info.StatInfo;
                     mc.SyncPos();
+
+                    // 컨디션
+                    if (info.ConditionInfos.Count > 0)
+                    {
+                        Condition condition = mc.GetComponent<Condition>();
+                        foreach (ConditionInfo conditionInfo in info.ConditionInfos)
+                        {
+                            condition.UpdateCondition(conditionInfo.ConditionType, info.ObjectId, conditionInfo.Id, conditionInfo.Time,
+                                conditionInfo.AttackSpeedValue, conditionInfo.MoveSpeedValue);
+                        }
+                    }
+
                 }
                 break;
             case GameObjectType.Projectile:

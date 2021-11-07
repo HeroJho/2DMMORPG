@@ -453,7 +453,7 @@ class PacketHandler
 		if (condition == null)
 			return;
 
-		condition.UpdateCondition(changeConditionPacket);
+		condition.UpdateCondition(changeConditionPacket.ConditionType, changeConditionPacket.Id, changeConditionPacket.SkillId, changeConditionPacket.Time, changeConditionPacket.AttackSpeed, changeConditionPacket.MoveSpeed);
 	}
 
 	public static void S_PartyListHandler(PacketSession session, IMessage packet)

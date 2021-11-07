@@ -128,6 +128,35 @@ namespace Server
                     // 패킷 복사 이유
                     ObjectInfo info = new ObjectInfo();
                     info.MergeFrom(gameObject.Info);
+
+                    // 버프도 같이 전송
+                    CreatureObject co = gameObject as CreatureObject;
+                    if (co != null)
+                    {
+                        info.StatInfo.MaxHp = co.TotalMaxHp;
+                        info.StatInfo.Defence = co.TotalDefence;
+                        Player player = co as Player;
+                        if (player != null)
+                            info.StatInfo.MaxMp = player.TotalMaxMp;
+
+
+                        foreach (BuffOrConditionTime bct in co.Condition.Buffs.Values)
+                        {
+                            ConditionInfo cInfo = new ConditionInfo();
+
+                            cInfo.Id = bct.SkillId;
+                            cInfo.ConditionType = bct.ConditionType;
+                            cInfo.BuffType = bct.BuffType;
+                            cInfo.Time = bct.RemindTick;
+                            cInfo.MoveSpeedValue = bct.conditionInfo.MoveSpeedValue;
+                            cInfo.AttackSpeedValue = bct.conditionInfo.AttackSpeedValue;
+                            cInfo.TickValue = bct.conditionInfo.TickValue;
+                            cInfo.StunChanceValue = bct.conditionInfo.StunChanceValue;
+                            cInfo.CommonValue = bct.conditionInfo.CommonValue;
+                            info.ConditionInfos.Add(cInfo);
+                        }
+                    }
+
                     spawnPacket.Objects.Add(info);
                 }
 

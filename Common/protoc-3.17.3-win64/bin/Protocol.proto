@@ -171,6 +171,13 @@ enum ConditionType{
     CONDITION_BUFF = 5;
 }
 
+enum BuffType{
+    BUFF_NONE = 0;
+    BUFF_MAGICGUARD = 1;
+    BUFF_HYPERBODY = 2;
+    BUFF_IRONBODY = 3;
+}
+
 message S_EnterGame{
     ObjectInfo player = 1;
 }
@@ -445,6 +452,7 @@ message ObjectInfo{
     PositionInfo posInfo = 4;
     StatInfo statInfo = 5;
     ItemInfo itemInfo = 6;
+    repeated ConditionInfo conditionInfos = 7;
 }
 
 message PositionInfo{
@@ -485,10 +493,12 @@ message QuestInfo{
 
 message ConditionInfo{
     ConditionType conditionType = 1;
-    int32 time = 2;
-    int32 moveSpeedValue = 3;
-    int32 attackSpeedValue = 4;
-    int32 tickValue = 5;
-    int32 stunChanceValue = 6;
-    int32 commonValue = 7;
+    BuffType buffType = 2;
+    int32 time = 3;
+    int32 moveSpeedValue = 4;
+    int32 attackSpeedValue = 5;
+    int32 tickValue = 6;
+    int32 stunChanceValue = 7;
+    int32 commonValue = 8;
+    int32 id = 9;
 }

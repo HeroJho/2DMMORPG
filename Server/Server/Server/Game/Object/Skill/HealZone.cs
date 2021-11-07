@@ -26,8 +26,10 @@ namespace Server
                
                 foreach (Player co in objects)
                 {
-                    if((Owner as Player).Communication.Party != null && (Owner as Player).Communication.Party.FindPlayerById(co.Id) != null)
+                    if ((Owner as Player).Communication.Party != null && (Owner as Player).Communication.Party.FindPlayerById(co.Id) != null)
                         co.Condition.Healing(_skillData, _skillLevel, Owner);
+                    else
+                        Owner.Condition.Healing(_skillData, _skillLevel, Owner);
                 }
             }
             else // 지속시간이 끝낫을 때

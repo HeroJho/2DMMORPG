@@ -20,8 +20,12 @@ public class Condition : MonoBehaviour
 
     private float _attackSpeed = 0;
 
+    bool _isInit = false;
     public void Start()
     {
+        if (_isInit == true)
+            return;
+
         _gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
         _creatureController = GetComponent<CreatureController>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -42,38 +46,66 @@ public class Condition : MonoBehaviour
         _magicGuardEffect.gameObject.SetActive(false);
         _hyperBodyEffect.gameObject.SetActive(false);
         _ironBodyEffect.gameObject.SetActive(false);
+        _isInit = true;
     }
 
-    public void UpdateCondition(S_ChangeConditionInfo changeConditionPacket)
+    public void Init()
     {
-        int timeValue = changeConditionPacket.Time;
-        ConditionType conditionType = changeConditionPacket.ConditionType;
+        if (_isInit == true)
+            return;
+
+        _gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+        _creatureController = GetComponent<CreatureController>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
+
+        // 일일히 크리쳐한테 파싱 ㄴㄴ
+        _posionEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Poision", gameObject.transform).GetComponent<Animator>();
+        _stunEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Debuff_Stun", gameObject.transform).GetComponent<Animator>();
+        _healingEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_Healing", gameObject.transform).GetComponent<Animator>();
+        _magicGuardEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_MagicGuard", gameObject.transform).GetComponent<Animator>();
+        _hyperBodyEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_HyperBody", gameObject.transform).GetComponent<Animator>();
+        _ironBodyEffect = Managers.Resource.Instantiate("Effect/BuffEffect/Buff_IronBody", gameObject.transform).GetComponent<Animator>();
+
+
+        _posionEffect.gameObject.SetActive(false);
+        _stunEffect.gameObject.SetActive(false);
+        _healingEffect.gameObject.SetActive(false);
+        _magicGuardEffect.gameObject.SetActive(false);
+        _hyperBodyEffect.gameObject.SetActive(false);
+        _ironBodyEffect.gameObject.SetActive(false);
+        _isInit = true;
+    }
+
+    public void UpdateCondition(ConditionType conditionType, int objId, int skillId, int time, float attackSpeed, float moveSpeed)
+    {
+        int timeValue = time;
 
         switch (conditionType)
         {
             case ConditionType.ConditionChilled:
-                Chilled(changeConditionPacket.MoveSpeed, changeConditionPacket.AttackSpeed, timeValue);
+                Chilled(moveSpeed, attackSpeed, timeValue);
                 break;
             case ConditionType.ConditionPoison:
-                Poison(changeConditionPacket.Time);
+                Poison(time);
                 break;
             case ConditionType.ConditionStun:
-                Stun(changeConditionPacket.Time);
+                Stun(time);
                 break;
             case ConditionType.ConditionHealing:
-                Healing(changeConditionPacket.Time);
+                Healing(time);
                 break;
             case ConditionType.ConditionBuff:
-                if(changeConditionPacket.SkillId == 2006)
-                    MagicGuard(changeConditionPacket.Time);
-                else if (changeConditionPacket.SkillId == 2007)
-                    HyperBody(changeConditionPacket.Time);
-                else if (changeConditionPacket.SkillId == 2008)
-                    IronBody(changeConditionPacket.Time);
+                if(skillId == 2006)
+                    MagicGuard(time);
+                else if (skillId == 2007)
+                    HyperBody(time);
+                else if (skillId == 2008)
+                    IronBody(time);
 
                 // 버프UI는 내 플레어만 띄우면 됨
-                if (Managers.Object.MyPlayer.Id == changeConditionPacket.Id)
-                    _gameSceneUI.BuffUI.AddBuff(changeConditionPacket.SkillId, changeConditionPacket.Time);
+                if (Managers.Object.MyPlayer.Id == objId)
+                    _gameSceneUI.BuffUI.AddBuff(skillId, time);
                 break;
             default:
                 break;
@@ -83,7 +115,9 @@ public class Condition : MonoBehaviour
     Coroutine _chilledAnim = null;
     public void Chilled(float slowMoveValue, float slowAttackValue, int timeValue)
     {
-        if(_chilledAnim != null)
+        Init();
+
+        if (_chilledAnim != null)
         {
             StopCoroutine(_chilledAnim);
             _chilledAnim = null;
@@ -107,6 +141,8 @@ public class Condition : MonoBehaviour
     Coroutine _poisonAnim = null;
     public void Poison(int timeValue)
     {
+        Init();
+
         if (_poisonAnim != null)
         {
             StopCoroutine(_poisonAnim);
@@ -128,6 +164,8 @@ public class Condition : MonoBehaviour
     Coroutine _healingAnim = null;
     public void Healing(int timeValue)
     {
+        Init();
+
         if (_healingAnim != null)
         {
             StopCoroutine(_healingAnim);
@@ -147,6 +185,8 @@ public class Condition : MonoBehaviour
     Coroutine _magicGuardAnim = null;
     public void MagicGuard(int timeValue)
     {
+        Init();
+
         if (_magicGuardAnim != null)
         {
             StopCoroutine(_magicGuardAnim);
@@ -166,6 +206,8 @@ public class Condition : MonoBehaviour
     Coroutine _hyperBodyAnim = null;
     public void HyperBody(int timeValue)
     {
+        Init();
+
         if (_hyperBodyAnim != null)
         {
             StopCoroutine(_hyperBodyAnim);
@@ -185,6 +227,8 @@ public class Condition : MonoBehaviour
     Coroutine _ironBodyAnim = null;
     public void IronBody(int timeValue)
     {
+        Init();
+
         if (_ironBodyAnim != null)
         {
             StopCoroutine(_ironBodyAnim);
@@ -217,6 +261,8 @@ public class Condition : MonoBehaviour
     float _originSpeed;
     public void SlowSpeed(float slowMoveValue, int timeValue)
     {
+        Init();
+
         if (_slowJob != null)
         {
             StopCoroutine(_slowJob);
@@ -239,6 +285,8 @@ public class Condition : MonoBehaviour
     float _originAttackSpeed;
     public void SlowAttackSpeed(float slowAttackValue, int timeValue)
     {
+        Init();
+
         if (_slowAttackJob != null)
         {
             StopCoroutine(_slowAttackJob);

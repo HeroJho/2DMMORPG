@@ -39,9 +39,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 948
+    x: 949
     y: 0
-    width: 283
+    width: 282
     height: 547
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 203, y: 121}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 119
+  controlID: 100
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_MinSize: {x: 343, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 67
+  controlID: 48
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 156
+  controlID: 157
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -194,7 +194,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 948
+    width: 949
     height: 547
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_MinSize: {x: 343, y: 342}
   m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
-  controlID: 66
+  controlID: 99
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_MinSize: {x: 851, y: 492}
   m_MaxSize: {x: 22006, y: 14042}
   vertical: 0
-  controlID: 229
+  controlID: 211
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -897,7 +897,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 1233
-    width: 947
+    width: 948
     height: 526
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
@@ -944,23 +944,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 947
+      width: 948
       height: 505
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 473.5, y: 252.5}
+    m_Translation: {x: 474, y: 252.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -473.5
+      x: -474
       y: -252.5
-      width: 947
+      width: 948
       height: 505
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 947, y: 526}
+  m_LastWindowPixelSize: {x: 948, y: 526}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -987,9 +987,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 948
+    x: 949
     y: 1233
-    width: 281
+    width: 280
     height: 526
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &23
@@ -1136,9 +1136,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: c43b0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 5efbfffff4ffffff
+      m_ExpandedIDs: 2a21feff4c21feff5021feff8c21feffb821feff0e23feff5efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1201,19 +1201,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Data
+    - Assets/Scripts/Controllers
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Data
+  - Assets/Scripts/Controllers
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "C:\\Users\\thehe\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\GitHub\\Client"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 804a0000
-    m_LastClickedID: 19072
+    m_SelectedIDs: 8c4a0000
+    m_LastClickedID: 19084
     m_ExpandedIDs: 000000009a4500009c4500009e450000a0450000a2450000a4450000a6450000a8450000aa450000ac450000ae450000b0450000b2450000b4450000b6450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1273,18 +1273,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 004a0000cc380000d038000094470000ec4d0000903600006e37000098340000b2410000683900008e390000843b00008a3b0000ea410000e8400000ec4000005a470000044c0000145c0000be5f0000686a0000443b0000f846000080480000e25400004e410000085700009242000046440000185100001a51000006640000c03c00008e4600007a450000d44200005c43000050770000fe450000545a0000585a0000264f0000b049000050490000103a00000c65000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: NpcController
+      m_OriginalName: NpcController
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 13990
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 6}
     m_CreateAssetUtility:
@@ -1335,7 +1335,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 1620
+  m_LastVerticalScrollValue: 0
 --- !u!114 &27
 MonoBehaviour:
   m_ObjectHideFlags: 52

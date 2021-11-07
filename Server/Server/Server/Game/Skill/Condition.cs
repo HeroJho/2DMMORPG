@@ -6,8 +6,29 @@ using System.Text;
 
 namespace Server
 {
+    public struct BuffOrConditionTime
+    {
+        public int SkillId { get; set; }
+        public BuffType BuffType { get; set; }
+        public ConditionType ConditionType { get; set; }
+        public ConditionInfo conditionInfo { get; set; }
+        public int Cooldown { get; set; }
+        public int StartTime { get; set; }
+
+        public int RemindTick 
+        { 
+            get
+            {
+                return ((StartTime + Cooldown * 1000) - Environment.TickCount)/1000;
+            }
+        }
+
+
+    }
+
     public class Condition
     {
+        public Dictionary<int, BuffOrConditionTime> Buffs = new Dictionary<int, BuffOrConditionTime>();
         private CreatureObject _creatureObj;
 
         public Condition(CreatureObject creatureObj)
@@ -18,30 +39,53 @@ namespace Server
 
         public void Chilled(Skill skillData, int skillLevel)
         {
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null)
+                return;
             if (_creatureObj.State == CreatureState.Dead)
                 return;
 
             int time = skillData.conditions[skillLevel].Time;
             int moveSlowValue = skillData.conditions[skillLevel].MoveSpeedValue;
-            int AttackSlowValue = skillData.conditions[skillLevel].AttackSpeedValue;
+            int attackSlowValue = skillData.conditions[skillLevel].AttackSpeedValue;
+            ConditionInfo info = new ConditionInfo()
+            {
+                Time = time,
+                MoveSpeedValue = moveSlowValue,
+                AttackSpeedValue = attackSlowValue
+            };
 
             SlowSpeed(moveSlowValue, time);
-            SlowAttackSpeed(AttackSlowValue, time);
+            SlowAttackSpeed(attackSlowValue, time);
 
+            // 쿨타임을 추격해줌 >> vision에서 벗어나서 들어올 때 버프가 사라짐
+            // 다시 vision에 들어온 player의 버프상태도 같이 보내줘야 함.
+            ManageBuffOrCondition(skillData, time, info, ConditionType.ConditionChilled);
             SendConditionPacket(ConditionType.ConditionChilled, time);
         }
         public void Poison(Skill skillData, int skillLevel, GameObject speller)
         {
-            if(speller == null || speller.Room == null)
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null)
+                return;
+            if (speller == null || speller.Room == null)
                 return;
             if (_creatureObj.State == CreatureState.Dead)
                 return;
 
             int time = skillData.conditions[skillLevel].Time;
             int damageValue = skillData.conditions[skillLevel].TickValue;
+            ConditionInfo info = new ConditionInfo()
+            {
+                Time = time,
+                TickValue = damageValue
+            };
 
             TickDamage(damageValue, time, speller);
 
+            // 쿨타임을 추격해줌 >> vision에서 벗어나서 들어올 때 버프가 사라짐
+            // 다시 vision에 들어온 player의 버프상태도 같이 보내줘야 함.
+            ManageBuffOrCondition(skillData, time, info, ConditionType.ConditionPoison);
             SendConditionPacket(ConditionType.ConditionPoison, time);
         }
         public void Healing(Skill skillData, int skillLevel, GameObject speller)
@@ -53,9 +97,17 @@ namespace Server
 
             int time = skillData.conditions[skillLevel].Time;
             int healValue = skillData.conditions[skillLevel].TickValue;
+            ConditionInfo info = new ConditionInfo()
+            {
+                Time = time,
+                TickValue = healValue
+            };
 
             TickHeal(healValue, time, speller);
 
+            // 쿨타임을 추격해줌 >> vision에서 벗어나서 들어올 때 버프가 사라짐
+            // 다시 vision에 들어온 player의 버프상태도 같이 보내줘야 함.
+            ManageBuffOrCondition(skillData, time, info, ConditionType.ConditionHealing);
             SendConditionPacket(ConditionType.ConditionHealing, time);
         }
 
@@ -80,6 +132,10 @@ namespace Server
 
             int time = skillData.conditions[skillLevel].Time;
             _magicGuardValue = skillData.conditions[skillLevel].CommonValue;
+            ConditionInfo info = new ConditionInfo()
+            {
+                Time = time
+            };
 
             // 시간후에 원래속도 되돌림
             _magicGuardJob = room.PushAfter(time * 1000, () =>
@@ -88,6 +144,7 @@ namespace Server
                 _magicGuardJob = null;
             });
 
+            ManageBuffOrCondition(skillData, time, info, ConditionType.ConditionBuff, BuffType.BuffMagicguard);
             SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
         }
         IJob _hyperBodyJob;
@@ -110,8 +167,12 @@ namespace Server
 
             int time = skillData.conditions[skillLevel].Time;
             int plusValue = (int)(_creatureObj.Stat.MaxHp * (skillData.conditions[skillLevel].CommonValue * 0.01f));
+            ConditionInfo info = new ConditionInfo()
+            {
+                Time = time
+            };
 
-            if(plusValue != 0)
+            if (plusValue != 0)
             {
                 _hyperMaxHp = plusValue;
                 _creatureObj.UpdateHpMpStat();
@@ -128,6 +189,7 @@ namespace Server
                 _hyperBodyJob = null;
             });
 
+            ManageBuffOrCondition(skillData, time, info, ConditionType.ConditionBuff, BuffType.BuffHyperbody);
             SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
         }
         IJob _ironBodyJob;
@@ -150,7 +212,11 @@ namespace Server
 
             int time = skillData.conditions[skillLevel].Time;
             int plusValue = (int)(_creatureObj.Stat.MaxHp * (skillData.conditions[skillLevel].CommonValue * 0.01f));
-            Console.WriteLine(plusValue);
+            ConditionInfo info = new ConditionInfo()
+            {
+                Time = time
+            };
+
             if (plusValue != 0)
             {
                 _ironBodyValue = plusValue;
@@ -166,9 +232,37 @@ namespace Server
                 _ironBodyJob = null;
             });
 
+            ManageBuffOrCondition(skillData, time, info, ConditionType.ConditionBuff, BuffType.BuffIronbody);
             SendConditionPacket(ConditionType.ConditionBuff, time, skillData.id);
         }
 
+
+
+        public void ManageBuffOrCondition(Skill skillData, int time, ConditionInfo info, ConditionType conditionType = ConditionType.ConditionNone, BuffType buffType = BuffType.BuffNone)
+        {
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null)
+                return;
+
+            // 또 쓰면 기존꺼 삭제하고 갱신
+            if (Buffs.ContainsKey(skillData.id))
+                Buffs.Remove(skillData.id);
+
+            BuffOrConditionTime buffOrConditionTime = new BuffOrConditionTime();
+            {
+                buffOrConditionTime.conditionInfo = info;
+                buffOrConditionTime.SkillId = skillData.id;
+                buffOrConditionTime.ConditionType = conditionType;
+                buffOrConditionTime.BuffType = buffType;
+                buffOrConditionTime.Cooldown = time;
+                buffOrConditionTime.StartTime = Environment.TickCount;
+            }
+            Buffs.Add(skillData.id, buffOrConditionTime);
+            room.PushAfter(time * 1000, () =>
+            {
+                Buffs.Remove(skillData.id);
+            });
+        }
 
         public void SendConditionPacket(ConditionType conditionType, int timeValue, int skillId = 0)
         {
@@ -438,7 +532,6 @@ namespace Server
 
 
         }
-
 
 
         public int PlayerBuffDamage(int damage)
