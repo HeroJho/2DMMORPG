@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 176
+  controlID: 156
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_MinSize: {x: 851, y: 492}
   m_MaxSize: {x: 22006, y: 14042}
   vertical: 0
-  controlID: 230
+  controlID: 228
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1138,7 +1138,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: fe38fbff2039fbff2439fbff6039fbff8c39fbffde3afbff0c8efdff5efbffff
+      m_ExpandedIDs: 98f7ffffbaf7ffffbef7fffffaf7ffff26f8ffff7ef9ffff5efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1201,20 +1201,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Data
+    - Assets/Scripts/Contents
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Data
+  - Assets/Scripts/Contents
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "C:\\Users\\thehe\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\GitHub\\Client"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 804a0000
-    m_LastClickedID: 19072
-    m_ExpandedIDs: 000000009a4500009c4500009e450000a0450000a2450000a4450000a6450000a8450000aa450000ac450000ae450000b0450000b2450000b4450000b64500007e4a0000864a0000
+    scrollPos: {x: 0, y: 300}
+    m_SelectedIDs: a84a0000
+    m_LastClickedID: 19112
+    m_ExpandedIDs: 000000009a4500009c4500009e450000a0450000a2450000a4450000a6450000a8450000aa450000ac450000ae450000b0450000b2450000b4450000b6450000b8450000ba450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1242,7 +1242,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009a4500009c4500009e450000a0450000a2450000a4450000a6450000a8450000aa450000ac450000ae450000b0450000b2450000b4450000b6450000
+    m_ExpandedIDs: 000000009a4500009c4500009e450000a0450000a2450000a4450000a6450000a8450000aa450000ac450000ae450000b0450000b2450000b4450000b6450000b8450000ba450000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1273,18 +1273,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 004a0000cc380000d038000094470000ec4d0000903600006e37000098340000b2410000683900008e390000843b00008a3b0000ea410000e8400000ec4000005a470000044c0000145c0000be5f0000686a0000443b0000f846000080480000e25400004e410000085700009242000046440000185100001a51000006640000c03c00008e4600007a450000d44200005c43000050770000fe450000545a0000585a0000264f0000b049000050490000103a00000c65000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Tree
-      m_OriginalName: Tree
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 19170
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 6}
     m_CreateAssetUtility:

@@ -264,6 +264,7 @@ namespace Server
             });
         }
 
+
         public void SendConditionPacket(ConditionType conditionType, int timeValue, int skillId = 0)
         {
             GameRoom room = _creatureObj.Room;

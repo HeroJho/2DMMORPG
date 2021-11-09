@@ -313,6 +313,8 @@ public class Condition : MonoBehaviour
     Coroutine _stunAnim = null;
     public void Stun(int timeValue)
     {
+        Init();
+
         if (_stunAnim != null)
         {
             StopCoroutine(_stunAnim);
