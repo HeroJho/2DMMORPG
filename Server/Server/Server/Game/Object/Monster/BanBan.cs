@@ -189,7 +189,7 @@ namespace Server
                     else
                         return false;
                 case SkillState.Skill_1:
-                    //Skill_5();
+                    Skill_9();
                     return true;
                 case SkillState.Skill_2:
                     Skill_1();
@@ -316,6 +316,19 @@ namespace Server
             skillData.conditions.Add(condition);
 
             Condition.Healing(skillData, 0, this);
+        }
+        void Skill_9() // 벽소환 Test
+        {
+            Wall wall = ObjectManager.Instance.Add<Wall>();
+
+            Vector2Int? pos = GetRandomPos(CellPos);
+            if (pos == null)
+                return;
+
+            wall.Init(5, pos.Value);
+            Minions.Add(wall);
+
+            Room.EnterGame(wall);
         }
 
         private void ShootIceBall(MoveDir dir)

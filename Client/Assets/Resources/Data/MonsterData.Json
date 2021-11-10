@@ -187,6 +187,27 @@
           "count": "5"
         }
       ]
+    },
+    {
+      "id": "5",
+      "name": "반반의 벽",
+      "stat": {
+        "level": "10",
+        "maxHp": "250",
+        "attack": "5",
+        "speed": "0",
+        "attackSpeed": "0",
+        "totalExp": "0"
+      },
+      "chaseCellDist": "5",
+      "searchCellDist": "5",
+      "maxCount": "1",
+      "genDelay": "30000",
+      "rangth": "1",
+      "prefabPath": "Wall",
+      "rewards": [
+
+      ]
     }
 
   ]
