@@ -241,7 +241,7 @@ namespace Server
             if (path == null || path.Count < 2)
             {
                 _target = null;
-                State = CreatureState.Callback;
+                State = CreatureState.Idle; // 벽에 막히면 그자리에서 콜백끝
                 BroadcastMove();
                 return;
             }

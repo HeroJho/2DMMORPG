@@ -160,7 +160,7 @@
         "level": "10",
         "maxHp": "250",
         "attack": "5",
-        "speed": "3.0",
+        "speed": "5.0",
         "attackSpeed": "0.5",
         "totalExp": "20"
       },

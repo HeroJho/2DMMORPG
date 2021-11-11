@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - ArrowController
+    - BanBanController
     - ChatBox
     - Condition
     - CutSceneManager
@@ -186,125 +187,127 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11554}
     - Class: 114
-      Script: {instanceID: 11602}
+      Script: {instanceID: 11586}
     - Class: 114
-      Script: {instanceID: 11724}
+      Script: {instanceID: 11604}
     - Class: 114
-      Script: {instanceID: 11802}
+      Script: {instanceID: 11726}
     - Class: 114
       Script: {instanceID: 11804}
     - Class: 114
-      Script: {instanceID: 11840}
+      Script: {instanceID: 11806}
     - Class: 114
-      Script: {instanceID: 11884}
+      Script: {instanceID: 11842}
     - Class: 114
-      Script: {instanceID: 11916}
+      Script: {instanceID: 11886}
     - Class: 114
-      Script: {instanceID: 12066}
+      Script: {instanceID: 11918}
     - Class: 114
-      Script: {instanceID: 12146}
+      Script: {instanceID: 12068}
     - Class: 114
-      Script: {instanceID: 12162}
+      Script: {instanceID: 12148}
     - Class: 114
-      Script: {instanceID: 12238}
+      Script: {instanceID: 12164}
     - Class: 114
-      Script: {instanceID: 12248}
+      Script: {instanceID: 12240}
     - Class: 114
-      Script: {instanceID: 12342}
+      Script: {instanceID: 12250}
     - Class: 114
-      Script: {instanceID: 12400}
+      Script: {instanceID: 12344}
     - Class: 114
-      Script: {instanceID: 12408}
+      Script: {instanceID: 12402}
     - Class: 114
-      Script: {instanceID: 12434}
+      Script: {instanceID: 12410}
     - Class: 114
-      Script: {instanceID: 12488}
+      Script: {instanceID: 12436}
     - Class: 114
-      Script: {instanceID: 12552}
+      Script: {instanceID: 12490}
     - Class: 114
-      Script: {instanceID: 12580}
+      Script: {instanceID: 12554}
     - Class: 114
-      Script: {instanceID: 12738}
+      Script: {instanceID: 12582}
     - Class: 114
-      Script: {instanceID: 12750}
+      Script: {instanceID: 12740}
     - Class: 114
-      Script: {instanceID: 12788}
+      Script: {instanceID: 12752}
     - Class: 114
-      Script: {instanceID: 12820}
+      Script: {instanceID: 12790}
     - Class: 114
-      Script: {instanceID: 12892}
+      Script: {instanceID: 12822}
     - Class: 114
-      Script: {instanceID: 12930}
+      Script: {instanceID: 12894}
     - Class: 114
-      Script: {instanceID: 12972}
+      Script: {instanceID: 12932}
     - Class: 114
-      Script: {instanceID: 12988}
+      Script: {instanceID: 12974}
     - Class: 114
-      Script: {instanceID: 13176}
+      Script: {instanceID: 12990}
     - Class: 114
-      Script: {instanceID: 13254}
+      Script: {instanceID: 13178}
     - Class: 114
-      Script: {instanceID: 13426}
+      Script: {instanceID: 13256}
     - Class: 114
-      Script: {instanceID: 13504}
+      Script: {instanceID: 13428}
     - Class: 114
-      Script: {instanceID: 13514}
+      Script: {instanceID: 13506}
     - Class: 114
-      Script: {instanceID: 13562}
+      Script: {instanceID: 13516}
     - Class: 114
-      Script: {instanceID: 13576}
+      Script: {instanceID: 13564}
     - Class: 114
-      Script: {instanceID: 13582}
+      Script: {instanceID: 13578}
     - Class: 114
-      Script: {instanceID: 13586}
+      Script: {instanceID: 13584}
     - Class: 114
-      Script: {instanceID: 13660}
+      Script: {instanceID: 13588}
     - Class: 114
-      Script: {instanceID: 13664}
+      Script: {instanceID: 13662}
     - Class: 114
       Script: {instanceID: 13666}
     - Class: 114
-      Script: {instanceID: 13698}
+      Script: {instanceID: 13668}
     - Class: 114
-      Script: {instanceID: 13924}
+      Script: {instanceID: 13700}
     - Class: 114
-      Script: {instanceID: 13934}
+      Script: {instanceID: 13926}
     - Class: 114
-      Script: {instanceID: 13954}
+      Script: {instanceID: 13936}
     - Class: 114
-      Script: {instanceID: 13990}
+      Script: {instanceID: 13956}
     - Class: 114
-      Script: {instanceID: 14060}
+      Script: {instanceID: 13992}
     - Class: 114
-      Script: {instanceID: 14088}
+      Script: {instanceID: 14062}
     - Class: 114
-      Script: {instanceID: 14234}
+      Script: {instanceID: 14090}
     - Class: 114
-      Script: {instanceID: 14320}
+      Script: {instanceID: 14236}
     - Class: 114
-      Script: {instanceID: 14324}
+      Script: {instanceID: 14322}
     - Class: 114
-      Script: {instanceID: 14348}
+      Script: {instanceID: 14326}
     - Class: 114
-      Script: {instanceID: 14368}
+      Script: {instanceID: 14350}
     - Class: 114
-      Script: {instanceID: 14380}
+      Script: {instanceID: 14370}
     - Class: 114
-      Script: {instanceID: 14384}
+      Script: {instanceID: 14382}
     - Class: 114
-      Script: {instanceID: 14540}
+      Script: {instanceID: 14386}
     - Class: 114
-      Script: {instanceID: 14556}
+      Script: {instanceID: 14542}
     - Class: 114
-      Script: {instanceID: 14672}
+      Script: {instanceID: 14558}
     - Class: 114
-      Script: {instanceID: 14726}
+      Script: {instanceID: 14674}
     - Class: 114
-      Script: {instanceID: 14752}
+      Script: {instanceID: 14728}
     - Class: 114
-      Script: {instanceID: 14770}
+      Script: {instanceID: 14754}
     - Class: 114
-      Script: {instanceID: 14800}
+      Script: {instanceID: 14772}
+    - Class: 114
+      Script: {instanceID: 14802}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -478,6 +481,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Scrollbar
+  - hash:
+      serializedVersion: 2
+      Hash: 263169be3d059c06a06d1f13dd30d00a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BanBanController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f

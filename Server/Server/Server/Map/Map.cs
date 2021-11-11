@@ -146,9 +146,10 @@ namespace Server
             PuseItems.Remove(addedItem);
         }
 
-        public HashSet<T> LoopByCircle<T>(Vector2Int cellPos, int rad, bool includeInit = false) where T : GameObject
+        public HashSet<T> LoopByCircle<T>(Vector2Int cellPos, int rad, bool includeInit = false, bool diameter = false) where T : GameObject
         {
             HashSet<T> objects = new HashSet<T>();
+            int initRad = rad;
 
             int x = cellPos.x - MinX;
             int y = MaxY - cellPos.y;
@@ -250,12 +251,16 @@ namespace Server
                 }
 
                 rad--;
+                // 지름을 구하고 한번 줄었다면 
+                if(diameter && rad == initRad - 1)
+                {
+                    return objects;
+                }
             }
 
             return objects;
 
         }
-
         public HashSet<T> LoopByOval<T>(Vector2Int cellPos, MoveDir dir, int rad) where T : GameObject
         {
             HashSet<T> objects = new HashSet<T>();
@@ -346,6 +351,95 @@ namespace Server
 
             return objects;
         }
+        public HashSet<Vector2Int> LoopByCircleWithVector(Vector2Int cellPos, int rad, bool includeInit = false, bool diameter = false)
+        {
+            HashSet<Vector2Int> vectors = new HashSet<Vector2Int>();
+            int initRad = rad;
+
+            int x = cellPos.x - MinX;
+            int y = MaxY - cellPos.y;
+
+            // 요청자리 포함할거냐
+            if (includeInit)
+                vectors.Add(Pos2Cell(new Pos(y, x)));
+
+            while (rad > 0)
+            {
+                int depY = y + rad;
+                int depX = x;
+
+                while (depY >= y)
+                {
+                    if (depY > SizeY - 1 || depX > SizeX - 1 || depY < 0 || depX < 0)
+                    {
+                        depY--;
+                        depX++;
+                        continue;
+                    }
+
+                    vectors.Add(Pos2Cell(new Pos(depY--, depX++)));
+                }
+                depY++;
+                depX--;
+
+                depY--;
+                depX--;
+                while (depX >= x)
+                {
+                    if (depY > SizeY - 1 || depX > SizeX - 1 || depY < 0 || depX < 0)
+                    {
+                        depY--;
+                        depX--;
+                        continue;
+                    }
+
+                    vectors.Add(Pos2Cell(new Pos(depY--, depX--)));
+                }
+                depY++;
+                depX++;
+
+                depY++;
+                depX--;
+                while (depY <= y)
+                {
+                    if (depY > SizeY - 1 || depX > SizeX - 1 || depY < 0 || depX < 0)
+                    {
+                        depY++;
+                        depX--;
+                        continue;
+                    }
+
+                    vectors.Add(Pos2Cell(new Pos(depY++, depX--)));
+                }
+                depY--;
+                depX++;
+
+                depY++;
+                depX++;
+                while (depX < x)
+                {
+                    if (depY > SizeY - 1 || depX > SizeX - 1 || depY < 0 || depX < 0)
+                    {
+                        depY++;
+                        depX++;
+                        continue;
+                    }
+
+                    vectors.Add(Pos2Cell(new Pos(depY++, depX++)));
+                }
+
+                rad--;
+                // 지름을 구하고 한번 줄었다면 
+                if (diameter && rad == initRad - 1)
+                {
+                    return vectors;
+                }
+            }
+
+            return vectors;
+
+        }
+
 
         public bool CanGo(Vector2Int cellPos, bool checkObject = true)
         {
@@ -378,7 +472,7 @@ namespace Server
             if (CanGo(dest, checkObjects) == false)
                 return false;
 
-
+            // 플레이어는 장애물 체크
             GameObjectType type = ObjectManager.GetObjectTypeById(gameObject.Id);
             if (type == GameObjectType.Player)
             {
@@ -700,13 +794,13 @@ namespace Server
             return cells;
         }
 
-        Pos Cell2Pos(Vector2Int cell)
+        public Pos Cell2Pos(Vector2Int cell)
         {
             // CellPos -> ArrayPos
             return new Pos(MaxY - cell.y, cell.x - MinX);
         }
 
-        Vector2Int Pos2Cell(Pos pos)
+        public Vector2Int Pos2Cell(Pos pos)
         {
             // ArrayPos -> CellPos
             return new Vector2Int(pos.X + MinX, MaxY - pos.Y);

@@ -429,6 +429,11 @@ message S_Chat{
     string str = 2;
 }
 
+message S_SkillMotion{
+    int32 id = 1;
+    int32 skillId = 2;
+}
+
 message ItemInfo{
     int32 itemDbId = 1;
     int32 templateId = 2;

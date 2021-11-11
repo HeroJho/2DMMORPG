@@ -508,7 +508,7 @@
           "time": "5",
           "moveSpeedValue": "0",
           "attackSpeedValue": "0",
-          "tickValue": "50",
+          "tickValue": "500",
           "stunChanceValue": "0"
         }
       ],
