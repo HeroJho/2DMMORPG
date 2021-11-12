@@ -6,11 +6,42 @@ using UnityEngine;
 public class BanBanController : MonsterController
 {
 	protected Coroutine _coSkill;
+	private UI_GameScene _gameSceneUI;
 
 	[SerializeField]
 	private GameObject WarningSkill_7;
+	[SerializeField]
+	private GameObject WarningSkill_10_Right;
+	[SerializeField]
+	private GameObject WarningSkill_10_Left;
+	[SerializeField]
+	private GameObject WarningSkill_10_Up;
+	[SerializeField]
+	private GameObject WarningSkill_10_Down;
 
-	public override void UseSkill(int skillId, int skillLevel)
+    protected override void AddHpBar()
+    {
+		_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		_gameSceneUI.BossHpUI.gameObject.SetActive(true);
+	}
+
+    protected override void UpdateHpBar()
+    {
+		if (_gameSceneUI == null)
+			return;
+		if (_gameSceneUI.BossHpUI == null && _gameSceneUI.BossHpUI.gameObject.activeSelf)
+			return;
+
+		float ratio = 0.0f;
+		if (Stat.MaxHp > 0)
+		{
+			ratio = ((float)Hp / Stat.MaxHp);
+		}
+
+		_gameSceneUI.BossHpUI.SetHpBar(ratio);
+	}
+
+    public override void UseSkill(int skillId, int skillLevel)
     {
 		if (_animator == null)
 			return;
@@ -25,6 +56,16 @@ public class BanBanController : MonsterController
 				break;
 			case 7:
 				_coSkill = StartCoroutine("CoStartMotionSkill_7", 0);
+				break;
+			case 10:
+				if(Dir == MoveDir.Right)
+					_coSkill = StartCoroutine("CoStartMotionSkill_10_Right", 0);
+				else if(Dir == MoveDir.Left)
+					_coSkill = StartCoroutine("CoStartMotionSkill_10_Left", 0);
+				else if (Dir == MoveDir.Up)
+					_coSkill = StartCoroutine("CoStartMotionSkill_10_Up", 0);
+				else if (Dir == MoveDir.Down)
+					_coSkill = StartCoroutine("CoStartMotionSkill_10_Down", 0);
 				break;
 			default:
                 break;
@@ -63,6 +104,55 @@ public class BanBanController : MonsterController
 		yield return new WaitForSeconds(1.8f);
 
 		WarningSkill_7.SetActive(false);
+		State = CreatureState.Idle;
+		_coSkill = null;
+	}
+
+	IEnumerator CoStartMotionSkill_10_Right(int skillLevel)
+	{
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+		_animator.Play("SKILL_7");
+		WarningSkill_10_Right.SetActive(true);
+
+		yield return new WaitForSeconds(1.8f);
+
+		WarningSkill_10_Right.SetActive(false);
+		State = CreatureState.Idle;
+		_coSkill = null;
+	}
+	IEnumerator CoStartMotionSkill_10_Left(int skillLevel)
+	{
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+		_animator.Play("SKILL_7");
+		WarningSkill_10_Left.SetActive(true);
+
+		yield return new WaitForSeconds(1.8f);
+
+		WarningSkill_10_Left.SetActive(false);
+		State = CreatureState.Idle;
+		_coSkill = null;
+	}
+	IEnumerator CoStartMotionSkill_10_Up(int skillLevel)
+	{
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+		_animator.Play("SKILL_7");
+		WarningSkill_10_Up.SetActive(true);
+
+		yield return new WaitForSeconds(1.8f);
+
+		WarningSkill_10_Up.SetActive(false);
+		State = CreatureState.Idle;
+		_coSkill = null;
+	}
+	IEnumerator CoStartMotionSkill_10_Down(int skillLevel)
+	{
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+		_animator.Play("SKILL_7");
+		WarningSkill_10_Down.SetActive(true);
+
+		yield return new WaitForSeconds(1.8f);
+
+		WarningSkill_10_Down.SetActive(false);
 		State = CreatureState.Idle;
 		_coSkill = null;
 	}

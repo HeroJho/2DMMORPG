@@ -288,6 +288,13 @@ public class ObjectManager
 
         }
 
+        BanBanController bc = go.GetComponent<BanBanController>();
+        if(bc != null)
+        {
+            UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+            gameSceneUI.BossHpUI.gameObject.SetActive(false);
+        }
+
         Managers.Resource.Destroy(go);
     }
 

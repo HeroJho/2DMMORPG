@@ -158,7 +158,7 @@
       "name": "반반",
       "stat": {
         "level": "10",
-        "maxHp": "250",
+        "maxHp": "20000",
         "attack": "5",
         "speed": "5.0",
         "attackSpeed": "0.5",

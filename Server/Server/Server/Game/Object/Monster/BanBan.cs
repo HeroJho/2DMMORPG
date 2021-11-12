@@ -8,8 +8,24 @@ namespace Server
 { 
     public class BanBan : Monster
     {
-        public enum SkillState { None, Skill_1, Skill_2, Skill_3, Skill_4, Skill_5, Skill_6, Skill_7 }
+        public enum SkillState { None, Skill_1, Skill_2, Skill_3, Skill_4, Skill_5, Skill_6, Skill_7, Skill_8, Skill_9, Skill_10 }
+        public enum BossPage { Page_1, Page_2 }
         public List<Monster> Minions = new List<Monster>();
+        private BossPage _page;
+
+        public override int Hp
+        {
+            get { return Stat.Hp; }
+            set { 
+                Stat.Hp = Math.Clamp(value, 0, TotalMaxHp);
+                if (_page == BossPage.Page_1 && Stat.Hp < TotalMaxHp * 0.5)
+                {
+                    Console.WriteLine("Page2!!");
+                    _page = BossPage.Page_2;
+                }
+
+            }
+        }
 
         public virtual void Init(int templateId, Vector2Int beginPos, Spawner spawner = null)
         {
@@ -27,6 +43,8 @@ namespace Server
 
             CellPos = beginPos;
             _beginPos = beginPos;
+
+            _page = BossPage.Page_1;
         }
 
         public override void Update()
@@ -187,22 +205,34 @@ namespace Server
                 case SkillState.None:
                     return Skill_0();
                 case SkillState.Skill_1:
-                    Skill_2();
+                    Skill_1();
                     return true;
                 case SkillState.Skill_2:
-                    Skill_3();
+                    Skill_2();
                     return true;
                 case SkillState.Skill_3:
-                    Skill_6();
+                    Skill_3();
                     return true;
                 case SkillState.Skill_4:
-                    Skill_5();
-                    return true;
-                case SkillState.Skill_5:
                     Skill_4();
                     return true;
+                case SkillState.Skill_5:
+                    Skill_5();
+                    return true;
                 case SkillState.Skill_6:
+                    Skill_6();
+                    return true;
+                case SkillState.Skill_7:
                     Skill_7();
+                    return true;
+                case SkillState.Skill_8:
+                    Skill_8();
+                    return true;
+                case SkillState.Skill_9:
+                    Skill_9();
+                    return true;
+                case SkillState.Skill_10:
+                    Skill_10();
                     return true;
                 default:
                     return false;
@@ -212,29 +242,21 @@ namespace Server
         public SkillState ChooseRandomSkill()
         {
             int rand = new Random().Next(0, 101);
-            if (rand < 30)
+
+            switch (_page)
             {
-                return SkillState.Skill_1;
-            }
-            else if(rand < 50)
-            {
-                return SkillState.Skill_2;
-            }
-            else if (rand < 70)
-            {
-                return SkillState.Skill_3;
-            }
-            else if (rand < 80)
-            {
-                return SkillState.Skill_4;
-            }
-            else if (rand < 90)
-            {
-                return SkillState.Skill_5;
-            }
-            else if (rand < 100)
-            {
-                return SkillState.Skill_6;
+                case BossPage.Page_1:
+                    if (rand < 10)
+                        return SkillState.Skill_1;
+                    else if (rand < 30)
+                        return SkillState.Skill_2;
+                    else if (rand < 35)
+                        return SkillState.Skill_3;
+                    break;
+                case BossPage.Page_2:
+                    break;
+                default:
+                    break;
             }
 
             return SkillState.None;
@@ -452,14 +474,28 @@ namespace Server
         }
         void Skill_8() // 회복 
         {
-            Skill skillData = new Skill();
-            ConditionInfo condition = new ConditionInfo();
-            condition.Time = 10;
-            condition.TickValue = 500;
-            skillData.conditions = new List<ConditionInfo>();
-            skillData.conditions.Add(condition);
+            _isUsingSkill = true;
 
-            Condition.Healing(skillData, 0, this);
+            // 클라 애니메이션 실행
+            S_Skill skill = new S_Skill() { Info = new SkillInfo() };
+            skill.ObjectId = Info.ObjectId;
+            skill.Info.SkillId = 1;
+            skill.Info.Point = 0;
+            Room.Broadcast(CellPos, skill);
+
+            // 스킬시전 시간 후에 생성
+            Room.PushAfter(2000, () =>
+            {
+                Skill skillData = new Skill();
+                ConditionInfo condition = new ConditionInfo();
+                condition.Time = 10;
+                condition.TickValue = 500;
+                skillData.conditions = new List<ConditionInfo>();
+                skillData.conditions.Add(condition);
+
+                Condition.Healing(skillData, 0, this);
+            });
+
         }
         void Skill_9() // 벽소환 >> 완료 
         {
@@ -507,7 +543,7 @@ namespace Server
             // 클라 애니메이션 실행
             S_Skill skill = new S_Skill() { Info = new SkillInfo() };
             skill.ObjectId = Info.ObjectId;
-            skill.Info.SkillId = 7;
+            skill.Info.SkillId = 10;
             skill.Info.Point = 0;
             Room.Broadcast(CellPos, skill);
 
@@ -519,7 +555,7 @@ namespace Server
 
                 _isUsingSkill = false;
 
-                HashSet<CreatureObject> objects = Room.Map.LoopByOval<CreatureObject>(CellPos, Dir, 4);
+                HashSet<CreatureObject> objects = Room.Map.LoopByOval<CreatureObject>(CellPos, Dir, 10);
                 foreach (CreatureObject co in objects)
                 {
                     int damage = co.Hp - 10;

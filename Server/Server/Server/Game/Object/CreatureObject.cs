@@ -20,7 +20,7 @@ namespace Server
 			set { Stat.Speed = value; }
 		}
 
-		public int Hp
+		public virtual int Hp
 		{
 			get { return Stat.Hp; }
 			set { Stat.Hp = Math.Clamp(value, 0, TotalMaxHp); }
