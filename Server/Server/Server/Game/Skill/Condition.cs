@@ -34,7 +34,18 @@ namespace Server
         public Condition(CreatureObject creatureObj)
         {
             _creatureObj = creatureObj;
-           
+
+        }
+
+        private bool _isSetOrigin = false;
+        private void SetOriginValues()
+        {
+            if (_isSetOrigin)
+                return;
+
+            _isSetOrigin = true;
+            _originSpeed = _creatureObj.Speed;
+            _originAtteckSpeed = _creatureObj.Stat.AttackSpeed;
         }
 
         public void Chilled(Skill skillData, int skillLevel)
@@ -290,6 +301,8 @@ namespace Server
         float _originSpeed; 
         public void SlowSpeed(int slowValue, int timeValue)
         {
+            SetOriginValues();
+
             GameRoom room = _creatureObj.Room;
             if (_creatureObj == null || room == null)
                 return;
@@ -306,7 +319,6 @@ namespace Server
             }
 
             // 속도 감소
-            _originSpeed = _creatureObj.Speed;
             _creatureObj.Speed -= slowValue;
 
             if (_creatureObj.Speed <= 0)
@@ -324,6 +336,8 @@ namespace Server
         float _originAtteckSpeed;
         public void SlowAttackSpeed(int slowValue, int timeValue)
         {
+            SetOriginValues();
+
             GameRoom room = _creatureObj.Room;
             if (_creatureObj == null || room == null)
                 return;
@@ -340,7 +354,6 @@ namespace Server
             }
 
             // 원래 속도 저장 후 감소
-            _originAtteckSpeed = _creatureObj.Stat.AttackSpeed;
             _creatureObj.Stat.AttackSpeed += slowValue;
 
             // 시간후에 원래속도 되돌림

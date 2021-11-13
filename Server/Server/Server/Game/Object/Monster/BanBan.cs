@@ -5,23 +5,30 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace Server
-{ 
+{
     public class BanBan : Monster
     {
         public enum SkillState { None, Skill_1, Skill_2, Skill_3, Skill_4, Skill_5, Skill_6, Skill_7, Skill_8, Skill_9, Skill_10 }
-        public enum BossPage { Page_1, Page_2 }
+        public enum BossPage { Page_1, Page_2, Page_3 }
         public List<Monster> Minions = new List<Monster>();
         private BossPage _page;
+        private Random _random = new Random();
 
         public override int Hp
         {
             get { return Stat.Hp; }
-            set { 
+            set
+            {
                 Stat.Hp = Math.Clamp(value, 0, TotalMaxHp);
-                if (_page == BossPage.Page_1 && Stat.Hp < TotalMaxHp * 0.5)
+                if (_page == BossPage.Page_1 && Stat.Hp < TotalMaxHp * 0.7)
                 {
                     Console.WriteLine("Page2!!");
                     _page = BossPage.Page_2;
+                }
+                else if (_page == BossPage.Page_2 && Stat.Hp < TotalMaxHp * 0.4)
+                {
+                    Console.WriteLine("Page3!!");
+                    _page = BossPage.Page_3;
                 }
 
             }
@@ -127,58 +134,7 @@ namespace Server
 
         public override void UpdateSkill()
         {
-            if (_coolTick == 0)
-            {
-                // 유효한 타겟인지
-                if (_target == null || _target.Room != Room || _target.State == CreatureState.Dead)
-                {
-                    _target = null;
-                    State = CreatureState.Moving;
-                    BroadcastMove();
-                    return;
-                }
-
-                // 스킬이 아직 사용 가능한지
-                Vector2Int dir = _target.CellPos - CellPos;
-                int dist = dir.cellDistFromZero;
-                bool canUseSkill = (dist <= _skillRange && (dir.x == 0 || dir.y == 0));
-                if (canUseSkill == false)
-                {
-                    State = CreatureState.Moving;
-                    BroadcastMove();
-                    return;
-                }
-
-                // 타게팅 방향 주시
-                MoveDir lookDir = GetDirFromVec(dir);
-                if (Dir != lookDir)
-                {
-                    Dir = lookDir;
-                    BroadcastMove();
-                }
-
-                // 데미지 판정
-                _target.OnDamaged(this, Stat.Attack + TotalAttack);
-                // 평타에 일정확률로 기절
-                _target.Condition.Stun(3, 5);
-
-                // 스킬 사용 Broadcast
-                S_Skill skill = new S_Skill() { Info = new SkillInfo() };
-                skill.ObjectId = Id;
-                skill.Info.SkillId = 0;
-                Room.Broadcast(CellPos, skill);
-
-                // 스킬 쿨타임 적용
-                int collTick = (int)(1000 * Stat.AttackSpeed);
-                _coolTick = Environment.TickCount64 + collTick;
-
-                State = CreatureState.Moving;
-            }
-
-            if (_coolTick > Environment.TickCount64)
-                return;
-
-            _coolTick = 0;
+            // 반반은 평타를 스킬처럼 사용하도록 구현함
         }
 
         public override void UpdateDead()
@@ -214,7 +170,7 @@ namespace Server
                     Skill_3();
                     return true;
                 case SkillState.Skill_4:
-                    Skill_4();
+                    //Skill_4();
                     return true;
                 case SkillState.Skill_5:
                     Skill_5();
@@ -241,20 +197,38 @@ namespace Server
 
         public SkillState ChooseRandomSkill()
         {
-            int rand = new Random().Next(0, 101);
+            int rand = _random.Next(0, 101);
 
             switch (_page)
             {
                 case BossPage.Page_1:
-                    if (rand < 10)
-                        return SkillState.Skill_1;
-                    else if (rand < 30)
+                    if (rand < 20) // 20
                         return SkillState.Skill_2;
-                    else if (rand < 35)
+                    else if (rand < 25) // 5
+                        return SkillState.Skill_4;
+                    else if (rand < 35) // 10
                         return SkillState.Skill_3;
-                    break;
+                    break; // 60
                 case BossPage.Page_2:
-                    break;
+                    if (rand < 40) // 40
+                        return SkillState.Skill_5; // 몬스터 솬
+                    else if (rand < 50) // 10
+                        return SkillState.Skill_6; // 버프
+                    else if (rand < 70) // 20
+                        return SkillState.Skill_8; // 회복
+                    else if (rand < 80) // 10
+                        return SkillState.Skill_3; // 전방 5번 스킬
+                    break; // 20
+                case BossPage.Page_3:
+                    if (rand < 40) // 40
+                        return SkillState.Skill_7; // 원형 즉사
+                    else if (rand < 80) // 40
+                        return SkillState.Skill_10; // 전방 즉사
+                    else if (rand < 90) // 10
+                        return SkillState.Skill_9; // 벽 소환
+                    else if (rand < 100) // 10
+                        return SkillState.Skill_2; // 십자 슬로우
+                    break; // 0
                 default:
                     break;
             }
@@ -265,21 +239,55 @@ namespace Server
         private bool _isUsingSkill = false;
         bool Skill_0() // 평타 >> 완료 
         {
-            if (_isUsingSkill) // 스킬을 사용중이면 평타 불가능
-                return false;
+            _isUsingSkill = true;
 
-            // 스킬로 넘어갈지 체크
+            // 유효한 타겟인지
+            if (_target == null || _target.Room != Room || _target.State == CreatureState.Dead)
+            {
+                _target = null;
+                _isUsingSkill = false;
+                BroadcastMove();
+                return false;
+            }
+
+            // 스킬이 아직 사용 가능한지
             Vector2Int dir = _target.CellPos - CellPos;
             int dist = dir.cellDistFromZero;
-            if (dist <= _skillRange && (dir.x == 0 || dir.y == 0))
+            bool canUseSkill = (dist <= _skillRange && (dir.x == 0 || dir.y == 0));
+            if (canUseSkill == false)
             {
-                _coolTick = 0;
-                State = CreatureState.Skill;
+                _isUsingSkill = false;
                 BroadcastMove();
-                return true;
-            }
-            else
                 return false;
+            }
+
+            // 타게팅 방향 주시
+            MoveDir lookDir = GetDirFromVec(dir);
+            if (Dir != lookDir)
+            {
+                Dir = lookDir;
+                BroadcastMove();
+            }
+
+            // 데미지 판정
+            _target.OnDamaged(this, Stat.Attack + TotalAttack);
+            // 평타에 일정확률로 기절
+            _target.Condition.Stun(3, 5);
+
+            // 스킬 사용 Broadcast
+            S_Skill skill = new S_Skill() { Info = new SkillInfo() };
+            skill.ObjectId = Id;
+            skill.Info.SkillId = 0;
+            Room.Broadcast(CellPos, skill);
+
+            Room.PushAfter(2000, () =>
+            {
+                if (this == null || Room == null)
+                    return;
+
+                _isUsingSkill = false;
+            });
+            return true;
         }
         void Skill_1() // 전방으로 아이스볼을 한 번 발사한다 >> 완료 
         {
@@ -394,7 +402,7 @@ namespace Server
                 Room.EnterGame(poisonSmoke);
             });
         }
-        void Skill_5() // 랜덤하게 몬스터를 소환한다 >> 완료 
+        void Skill_5() // 뒤틀린 몬스터를 소환한다 >> 완료 
         {
             _isUsingSkill = true;
 
@@ -419,8 +427,7 @@ namespace Server
                 if (pos == null)
                     return;
 
-                int rand = new Random().Next(1, 4); // 1~3
-                monster.Init(rand, pos.Value);
+                monster.Init(6, pos.Value);
                 Minions.Add(monster);
 
                 Room.EnterGame(monster);
@@ -466,6 +473,16 @@ namespace Server
                 HashSet<CreatureObject> objects = Room.Map.LoopByCircle<CreatureObject>(CellPos, 4);
                 foreach (CreatureObject co in objects)
                 {
+                    if (co is Wall)
+                        continue;
+
+                    // 두번 스턴이 됐다 >> 즉사
+                    if (co.Condition.Buffs.ContainsKey(9999))
+                    {
+                        co.OnDamaged(this, co.TotalMaxHp, true);
+                        continue;
+                    }
+
                     int damage = co.Hp - 10;
                     co.OnDamaged(this, damage, true);
                     co.Condition.Stun(2, 100);
@@ -479,17 +496,22 @@ namespace Server
             // 클라 애니메이션 실행
             S_Skill skill = new S_Skill() { Info = new SkillInfo() };
             skill.ObjectId = Info.ObjectId;
-            skill.Info.SkillId = 1;
+            skill.Info.SkillId = 5;
             skill.Info.Point = 0;
             Room.Broadcast(CellPos, skill);
 
             // 스킬시전 시간 후에 생성
             Room.PushAfter(2000, () =>
             {
+                if (this == null || Room == null)
+                    return;
+
+                _isUsingSkill = false;
+
                 Skill skillData = new Skill();
                 ConditionInfo condition = new ConditionInfo();
                 condition.Time = 10;
-                condition.TickValue = 500;
+                condition.TickValue = 1000;
                 skillData.conditions = new List<ConditionInfo>();
                 skillData.conditions.Add(condition);
 
@@ -516,7 +538,9 @@ namespace Server
 
                 _isUsingSkill = false;
 
-                HashSet<Vector2Int> vectors = Room.Map.LoopByCircleWithVector(CellPos, 1, false, true);
+                int rand = _random.Next(3, 8);
+
+                HashSet<Vector2Int> vectors = Room.Map.LoopByCircleWithVector(CellPos, rand, false, true);
 
                 foreach (Vector2Int cellPos in vectors)
                 {
@@ -529,7 +553,6 @@ namespace Server
                     Wall wall = ObjectManager.Instance.Add<Wall>();
 
                     wall.Init(5, cellPos);
-                    //Minions.Add(wall);
 
                     Room.EnterGame(wall);
                 }
@@ -541,10 +564,11 @@ namespace Server
             _isUsingSkill = true;
 
             // 클라 애니메이션 실행
+            int dir = _random.Next(0, 4);
             S_Skill skill = new S_Skill() { Info = new SkillInfo() };
             skill.ObjectId = Info.ObjectId;
             skill.Info.SkillId = 10;
-            skill.Info.Point = 0;
+            skill.Info.Point = dir;
             Room.Broadcast(CellPos, skill);
 
             // 스킬시전 시간 후에 생성
@@ -555,9 +579,19 @@ namespace Server
 
                 _isUsingSkill = false;
 
-                HashSet<CreatureObject> objects = Room.Map.LoopByOval<CreatureObject>(CellPos, Dir, 10);
+                HashSet<CreatureObject> objects = Room.Map.LoopByOval<CreatureObject>(CellPos, (MoveDir)dir, 10);
                 foreach (CreatureObject co in objects)
                 {
+                    if (co is Wall)
+                        continue;
+
+                    // 두번 스턴이 됐다 >> 즉사
+                    if (co.Condition.Buffs.ContainsKey(9999))
+                    {
+                        co.OnDamaged(this, co.TotalMaxHp, true);
+                        continue;
+                    }
+
                     int damage = co.Hp - 10;
                     co.OnDamaged(this, damage, true);
                     co.Condition.Stun(2, 100);

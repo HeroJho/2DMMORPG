@@ -19,6 +19,7 @@ ScriptsOnlyBuild:
     - QuestGiver
     - SummoningController
     - TreeController
+    - UI_BossHp
     - UI_Buff
     - UI_BuffPanel
     - UI_CanClassUp
@@ -88,8 +89,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -235,79 +238,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12822}
     - Class: 114
-      Script: {instanceID: 12894}
+      Script: {instanceID: 12874}
     - Class: 114
-      Script: {instanceID: 12932}
+      Script: {instanceID: 12896}
     - Class: 114
-      Script: {instanceID: 12974}
+      Script: {instanceID: 12934}
     - Class: 114
-      Script: {instanceID: 12990}
+      Script: {instanceID: 12976}
     - Class: 114
-      Script: {instanceID: 13178}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13256}
+      Script: {instanceID: 13180}
     - Class: 114
-      Script: {instanceID: 13428}
+      Script: {instanceID: 13258}
     - Class: 114
-      Script: {instanceID: 13506}
+      Script: {instanceID: 13430}
     - Class: 114
-      Script: {instanceID: 13516}
+      Script: {instanceID: 13508}
     - Class: 114
-      Script: {instanceID: 13564}
+      Script: {instanceID: 13518}
     - Class: 114
-      Script: {instanceID: 13578}
+      Script: {instanceID: 13566}
     - Class: 114
-      Script: {instanceID: 13584}
+      Script: {instanceID: 13580}
     - Class: 114
-      Script: {instanceID: 13588}
+      Script: {instanceID: 13586}
     - Class: 114
-      Script: {instanceID: 13662}
+      Script: {instanceID: 13590}
     - Class: 114
-      Script: {instanceID: 13666}
+      Script: {instanceID: 13664}
     - Class: 114
       Script: {instanceID: 13668}
     - Class: 114
-      Script: {instanceID: 13700}
+      Script: {instanceID: 13670}
     - Class: 114
-      Script: {instanceID: 13926}
+      Script: {instanceID: 13702}
     - Class: 114
-      Script: {instanceID: 13936}
+      Script: {instanceID: 13928}
     - Class: 114
-      Script: {instanceID: 13956}
+      Script: {instanceID: 13938}
     - Class: 114
-      Script: {instanceID: 13992}
+      Script: {instanceID: 13958}
     - Class: 114
-      Script: {instanceID: 14062}
+      Script: {instanceID: 13994}
     - Class: 114
-      Script: {instanceID: 14090}
+      Script: {instanceID: 14064}
     - Class: 114
-      Script: {instanceID: 14236}
+      Script: {instanceID: 14092}
     - Class: 114
-      Script: {instanceID: 14322}
+      Script: {instanceID: 14238}
     - Class: 114
-      Script: {instanceID: 14326}
+      Script: {instanceID: 14324}
     - Class: 114
-      Script: {instanceID: 14350}
+      Script: {instanceID: 14328}
     - Class: 114
-      Script: {instanceID: 14370}
+      Script: {instanceID: 14352}
     - Class: 114
-      Script: {instanceID: 14382}
+      Script: {instanceID: 14372}
     - Class: 114
-      Script: {instanceID: 14386}
+      Script: {instanceID: 14384}
     - Class: 114
-      Script: {instanceID: 14542}
+      Script: {instanceID: 14388}
     - Class: 114
-      Script: {instanceID: 14558}
+      Script: {instanceID: 14544}
     - Class: 114
-      Script: {instanceID: 14674}
+      Script: {instanceID: 14560}
     - Class: 114
-      Script: {instanceID: 14728}
+      Script: {instanceID: 14676}
     - Class: 114
-      Script: {instanceID: 14754}
+      Script: {instanceID: 14730}
     - Class: 114
-      Script: {instanceID: 14772}
+      Script: {instanceID: 14756}
     - Class: 114
-      Script: {instanceID: 14802}
+      Script: {instanceID: 14774}
+    - Class: 114
+      Script: {instanceID: 14804}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -483,7 +488,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 263169be3d059c06a06d1f13dd30d00a
+      Hash: 93200a283935a3e09946a580a5d5a9a5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BanBanController
@@ -835,6 +840,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: SpriteSkinEntity
+  - hash:
+      serializedVersion: 2
+      Hash: 385ec5bb8ed12d529bc01d5261598b01
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_BossHp
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f

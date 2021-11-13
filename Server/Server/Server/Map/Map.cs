@@ -377,7 +377,9 @@ namespace Server
                         continue;
                     }
 
-                    vectors.Add(Pos2Cell(new Pos(depY--, depX++)));
+                    Vector2Int cell = Pos2Cell(new Pos(depY--, depX++));
+                    if (CanGo(cell))
+                        vectors.Add(cell);
                 }
                 depY++;
                 depX--;
@@ -393,7 +395,9 @@ namespace Server
                         continue;
                     }
 
-                    vectors.Add(Pos2Cell(new Pos(depY--, depX--)));
+                    Vector2Int cell = Pos2Cell(new Pos(depY--, depX--));
+                    if (CanGo(cell))
+                        vectors.Add(cell);
                 }
                 depY++;
                 depX++;
@@ -409,7 +413,9 @@ namespace Server
                         continue;
                     }
 
-                    vectors.Add(Pos2Cell(new Pos(depY++, depX--)));
+                    Vector2Int cell = Pos2Cell(new Pos(depY++, depX--));
+                    if (CanGo(cell))
+                        vectors.Add(cell);
                 }
                 depY--;
                 depX++;
@@ -425,7 +431,9 @@ namespace Server
                         continue;
                     }
 
-                    vectors.Add(Pos2Cell(new Pos(depY++, depX++)));
+                    Vector2Int cell = Pos2Cell(new Pos(depY++, depX++));
+                    if (CanGo(cell))
+                        vectors.Add(cell);
                 }
 
                 rad--;

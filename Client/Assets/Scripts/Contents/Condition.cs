@@ -47,6 +47,9 @@ public class Condition : MonoBehaviour
         _hyperBodyEffect.gameObject.SetActive(false);
         _ironBodyEffect.gameObject.SetActive(false);
         _isInit = true;
+
+        _originSpeed = _creatureController.Speed;
+        _originAttackSpeed = _creatureController.Stat.AttackSpeed;
     }
 
     public void Init()
@@ -75,6 +78,10 @@ public class Condition : MonoBehaviour
         _hyperBodyEffect.gameObject.SetActive(false);
         _ironBodyEffect.gameObject.SetActive(false);
         _isInit = true;
+
+
+        _originSpeed = _creatureController.Speed;
+        _originAttackSpeed = _creatureController.Stat.AttackSpeed;
     }
 
     public void UpdateCondition(ConditionType conditionType, int objId, int skillId, int time, float attackSpeed, float moveSpeed)
@@ -128,13 +135,15 @@ public class Condition : MonoBehaviour
 
         // 이펙트
         _spriteRenderer.color = new Color(0, 255, 255);
-        _animator.SetFloat("AttackSpeed", 0.5f);
+        if(_animator != null)
+            _animator.SetFloat("AttackSpeed", 0.5f);
 
         // 시간후에 원래속도 되돌림
         _chilledAnim = StartCoroutine(CoolTime(timeValue, () =>
         {
             _spriteRenderer.color = new Color(255, 255, 255);
-            _animator.SetFloat("AttackSpeed", 1);
+            if (_animator != null)
+                _animator.SetFloat("AttackSpeed", 1);
         }));
     }
 
@@ -271,7 +280,6 @@ public class Condition : MonoBehaviour
         }
 
         // 원래 속도 저장 후 감소
-        _originSpeed = _creatureController.Speed;
         _creatureController.Speed = slowMoveValue;
 
         // 시간후에 원래속도 되돌림
@@ -294,7 +302,6 @@ public class Condition : MonoBehaviour
             _slowAttackJob = null;
         }
 
-        _originAttackSpeed = _creatureController.Stat.AttackSpeed;
         _creatureController.Stat.AttackSpeed = slowAttackValue;
 
         // 시간후에 원래속도 되돌림

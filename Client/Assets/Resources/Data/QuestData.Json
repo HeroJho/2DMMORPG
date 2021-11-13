@@ -257,6 +257,13 @@
           "itemId": "201",
           "count": "500",
           "upClass": "0"
+        },
+        {
+          "exp": "20000",
+          "gold": "0",
+          "itemId": "0",
+          "count": "0",
+          "upClass": "0"
         }
       ],
       "cutSceneId": "-1"

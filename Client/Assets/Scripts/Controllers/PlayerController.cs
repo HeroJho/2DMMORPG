@@ -226,7 +226,8 @@ public class PlayerController : CreatureController
 		_rangedSkill = false;
 		State = CreatureState.Skill; // 서버에서 허락을 맡음
 		yield return new WaitForSeconds(0.5f);
-		State = CreatureState.Idle;
+		if(State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();
@@ -237,7 +238,8 @@ public class PlayerController : CreatureController
         _rangedSkill = true;
 		State = CreatureState.Skill;
         yield return new WaitForSeconds(0.5f);
-        State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
         _coSkill = null;
 
 		CheckUpdatedFlag();
@@ -264,8 +266,8 @@ public class PlayerController : CreatureController
 		Destroy(go, 1);
 
 		yield return new WaitForSeconds(1f);
-
-		State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();
@@ -283,8 +285,8 @@ public class PlayerController : CreatureController
 		Destroy(go, 2);
 
 		yield return new WaitForSeconds(2f);
-
-		State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();
@@ -302,8 +304,8 @@ public class PlayerController : CreatureController
 		Destroy(go, 2);
 
 		yield return new WaitForSeconds(2f);
-
-		State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();
@@ -346,8 +348,8 @@ public class PlayerController : CreatureController
 		Destroy(go, 1);
 
 		yield return new WaitForSeconds(1f);
-
-		State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();
@@ -365,8 +367,8 @@ public class PlayerController : CreatureController
 		Destroy(go, 1);
 
 		yield return new WaitForSeconds(1f);
-
-		State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();
@@ -384,8 +386,8 @@ public class PlayerController : CreatureController
 		Destroy(go, 1);
 
 		yield return new WaitForSeconds(1f);
-
-		State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();
@@ -403,8 +405,8 @@ public class PlayerController : CreatureController
 		Destroy(go, 1);
 
 		yield return new WaitForSeconds(1f);
-
-		State = CreatureState.Idle;
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
 		_coSkill = null;
 
 		CheckUpdatedFlag();

@@ -48,7 +48,10 @@ public class BanBanController : MonsterController
 
         switch (skillId)
         {
-            case 1:
+			case 0:
+				_coSkill = StartCoroutine("CoStartMotionSkill_0", 0);
+				break;
+			case 1:
 				_coSkill = StartCoroutine("CoStartMotionSkill_1", 0);
 				break;
 			case 5:
@@ -58,13 +61,15 @@ public class BanBanController : MonsterController
 				_coSkill = StartCoroutine("CoStartMotionSkill_7", 0);
 				break;
 			case 10:
-				if(Dir == MoveDir.Right)
+				MoveDir dir = (MoveDir)skillLevel;
+
+				if(dir == MoveDir.Right)
 					_coSkill = StartCoroutine("CoStartMotionSkill_10_Right", 0);
-				else if(Dir == MoveDir.Left)
+				else if(dir == MoveDir.Left)
 					_coSkill = StartCoroutine("CoStartMotionSkill_10_Left", 0);
-				else if (Dir == MoveDir.Up)
+				else if (dir == MoveDir.Up)
 					_coSkill = StartCoroutine("CoStartMotionSkill_10_Up", 0);
-				else if (Dir == MoveDir.Down)
+				else if (dir == MoveDir.Down)
 					_coSkill = StartCoroutine("CoStartMotionSkill_10_Down", 0);
 				break;
 			default:
@@ -72,6 +77,36 @@ public class BanBanController : MonsterController
         }
 
     }
+
+	IEnumerator CoStartMotionSkill_0(int skillLevel)
+	{
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		switch (Dir)
+		{
+			case MoveDir.Up:
+				_animator.Play("ATTACK_BACK");
+				_sprite.flipX = false;
+				break;
+			case MoveDir.Down:
+				_animator.Play("ATTACK_FRONT");
+				_sprite.flipX = false;
+				break;
+			case MoveDir.Left:
+				_animator.Play("ATTACK_RIGHT");
+				_sprite.flipX = true;
+				break;
+			case MoveDir.Right:
+				_animator.Play("ATTACK_RIGHT");
+				_sprite.flipX = false;
+				break;
+		}
+
+		yield return new WaitForSeconds(2f);
+
+		State = CreatureState.Idle;
+		_coSkill = null;
+	}
 
 	IEnumerator CoStartMotionSkill_1(int skillLevel)
 	{
