@@ -18,6 +18,7 @@ public class DataManager
     public Dictionary<int, Data.QuestData> QuestDict { get; private set; } = new Dictionary<int, QuestData>();
     public Dictionary<int, Data.ObstacleData> ObstacleDict { get; private set; } = new Dictionary<int, ObstacleData>();
     public Dictionary<int, Data.NpcData> NpcDict { get; private set; } = new Dictionary<int, NpcData>();
+    public Dictionary<int, Data.DungunData> DungunDict { get; private set; } = new Dictionary<int, DungunData>();
 
     public SkipDirectorData SkipDirectorData { get; private set; } = new SkipDirectorData();
 
@@ -29,6 +30,7 @@ public class DataManager
         QuestDict = LoadJson<Data.QuestLoader, int, Data.QuestData>("QuestData").MakeDict();
         ObstacleDict = LoadJson<Data.ObstacleLoader, int, Data.ObstacleData>("ObstacleData").MakeDict();
         NpcDict = LoadJson<Data.NpcLoader, int, Data.NpcData>("NpcData").MakeDict();
+        DungunDict = LoadJson<Data.DungunLoader, int, Data.DungunData>("DungunData").MakeDict();
 
 
         SkipDirectorData = LoadLocalJson<Data.SkipDirectorData>("SkipDirectorData");

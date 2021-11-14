@@ -21,6 +21,7 @@ public class UI_GameScene : UI_Scene
     public UI_PartyPanel PartyPanelUI { get; private set; }
     public UI_ChatInputBox ChatInputBoxUI { get; private set; }
     public UI_BossHp BossHpUI { get; private set; }
+    public UI_DungunPanel DungunUI { get; private set; }
 
     public UI_CanClassUp ClassUp { get; private set; }
     public UI_DescriptionBox DescriptionBox { get; private set; }
@@ -43,6 +44,7 @@ public class UI_GameScene : UI_Scene
         PartyPanelUI = GetComponentInChildren<UI_PartyPanel>();
         ChatInputBoxUI = GetComponentInChildren<UI_ChatInputBox>();
         BossHpUI = GetComponentInChildren<UI_BossHp>();
+        DungunUI = GetComponentInChildren<UI_DungunPanel>();
 
         ClassUp = GetComponentInChildren<UI_CanClassUp>();
         DescriptionBox = GetComponentInChildren<UI_DescriptionBox>();
@@ -53,6 +55,7 @@ public class UI_GameScene : UI_Scene
         ClassUp.gameObject.SetActive(false);
         InteractionUI.gameObject.SetActive(false);
         BossHpUI.gameObject.SetActive(false);
+        DungunUI.gameObject.SetActive(false);
     }
 
     void BindEvent()

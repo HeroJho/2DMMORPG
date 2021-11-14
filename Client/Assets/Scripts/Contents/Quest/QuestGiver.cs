@@ -20,6 +20,7 @@ public class QuestGiver : MonoBehaviour
 
     public void Init(NpcData npcData)
     {
+        NpcName = npcData.name;
         Description = npcData.Description;
     }
 

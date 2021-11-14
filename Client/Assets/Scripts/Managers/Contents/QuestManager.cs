@@ -126,6 +126,14 @@ public class QuestManager
         if (nc == null)
             return;
 
+        //던전 안내라면
+        DungunGiver dungun = nc.GetComponent<DungunGiver>();
+        if (dungun != null)
+        {
+            dungun.GetPanelInfo();
+            return;
+        }
+
         QuestGiver npc = nc.GetComponent<QuestGiver>();
 
         // 완료가능 > 수행가능 > 수행중 순으로 반환
@@ -135,7 +143,6 @@ public class QuestManager
             Managers.UI.ShowPopupUI<UI_Quest>().RefreshUI(npc);
         else // 퀘스트의 상황에 맞게 대사
             Managers.UI.ShowPopupUI<UI_Quest>().RefreshUI(quest);
-
 
     }
 

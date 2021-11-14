@@ -396,7 +396,7 @@ public class ObjectManager
 
         // 위치를 설정
         NpcController nc = go.GetComponent<NpcController>();
-        nc.Name = info.Name;
+        nc.Name = npcData.name;
         nc.PosInfo = info.PosInfo;
         nc.State = CreatureState.Idle;
         nc.SyncPos();

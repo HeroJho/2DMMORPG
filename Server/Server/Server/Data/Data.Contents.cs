@@ -340,4 +340,31 @@ namespace Server.Data
 
     #endregion
 
+    #region Dungun
+
+    [Serializable]
+    public class DungunData
+    {
+        public int npcId;
+        public string name;
+        public int limitLevel;
+
+    }
+
+    [Serializable]
+    public class DungunLoader : ILoader<int, DungunData>
+    {
+        public List<DungunData> dungun = new List<DungunData>();
+
+        public Dictionary<int, DungunData> MakeDict()
+        {
+            Dictionary<int, DungunData> dict = new Dictionary<int, DungunData>();
+            foreach (DungunData dun in dungun)
+                dict.Add(dun.npcId, dun);
+            return dict;
+        }
+    }
+
+    #endregion
+
 }
