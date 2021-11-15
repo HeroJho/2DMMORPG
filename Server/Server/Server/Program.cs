@@ -51,7 +51,7 @@ namespace Server
 			DataManager.LoadData();
 
 
-			GameLogic.Instance.Add(1);
+			GameLogic.Instance.Add();
 			GameLogic.Instance.Init();
 
 

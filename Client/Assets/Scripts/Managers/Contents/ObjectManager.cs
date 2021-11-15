@@ -77,8 +77,6 @@ public class ObjectManager
                         MyPlayer.Stat = info.StatInfo;
                         MyPlayer.SyncPos();
 
-                        Debug.Log(MyPlayer.Stat.JobClassType);
-
                         // 퀘스트 여부 체크
                         Managers.Quest.CheckCondition();
 

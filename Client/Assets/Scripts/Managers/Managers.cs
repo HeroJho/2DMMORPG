@@ -35,11 +35,13 @@ public class Managers : MonoBehaviour
     DataManager _data = new DataManager();
     ResourceManager _resource = new ResourceManager();
     UIManager _ui = new UIManager();
+    SceneManagerEx _scene = new SceneManagerEx();
 
 
     public static DataManager Data { get { return Instance._data; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static UIManager UI { get { return Instance._ui; } }
+    public static SceneManagerEx Scene { get { return Instance._scene; } }
     #endregion
 
     void Start()

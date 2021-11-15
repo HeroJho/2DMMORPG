@@ -14,6 +14,7 @@ namespace Server
     {
         public int AccountDbId { get; private set; }
         public List<LobbyPlayerInfo> LobbyPlayers { get; set; } = new List<LobbyPlayerInfo>();
+        public Party TempParty { get; set; }
 
         public void HandleLogin(C_Login loginPacket)
         {
@@ -334,6 +335,143 @@ namespace Server
                     Send(newPlayer);
                 }
             }
+        }
+
+        public void HandleChangeRoom(Player player, int roomId)
+        {
+            // 초기 위치 설정
+            player.CellPos = new Vector2Int(24, -45);
+
+            MyPlayer = ObjectManager.Instance.Add<Player>();
+            {
+                // 플레이어 정보
+                MyPlayer.PlayerDbId = player.PlayerDbId;
+                MyPlayer.Info.Name = player.Info.Name;
+                MyPlayer.Info.PosInfo.State = CreatureState.Idle;
+                MyPlayer.Info.PosInfo.MoveDir = MoveDir.Down;
+                MyPlayer.Info.PosInfo.PosX = player.Info.PosInfo.PosX;
+                MyPlayer.Info.PosInfo.PosY = player.Info.PosInfo.PosY;
+                MyPlayer.Stat.MergeFrom(player.Info.StatInfo);
+                MyPlayer.Session = this;
+                // ClassType에 따라 Tree클래스 설정
+                MyPlayer.Skill.SetSkillTree();
+
+
+                // 아이템 정보
+                S_ItemList itemListPacket = new S_ItemList();
+                // 스킬 정보
+                S_SkillPoint skillPointPacket = new S_SkillPoint();
+
+                using (AppDbContext db = new AppDbContext())
+                {
+                    // Loading Item
+                    List<ItemDb> items = db.Items
+                        .Where(i => i.OwnerDbId == MyPlayer.PlayerDbId)
+                        .ToList();
+
+                    foreach (ItemDb itemDb in items)
+                    {
+                        Item item = Item.MakeItem(itemDb);
+                        if (item != null)
+                        {
+                            MyPlayer.Inven.Add(item);
+
+                            ItemInfo info = new ItemInfo();
+                            info.MergeFrom(item.ItemInfo);
+                            itemListPacket.Items.Add(info);
+                        }
+                    }
+
+
+                    // Loading Quest
+                    List<QuestDb> quests = db.Quests
+                        .Where(q => q.OwnerDbId == MyPlayer.PlayerDbId)
+                        .ToList();
+
+                    foreach (QuestDb questDb in quests)
+                    {
+                        Quest quest = Quest.MakeQuest(questDb);
+                        if (quest == null)
+                            continue;
+
+                        switch (quest.QuestState)
+                        {
+                            case QuestState.Proceed:
+                                {
+                                    MyPlayer.Quest.Quests.Add(quest.QuestId, quest);
+                                }
+                                break;
+                            case QuestState.Cancomplete:
+                                {
+                                    MyPlayer.Quest.Quests.Add(quest.QuestId, quest);
+                                    MyPlayer.Quest.CanCompleteQuests.Add(quest.QuestId, quest);
+                                }
+                                break;
+                            case QuestState.Complete:
+                                {
+                                    MyPlayer.Quest.CompletedQuests.Add(quest.QuestId, quest);
+                                }
+                                break;
+                        }
+
+                    }
+
+
+                    // Loading Obstacle
+                    foreach (ObstacleData obstacleData in DataManager.ObstacleDict.Values)
+                    {
+                        Quest tempQuest = null;
+                        if (MyPlayer.Quest.CompletedQuests.TryGetValue(obstacleData.despawnConditionQuestId, out tempQuest))
+                            continue;
+
+                        Obstacle obstacle = Obstacle.MakeObstacle(obstacleData);
+                        if (obstacle == null)
+                            continue;
+
+                        MyPlayer.Obstacle.Add(obstacle);
+                    }
+
+
+                    // Loading SkillInfo
+                    SkillDb skills = db.Skills
+                        .Where(s => s.OwnerDbId == MyPlayer.PlayerDbId)
+                        .FirstOrDefault();
+
+                    MyPlayer.Skill.SkillDbId = skills.SkillDbId;
+                    ConvertIntStringData convertData = new ConvertIntStringData();
+                    convertData = skills.ConvertStringToInt();
+                    MyPlayer.Skill.SkillPoint = skills.SkillPoints;
+                    MyPlayer.Skill.SkillTree.SkillPoints = convertData.SkillPoints;
+
+                    skillPointPacket.Points = MyPlayer.Skill.SkillPoint;
+                    foreach (int key in MyPlayer.Skill.SkillTree.SkillPoints.Keys)
+                    {
+                        SkillInfo skillInfo = new SkillInfo();
+                        skillInfo.SkillId = key;
+                        skillInfo.Point = MyPlayer.Skill.SkillTree.SkillPoints[key];
+                        skillPointPacket.SkillInfos.Add(skillInfo);
+                    }
+
+                }
+
+                // 퀘스트 같은 경우는 EnterGame할 때 보내줌
+                Send(itemListPacket);
+                Send(skillPointPacket);
+            }
+
+            // 방을 만들고 방 입장
+            GameLogic.Instance.Push(() =>
+            {
+                GameRoom room = GameLogic.Instance.Find(2);
+
+                if(room == null)
+                {
+                    room = GameLogic.Instance.Add();
+                    room.Init(roomId, 50);
+                }
+
+                room.Push(room.EnterGame, MyPlayer);
+            });
         }
     }
 }

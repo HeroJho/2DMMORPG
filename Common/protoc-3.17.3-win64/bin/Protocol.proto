@@ -59,6 +59,9 @@ enum MsgId{
     C_QUIT_PARTY = 52;
     S_CHAT = 53;
     C_CHAT = 54;
+    C_GET_IN_DUNGUN = 55;
+    S_TRY_GET_IN_DUNGUN = 56;
+    C_TRY_GET_IN_DUNGUN = 57;
 }
 
 enum CreatureState{
@@ -434,12 +437,26 @@ message S_SkillMotion{
     int32 skillId = 2;
 }
 
+message C_GetInDungun{
+    int32 id = 1;
+}
+
+message C_TryGetInDungun{
+    int32 id = 1;
+}
+
+message S_TryGetInDungun{
+    int32 ok = 1;
+}
+
+
 message ItemInfo{
     int32 itemDbId = 1;
     int32 templateId = 2;
     int32 count = 3;
     int32 slot = 4;
     bool equipped = 5;
+    int32 roomId = 6;
 }
 
 message LobbyPlayerInfo{

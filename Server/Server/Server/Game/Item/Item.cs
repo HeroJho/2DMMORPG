@@ -41,6 +41,12 @@ namespace Server
             set { ItemInfo.Equipped = value; }
         }
 
+        public int RoomId
+        {
+            get { return ItemInfo.RoomId; }
+            set { ItemInfo.RoomId = value; }
+        }
+
         public ItemType ItemType { get; private set; }
         public bool Stackable { get; protected set; }
 
@@ -83,6 +89,7 @@ namespace Server
                 item.Count = itemDb.Count;
                 item.Slot = itemDb.Slot;
                 item.Equipped = itemDb.Equipped;
+                item.RoomId = itemDb.RoomId;
 
                 // 떨어진 아이템 위치
                 item.PosInfo.PosX = itemDb.PosX;

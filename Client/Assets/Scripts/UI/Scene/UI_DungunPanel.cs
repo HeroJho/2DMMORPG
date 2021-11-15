@@ -1,4 +1,5 @@
 ﻿using Data;
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -56,6 +57,14 @@ public class UI_DungunPanel : UI_Base
 
         }, Define.UIEvent.LeftClick);
 
+        BindEvent(Get<Button>((int)Buttons.GetInButton).gameObject, (e) =>
+        {
+            C_TryGetInDungun tryDungunPacket = new C_TryGetInDungun();
+            tryDungunPacket.Id = _dungunId;
+
+            Managers.Network.Send(tryDungunPacket);
+
+        }, Define.UIEvent.LeftClick);
 
     }
 }

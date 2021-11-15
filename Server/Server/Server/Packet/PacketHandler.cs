@@ -298,5 +298,39 @@ namespace Server
             room.Push(room.HandleChat, player, chatPacket);
         }
 
+        public static void C_TryGetInDungunHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_TryGetInDungun tryDungunPacket = (C_TryGetInDungun)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleTryDungun, player, tryDungunPacket);
+        }
+
+        public static void C_GetInDungunHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_GetInDungun dungunPacket = (C_GetInDungun)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            // 던전 입장은 이전에 Room을 나간 상태이기 때문에
+            // null이 아니라면 종료
+            GameRoom room = player.Room;
+            if (room != null)
+                return;
+
+            player.Session.HandleChangeRoom(player, 2);
+        }
+
     }
 }

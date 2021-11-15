@@ -137,6 +137,10 @@ namespace Server
                 case GameObjectType.Item:
                     {
                         Item item = (Item)gameObject;
+                        // 떨어진 아이템이 해당 룸이 아닐땐 패스
+                        if (item.RoomId != RoomId)
+                            return;
+
                         _Items.Add(item.Id, item);
                         item.Room = this;
 
@@ -330,6 +334,74 @@ namespace Server
 
             // 직업, 직업업글 여부 갱신
             player.UpdateClientStat();
+        }
+
+        public void HandleTryDungun ( Player player, C_TryGetInDungun tryDungunPacket)
+        {
+            if (player == null || player.Room == null)
+                return;
+
+            // 던전 데이터를 뽑는다
+            DungunData dungunData = null;
+            if (DataManager.DungunDict.TryGetValue(tryDungunPacket.Id, out dungunData) == false)
+                return;
+
+            S_TryGetInDungun stryDungunPacket = new S_TryGetInDungun();
+
+
+            // 파티 정보를 뽑는다
+            List<Player> partys = new List<Player>();
+            if (player.Communication.Party != null)
+            {
+                // 리더인지 확인
+                if (player != player.Communication.Party.LeaderPlayer)
+                {
+                    // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
+                    stryDungunPacket.Ok = 2;
+                    player.Session.Send(stryDungunPacket);
+                    return;
+                }    
+
+                foreach (Player partyer in player.Communication.Party.PartyList.Values)
+                {
+                    if (partyer == null || partyer.Room == null)
+                        return;
+
+                    // 파티원중에 레벨이 안되는 사람이 있다 >> 레벨 안됨 메세지 전송
+                    if(partyer.Stat.Level < dungunData.limitLevel)
+                    {
+                        // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
+                        stryDungunPacket.Ok = 0;
+                        player.Session.Send(stryDungunPacket);
+                        return;
+                    }
+
+                    partys.Add(partyer);
+                }
+            }
+            else // 파티가 없다면 파티가 있어야 한다는 메세지 전송
+            {
+                // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
+                stryDungunPacket.Ok = 1;
+                player.Session.Send(stryDungunPacket);
+                return;
+            }
+
+
+            // 파티원들을 전부 씬만 전환
+            foreach (Player partyer in partys)
+            {
+                // 아무이상 없다면 일단
+                // 먼저 방을 나감 >> 씬전환 후 Clear실행 방지
+                partyer.Room.LeaveGame(partyer.Id);
+
+                // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
+                stryDungunPacket.Ok = 3;
+                partyer.Session.Send(stryDungunPacket);
+            }
+
+            // 씬 전환 되면 GetIn패킷으로 방 변경
+            // 씬 전환 되고 Spawn패킷을 실행하기 위함
         }
 
         public void Broadcast(Vector2Int pos, IMessage packet)

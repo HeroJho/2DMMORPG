@@ -30,7 +30,7 @@ namespace Server
             }
         }
 
-        public GameRoom Add(int mapId)
+        public GameRoom Add()
         {
             GameRoom gameRoom = new GameRoom();
             //gameRoom.Push(gameRoom.Init, mapId, 10);

@@ -11,6 +11,7 @@ class PacketHandler
 	{
 		S_EnterGame enterPacket = packet as S_EnterGame;
 
+		Debug.Log("Enter!");
 		Managers.Object.Add(enterPacket.Player, myPlayer: true);
 	}
 
@@ -486,5 +487,29 @@ class PacketHandler
 
 		Managers.Chat.SendChatToBox(chatPacket.Id, chatPacket.Str);
     }
+
+	public static void S_TryGetInDungunHandler(PacketSession session, IMessage packet)
+	{
+		S_TryGetInDungun dungunPacket = (S_TryGetInDungun)packet;
+
+		if (dungunPacket.Ok == 0)
+        {
+			// TODO : 파티를 해야합니다!
+        }
+		else if (dungunPacket.Ok == 1)
+        {
+			// TODO : 조건이 안됩니다!
+        }
+		else if (dungunPacket.Ok == 2)
+        {
+			// TODO : 파티장이 아닙니다!
+        }
+		else if (dungunPacket.Ok == 3)
+        {
+			Managers.Scene.LoadScene(Define.Scene.Dungun);
+		}
+
+
+	}
 
 }

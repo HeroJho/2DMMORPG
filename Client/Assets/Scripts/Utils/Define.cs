@@ -10,6 +10,7 @@ public class Define
         Login,
         Lobby,
         Game,
+        Dungun
     }
 
     public enum UIEvent

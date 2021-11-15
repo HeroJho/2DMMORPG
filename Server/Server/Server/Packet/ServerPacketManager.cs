@@ -88,6 +88,12 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CChat, MakePacket<C_Chat>);
             _handler.Add((ushort)MsgId.CChat, PacketHandler.C_ChatHandler);
 
+            _onRecv.Add((ushort)MsgId.CGetInDungun, MakePacket<C_GetInDungun>);
+            _handler.Add((ushort)MsgId.CGetInDungun, PacketHandler.C_GetInDungunHandler);
+
+            _onRecv.Add((ushort)MsgId.CTryGetInDungun, MakePacket<C_TryGetInDungun>);
+            _handler.Add((ushort)MsgId.CTryGetInDungun, PacketHandler.C_TryGetInDungunHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

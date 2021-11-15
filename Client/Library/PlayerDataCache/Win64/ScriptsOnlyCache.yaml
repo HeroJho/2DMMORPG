@@ -7,6 +7,8 @@ ScriptsOnlyBuild:
     - Condition
     - CutSceneManager
     - CutScenePos
+    - DungunGiver
+    - DungunScene
     - GameScene
     - HpBar
     - ItemController
@@ -26,6 +28,7 @@ ScriptsOnlyBuild:
     - UI_ChatInputBox
     - UI_ClassUp
     - UI_DescriptionBox
+    - UI_DungunPanel
     - UI_FrontDragIcon
     - UI_GameScene
     - UI_InteractionPanel
@@ -89,10 +92,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -114,6 +115,85 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   sceneClasses:
+    Assets/Scenes/Dungun.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11486}
+    - Class: 114
+      Script: {instanceID: 11520}
+    - Class: 114
+      Script: {instanceID: 11806}
+    - Class: 114
+      Script: {instanceID: 11842}
+    - Class: 114
+      Script: {instanceID: 11886}
+    - Class: 114
+      Script: {instanceID: 11918}
+    - Class: 114
+      Script: {instanceID: 12068}
+    - Class: 114
+      Script: {instanceID: 12240}
+    - Class: 114
+      Script: {instanceID: 12402}
+    - Class: 114
+      Script: {instanceID: 12436}
+    - Class: 114
+      Script: {instanceID: 12790}
+    - Class: 114
+      Script: {instanceID: 12906}
+    - Class: 114
+      Script: {instanceID: 12994}
+    - Class: 114
+      Script: {instanceID: 13522}
+    - Class: 114
+      Script: {instanceID: 13584}
+    - Class: 114
+      Script: {instanceID: 13594}
+    - Class: 114
+      Script: {instanceID: 13674}
+    - Class: 114
+      Script: {instanceID: 13706}
+    - Class: 114
+      Script: {instanceID: 14334}
+    - Class: 114
+      Script: {instanceID: 14682}
+    - Class: 114
+      Script: {instanceID: 14762}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 320
+      Script: {instanceID: 0}
     Assets/Scenes/Game.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -242,77 +322,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12896}
     - Class: 114
-      Script: {instanceID: 12934}
+      Script: {instanceID: 12936}
     - Class: 114
-      Script: {instanceID: 12976}
+      Script: {instanceID: 12978}
     - Class: 114
-      Script: {instanceID: 12992}
+      Script: {instanceID: 12994}
     - Class: 114
-      Script: {instanceID: 13180}
+      Script: {instanceID: 13182}
     - Class: 114
-      Script: {instanceID: 13258}
+      Script: {instanceID: 13190}
     - Class: 114
-      Script: {instanceID: 13430}
+      Script: {instanceID: 13262}
     - Class: 114
-      Script: {instanceID: 13508}
+      Script: {instanceID: 13434}
     - Class: 114
-      Script: {instanceID: 13518}
+      Script: {instanceID: 13512}
     - Class: 114
-      Script: {instanceID: 13566}
+      Script: {instanceID: 13522}
     - Class: 114
-      Script: {instanceID: 13580}
+      Script: {instanceID: 13570}
     - Class: 114
-      Script: {instanceID: 13586}
+      Script: {instanceID: 13584}
     - Class: 114
       Script: {instanceID: 13590}
     - Class: 114
-      Script: {instanceID: 13664}
+      Script: {instanceID: 13594}
     - Class: 114
       Script: {instanceID: 13668}
     - Class: 114
-      Script: {instanceID: 13670}
+      Script: {instanceID: 13672}
     - Class: 114
-      Script: {instanceID: 13702}
+      Script: {instanceID: 13674}
     - Class: 114
-      Script: {instanceID: 13928}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 13938}
+      Script: {instanceID: 13932}
     - Class: 114
-      Script: {instanceID: 13958}
+      Script: {instanceID: 13942}
     - Class: 114
-      Script: {instanceID: 13994}
+      Script: {instanceID: 13962}
     - Class: 114
-      Script: {instanceID: 14064}
+      Script: {instanceID: 13998}
     - Class: 114
-      Script: {instanceID: 14092}
+      Script: {instanceID: 14068}
     - Class: 114
-      Script: {instanceID: 14238}
+      Script: {instanceID: 14096}
     - Class: 114
-      Script: {instanceID: 14324}
+      Script: {instanceID: 14242}
     - Class: 114
-      Script: {instanceID: 14328}
+      Script: {instanceID: 14310}
     - Class: 114
-      Script: {instanceID: 14352}
+      Script: {instanceID: 14330}
     - Class: 114
-      Script: {instanceID: 14372}
+      Script: {instanceID: 14334}
     - Class: 114
-      Script: {instanceID: 14384}
+      Script: {instanceID: 14358}
     - Class: 114
-      Script: {instanceID: 14388}
+      Script: {instanceID: 14378}
     - Class: 114
-      Script: {instanceID: 14544}
+      Script: {instanceID: 14390}
     - Class: 114
-      Script: {instanceID: 14560}
+      Script: {instanceID: 14394}
     - Class: 114
-      Script: {instanceID: 14676}
+      Script: {instanceID: 14550}
     - Class: 114
-      Script: {instanceID: 14730}
+      Script: {instanceID: 14566}
     - Class: 114
-      Script: {instanceID: 14756}
+      Script: {instanceID: 14682}
     - Class: 114
-      Script: {instanceID: 14774}
+      Script: {instanceID: 14736}
     - Class: 114
-      Script: {instanceID: 14804}
+      Script: {instanceID: 14762}
+    - Class: 114
+      Script: {instanceID: 14780}
+    - Class: 114
+      Script: {instanceID: 14810}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -854,6 +938,12 @@ ScriptsOnlyBuild:
     className: MonsterController
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DungunScene
+  - hash:
+      serializedVersion: 2
       Hash: 15882a52798c275361cd0a3ada984ec5
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
@@ -918,6 +1008,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MyPlayerController
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DungunGiver
   - hash:
       serializedVersion: 2
       Hash: f84d945e5e1ca985698660fc26e9657f
@@ -1178,6 +1274,12 @@ ScriptsOnlyBuild:
     className: MpBar
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_DungunPanel
+  - hash:
+      serializedVersion: 2
       Hash: 55265d17113a0b6d07831cf50362c455
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1353,4 +1455,5 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/Scenes/Game.unity
+  - Assets/Scenes/Dungun.unity
   playerPath: "C:/Users/thehe/OneDrive/\uBC14\uD0D5 \uD654\uBA74/GitHub/Client/Builds/Win64/Client2/Client2.exe"

@@ -133,6 +133,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SChat, MakePacket<S_Chat>);
             _handler.Add((ushort)MsgId.SChat, PacketHandler.S_ChatHandler);
 
+            _onRecv.Add((ushort)MsgId.STryGetInDungun, MakePacket<S_TryGetInDungun>);
+            _handler.Add((ushort)MsgId.STryGetInDungun, PacketHandler.S_TryGetInDungunHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)
