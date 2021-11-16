@@ -191,5 +191,12 @@ namespace Server
             _player.Session.Send(completeQuestPacket);
         }
 
+        public void Clear()
+        {
+            Quests.Clear();
+            CanCompleteQuests.Clear();
+            CompletedQuests.Clear();
+        }
+
     }
 }

@@ -150,14 +150,22 @@ namespace Server
             BecomeGhost();
         }
 
+        public bool IsChangedRoom = false;
         public void OnLeaveGame()
         {
             // DB 연동
             DbTransaction.SavePlayerStatus_AllInOne(this, Room);
             DbTransaction.SavePlayerQuests_AllInOne(this, Room);
 
-            if (Communication.Party != null)
+            // Room이동 때 다시 DB에서 불러오기 때문에 전부 Clear해 줌
+            Inven.Clear();
+            Obstacle.Clear();
+            Vision.Clear();
+            Quest.Clear();
+
+            if (!IsChangedRoom && Communication.Party != null)
                 Communication.RemoveParty();
+
         }
 
         public void HandleEquipItem(C_EquipItem equipPacket)

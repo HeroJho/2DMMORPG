@@ -42,5 +42,11 @@ namespace Server
             return false;
         }
 
+        public void Clear()
+        {
+            Obstacles.Clear();
+            _checkObstacle.Clear();
+        }
+
     }
 }

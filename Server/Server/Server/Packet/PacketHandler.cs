@@ -329,7 +329,7 @@ namespace Server
             if (room != null)
                 return;
 
-            player.Session.HandleChangeRoom(player, 2);
+            player.Session.HandleChangeRoom();
         }
 
     }

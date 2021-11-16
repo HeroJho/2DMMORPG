@@ -324,6 +324,7 @@ namespace Data
     [Serializable]
     public class DungunData
     {
+        public int mapId;
         public int npcId;
         public string name;
         public int limitLevel;

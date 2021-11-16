@@ -181,5 +181,10 @@ namespace Server
             job =  Owner.Room.PushAfter(100, Update);
         }
 
+        public void Clear()
+        {
+            PreviousObjects.Clear();
+        }
+
     }
 }

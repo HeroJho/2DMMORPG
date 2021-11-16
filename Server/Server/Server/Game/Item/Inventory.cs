@@ -59,5 +59,12 @@ namespace Server
             Item item = Items.Values.FirstOrDefault(i => i.Slot == slot);
             return item;
         }
+
+        public void Clear()
+        {
+            Items.Clear();
+            SlotPuse.Clear();
+        }
+
     }
 }

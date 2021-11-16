@@ -98,6 +98,11 @@ namespace Server
 
                         player.Vision.AllSpawn();
                         player.Vision.Update();
+
+                        // 파티가 있다면 파티정보 전송
+                        if(player.Communication.Party != null)
+                            player.Communication.SendPartyInfo();
+
                     }
                     break;
                 case GameObjectType.Monster:
@@ -350,11 +355,12 @@ namespace Server
 
 
             // 파티 정보를 뽑는다
+            Party party = player.Communication.Party;
             List<Player> partys = new List<Player>();
             if (player.Communication.Party != null)
             {
                 // 리더인지 확인
-                if (player != player.Communication.Party.LeaderPlayer)
+                if (player != party.LeaderPlayer)
                 {
                     // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
                     stryDungunPacket.Ok = 2;
@@ -362,7 +368,7 @@ namespace Server
                     return;
                 }    
 
-                foreach (Player partyer in player.Communication.Party.PartyList.Values)
+                foreach (Player partyer in party.PartyList.Values)
                 {
                     if (partyer == null || partyer.Room == null)
                         return;
@@ -387,18 +393,27 @@ namespace Server
                 return;
             }
 
-
-            // 파티원들을 전부 씬만 전환
-            foreach (Player partyer in partys)
+            // 맵을 먼저 만든다
+            GameLogic.Instance.Push(() =>
             {
-                // 아무이상 없다면 일단
-                // 먼저 방을 나감 >> 씬전환 후 Clear실행 방지
-                partyer.Room.LeaveGame(partyer.Id);
+                GameRoom room = GameLogic.Instance.Add();
+                room.Init(dungunData.mapId, 50);
 
-                // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
-                stryDungunPacket.Ok = 3;
-                partyer.Session.Send(stryDungunPacket);
-            }
+                // 파티원들을 전부 씬만 전환
+                foreach (Player partyer in partys)
+                {
+                    partyer.Session.TempRoomId = room.RoomId;
+                    partyer.IsChangedRoom = true;
+
+                    // 아무이상 없다면 일단
+                    // 먼저 방을 나감 >> 씬전환 후 Clear실행 방지
+                    partyer.Room.LeaveGame(partyer.Id);
+
+                    // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
+                    stryDungunPacket.Ok = 3;
+                    partyer.Session.Send(stryDungunPacket);
+                }
+            });
 
             // 씬 전환 되면 GetIn패킷으로 방 변경
             // 씬 전환 되고 Spawn패킷을 실행하기 위함

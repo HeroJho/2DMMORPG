@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 176
+  controlID: 156
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_MinSize: {x: 851, y: 492}
   m_MaxSize: {x: 22006, y: 14042}
   vertical: 0
-  controlID: 225
+  controlID: 223
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1155,7 +1155,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: f295ffff0c96ffff5496ffff5efbffff
+      m_ExpandedIDs: 2801feff4a01feff5001feff5601feff9201feffb401feffba01feffc001fefffe01feff2a02feff8803feff8e03feffc2f6ffffe4f6ffffeaf6fffff0f6ffff2ef7ffff5af7ffffb8f8ffffc0f8ffff5efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1218,20 +1218,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Resources/Data
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Resources/Data
   m_LastFoldersGridSize: 16
   m_LastProjectPath: "C:\\Users\\thehe\\OneDrive\\\uBC14\uD0D5 \uD654\uBA74\\GitHub\\Client"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2e4b0000
-    m_LastClickedID: 19246
-    m_ExpandedIDs: 00000000d04a0000d24a0000d44a0000d64a0000d84a0000da4a0000dc4a0000de4a0000e04a0000e24a0000e44a0000e64a0000e84a0000ea4a0000
+    m_SelectedIDs: 4e4b0000
+    m_LastClickedID: 19278
+    m_ExpandedIDs: 00000000d04a0000d24a0000d44a0000d64a0000d84a0000da4a0000dc4a0000de4a0000e04a0000e24a0000e44a0000e64a0000e84a0000ea4a00002c4b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1290,15 +1290,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: 004a0000cc380000d038000094470000ec4d0000903600006e37000098340000b2410000683900008e390000843b00008a3b0000ea410000e8400000ec4000005a470000044c0000145c0000be5f0000686a0000443b0000f846000080480000e25400004e410000085700009242000046440000185100001a51000006640000c03c00008e4600007a450000d44200005c43000050770000fe450000545a0000585a0000264f0000b049000050490000103a00000c6500008e3d0000a47f000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Game
-      m_OriginalName: Game
+      m_Name: DungunData
+      m_OriginalName: DungunData
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 24620
+      m_UserData: 15854
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
