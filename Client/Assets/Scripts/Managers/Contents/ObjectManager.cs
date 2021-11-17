@@ -79,7 +79,9 @@ public class ObjectManager
 
                         // 퀘스트 여부 체크
                         Managers.Quest.CheckCondition();
-
+                        // 내 플레이어가 입장 했으면 이제 검은색 화면 풀어준다
+                        UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+                        gameSceneUI.ChangeUI.ArrivedRoom();
                     }
                     else
                     {

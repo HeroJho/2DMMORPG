@@ -184,6 +184,10 @@ namespace Server
                     // Loading Obstacle
                     foreach (ObstacleData obstacleData in DataManager.ObstacleDict.Values)
                     {
+                        // TODO DB에 현재 위치한 맵저장을 넣어야함
+                        if (obstacleData.mapId != 1)
+                            continue;
+
                         Quest tempQuest = null;
                         if (MyPlayer.Quest.CompletedQuests.TryGetValue(obstacleData.despawnConditionQuestId, out tempQuest))
                             continue;
@@ -403,6 +407,10 @@ namespace Server
                 // Loading Obstacle
                 foreach (ObstacleData obstacleData in DataManager.ObstacleDict.Values)
                 {
+                    // 방이 다르면 패스
+                    if (obstacleData.mapId != TempRoomId)
+                        continue;
+
                     Quest tempQuest = null;
                     if (MyPlayer.Quest.CompletedQuests.TryGetValue(obstacleData.despawnConditionQuestId, out tempQuest))
                         continue;
@@ -442,7 +450,10 @@ namespace Server
 
 
             // 초기 위치
-            MyPlayer.CellPos = new Vector2Int(24, -45);
+            if(TempRoomId == 1)
+                MyPlayer.CellPos = new Vector2Int(-33, -36);
+            else
+                MyPlayer.CellPos = new Vector2Int(24, -45);
 
             // 파티방 입장
             GameLogic.Instance.Push(() =>

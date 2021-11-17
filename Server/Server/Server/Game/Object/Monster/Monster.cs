@@ -41,7 +41,7 @@ namespace Server
         }
 
         // FSM (Finite State Machine)
-        private IJob _job;
+        protected IJob _job;
         public override void Update()
         {
             switch (State)
@@ -326,7 +326,7 @@ namespace Server
             room.EnterGame(this);
         }
 
-        RewardData GetRandomReward()
+        protected RewardData GetRandomReward()
         {
             int rand = new Random().Next(0, 101);
             int sum = 0;

@@ -1,5 +1,6 @@
 ﻿using Google.Protobuf.Protocol;
 using Server.Data;
+using Server.DB;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -644,6 +645,73 @@ namespace Server
             }
 
             return randPos;
+        }
+
+        public override void OnDead(GameObject attacker)
+        {
+            if (_job != null)
+            {
+                _job.Cancel = true;
+                _job = null;
+            }
+
+            // 버프 전부 해제
+            Condition.BackCondition();
+
+            GameObject owner = attacker.GetOwner();
+
+            if (owner.ObjectType == GameObjectType.Player)
+            {
+
+                Player player = (Player)owner;
+                // 경험치 획득
+                player.GetEx(_monsterData.stat.TotalExp);
+                // 퀘스트 진행여부 확인
+                player.Quest.ProceddWithQuest(TemplateId);
+            }
+
+            // 보상 로직
+            RewardData rewardData = GetRandomReward();
+            if (rewardData != null)
+            {
+                // TODO
+                // 보스의 경우 바로 보상 인벤으로 꼳아줌
+            }
+
+            {
+                S_Die diePacket = new S_Die();
+                diePacket.ObjectId = Id;
+                diePacket.AttackerId = attacker.Id;
+                Room.Broadcast(CellPos, diePacket);
+
+                GameRoom room = Room;
+                // TODO
+                // 보스가 죽었을 경우 자기가 속한 던전맵이라면 몇초 후 원래 맵으로 귀한
+                if (Room.Map.MapId == 2)
+                {
+                    Room.PushAfter(10000, () =>
+                    {
+                        if (Room == null)
+                            return;
+
+                        Room.ChangeRoomAllPlayer();
+
+                        // 방 제거
+                        GameLogic.Instance.Push(() =>
+                        {
+                            GameLogic.Instance.Remove(Room.RoomId);
+                            Console.WriteLine("맵 제거!");
+                        });
+                    });
+                }
+
+
+                room.LeaveGame(Id);
+
+                if (_spawner != null)
+                    _spawner.Dead(this);
+
+            }
         }
 
 

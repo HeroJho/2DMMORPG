@@ -223,6 +223,7 @@ namespace Server.Data
     public class NpcData
     {
         public int id;
+        public int mapId;
         public string name;
         public int x;
         public int y;
@@ -319,6 +320,7 @@ namespace Server.Data
     public class ObstacleData
     {
         public int id;
+        public int mapId;
         public Vector2Int spawnPos;
         public int despawnConditionQuestId;
         public List<Vector2Int> obstaclePos;

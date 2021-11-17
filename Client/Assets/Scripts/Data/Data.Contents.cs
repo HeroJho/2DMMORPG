@@ -201,6 +201,7 @@ namespace Data
     public class NpcData
     {
         public int id;
+        public int mapId;
         public string name;
         public string Description;
     }
@@ -299,6 +300,7 @@ namespace Data
     public class ObstacleData
     {
         public int id;
+        public int mapId;
         public Vector2Int spawnPos;
         public List<Vector2Int> obstaclePos;
     }

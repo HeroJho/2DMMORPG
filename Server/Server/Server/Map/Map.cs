@@ -84,6 +84,8 @@ namespace Server
 
     public class Map
     {
+        public int MapId { get; private set; }
+
         public int MinX { get; set; }
         public int MaxX { get; set; }
         public int MinY { get; set; }
@@ -637,6 +639,8 @@ namespace Server
 
         public string LoadMap(int mapId, string pathPrefix = "../../../../../../Common/MapData")
         {
+            MapId = mapId;
+
             string mapName = "Map_" + mapId.ToString("000");
 
             // Collision 관련 파일

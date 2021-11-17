@@ -506,7 +506,8 @@ class PacketHandler
         }
 		else if (dungunPacket.Ok == 3)
         {
-			Managers.Scene.LoadScene(Define.Scene.Dungun);
+			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+			gameSceneUI.ChangeUI.ChangeRoom();
 		}
 
 

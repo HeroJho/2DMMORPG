@@ -2,6 +2,7 @@
   "obstacle": [
     {
       "id": "1",
+      "mapId": "1",
       "spawnPos": {
         "x": "-26",
         "y": "-77"

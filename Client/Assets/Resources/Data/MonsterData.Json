@@ -158,14 +158,14 @@
       "name": "반반",
       "stat": {
         "level": "10",
-        "maxHp": "20000",
+        "maxHp": "100",
         "attack": "5",
         "speed": "5.0",
         "attackSpeed": "0.5",
         "totalExp": "20"
       },
       "chaseCellDist": "10",
-      "searchCellDist": "5",
+      "searchCellDist": "10",
       "maxCount": "1",
       "genDelay": "30000",
       "rangth": "1",

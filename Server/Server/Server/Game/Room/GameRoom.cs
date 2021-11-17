@@ -494,6 +494,25 @@ namespace Server
             return zones.ToList();
         }
 
+        public void ChangeRoomAllPlayer()
+        {
+            S_TryGetInDungun stryDungunPacket = new S_TryGetInDungun();
+            List<Player> players = _players.Values.ToList();
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].Session.TempRoomId = 1;
+                players[i].IsChangedRoom = true;
+
+                // 아무이상 없다면 일단
+                // 먼저 방을 나감 >> 씬전환 후 Clear실행 방지
+                LeaveGame(players[i].Id);
+
+                // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
+                stryDungunPacket.Ok = 3;
+                players[i].Session.Send(stryDungunPacket);
+            }
+        }
+
         public void LoadInitData()
         {
             // 아이템 필드에 뿌리기
@@ -501,8 +520,9 @@ namespace Server
             using (AppDbContext db = new AppDbContext())
             {
                 items = db.Items
-                    .Where(i => i.Owner == null).ToList();
-                
+                    .Where(i => i.Owner == null)
+                    .Where(i => i.RoomId == RoomId).ToList();
+
             }
 
             if (items == null)
@@ -518,9 +538,14 @@ namespace Server
             }
 
 
+
             // NPC 메모리에 넣기
             foreach (NpcData npcData in DataManager.NpcDict.Values)
             {
+                // 해당 룸의 Npc가 아니면 패쓰
+                if (npcData.mapId != RoomId)
+                    continue;
+
                 // 따로 Npc패킷을 만들어서 tampId랑해서 보내기
                 Npc npc = new Npc();
                 npc.Init(npcData.id);
@@ -528,6 +553,7 @@ namespace Server
                 _npc.Add(npcData.id, npc);
                 Map.ApplyMove(npc, npc.CellPos, checkObjects: false, collision: true);
             }
+
 
         }
 
@@ -575,7 +601,6 @@ namespace Server
                 return;
 
             S_SpawnObstacle spawnObstaclePacket = new S_SpawnObstacle();
-
             foreach (int key in player.Obstacle.Obstacles.Keys)
             {
                 spawnObstaclePacket.TemplateId.Add(key);
@@ -583,6 +608,7 @@ namespace Server
 
             player.Session.Send(spawnObstaclePacket);
         }
+
 
     }
 }
