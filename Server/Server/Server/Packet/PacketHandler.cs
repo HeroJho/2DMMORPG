@@ -329,9 +329,6 @@ namespace Server
             if (room != null)
                 return;
 
-            if (player.Session.TempRoomId != dungunPacket.Id)
-                return;
-
             player.Session.HandleChangeRoom();
         }
 

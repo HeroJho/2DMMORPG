@@ -10,7 +10,7 @@ public class CutSceneManager : MonoBehaviour
     SkipDirectorData _skipDirectorData;
 
     public List<PlayableDirector> Directors;
-    private int _playingDirector;
+    private int _playingDirector = -1;
     private bool _isPosCut;
 
     public void Init()
@@ -22,7 +22,7 @@ public class CutSceneManager : MonoBehaviour
     {
         _isPosCut = isPosCut;
 
-        if (Directors[_playingDirector].gameObject.activeSelf)
+        if (_playingDirector != -1 && Directors[_playingDirector].gameObject.activeSelf)
             return;
 
         if (_isPosCut)

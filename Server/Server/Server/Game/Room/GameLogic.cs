@@ -24,10 +24,13 @@ namespace Server
         {
             Flush();
 
+            Console.Write("Room List: ");
             foreach(GameRoom room in _rooms.Values)
             {
+                Console.Write($"{room.RoomId}, ");
                 room.Update();
             }
+            Console.WriteLine();
         }
 
         public GameRoom Add()

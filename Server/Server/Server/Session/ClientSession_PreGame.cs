@@ -453,7 +453,7 @@ namespace Server
             if(TempRoomId == 1)
                 MyPlayer.CellPos = new Vector2Int(-33, -36);
             else
-                MyPlayer.CellPos = new Vector2Int(24, -45);
+                MyPlayer.CellPos = new Vector2Int(25, -35);
 
             // 파티방 입장
             GameLogic.Instance.Push(() =>

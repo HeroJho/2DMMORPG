@@ -61,9 +61,48 @@ namespace Server
             _spawnManager.Init();
         }
 
+        bool _isEmpty = false;
+        IJob _checkEmptyJob = null;
         public void Update()
         {
-            Flush();         
+            Flush();
+
+            CheckEmptyRoom();
+        }
+
+        private void CheckEmptyRoom()
+        {
+            if (Map.MapId == 1)
+                return;
+
+            // 던전에 플레이어가 20초 이상 동안 없다면 방 삭제
+            if (_players.Count <= 0)
+                _isEmpty = true;
+            else
+                _isEmpty = false;
+
+            if (_checkEmptyJob == null)
+            {
+                _checkEmptyJob = PushAfter(20000, () =>
+                {
+                    _checkEmptyJob = null;
+
+                    if (this == null)
+                        return;
+
+                    if (_isEmpty == false)
+                        return;
+
+                    ChangeRoomAllPlayer();
+
+                    // 방 제거
+                    GameLogic.Instance.Push(() =>
+                    {
+                        GameLogic.Instance.Remove(RoomId);
+                        Console.WriteLine("맵 제거!");
+                    });
+                });
+            }
         }
 
         public void EnterGame(GameObject gameObject)

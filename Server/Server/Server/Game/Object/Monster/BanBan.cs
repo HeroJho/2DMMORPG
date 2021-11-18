@@ -687,19 +687,19 @@ namespace Server
                 GameRoom room = Room;
                 // TODO
                 // 보스가 죽었을 경우 자기가 속한 던전맵이라면 몇초 후 원래 맵으로 귀한
-                if (Room.Map.MapId == 2)
-                {
-                    Room.PushAfter(10000, () =>
+                if (room.Map.MapId == 2)
+                {                    
+                    room.PushAfter(10000, () =>
                     {
-                        if (Room == null)
+                        if (room == null)
                             return;
 
-                        Room.ChangeRoomAllPlayer();
+                        room.ChangeRoomAllPlayer();
 
                         // 방 제거
                         GameLogic.Instance.Push(() =>
                         {
-                            GameLogic.Instance.Remove(Room.RoomId);
+                            GameLogic.Instance.Remove(room.RoomId);
                             Console.WriteLine("맵 제거!");
                         });
                     });

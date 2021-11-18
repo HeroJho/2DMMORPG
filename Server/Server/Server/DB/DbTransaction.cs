@@ -24,8 +24,18 @@ namespace Server.DB
             // Me (GameRoom)
             PlayerDb playerDb = new PlayerDb();
             {
-                playerDb.PosX = player.PosInfo.PosX;
-                playerDb.PosY = player.PosInfo.PosY;
+                // TODO : 여러던전 고려
+                if(room.RoomId == 1)
+                {
+                    playerDb.PosX = player.PosInfo.PosX;
+                    playerDb.PosY = player.PosInfo.PosY;
+                }
+                else
+                {
+                    playerDb.PosX = -33;
+                    playerDb.PosY = -36;
+                }
+
 
                 playerDb.PlayerDbId = player.PlayerDbId;
                 playerDb.Attack = player.Stat.Attack;
@@ -714,6 +724,10 @@ namespace Server.DB
             if (rewardData == null || room == null)
                 return;
 
+            // 던전이라면 아이템을 떨구지 않는다
+            if (room.RoomId != 1)
+                return;
+
             // Me
             ItemDb itemDb = new ItemDb()
             {
@@ -729,8 +743,10 @@ namespace Server.DB
             {
                 using (AppDbContext db = new AppDbContext())
                 {
+                    bool success = false;
                     db.Items.Add(itemDb);
-                    bool success = db.SaveChangesEx();
+                    success = db.SaveChangesEx();
+                  
                     if (success)
                     {
                         // Me

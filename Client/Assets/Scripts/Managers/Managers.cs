@@ -25,7 +25,7 @@ public class Managers : MonoBehaviour
     public static ObjectManager Object { get { return Instance._obj; } }
     public static SkillManager Skill { get { return Instance._skill; } }
     public static QuestManager Quest { get { return Instance._quest; } }
-    public static CutSceneManager CutScene { get { return Instance._cutScene; } }
+    public static CutSceneManager CutScene { get { return Instance._cutScene; } set { Instance._cutScene = value; } }
     public static CommunicationManager Communication { get { return Instance._communication; } }
     public static ChatManager Chat { get { return Instance._chat; } }
 
@@ -46,8 +46,8 @@ public class Managers : MonoBehaviour
 
     void Start()
     {
-        Init();
         _cutScene = GameObject.Find("CutScene").GetComponent<CutSceneManager>();
+        Init();
 
         CutScene.Init();
     }

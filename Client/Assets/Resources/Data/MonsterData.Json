@@ -167,7 +167,7 @@
       "chaseCellDist": "10",
       "searchCellDist": "10",
       "maxCount": "1",
-      "genDelay": "30000",
+      "genDelay": "300000",
       "rangth": "1",
       "prefabPath": "BanBan",
       "rewards": [

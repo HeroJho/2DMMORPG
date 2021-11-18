@@ -20,6 +20,9 @@ public class GameScene : BaseScene
         _sceneUI = Managers.UI.ShowSceneUI<UI_GameScene>();
 
         StartCoroutine("aaa");
+
+        Managers.CutScene = GameObject.Find("CutScene").GetComponent<CutSceneManager>();
+        Managers.CutScene.Init();
     }
 
     IEnumerator aaa()
