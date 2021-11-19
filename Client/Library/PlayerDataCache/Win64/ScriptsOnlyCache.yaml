@@ -76,7 +76,9 @@ ScriptsOnlyBuild:
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshPro
     Unity.Timeline.Editor.dll:
+    - UnityEditor.Timeline.EditorClip
     - UnityEditor.Timeline.SequenceHierarchy
+    - UnityEditor.Timeline.TimelineAssetViewModel
     - UnityEditor.Timeline.TimelineWindow
     Unity.Timeline.dll:
     - UnityEngine.Timeline.ActivationPlayableAsset
@@ -146,6 +148,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11520}
     - Class: 114
+      Script: {instanceID: 11588}
+    - Class: 114
       Script: {instanceID: 11808}
     - Class: 114
       Script: {instanceID: 11844}
@@ -167,6 +171,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12908}
     - Class: 114
       Script: {instanceID: 12996}
+    - Class: 114
+      Script: {instanceID: 13436}
     - Class: 114
       Script: {instanceID: 13524}
     - Class: 114
@@ -1465,4 +1471,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Game.unity
   - Assets/Scenes/Dungun.unity
-  playerPath: "C:/Users/thehe/OneDrive/\uBC14\uD0D5 \uD654\uBA74/GitHub/Client/Builds/Win64/Client3/Client3.exe"
+  playerPath: "C:/Users/thehe/OneDrive/\uBC14\uD0D5 \uD654\uBA74/GitHub/Client/Builds/Win64/Client2/Client2.exe"
