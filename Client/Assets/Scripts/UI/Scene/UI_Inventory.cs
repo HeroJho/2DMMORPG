@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Inventory : UI_Base
 {
+    [SerializeField]
+    private Text _goldText;
+
     public List<UI_Inventory_Item> Items { get; } = new List<UI_Inventory_Item>();
 
     public override void Init()
@@ -28,6 +32,8 @@ public class UI_Inventory : UI_Base
 
     public void RefreshUI()
     {
+        _goldText.text = "골드: " + Managers.Inven.Gold;
+
         if (Items.Count == 0)
             return;
 

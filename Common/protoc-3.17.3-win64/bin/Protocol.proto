@@ -62,6 +62,7 @@ enum MsgId{
     C_GET_IN_DUNGUN = 55;
     S_TRY_GET_IN_DUNGUN = 56;
     C_TRY_GET_IN_DUNGUN = 57;
+    S_CHANGE_GOLD = 58;
 }
 
 enum CreatureState{
@@ -449,6 +450,12 @@ message S_TryGetInDungun{
     int32 ok = 1;
 }
 
+message S_ChangeGold{
+    int32 gold = 1;
+}
+
+
+
 
 message ItemInfo{
     int32 itemDbId = 1;
@@ -464,17 +471,19 @@ message LobbyPlayerInfo{
     string name = 2;
     int32 posX = 3;
     int32 posY = 4;
-    StatInfo statInfo = 5; 
+    int32 gold = 5;
+    StatInfo statInfo = 6; 
 }
 
 message ObjectInfo{
     int32 objectId = 1;
     int32 templateId = 2;
     string name = 3;
-    PositionInfo posInfo = 4;
-    StatInfo statInfo = 5;
-    ItemInfo itemInfo = 6;
-    repeated ConditionInfo conditionInfos = 7;
+    int32 gold = 4;
+    PositionInfo posInfo = 5;
+    StatInfo statInfo = 6;
+    ItemInfo itemInfo = 7;
+    repeated ConditionInfo conditionInfos = 8;
 }
 
 message PositionInfo{

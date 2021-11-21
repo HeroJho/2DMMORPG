@@ -25,19 +25,19 @@ namespace Server.DB
             PlayerDb playerDb = new PlayerDb();
             {
                 // TODO : 여러던전 고려
-                if(room.RoomId == 1)
+                if(room.Map.MapId == 1)
                 {
                     playerDb.PosX = player.PosInfo.PosX;
                     playerDb.PosY = player.PosInfo.PosY;
                 }
-                else
+                else // 던전 안에서 나갓다
                 {
                     playerDb.PosX = -33;
                     playerDb.PosY = -36;
                 }
 
-
                 playerDb.PlayerDbId = player.PlayerDbId;
+                playerDb.Gold = player.Info.Gold;
                 playerDb.Attack = player.Stat.Attack;
                 playerDb.Defence = player.Stat.Defence;
                 playerDb.MaxHp = player.Stat.MaxHp;
@@ -73,6 +73,7 @@ namespace Server.DB
                     db.Entry(playerDb).Property(nameof(PlayerDb.PosX)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.PosY)).IsModified = true;
 
+                    db.Entry(playerDb).Property(nameof(PlayerDb.Gold)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.Attack)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.Defence)).IsModified = true;
                     db.Entry(playerDb).Property(nameof(PlayerDb.Hp)).IsModified = true;

@@ -19,6 +19,7 @@ public class DataManager
     public Dictionary<int, Data.ObstacleData> ObstacleDict { get; private set; } = new Dictionary<int, ObstacleData>();
     public Dictionary<int, Data.NpcData> NpcDict { get; private set; } = new Dictionary<int, NpcData>();
     public Dictionary<int, Data.DungunData> DungunDict { get; private set; } = new Dictionary<int, DungunData>();
+    public Dictionary<int, Data.ShoperData> ShoperDict { get; private set; } = new Dictionary<int, ShoperData>();
 
     public SkipDirectorData SkipDirectorData { get; private set; } = new SkipDirectorData();
 
@@ -31,6 +32,7 @@ public class DataManager
         ObstacleDict = LoadJson<Data.ObstacleLoader, int, Data.ObstacleData>("ObstacleData").MakeDict();
         NpcDict = LoadJson<Data.NpcLoader, int, Data.NpcData>("NpcData").MakeDict();
         DungunDict = LoadJson<Data.DungunLoader, int, Data.DungunData>("DungunData").MakeDict();
+        ShoperDict = LoadJson<Data.ShoperLoader, int, Data.ShoperData>("ShoperData").MakeDict();
 
 
         SkipDirectorData = LoadLocalJson<Data.SkipDirectorData>("SkipDirectorData");

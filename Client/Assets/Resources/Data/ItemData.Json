@@ -3,6 +3,7 @@
     {
       "id": "1",
       "name": "조영웅의 검",
+      "gold": "100",
       "description": "공격력: 99\n아무나 사용할 수 없는 검이다. 자칫 어둠의 힘에 잡아먹힐 수도...",
       "weaponType": "Sword",
       "damage": "99",
@@ -11,6 +12,8 @@
     {
       "id": "2",
       "name": "견습생의 활",
+      "gold": "100",
+      "description": "공격력: 5\n누구나 당길 수 있는 가벼운 활이다.",
       "weaponType": "Bow",
       "damage": "5",
       "iconPath": "Textures/Item/bow"
@@ -20,6 +23,7 @@
     {
       "id": "100",
       "name": "병사 갑옷",
+      "gold": "100",
       "description": "방어력: 15\n무겁기는 하지만... 효과는 좋다!",
       "armorType": "Armor",
       "defence": "15",
@@ -28,6 +32,7 @@
     {
       "id": "101",
       "name": "병사 투구",
+      "gold": "100",
       "description": "방어력: 5\n무겁기는 하지만... 효과는 좋다!",
       "armorType": "Helmet",
       "defence": "5",
@@ -38,6 +43,7 @@
     {
       "id": "200",
       "name": "소형 물약",
+      "gold": "50",
       "description": "회복력: 10\n쓰기는 하지만... 효과는 좋다!",
       "consumableType": "Potion",
       "posionType": "Hp",
@@ -48,6 +54,7 @@
     {
       "id": "201",
       "name": "MP 물약",
+      "gold": "50",
       "description": "회복력: 10\n쓰기는 하지만... 효과는 좋다!",
       "consumableType": "Potion",
       "posionType": "Mp",
@@ -60,6 +67,7 @@
     {
       "id": "1001",
       "name": "두더지 발톱",
+      "gold": "5",
       "description": "두더지 발톱은 무슨 냄새일까..?",
       "collectionType": "None",
       "maxCount": "999",
@@ -68,6 +76,7 @@
     {
       "id": "1002",
       "name": "부쉬의 사과",
+      "gold": "10",
       "description": "외형만 보면 썩은것 같지만 맛은 있다.",
       "collectionType": "None",
       "maxCount": "999",
@@ -76,6 +85,7 @@
     {
       "id": "1003",
       "name": "작은 나무",
+      "gold": "15",
       "description": "나무향은 중독성이 강하다.",
       "collectionType": "None",
       "maxCount": "999",

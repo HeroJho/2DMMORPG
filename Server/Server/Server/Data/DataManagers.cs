@@ -21,6 +21,7 @@ namespace Server.Data
         public static Dictionary<int, Data.QuestData> QuestDict { get; private set; } = new Dictionary<int, QuestData>();
         public static Dictionary<int, Data.ObstacleData> ObstacleDict { get; private set; } = new Dictionary<int, ObstacleData>();
         public static Dictionary<int, Data.DungunData> DungunDict { get; private set; } = new Dictionary<int, DungunData>();
+        public static Dictionary<int, Data.ShoperData> ShoperDict { get; private set; } = new Dictionary<int, ShoperData>();
 
 
         public static void LoadData()
@@ -33,6 +34,8 @@ namespace Server.Data
             QuestDict = LoadJson<Data.QuestLoader, int, Data.QuestData>("QuestData").MakeDict();
             ObstacleDict = LoadJson<Data.ObstacleLoader, int, Data.ObstacleData>("ObstacleData").MakeDict();
             DungunDict = LoadJson<Data.DungunLoader, int, Data.DungunData>("DungunData").MakeDict();
+            ShoperDict = LoadJson<Data.ShoperLoader, int, Data.ShoperData>("ShoperData").MakeDict();
+
 
         }
 

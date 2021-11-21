@@ -283,6 +283,20 @@ namespace Server
             Session.Send(changeExPacket);
         }
 
+        public void GetGold(int gold)
+        {
+            if (gold == 0)
+                return;
+
+            // 골드의 경우 중요하기 때문에 바로바로 저장
+            DbTransaction.ChangeGoldNoti(this, gold);
+
+            S_ChangeGold changeGoldPacket = new S_ChangeGold();
+            changeGoldPacket.Gold = Info.Gold;
+
+            Session.Send(changeGoldPacket);
+        }
+
         public void UpClass(int classGrade)
         {
             if(classGrade == 1)

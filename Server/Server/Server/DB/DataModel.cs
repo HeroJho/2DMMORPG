@@ -45,6 +45,7 @@ namespace Server.DB
         public bool CanUpClass { get; set; }
         public int StatPoints { get; set; }
 
+        public int Gold { get; set; }
         public ICollection<ItemDb> Items { get; set; }
         public ICollection<QuestDb> Quests { get; set; }
         public SkillDb Skills { get; set; }

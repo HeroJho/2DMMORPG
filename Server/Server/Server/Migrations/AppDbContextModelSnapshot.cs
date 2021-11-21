@@ -95,6 +95,9 @@ namespace Server.Migrations
                     b.Property<int>("Defence")
                         .HasColumnType("int");
 
+                    b.Property<int>("Gold")
+                        .HasColumnType("int");
+
                     b.Property<int>("Hp")
                         .HasColumnType("int");
 

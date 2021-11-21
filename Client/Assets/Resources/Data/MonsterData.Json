@@ -3,6 +3,7 @@
     {
       "id": "9999",
       "name": "작성 예",
+      "gold": "1000",
       "stat": {
         "level": "1",
         "maxHp": "20",
@@ -50,6 +51,7 @@
     {
       "id": "1",
       "name": "두더지",
+      "gold": "5",
       "stat": {
         "level": "1",
         "maxHp": "100",
@@ -86,6 +88,7 @@
     {
       "id": "2",
       "name": "수풀 몬스터",
+      "gold": "10",
       "stat": {
         "level": "10",
         "maxHp": "250",
@@ -121,6 +124,7 @@
     {
       "id": "3",
       "name": "작은 나무",
+      "gold": "20",
       "stat": {
         "level": "10",
         "maxHp": "250",
@@ -156,6 +160,7 @@
     {
       "id": "4",
       "name": "반반",
+      "gold": "1000",
       "stat": {
         "level": "10",
         "maxHp": "100",
@@ -172,6 +177,7 @@
       "prefabPath": "BanBan",
       "rewards": [
         {
+          "gold": "1000",
           "probability": "80",
           "itemId": "1003",
           "count": "5"
@@ -191,6 +197,7 @@
     {
       "id": "5",
       "name": "반반의 벽",
+      "gold": "0",
       "stat": {
         "level": "10",
         "maxHp": "250",
@@ -212,6 +219,7 @@
     {
       "id": "6",
       "name": "뒤틀린 그림자",
+      "gold": "0",
       "stat": {
         "level": "10",
         "maxHp": "250",

@@ -8,6 +8,7 @@ using UnityEngine;
 public class InventoryManager
 {
     public Dictionary<int, Item> Items { get; } = new Dictionary<int, Item>();
+    public int Gold { get; set; }
 
     public void Add(Item item)
     {

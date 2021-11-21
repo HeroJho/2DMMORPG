@@ -43,6 +43,7 @@ namespace Server
                         {
                             PlayerDbId = playerDb.PlayerDbId,
                             Name = playerDb.PlayerName,
+                            Gold = playerDb.Gold,
                             PosX = playerDb.PosX,
                             PosY = playerDb.PosY,
                             StatInfo = new StatInfo()
@@ -111,6 +112,7 @@ namespace Server
                 // 플레이어 정보
                 MyPlayer.PlayerDbId = playerInfo.PlayerDbId;
                 MyPlayer.Info.Name = playerInfo.Name;
+                MyPlayer.Info.Gold = playerInfo.Gold;
                 MyPlayer.Info.PosInfo.State = CreatureState.Idle;
                 MyPlayer.Info.PosInfo.MoveDir = MoveDir.Down;
                 MyPlayer.Info.PosInfo.PosX = playerInfo.PosX;
@@ -263,6 +265,7 @@ namespace Server
                     PlayerDb newPlayerDb = new PlayerDb()
                     {
                         PlayerName = createPacket.Name,
+                        Gold = 500,
                         Level = stat.Level,
                         Hp = stat.Hp,
                         Mp = stat.Mp,
@@ -310,6 +313,7 @@ namespace Server
                     {
                         PlayerDbId = newPlayerDb.PlayerDbId,
                         Name = createPacket.Name,
+                        Gold = newPlayerDb.Gold,
                         PosX = -50,
                         PosY = -75,
                         StatInfo = new StatInfo()

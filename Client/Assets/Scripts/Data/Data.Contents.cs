@@ -96,6 +96,7 @@ namespace Data
     {
         public int id;
         public string name;
+        public int gold;
         public string description;
         public ItemType itemType;
         public string iconPath;
@@ -343,6 +344,31 @@ namespace Data
             Dictionary<int, DungunData> dict = new Dictionary<int, DungunData>();
             foreach (DungunData dun in dungun)
                 dict.Add(dun.npcId, dun);
+            return dict;
+        }
+    }
+
+    #endregion
+
+    #region Shoper
+
+    [Serializable]
+    public class ShoperData
+    {
+        public int npcId;
+        public List<int> itemIds;
+    }
+
+    [Serializable]
+    public class ShoperLoader : ILoader<int, ShoperData>
+    {
+        public List<ShoperData> shoper = new List<ShoperData>();
+
+        public Dictionary<int, ShoperData> MakeDict()
+        {
+            Dictionary<int, ShoperData> dict = new Dictionary<int, ShoperData>();
+            foreach (ShoperData shoperData in shoper)
+                dict.Add(shoperData.npcId, shoperData);
             return dict;
         }
     }

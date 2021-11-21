@@ -128,9 +128,15 @@ public class QuestManager
 
         //던전 안내라면
         DungunGiver dungun = nc.GetComponent<DungunGiver>();
+        ShopGiver shop = nc.GetComponent<ShopGiver>();
         if (dungun != null)
         {
             dungun.GetPanelInfo();
+            return;
+        }
+        else if(shop != null)
+        {
+            shop.GetPanelInfo();
             return;
         }
 

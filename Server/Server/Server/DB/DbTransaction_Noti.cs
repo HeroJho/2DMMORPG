@@ -105,5 +105,37 @@ namespace Server.DB
             });
         }
 
+        public static void ChangeGoldNoti(Player player, int gold)
+        {
+            if (player == null || gold == 0)
+                return;
+
+            // 메모리 선 저장
+            player.Info.Gold += gold;
+
+            // Me (GameRoom)
+            PlayerDb playerDb = new PlayerDb();
+            {
+                playerDb.PlayerDbId = player.PlayerDbId;
+                playerDb.Gold = player.Info.Gold;
+            }
+
+            // You
+            Instance.Push(() =>
+            {
+                using (AppDbContext db = new AppDbContext())
+                {
+                    db.Entry(playerDb).State = EntityState.Unchanged;
+                    db.Entry(playerDb).Property(nameof(PlayerDb.Gold)).IsModified = true;
+
+                    bool success = db.SaveChangesEx();
+                    if (!success)
+                    {
+                        // 실패 > Kick
+                    }
+                }
+            });
+        }
+
     }
 }

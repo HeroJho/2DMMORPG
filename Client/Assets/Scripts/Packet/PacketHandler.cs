@@ -513,4 +513,15 @@ class PacketHandler
 
 	}
 
+	public static void S_ChangeGoldHandler(PacketSession session, IMessage packet)
+	{
+		S_ChangeGold changeGoldPacket = (S_ChangeGold)packet;
+
+		Managers.Inven.Gold = changeGoldPacket.Gold;
+
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.InvenUI.RefreshUI();
+
+	}
+
 }

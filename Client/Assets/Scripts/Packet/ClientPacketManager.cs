@@ -136,6 +136,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.STryGetInDungun, MakePacket<S_TryGetInDungun>);
             _handler.Add((ushort)MsgId.STryGetInDungun, PacketHandler.S_TryGetInDungunHandler);
 
+            _onRecv.Add((ushort)MsgId.SChangeGold, MakePacket<S_ChangeGold>);
+            _handler.Add((ushort)MsgId.SChangeGold, PacketHandler.S_ChangeGoldHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

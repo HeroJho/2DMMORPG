@@ -279,8 +279,9 @@ namespace Server
             {
 
                 Player player = (Player)owner;
-                // 경험치 획득
+                // 경험치, Gold 획득
                 player.GetEx(_monsterData.stat.TotalExp);
+                player.GetGold(_monsterData.gold);
                 // 퀘스트 진행여부 확인
                 player.Quest.ProceddWithQuest(TemplateId);
             }
