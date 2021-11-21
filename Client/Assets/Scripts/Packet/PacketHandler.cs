@@ -492,25 +492,10 @@ class PacketHandler
 	{
 		S_TryGetInDungun dungunPacket = (S_TryGetInDungun)packet;
 
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+
 		if (dungunPacket.Ok == 0)
-        {
-			// TODO : 파티를 해야합니다!
-        }
-		else if (dungunPacket.Ok == 1)
-        {
-			// TODO : 조건이 안됩니다!
-        }
-		else if (dungunPacket.Ok == 2)
-        {
-			// TODO : 파티장이 아닙니다!
-        }
-		else if (dungunPacket.Ok == 3)
-        {
-			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 			gameSceneUI.ChangeUI.ChangeRoom();
-		}
-
-
 	}
 
 	public static void S_ChangeGoldHandler(PacketSession session, IMessage packet)
@@ -521,6 +506,18 @@ class PacketHandler
 
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.InvenUI.RefreshUI();
+
+	}
+
+	public static void S_SendMassageHandler(PacketSession session, IMessage packet)
+    {
+		S_SendMassage massagePacket = (S_SendMassage)packet;
+
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		if (massagePacket.IsCount)
+			gameSceneUI.MassageUI.WriteCount(true);
+		else
+			gameSceneUI.MassageUI.WriteMassage(massagePacket.Str, massagePacket.IsGreen);
 
 	}
 

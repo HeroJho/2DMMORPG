@@ -433,5 +433,16 @@ namespace Server
             // 파티의 경우 VisionCube범위가 아니더라도 체력 정보가 정송 돼야함
             Communication.SendPartyInfo();
         }
+
+        public void SendMassage(string str, bool isGreen, bool isCount = false)
+        {
+            S_SendMassage massagePacket = new S_SendMassage();
+            massagePacket.Str = str;
+            massagePacket.IsGreen = isGreen;
+            massagePacket.IsCount = isCount;
+
+            Session.Send(massagePacket);
+        }
+
     }
 }

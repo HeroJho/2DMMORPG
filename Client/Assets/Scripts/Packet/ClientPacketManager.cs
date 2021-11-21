@@ -139,6 +139,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SChangeGold, MakePacket<S_ChangeGold>);
             _handler.Add((ushort)MsgId.SChangeGold, PacketHandler.S_ChangeGoldHandler);
 
+            _onRecv.Add((ushort)MsgId.SSendMassage, MakePacket<S_SendMassage>);
+            _handler.Add((ushort)MsgId.SSendMassage, PacketHandler.S_SendMassageHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

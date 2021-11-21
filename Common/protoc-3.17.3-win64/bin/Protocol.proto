@@ -63,6 +63,7 @@ enum MsgId{
     S_TRY_GET_IN_DUNGUN = 56;
     C_TRY_GET_IN_DUNGUN = 57;
     S_CHANGE_GOLD = 58;
+    S_SEND_MASSAGE = 59;
 }
 
 enum CreatureState{
@@ -454,7 +455,11 @@ message S_ChangeGold{
     int32 gold = 1;
 }
 
-
+message S_SendMassage{
+    string str = 1;
+    bool isGreen = 2;
+    bool isCount = 3;
+}
 
 
 message ItemInfo{

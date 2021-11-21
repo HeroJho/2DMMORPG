@@ -25,11 +25,15 @@ namespace Server
                 {
                     Console.WriteLine("Page2!!");
                     _page = BossPage.Page_2;
+
+                    Room.SendAllPlayerMassage("반반이 환각을 일으킵니다...", false);
                 }
                 else if (_page == BossPage.Page_2 && Stat.Hp < TotalMaxHp * 0.4)
                 {
                     Console.WriteLine("Page3!!");
                     _page = BossPage.Page_3;
+
+                    Room.SendAllPlayerMassage("반반이 폭주합니다!", false);
                 }
 
             }
@@ -685,7 +689,10 @@ namespace Server
                 Room.Broadcast(CellPos, diePacket);
 
                 GameRoom room = Room;
-                // TODO
+
+                // 클라쪽 10초 카운트 시작
+                Room.SendAllPlayerMassage("", false, true);
+
                 // 보스가 죽었을 경우 자기가 속한 던전맵이라면 몇초 후 원래 맵으로 귀한
                 if (room.Map.MapId == 2)
                 {                    

@@ -48,7 +48,7 @@ namespace Server
             return true;
         }
 
-        public void InvitePlayerToParty(Player player)
+        public void InvitePlayerToParty(Player tryplayer, Player player)
         {
             // 파티가 없다면 만들어서 초대
             if (Party == null)
@@ -57,32 +57,32 @@ namespace Server
             // 파티장이 아니라면 초대 불가능
             if (Party.LeaderPlayer != _player)
             {
-                Console.WriteLine("You're not Leader!");
+                player.SendMassage("당신은 파티장이 아닙니다!", false);
                 return;
             }
             // 이미 가입한 파티가 있다
-            if (player.Communication.Party != null)
+            if (tryplayer.Communication.Party != null)
             {
-                Console.WriteLine("this Player aleady have a party!");
+                player.SendMassage("이 플레이어는 이미 가입한 파티가 있습니다!", false);
                 return;
             }
 
             // 4인 이상이다
             if (Party.PartyList.Count >= 4)
             {
-                Console.WriteLine("Pull Party!");
+                player.SendMassage("파티가 꽉 찻습니다!", false);
                 return;
             }
 
             // 이미 가입한 플레이어다
-            if (!Party.AddPlayer(player))
+            if (!Party.AddPlayer(tryplayer))
             {
-                Console.WriteLine("This Player is already in Party!");
+                player.SendMassage("이미 가입한 플레이어 입니다!", false);
                 return;
             }
-                
+
             // 가입한 플레이어의 Party를 지금 Party로 저장
-            player.Communication.Party = Party;
+            tryplayer.Communication.Party = Party;
         }
 
         public void SendPartyInfo()

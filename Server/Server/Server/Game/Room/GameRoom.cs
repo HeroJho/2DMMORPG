@@ -401,9 +401,7 @@ namespace Server
                 // 리더인지 확인
                 if (player != party.LeaderPlayer)
                 {
-                    // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
-                    stryDungunPacket.Ok = 2;
-                    player.Session.Send(stryDungunPacket);
+                    player.SendMassage("당신은 파티장이 아닙니다!", false);
                     return;
                 }    
 
@@ -415,9 +413,7 @@ namespace Server
                     // 파티원중에 레벨이 안되는 사람이 있다 >> 레벨 안됨 메세지 전송
                     if(partyer.Stat.Level < dungunData.limitLevel)
                     {
-                        // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
-                        stryDungunPacket.Ok = 0;
-                        player.Session.Send(stryDungunPacket);
+                        player.SendMassage("입장 조건이 안됩니다!", false);
                         return;
                     }
 
@@ -426,9 +422,7 @@ namespace Server
             }
             else // 파티가 없다면 파티가 있어야 한다는 메세지 전송
             {
-                // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
-                stryDungunPacket.Ok = 1;
-                player.Session.Send(stryDungunPacket);
+                player.SendMassage("꼭 파티가 있어야 합니다!", false);
                 return;
             }
 
@@ -448,8 +442,7 @@ namespace Server
                     // 먼저 방을 나감 >> 씬전환 후 Clear실행 방지
                     partyer.Room.LeaveGame(partyer.Id);
 
-                    // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
-                    stryDungunPacket.Ok = 3;
+                    stryDungunPacket.Ok = 0;
                     partyer.Session.Send(stryDungunPacket);
                 }
             });
@@ -546,8 +539,7 @@ namespace Server
                 // 먼저 방을 나감 >> 씬전환 후 Clear실행 방지
                 LeaveGame(players[i].Id);
 
-                // 0레벨 안됨, 1 파티 있어야함, 2 리더아님, 3 통과
-                stryDungunPacket.Ok = 3;
+                stryDungunPacket.Ok = 0;
                 players[i].Session.Send(stryDungunPacket);
             }
         }
@@ -648,6 +640,12 @@ namespace Server
             player.Session.Send(spawnObstaclePacket);
         }
 
+        public void SendAllPlayerMassage(string str, bool isGreen, bool isCount = false)
+        {
+            foreach (Player player in _players.Values)
+                player.SendMassage(str, isGreen, isCount);
+
+        }
 
     }
 }

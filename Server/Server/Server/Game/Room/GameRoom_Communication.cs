@@ -23,7 +23,7 @@ namespace Server
             if (playerInvited == null)
                 return;
 
-            player.Communication.InvitePlayerToParty(playerInvited);
+            player.Communication.InvitePlayerToParty(playerInvited, player);
         }
 
         public void HandleQuitParty(Player player, C_QuitParty quitPartyPacket)
@@ -41,7 +41,7 @@ namespace Server
 
             // 파티장 인가? >> 강퇴
             if(player.Communication.KickParty(quitPartyPacket.Id) == false)
-                Console.WriteLine("You're not Leader!");
+                player.SendMassage("당신은 파티장이 아닙니다!", false);
 
         }
 
