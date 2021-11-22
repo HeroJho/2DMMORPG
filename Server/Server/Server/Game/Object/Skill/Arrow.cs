@@ -44,7 +44,7 @@ namespace Server
 
                     if (target != null)
                     {
-                        target.OnDamaged(this, Damage + Owner.TotalAttack);
+                        target.OnDamaged(Owner, Damage + Owner.TotalAttack);
                     }
                 }
 

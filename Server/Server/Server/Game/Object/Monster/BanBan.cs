@@ -606,6 +606,9 @@ namespace Server
 
         private void ShootIceBall(MoveDir dir)
         {
+            if (this == null || Room == null)
+                return;
+
             IceBall iceBall = ObjectManager.Instance.Add<IceBall>();
             if (iceBall == null)
                 return;
@@ -666,21 +669,31 @@ namespace Server
 
             if (owner.ObjectType == GameObjectType.Player)
             {
+                // 던전안의 모든 플레이어 보상
+                foreach (Player player in Room.PlayerList.Values)
+                {
+                    if (player == null || player.Room == null)
+                        return;
 
-                Player player = (Player)owner;
-                // 경험치 획득
-                player.GetEx(_monsterData.stat.TotalExp);
-                // 퀘스트 진행여부 확인
-                player.Quest.ProceddWithQuest(TemplateId);
+                    player.GetEx(_monsterData.stat.TotalExp);
+                    player.GetGold(_monsterData.gold);
+
+                    // 퀘스트 진행여부 확인
+                    player.Quest.ProceddWithQuest(TemplateId);
+                }
             }
 
             // 보상 로직
-            RewardData rewardData = GetRandomReward();
-            if (rewardData != null)
+
+            // 보스의 경우 바로 보상 인벤으로 꼳아줌
+            foreach (Player player in Room.PlayerList.Values)
             {
-                // TODO
-                // 보스의 경우 바로 보상 인벤으로 꼳아줌
+                if (player == null || player.Room == null)
+                    return;
+
+                SendAllReward(player);
             }
+
 
             {
                 S_Die diePacket = new S_Die();

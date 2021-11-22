@@ -160,6 +160,30 @@ namespace Server
             }
 
         }
+    
+        public void HandleBuyItem(Player player, C_BuyItem buyItemPacket)
+        {
+            GameRoom room = player.Room;
+            if (player == null || room == null)
+                return;
+
+            ItemData itemData = null;
+            if (DataManager.ItemDict.TryGetValue(buyItemPacket.ItemId, out itemData) == false)
+                return;
+
+            int gold = player.Info.Gold - (itemData.gold * buyItemPacket.Count);
+            if (gold < 0)
+            {
+                player.SendMassage("골드가 모자랍니다!", false);
+                return;
+            }
+
+
+            DbTransaction.BuyItem(player, itemData, buyItemPacket.Count, room);
+
+        }
+
+    
     }
 
 }

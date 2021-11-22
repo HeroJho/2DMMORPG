@@ -332,5 +332,22 @@ namespace Server
             player.Session.HandleChangeRoom();
         }
 
+        public static void C_BuyItemHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_BuyItem buyItemPacket = (C_BuyItem)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleBuyItem, player, buyItemPacket);
+        }
+
+
     }
 }

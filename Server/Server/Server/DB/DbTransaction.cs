@@ -378,6 +378,84 @@ namespace Server.DB
 
             }
         }
+        public static void BuyItem(Player player, ItemData iData, int count, GameRoom room)
+        {
+            // TODO : 거래같은 경우는 아이템과 돈이 한번에 같이 DB에 저장이 되야함.
+            // 둘 다 선 메모리가 아니라 Db저장후 메모리 저장으로 해야함
+
+            if (player == null || iData == null || room == null)
+                return;
+
+            int gold = player.Info.Gold - (iData.gold * count);
+            if (gold < 0)
+                return;
+
+            player.GetGold(-1 * iData.gold * count);
+
+            RewardData rewardData = new RewardData()
+            {
+                itemId = iData.id,
+                count = count
+            };
+
+            // count가 없는 일반 보상은 그냥 추가
+            if (rewardData.count <= 0)
+            {
+                Instance.AddNewSlot(player, rewardData, room);
+            }
+            else // count가 있다면 countMax따져서 추가
+            {
+                ItemData itemData = null;
+                DataManager.ItemDict.TryGetValue(rewardData.itemId, out itemData);
+                if (itemData == null)
+                    return;
+                ConsumableData consumableData = itemData as ConsumableData;
+                if (consumableData == null)
+                    return;
+
+                // 동일 종류이고 최대갯수가 아닌 아이템
+                Item item = player.Inven.Find(i =>
+                i.TemplateId == rewardData.itemId && i.Count < consumableData.maxCount);
+
+                int totalCount = 0;
+                if (item == null)
+                    totalCount = rewardData.count;
+                else
+                    totalCount = item.Count + rewardData.count;
+
+                while (totalCount > consumableData.maxCount)
+                {
+                    totalCount -= consumableData.maxCount;
+
+                    RewardData rewardDataCopy = new RewardData()
+                    {
+                        probability = rewardData.probability,
+                        itemId = rewardData.itemId,
+                        count = consumableData.maxCount
+                    };
+
+                    Instance.AddNewSlot(player, rewardDataCopy, room);
+                }
+
+                if (totalCount <= consumableData.maxCount)
+                {
+                    RewardData rewardDataCopy = new RewardData()
+                    {
+                        probability = rewardData.probability,
+                        itemId = rewardData.itemId,
+                        count = totalCount
+                    };
+
+                    if (item == null)
+                        Instance.AddNewSlot(player, rewardDataCopy, room);
+                    else
+                        Instance.AddCountSlot(player, rewardDataCopy, room, item);
+                }
+
+            }
+
+        }
+
 
         // 땅에 떨어진 아이템 추가
         public static void AddItemPlayer(Player player, Item newItem, GameRoom room)

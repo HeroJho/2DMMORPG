@@ -285,6 +285,7 @@ GameObject:
   - component: {fileID: 7487869902341290095}
   - component: {fileID: 706067909384438207}
   - component: {fileID: 8927858736997193835}
+  - component: {fileID: 3848811088854328760}
   m_Layer: 5
   m_Name: UI_Die
   m_TagString: Untagged
@@ -372,6 +373,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3848811088854328760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5978032504513997560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19575705fbb864743a15f1c75b7a3fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8970441602725800646
 GameObject:
   m_ObjectHideFlags: 0

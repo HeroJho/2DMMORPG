@@ -94,6 +94,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CTryGetInDungun, MakePacket<C_TryGetInDungun>);
             _handler.Add((ushort)MsgId.CTryGetInDungun, PacketHandler.C_TryGetInDungunHandler);
 
+            _onRecv.Add((ushort)MsgId.CBuyItem, MakePacket<C_BuyItem>);
+            _handler.Add((ushort)MsgId.CBuyItem, PacketHandler.C_BuyItemHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

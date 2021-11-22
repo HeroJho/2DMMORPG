@@ -98,6 +98,11 @@ namespace Server
             if (Room == null)
                 return;
 
+            // 자신의 파티원이라면 데미지 무효
+            Player player = attacker as Player;
+            if(player != null && Communication.Party != null && Communication.Party.FindPlayerById(player.Id) != null)
+                return;
+
             int totalDamage = damage;
 
             // 데미지 보정
@@ -144,10 +149,48 @@ namespace Server
             S_Die diePacket = new S_Die();
             diePacket.ObjectId = Id;
             diePacket.AttackerId = attacker.Id;
+            diePacket.MapId = Room.Map.MapId;
             Room.Broadcast(CellPos, diePacket);
+
+            if(Room.Map.MapId != 1) // 던전이라면 유령 상태에서 구경
+                SendMassage("당신은 쓰러졌습니다!\n팀원이 클리어시 보상은 같이 지급됩니다.\n보상을 포기하고 월드 맵으로 리스폰 가능합니다.", false);
 
             // Zone과 Collision 삭제
             BecomeGhost();
+        }
+
+        public void BecomeGhost()
+        {// Zone과 Collision 삭제
+            State = CreatureState.Dead;
+            //Room.Map.SetOffCollsion(this);
+        }
+
+        public void Respawn()
+        {
+            if (Vision.job != null)
+                Vision.job.Cancel = true;
+            Vision.job = null;
+
+            GameRoom room = Room;
+
+            Stat.Hp = TotalMaxHp;
+            Stat.Mp = TotalMaxMp;
+            PosInfo.State = CreatureState.Idle;
+            PosInfo.MoveDir = MoveDir.Down;
+
+            // 던전에서 죽으면 월드 맵으로 이동
+            if (Room.Map.MapId != 1)
+            {
+                room.ChangeRoomPlayer(this);
+            }
+            else
+            {
+                PosInfo.PosX = -50;
+                PosInfo.PosY = -75;
+                room.LeaveGame(Id);
+                room.EnterGame(this);
+            }
+
         }
 
         public bool IsChangedRoom = false;
@@ -374,31 +417,6 @@ namespace Server
             Mp += mp;
 
             UpdateHpMpStat();
-        }
-
-        public void BecomeGhost()
-        {// Zone과 Collision 삭제
-            State = CreatureState.Dead;
-            //Room.Map.SetOffCollsion(this);
-        }
-
-        public void Respawn()
-        {
-            if (Vision.job != null)
-                Vision.job.Cancel = true;
-            Vision.job = null;
-
-            GameRoom room = Room;
-            room.LeaveGame(Id);
-
-            Stat.Hp = TotalMaxHp;
-            Stat.Mp = TotalMaxMp;
-            PosInfo.State = CreatureState.Idle;
-            PosInfo.MoveDir = MoveDir.Down;
-            PosInfo.PosX = -50;
-            PosInfo.PosY = -75;
-
-            room.EnterGame(this);
         }
 
         public override void UpdateClientStat()

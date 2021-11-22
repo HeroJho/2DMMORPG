@@ -33,6 +33,7 @@ public class UI_Die : UI_Popup
 
             Managers.UI.ClosePopupUI(this);
         });
+
     }
 
 }

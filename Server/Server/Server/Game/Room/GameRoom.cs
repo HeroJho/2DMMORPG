@@ -16,6 +16,7 @@ namespace Server
         public int RoomId { get; set; }
 
         Dictionary<int, Player> _players = new Dictionary<int, Player>();
+        public Dictionary<int, Player> PlayerList { get { return _players; }}
         Dictionary<int, Monster> _monsters = new Dictionary<int, Monster>();
         Dictionary<int, Projectile> _projectiles = new Dictionary<int, Projectile>();
         Dictionary<int, Summoning> _summonings = new Dictionary<int, Summoning>();
@@ -542,6 +543,24 @@ namespace Server
                 stryDungunPacket.Ok = 0;
                 players[i].Session.Send(stryDungunPacket);
             }
+        }
+
+        public void ChangeRoomPlayer(Player player)
+        {
+            if (_players.ContainsKey(player.Id) == false)
+                return;
+
+            S_TryGetInDungun stryDungunPacket = new S_TryGetInDungun();
+
+            player.Session.TempRoomId = 1;
+            player.IsChangedRoom = true;
+
+            // 아무이상 없다면 일단
+            // 먼저 방을 나감 >> 씬전환 후 Clear실행 방지
+            LeaveGame(player.Id);
+
+            stryDungunPacket.Ok = 0;
+            player.Session.Send(stryDungunPacket);
         }
 
         public void LoadInitData()

@@ -131,12 +131,15 @@ class PacketHandler
 			cc.OnDead();
 
 			// 내 플레이어라면 창 띄우기
-			if(cc.Id == Managers.Object.MyPlayer.Id)
-            {
+			if (cc.Id != Managers.Object.MyPlayer.Id)
+				return;
+			
+			if(diePacket.MapId == 1)
 				Managers.UI.ShowPopupUI<UI_Die>();
-			}
+			else // 던전이라면 카운트 판넬
+				Managers.UI.ShowPopupUI<UI_DieCount>();
 
-        }
+		}
 	}
 
 	public static void S_ConnectedHandler(PacketSession session, IMessage packet)
@@ -506,6 +509,7 @@ class PacketHandler
 
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.InvenUI.RefreshUI();
+		gameSceneUI.ShopPanelUI.SetPlayerGrid();
 
 	}
 

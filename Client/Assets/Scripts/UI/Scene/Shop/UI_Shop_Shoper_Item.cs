@@ -66,6 +66,19 @@ public class UI_Shop_Shoper_Item : UI_Base
 
         }, Define.UIEvent.Exit);
 
+        BindEvent(Get<Button>((int)Buttons.BuyButton).gameObject, (e) =>
+        {
+            if (_itemData == null)
+                return;
+
+            C_BuyItem buyItemPacket = new C_BuyItem();
+            buyItemPacket.ItemId = _itemData.id;
+            buyItemPacket.Count = 1;
+
+            Managers.Network.Send(buyItemPacket);
+
+        }, Define.UIEvent.LeftClick);
+
     }
 
     public void SetInfo(ItemData data)

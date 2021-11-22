@@ -37,7 +37,17 @@
       "armorType": "Helmet",
       "defence": "5",
       "iconPath": "Textures/Item/helmets"
+    },
+    {
+      "id": "102",
+      "name": "반반 투구",
+      "gold": "1000",
+      "description": "방어력: 40\n반반의 마법이 깃든 투구이다.",
+      "armorType": "Helmet",
+      "defence": "40",
+      "iconPath": "Textures/Item/banbanHelmet"
     }
+
   ],
   "consumables": [
     {

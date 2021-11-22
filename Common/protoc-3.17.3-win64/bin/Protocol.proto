@@ -64,6 +64,7 @@ enum MsgId{
     C_TRY_GET_IN_DUNGUN = 57;
     S_CHANGE_GOLD = 58;
     S_SEND_MASSAGE = 59;
+    C_BUY_ITEM = 60;
 }
 
 enum CreatureState{
@@ -234,6 +235,7 @@ message S_ChangeMp{
 message S_Die{
     int32 objectId = 1;
     int32 attackerId = 2;
+    int32 mapId = 3;
 }
 
 message S_Connected{
@@ -459,6 +461,11 @@ message S_SendMassage{
     string str = 1;
     bool isGreen = 2;
     bool isCount = 3;
+}
+
+message C_BuyItem{
+    int32 itemId = 1;
+    int32 count = 2;
 }
 
 

@@ -45,7 +45,7 @@ namespace Server
                     if (target != null)
                     {
                         target.Condition.Chilled(_skillData, _skillLevel);
-                        target.OnDamaged(this, Damage + Owner.TotalAttack);
+                        target.OnDamaged(Owner, Damage + Owner.TotalAttack);
                     }
                 }
 

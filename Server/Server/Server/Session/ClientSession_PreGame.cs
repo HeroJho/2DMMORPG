@@ -459,6 +459,9 @@ namespace Server
             else
                 MyPlayer.CellPos = new Vector2Int(25, -35);
 
+            // 상태 Idle
+            MyPlayer.State = CreatureState.Idle;
+
             // 파티방 입장
             GameLogic.Instance.Push(() =>
             {

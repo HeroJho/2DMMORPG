@@ -277,7 +277,6 @@ namespace Server
 
             if(owner.ObjectType == GameObjectType.Player)
             {
-
                 Player player = (Player)owner;
                 // 경험치, Gold 획득
                 player.GetEx(_monsterData.stat.TotalExp);
@@ -340,5 +339,19 @@ namespace Server
 
             return null;
         }
+
+        protected void SendAllReward(Player player)
+        {
+            GameRoom room = player.Room;
+            if (player == null || room == null)
+                return;
+
+            foreach (RewardData rewardData in _monsterData.rewards)
+            {
+                DbTransaction.RewardPlayer(player, rewardData, room);
+            }
+
+        }
+
     }
 }
