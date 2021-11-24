@@ -171,15 +171,19 @@ namespace Server
             if (DataManager.ItemDict.TryGetValue(buyItemPacket.ItemId, out itemData) == false)
                 return;
 
-            int gold = player.Info.Gold - (itemData.gold * buyItemPacket.Count);
+            int gold = 0;
+            if (buyItemPacket.Stackable)
+                gold = player.Info.Gold - (itemData.gold * buyItemPacket.Count);
+            else
+                gold = player.Info.Gold - itemData.gold;
+
             if (gold < 0)
             {
                 player.SendMassage("골드가 모자랍니다!", false);
                 return;
             }
 
-
-            DbTransaction.BuyItem(player, itemData, buyItemPacket.Count, room);
+            DbTransaction.BuyItem(player, itemData, buyItemPacket.Count, buyItemPacket.Stackable, room);
 
         }
 

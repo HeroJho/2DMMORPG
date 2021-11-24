@@ -378,7 +378,7 @@ namespace Server.DB
 
             }
         }
-        public static void BuyItem(Player player, ItemData iData, int count, GameRoom room)
+        public static void BuyItem(Player player, ItemData iData, int count, bool stackable, GameRoom room)
         {
             // TODO : 거래같은 경우는 아이템과 돈이 한번에 같이 DB에 저장이 되야함.
             // 둘 다 선 메모리가 아니라 Db저장후 메모리 저장으로 해야함
@@ -386,11 +386,24 @@ namespace Server.DB
             if (player == null || iData == null || room == null)
                 return;
 
-            int gold = player.Info.Gold - (iData.gold * count);
+            int gold = 0;
+            int miusGold = 0;
+            if (stackable)
+            {
+                gold = player.Info.Gold - (iData.gold * count);
+                miusGold = -(iData.gold * count);
+            }
+            else
+            {
+                gold = player.Info.Gold - iData.gold;
+                miusGold = -iData.gold;
+                count = 0;
+            }
+
             if (gold < 0)
                 return;
 
-            player.GetGold(-1 * iData.gold * count);
+            player.GetGold(miusGold);
 
             RewardData rewardData = new RewardData()
             {

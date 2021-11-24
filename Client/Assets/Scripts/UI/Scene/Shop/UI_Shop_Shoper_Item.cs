@@ -73,7 +73,30 @@ public class UI_Shop_Shoper_Item : UI_Base
 
             C_BuyItem buyItemPacket = new C_BuyItem();
             buyItemPacket.ItemId = _itemData.id;
-            buyItemPacket.Count = 1;
+
+            int maxCount = 0;
+            if (_itemData.itemType == ItemType.Consumable)
+            {
+                ConsumableData consumableData = _itemData as ConsumableData;
+                maxCount = consumableData.maxCount;
+            }
+            else if (_itemData.itemType == ItemType.Collection)
+            {
+                CollectionData collectionData = _itemData as CollectionData;
+                maxCount = collectionData.maxCount;
+            }
+
+            if (maxCount == 0)
+            {
+                buyItemPacket.Count = 0;
+                buyItemPacket.Stackable = false;
+            }
+            else
+            {
+                buyItemPacket.Count = 1;
+                buyItemPacket.Stackable = true;
+            }
+                
 
             Managers.Network.Send(buyItemPacket);
 

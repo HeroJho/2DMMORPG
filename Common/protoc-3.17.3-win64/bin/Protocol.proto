@@ -466,6 +466,7 @@ message S_SendMassage{
 message C_BuyItem{
     int32 itemId = 1;
     int32 count = 2;
+    bool stackable = 3;
 }
 
 
