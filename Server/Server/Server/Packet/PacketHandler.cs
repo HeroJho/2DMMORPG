@@ -348,6 +348,22 @@ namespace Server
             room.Push(room.HandleBuyItem, player, buyItemPacket);
         }
 
+        public static void C_SellItemHandler(PacketSession session, IMessage packet)
+        {
+            ClientSession clientSession = (ClientSession)session;
+            C_SellItem sellItemPacket = (C_SellItem)packet;
+
+            Player player = clientSession.MyPlayer;
+            if (player == null)
+                return;
+
+            GameRoom room = player.Room;
+            if (room == null)
+                return;
+
+            room.Push(room.HandleSellItem, player, sellItemPacket);
+        }
+
 
     }
 }

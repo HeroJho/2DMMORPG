@@ -29,6 +29,8 @@ ScriptsOnlyBuild:
     - UI_ChatInputBox
     - UI_ClassUp
     - UI_DescriptionBox
+    - UI_Die
+    - UI_DieCount
     - UI_DungunPanel
     - UI_FrontDragIcon
     - UI_GameScene
@@ -175,23 +177,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13000}
     - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 13442}
     - Class: 114
-      Script: {instanceID: 13528}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 13590}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 13600}
+      Script: {instanceID: 13602}
     - Class: 114
-      Script: {instanceID: 13682}
+      Script: {instanceID: 13684}
     - Class: 114
-      Script: {instanceID: 13714}
+      Script: {instanceID: 13716}
     - Class: 114
-      Script: {instanceID: 14344}
+      Script: {instanceID: 14346}
     - Class: 114
-      Script: {instanceID: 14694}
+      Script: {instanceID: 14696}
     - Class: 114
-      Script: {instanceID: 14774}
+      Script: {instanceID: 14776}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -312,6 +314,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 12348}
     - Class: 114
+      Script: {instanceID: 12392}
+    - Class: 114
       Script: {instanceID: 12406}
     - Class: 114
       Script: {instanceID: 12414}
@@ -344,81 +348,83 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13000}
     - Class: 114
-      Script: {instanceID: 13188}
+      Script: {instanceID: 13154}
     - Class: 114
-      Script: {instanceID: 13196}
+      Script: {instanceID: 13190}
     - Class: 114
-      Script: {instanceID: 13268}
+      Script: {instanceID: 13198}
     - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 13270}
     - Class: 114
-      Script: {instanceID: 13518}
+      Script: {instanceID: 13442}
     - Class: 114
-      Script: {instanceID: 13528}
+      Script: {instanceID: 13520}
     - Class: 114
-      Script: {instanceID: 13576}
+      Script: {instanceID: 13530}
     - Class: 114
-      Script: {instanceID: 13590}
+      Script: {instanceID: 13578}
     - Class: 114
-      Script: {instanceID: 13596}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 13600}
+      Script: {instanceID: 13598}
     - Class: 114
-      Script: {instanceID: 13608}
+      Script: {instanceID: 13602}
     - Class: 114
-      Script: {instanceID: 13676}
+      Script: {instanceID: 13610}
     - Class: 114
-      Script: {instanceID: 13680}
+      Script: {instanceID: 13678}
     - Class: 114
       Script: {instanceID: 13682}
     - Class: 114
-      Script: {instanceID: 13714}
+      Script: {instanceID: 13684}
     - Class: 114
-      Script: {instanceID: 13940}
+      Script: {instanceID: 13716}
     - Class: 114
-      Script: {instanceID: 13950}
+      Script: {instanceID: 13942}
     - Class: 114
-      Script: {instanceID: 13970}
+      Script: {instanceID: 13952}
     - Class: 114
-      Script: {instanceID: 14006}
+      Script: {instanceID: 13972}
     - Class: 114
-      Script: {instanceID: 14076}
+      Script: {instanceID: 14008}
     - Class: 114
       Script: {instanceID: 14078}
     - Class: 114
-      Script: {instanceID: 14106}
+      Script: {instanceID: 14080}
     - Class: 114
-      Script: {instanceID: 14252}
+      Script: {instanceID: 14108}
     - Class: 114
-      Script: {instanceID: 14320}
+      Script: {instanceID: 14254}
     - Class: 114
-      Script: {instanceID: 14340}
+      Script: {instanceID: 14322}
     - Class: 114
-      Script: {instanceID: 14344}
+      Script: {instanceID: 14342}
     - Class: 114
-      Script: {instanceID: 14368}
+      Script: {instanceID: 14346}
     - Class: 114
-      Script: {instanceID: 14388}
+      Script: {instanceID: 14370}
     - Class: 114
-      Script: {instanceID: 14400}
+      Script: {instanceID: 14390}
     - Class: 114
-      Script: {instanceID: 14404}
+      Script: {instanceID: 14402}
     - Class: 114
-      Script: {instanceID: 14558}
+      Script: {instanceID: 14406}
     - Class: 114
-      Script: {instanceID: 14562}
+      Script: {instanceID: 14560}
     - Class: 114
-      Script: {instanceID: 14578}
+      Script: {instanceID: 14564}
     - Class: 114
-      Script: {instanceID: 14694}
+      Script: {instanceID: 14580}
     - Class: 114
-      Script: {instanceID: 14748}
+      Script: {instanceID: 14696}
     - Class: 114
-      Script: {instanceID: 14774}
+      Script: {instanceID: 14750}
     - Class: 114
-      Script: {instanceID: 14792}
+      Script: {instanceID: 14776}
     - Class: 114
-      Script: {instanceID: 14822}
+      Script: {instanceID: 14794}
+    - Class: 114
+      Script: {instanceID: 14824}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1036,6 +1042,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UI_DieCount
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f

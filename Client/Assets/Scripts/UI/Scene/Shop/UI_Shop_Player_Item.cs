@@ -1,4 +1,5 @@
 ﻿using Data;
+using Google.Protobuf.Protocol;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,6 +65,30 @@ public class UI_Shop_Player_Item : UI_Base
             _descriptionBox.ClosePosition();
 
         }, Define.UIEvent.Exit);
+
+
+        // 아이템 팔기
+        BindEvent(Get<Button>((int)Buttons.SellButton).gameObject, (e) =>
+        {
+            if (_item == null)
+                return;
+
+            C_SellItem sellItemPacket = new C_SellItem();
+            sellItemPacket.ItemDbId = _item.ItemDbId;
+
+            if(_item.Stackable)
+            {
+                // TODO : 몇개를 팔거냐
+                sellItemPacket.Count = 1;
+            }
+            else
+            {
+                sellItemPacket.Count = 1;
+            }
+
+            Managers.Network.Send(sellItemPacket);
+
+        }, Define.UIEvent.LeftClick);
 
     }
 

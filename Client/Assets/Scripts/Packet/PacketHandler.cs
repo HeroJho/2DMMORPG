@@ -311,6 +311,7 @@ class PacketHandler
 
 		gameSceneUI.InvenUI.SetCount(item);
 		gameSceneUI.ShortcutKeyUI.RefreshUI();
+		gameSceneUI.ShopPanelUI.SetPlayerGrid();
 
 		if (item.Count <= 0)
 			Managers.Inven.Items.Remove(item.ItemDbId);
@@ -326,6 +327,7 @@ class PacketHandler
 
 		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		gameSceneUI.InvenUI.RefreshUI();
+		gameSceneUI.ShopPanelUI.SetPlayerGrid();
 		//gameSceneUI.StatUI.RefreshUI();
 		//gameSceneUI.ShortcutKeyUI.RefreshUI();
 	}

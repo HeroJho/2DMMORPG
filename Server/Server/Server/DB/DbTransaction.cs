@@ -378,6 +378,7 @@ namespace Server.DB
 
             }
         }
+        
         public static void BuyItem(Player player, ItemData iData, int count, bool stackable, GameRoom room)
         {
             // TODO : 거래같은 경우는 아이템과 돈이 한번에 같이 DB에 저장이 되야함.
@@ -386,6 +387,7 @@ namespace Server.DB
             if (player == null || iData == null || room == null)
                 return;
 
+            // 골드 충분한지 먼저 확인
             int gold = 0;
             int miusGold = 0;
             if (stackable)
@@ -399,11 +401,8 @@ namespace Server.DB
                 miusGold = -iData.gold;
                 count = 0;
             }
-
             if (gold < 0)
                 return;
-
-            player.GetGold(miusGold);
 
             RewardData rewardData = new RewardData()
             {
@@ -411,10 +410,11 @@ namespace Server.DB
                 count = count
             };
 
+            bool isSusscess = false;
             // count가 없는 일반 보상은 그냥 추가
             if (rewardData.count <= 0)
             {
-                Instance.AddNewSlot(player, rewardData, room);
+                isSusscess = Instance.AddNewSlot(player, rewardData, room);
             }
             else // count가 있다면 countMax따져서 추가
             {
@@ -436,18 +436,31 @@ namespace Server.DB
                 else
                     totalCount = item.Count + rewardData.count;
 
-                while (totalCount > consumableData.maxCount)
+                // 장비칸이 충분한지 확인
+                if(totalCount > consumableData.maxCount)
                 {
-                    totalCount -= consumableData.maxCount;
+                    int emptySlotCount = player.Inven.GetCountEmptySlot();
+                    int needSlotCount = totalCount / consumableData.maxCount;
+                    if (emptySlotCount <= needSlotCount)
+                        isSusscess = false;
+                    else
+                        isSusscess = true;
 
-                    RewardData rewardDataCopy = new RewardData()
+                    while (totalCount > consumableData.maxCount && isSusscess)
                     {
-                        probability = rewardData.probability,
-                        itemId = rewardData.itemId,
-                        count = consumableData.maxCount
-                    };
+                        totalCount -= consumableData.maxCount;
 
-                    Instance.AddNewSlot(player, rewardDataCopy, room);
+                        RewardData rewardDataCopy = new RewardData()
+                        {
+                            probability = rewardData.probability,
+                            itemId = rewardData.itemId,
+                            count = consumableData.maxCount
+                        };
+
+                        // 카운터가 넘어서 슬롯을 늘린다면
+                        Instance.AddNewSlot(player, rewardDataCopy, room);
+                    }
+
                 }
 
                 if (totalCount <= consumableData.maxCount)
@@ -460,15 +473,47 @@ namespace Server.DB
                     };
 
                     if (item == null)
-                        Instance.AddNewSlot(player, rewardDataCopy, room);
+                        isSusscess = Instance.AddNewSlot(player, rewardDataCopy, room);
                     else
+                    {
                         Instance.AddCountSlot(player, rewardDataCopy, room, item);
+                        isSusscess = true;
+                    }
+
                 }
 
             }
 
-        }
+            // 아무이상 없이 DB저장 되면 머니 적용
+            if(isSusscess)
+                player.GetGold(miusGold);
 
+        }
+        public static void SellItem(Player player, GameRoom room, Item item, int count)
+        {
+            if (player == null || room == null || item == null)
+                return;
+
+            int totalGetGold = 0;
+            ItemData itemData = null;
+            if (DataManager.ItemDict.TryGetValue(item.TemplateId, out itemData) == false)
+                return;
+
+            totalGetGold = itemData.gold * count;
+
+            // 스택이 가능한가
+            if(item.Stackable)
+            {
+                RemoveCountItem(player, item, count, room);
+                player.GetGold(totalGetGold);
+            }
+            else
+            {
+                RemoveItem(player, item, room);
+                player.GetGold(totalGetGold);
+            }
+
+        }
 
         // 땅에 떨어진 아이템 추가
         public static void AddItemPlayer(Player player, Item newItem, GameRoom room)
@@ -543,15 +588,16 @@ namespace Server.DB
         }
 
         // RewardPlayer
-        public void AddNewSlot(Player player, RewardData rewardData, GameRoom room)
+        public bool AddNewSlot(Player player, RewardData rewardData, GameRoom room)
         {
             if (player == null || rewardData == null || room == null)
-                return;
+                return false;
 
-            // TODO : 살짝 문제가 있긴 하다... > 해결
+            // 살짝 문제가 있긴 하다... > 해결
             int? slot = player.Inven.GetEmptySlot();
             if (slot == null)
-                return;
+                return false;
+
 
             // Me
             ItemDb itemDb = new ItemDb()
@@ -596,6 +642,8 @@ namespace Server.DB
                     }
                 }
             });
+
+            return true;
         }
 
         public void AddCountSlot(Player player, RewardData rewardData, GameRoom room, Item item)

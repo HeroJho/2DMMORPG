@@ -97,6 +97,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CBuyItem, MakePacket<C_BuyItem>);
             _handler.Add((ushort)MsgId.CBuyItem, PacketHandler.C_BuyItemHandler);
 
+            _onRecv.Add((ushort)MsgId.CSellItem, MakePacket<C_SellItem>);
+            _handler.Add((ushort)MsgId.CSellItem, PacketHandler.C_SellItemHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

@@ -66,6 +66,8 @@ public class UI_Shop_Shoper_Item : UI_Base
 
         }, Define.UIEvent.Exit);
 
+
+        // 아이템 사기
         BindEvent(Get<Button>((int)Buttons.BuyButton).gameObject, (e) =>
         {
             if (_itemData == null)
@@ -93,6 +95,7 @@ public class UI_Shop_Shoper_Item : UI_Base
             }
             else
             {
+                // 몇개를 팔거냐
                 buyItemPacket.Count = 1;
                 buyItemPacket.Stackable = true;
             }

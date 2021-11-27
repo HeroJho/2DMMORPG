@@ -171,6 +171,7 @@ namespace Server
             if (DataManager.ItemDict.TryGetValue(buyItemPacket.ItemId, out itemData) == false)
                 return;
 
+            // 중첩이 가능한 아이템이냐
             int gold = 0;
             if (buyItemPacket.Stackable)
                 gold = player.Info.Gold - (itemData.gold * buyItemPacket.Count);
@@ -187,7 +188,30 @@ namespace Server
 
         }
 
-    
-    }
+        public void HandleSellItem(Player player, C_SellItem sellItemPacket)
+        {
+            GameRoom room = player.Room;
+            if (player == null || room == null)
+                return;
 
+            // 해당 아이템이 있는지
+            Item item = player.Inven.Get(sellItemPacket.ItemDbId);
+            if (item == null)
+                return;
+
+            // 스택이 가능한지
+            if(item.Stackable)
+            {
+                // 갯수가 충분한지
+                if (item.Count < sellItemPacket.Count)
+                    return;
+            }
+
+            // 적용
+            DbTransaction.SellItem(player, room, item, sellItemPacket.Count);
+
+        }
+
+    }
+    
 }

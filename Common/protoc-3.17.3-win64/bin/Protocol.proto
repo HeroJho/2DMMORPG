@@ -65,6 +65,7 @@ enum MsgId{
     S_CHANGE_GOLD = 58;
     S_SEND_MASSAGE = 59;
     C_BUY_ITEM = 60;
+    C_SELL_ITEM = 61;
 }
 
 enum CreatureState{
@@ -467,6 +468,11 @@ message C_BuyItem{
     int32 itemId = 1;
     int32 count = 2;
     bool stackable = 3;
+}
+
+message C_SellItem{
+    int32 itemDbId = 1;
+    int32 count = 2;
 }
 
 

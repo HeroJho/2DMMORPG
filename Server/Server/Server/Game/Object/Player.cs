@@ -14,6 +14,7 @@ namespace Server
         public QuestManager Quest { get; private set; }
         public ObstacleManager Obstacle { get; private set; }
         public Communication Communication { get; private set; }
+        public Inventory Inven { get; private set; }
         public JobClassType JobClassType 
         { 
             get
@@ -26,7 +27,6 @@ namespace Server
             }
         }
 
-        public Inventory Inven { get; private set; } = new Inventory();
 
         private int Level
         {
@@ -85,6 +85,7 @@ namespace Server
         {
             ObjectType = GameObjectType.Player;
             JobClassType = JobClassType.None;
+            Inven = new Inventory(this);
             Vision = new VisionCube(this);
             Skill = new SkillManager(this);
             Quest = new QuestManager(this);
