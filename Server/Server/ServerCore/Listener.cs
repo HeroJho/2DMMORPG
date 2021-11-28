@@ -28,22 +28,37 @@ namespace ServerCore
         void RegisterAccept(SocketAsyncEventArgs args)
         {
             args.AcceptSocket = null;
+            try
+            {
+                bool pending = _listenSocket.AcceptAsync(args);
+                if (pending == false)
+                    OnAcceptCompleted(null, args);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
-            bool pending = _listenSocket.AcceptAsync(args);
-            if (pending == false)
-                OnAcceptCompleted(null, args);
         }
 
         void OnAcceptCompleted(object sender, SocketAsyncEventArgs args)
         {
-            if (args.SocketError == SocketError.Success)
+            try
             {
-                Session session = _sessionFactory.Invoke();
-                session.Start(args.AcceptSocket);
-                session.OnConnected(args.AcceptSocket.RemoteEndPoint);
+                if (args.SocketError == SocketError.Success)
+                {
+                    Session session = _sessionFactory.Invoke();
+                    session.Start(args.AcceptSocket);
+                    session.OnConnected(args.AcceptSocket.RemoteEndPoint);
+                }
+                else
+                    Console.WriteLine(args.SocketError.ToString());
             }
-            else
-                Console.WriteLine(args.SocketError.ToString());
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
 
             RegisterAccept(args);
         }

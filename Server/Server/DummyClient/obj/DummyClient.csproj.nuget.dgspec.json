@@ -26,6 +26,68 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj": {
+                "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Google.Protobuf": {
+              "target": "Package",
+              "version": "[3.17.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj",
+        "projectName": "ServerCore",
+        "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj",
+        "packagesPath": "C:\\Users\\thehe\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\thehe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
             "projectReferences": {}
           }
         },

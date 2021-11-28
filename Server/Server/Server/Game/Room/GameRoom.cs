@@ -106,6 +106,8 @@ namespace Server
             }
         }
 
+        // TEST
+        Random _rand = new Random();
         public void EnterGame(GameObject gameObject)
         {
             if (gameObject == null)
@@ -117,6 +119,22 @@ namespace Server
             {
                 case GameObjectType.Player:
                     {
+                        // TEST : ChooseDummyPos
+                        if (true)
+                        {
+                            Vector2Int respawnPos;
+                            while (true)
+                            {
+                                respawnPos.x = _rand.Next(Map.MinX, Map.MaxX + 1);
+                                respawnPos.y = _rand.Next(Map.MinY, Map.MaxY + 1);
+                                if (Map.Find(respawnPos) == null)
+                                {
+                                    gameObject.CellPos = respawnPos;
+                                    break;
+                                }
+                            }
+                        }
+
                         Player player = (Player)gameObject;
                         _players.Add(player.Id, player);
                         player.Room = this;
@@ -469,12 +487,37 @@ namespace Server
             }            
         }
 
-        public Player FindPlayer(Func<Player, bool> condition)
+        // 너무 느림 >> 병목 가능성
+        Player FindPlayer(Func<Player, bool> condition)
         {
             foreach(Player player in _players.Values)
             {
                 if (condition.Invoke(player))
                     return player;
+            }
+
+            return null;
+        }
+
+        public Player FindClosestPlayer(Vector2Int pos, int range)
+        {
+            List<Player> players = GetAdjacentPlayers(pos, range);
+
+            players.Sort((left, right) =>
+            {
+                int leftDist = (left.CellPos - pos).cellDistFromZero;
+                int rightDist = (right.CellPos - pos).cellDistFromZero;
+                return leftDist - rightDist;
+            });
+
+            foreach(Player player in players)
+            {
+                List<Vector2Int> path = Map.FindPath(pos, player.CellPos, checkObject: true);
+                if (path.Count < 2 || path.Count > range)
+                    if (path.Count < 2 || path.Count > range)
+                        continue;
+
+                return player;
             }
 
             return null;
@@ -502,20 +545,41 @@ namespace Server
 
             return Zones[y, x];
         }
+        public Zone GetZone(int indexY, int indexX)
+        {
+            if (indexX < 0 || indexX >= Zones.GetLength(1))
+                return null;
+            if (indexY < 0 || indexY >= Zones.GetLength(0))
+                return null;
 
-        public List<Zone> GetAdiacentZones(Vector2Int cellPos, int cells = VisionCells)
+            return Zones[indexY, indexX];
+        }
+
+        public List<Zone> GetAdiacentZones(Vector2Int cellPos, int range = VisionCells)
         {
             HashSet<Zone> zones = new HashSet<Zone>();
 
-            int[] delta = new int[2] { -cells, +cells };
-            foreach (int dy in delta)
-            {
-                foreach (int dx in delta)
-                {
-                    int y = cellPos.y + dy;
-                    int x = cellPos.x + dx;
-                    Zone zone = GetZone(new Vector2Int(x, y));
+            int maxY = cellPos.y + range;
+            int minY = cellPos.y - range;
+            int maxX = cellPos.x + range;
+            int minX = cellPos.x - range;
 
+            // 좌 상단
+            Vector2Int leftTop = new Vector2Int(minX, maxY);
+            int minIndexY = (Map.MaxY - leftTop.y) / ZoneCells;
+            int minIndexX = (leftTop.x - Map.MinX) / ZoneCells;
+
+            // 우 하단
+            Vector2Int rightBot = new Vector2Int(maxX, minY);
+            int maxIndexY = (Map.MaxY - rightBot.y) / ZoneCells;
+            int maxIndexX = (rightBot.x - Map.MinX) / ZoneCells;
+
+
+            for (int x = minIndexX; x <= maxIndexX; x++)
+            {
+                for (int y = minIndexY; y <= maxIndexY; y++)
+                {
+                    Zone zone = GetZone(y, x);
                     // 범위에 벗어나면 zone null반환
                     if (zone == null)
                         continue;
@@ -525,6 +589,12 @@ namespace Server
             }
 
             return zones.ToList();
+        }
+
+        public List<Player> GetAdjacentPlayers(Vector2Int pos, int range)
+        {
+            List<Zone> zones = GetAdiacentZones(pos, range);
+            return zones.SelectMany(z => z.Players).ToList();
         }
 
         public void ChangeRoomAllPlayer()

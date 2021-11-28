@@ -73,12 +73,7 @@ namespace Server
                 return;
             _nextSearchTick = Environment.TickCount64 + 1000; // 초당 실행
 
-            Player target = Room.FindPlayer(p =>
-            {
-
-                Vector2Int dir = p.CellPos - CellPos;
-                return dir.cellDistFromZero <= _searchCellDist && p.State != CreatureState.Dead;
-            });
+            Player target = Room.FindClosestPlayer(CellPos, _searchCellDist);
 
             if (target == null)
                 return;

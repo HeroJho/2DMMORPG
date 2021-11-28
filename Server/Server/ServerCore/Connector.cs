@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace ServerCore
 {
@@ -10,17 +11,24 @@ namespace ServerCore
     {
         Func<Session> _sessionFactory;
 
-        public void Connect(IPEndPoint endPoint, Func<Session> sessionFactory)
+        public void Connect(IPEndPoint endPoint, Func<Session> sessionFactory, int count = 1)
         {
-            Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            _sessionFactory = sessionFactory;
+            for (int i = 0; i < count; i++)
+            {
+                Socket socket = new Socket(endPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                _sessionFactory = sessionFactory;
 
-            SocketAsyncEventArgs args = new SocketAsyncEventArgs();
-            args.Completed += OnConnectCompleted;
-            args.RemoteEndPoint = endPoint;
-            args.UserToken = socket;
+                SocketAsyncEventArgs args = new SocketAsyncEventArgs();
+                args.Completed += OnConnectCompleted;
+                args.RemoteEndPoint = endPoint;
+                args.UserToken = socket;
 
-            RegisterConnect(args);
+                RegisterConnect(args);
+
+                //TEMP
+                Thread.Sleep(10);
+            }
+
         }
 
         void RegisterConnect(SocketAsyncEventArgs args)
@@ -29,23 +37,40 @@ namespace ServerCore
             if (socket == null)
                 return;
 
-            bool pending = socket.ConnectAsync(args);
-            if (pending == false)
-                OnConnectCompleted(null, args);
+            try
+            {
+                bool pending = socket.ConnectAsync(args);
+                if (pending == false)
+                    OnConnectCompleted(null, args);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
         }
 
         void OnConnectCompleted(object obj, SocketAsyncEventArgs args)
         {
-            if (args.SocketError == SocketError.Success)
+
+            try
             {
-                Session session = _sessionFactory.Invoke();
-                session.Start(args.ConnectSocket);
-                session.OnConnected(args.RemoteEndPoint);
+                if (args.SocketError == SocketError.Success)
+                {
+                    Session session = _sessionFactory.Invoke();
+                    session.Start(args.ConnectSocket);
+                    session.OnConnected(args.RemoteEndPoint);
+                }
+                else
+                {
+                    Console.WriteLine($"OnConnectCompleted Fail: {args.SocketError}");
+                }
             }
-            else
+            catch (Exception e)
             {
-                Console.WriteLine($"OnConnectCompleted Fail: {args.SocketError}");
+                Console.WriteLine(e);
             }
+
         }
     }
 }

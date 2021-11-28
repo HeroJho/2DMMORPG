@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "4w3GrvjZZ4n+1HWvm6QDqpLMRUsFZzGI6EwGjt7leG07b6PHm7l1zK3c9ykfZ99mytA2dfIf9/wZBzfxvyUaUA==",
+  "dgSpecHash": "bhuiIR+Oa7ilp6DWERUT03Ic8FYjrWuxmH3EM8/K4Gr3aRNqYuF4qGT/wn8u0BpzP4byA5pttv/0OQDUB0NRsA==",
   "success": true,
   "projectFilePath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\DummyClient\\DummyClient.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\thehe\\.nuget\\packages\\google.protobuf\\3.17.3\\google.protobuf.3.17.3.nupkg.sha512",
+    "C:\\Users\\thehe\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\thehe\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512"
+  ],
   "logs": []
 }

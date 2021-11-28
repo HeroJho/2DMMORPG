@@ -7,7 +7,11 @@ C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\bin\Debug
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.csprojAssemblyReference.cache
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.AssemblyInfoInputs.cache
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.AssemblyInfo.cs
-C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.csproj.CoreCompileInputs.cache
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.dll
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.pdb
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.genruntimeconfig.cache
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\bin\Debug\netcoreapp3.1\ServerCore.dll
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\bin\Debug\netcoreapp3.1\ServerCore.pdb
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.csproj.CopyComplete
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\bin\Debug\netcoreapp3.1\Google.Protobuf.dll
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.csproj.CoreCompileInputs.cache
