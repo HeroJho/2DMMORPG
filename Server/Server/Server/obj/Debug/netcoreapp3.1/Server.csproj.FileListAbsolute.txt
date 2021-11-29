@@ -144,3 +144,5 @@ C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\Server\obj\Debug\netc
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\Server\obj\Debug\netcoreapp3.1\Server.dll
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\Server\obj\Debug\netcoreapp3.1\Server.pdb
 C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\Server\obj\Debug\netcoreapp3.1\Server.genruntimeconfig.cache
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\Server\bin\Debug\netcoreapp3.1\SharedDB.dll
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\Server\bin\Debug\netcoreapp3.1\SharedDB.pdb

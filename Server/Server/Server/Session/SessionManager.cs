@@ -13,6 +13,18 @@ namespace Server
         Dictionary<int, ClientSession> _sessions = new Dictionary<int, ClientSession>();
         int _sessionId = 0;
 
+        public int GetBusyScore()
+        {
+            int count = 0;
+
+            lock (_lock)
+            {
+                count = _sessions.Count;
+            }
+            
+            return count / 100;
+        }
+
         public List<ClientSession> GetSessions()
         {
             List<ClientSession> sessions = new List<ClientSession>();

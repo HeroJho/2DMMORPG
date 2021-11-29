@@ -1537,6 +1537,19 @@
         "runtime": {
           "bin/placeholder/ServerCore.dll": {}
         }
+      },
+      "SharedDB/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.8"
+        },
+        "compile": {
+          "bin/placeholder/SharedDB.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SharedDB.dll": {}
+        }
       }
     }
   },
@@ -5721,6 +5734,11 @@
       "type": "project",
       "path": "../ServerCore/ServerCore.csproj",
       "msbuildProject": "../ServerCore/ServerCore.csproj"
+    },
+    "SharedDB/1.0.0": {
+      "type": "project",
+      "path": "../SharedDB/SharedDB.csproj",
+      "msbuildProject": "../SharedDB/SharedDB.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5731,7 +5749,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.9",
       "Microsoft.Extensions.Logging.Console >= 5.0.0",
       "Newtonsoft.Json >= 13.0.1",
-      "ServerCore >= 1.0.0"
+      "ServerCore >= 1.0.0",
+      "SharedDB >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -5762,6 +5781,9 @@
           "projectReferences": {
             "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj": {
               "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\ServerCore\\ServerCore.csproj"
+            },
+            "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\SharedDB\\SharedDB.csproj": {
+              "projectPath": "C:\\Users\\thehe\\OneDrive\\바탕 화면\\GitHub\\Server\\Server\\SharedDB\\SharedDB.csproj"
             }
           }
         }

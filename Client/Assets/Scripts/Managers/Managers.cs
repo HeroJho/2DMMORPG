@@ -5,7 +5,7 @@ using UnityEngine;
 public class Managers : MonoBehaviour
 {
     static Managers s_instance;
-    static Managers Instance { get { Init(); return s_instance; } }
+    static public Managers Instance { get { Init(); return s_instance; } }
 
     #region Contents
     InventoryManager _inven = new InventoryManager();
@@ -17,6 +17,7 @@ public class Managers : MonoBehaviour
     CutSceneManager _cutScene;
     CommunicationManager _communication = new CommunicationManager();
     ChatManager _chat = new ChatManager();
+    WebManager _web = new WebManager();
 
 
     public static InventoryManager Inven { get { return Instance._inven; } }
@@ -28,6 +29,7 @@ public class Managers : MonoBehaviour
     public static CutSceneManager CutScene { get { return Instance._cutScene; } set { Instance._cutScene = value; } }
     public static CommunicationManager Communication { get { return Instance._communication; } }
     public static ChatManager Chat { get { return Instance._chat; } }
+    public static WebManager Web { get { return Instance._web; } }
 
     #endregion
 
@@ -46,10 +48,14 @@ public class Managers : MonoBehaviour
 
     void Start()
     {
-        _cutScene = GameObject.Find("CutScene").GetComponent<CutSceneManager>();
-        Init();
+        GameObject cutobj = GameObject.Find("CutScene");
+        if(cutobj != null)
+        {
+            _cutScene = cutobj.GetComponent<CutSceneManager>();
+            CutScene.Init();
+        }
 
-        CutScene.Init();
+        Init();
     }
 
     void Update()
@@ -71,7 +77,6 @@ public class Managers : MonoBehaviour
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
 
-            s_instance._network.Init();
             Data.LoadData();
 
         }

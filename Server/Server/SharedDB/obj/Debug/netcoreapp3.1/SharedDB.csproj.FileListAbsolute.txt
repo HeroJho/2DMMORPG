@@ -1,0 +1,12 @@
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.deps.json
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.dll
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.csprojAssemblyReference.cache
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.AssemblyInfoInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.AssemblyInfo.cs
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.runtimeconfig.json
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.runtimeconfig.dev.json
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.genruntimeconfig.cache
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\bin\Debug\netcoreapp3.1\SharedDB.pdb
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.csproj.CoreCompileInputs.cache
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.dll
+C:\Users\thehe\OneDrive\바탕 화면\GitHub\Server\Server\SharedDB\obj\Debug\netcoreapp3.1\SharedDB.pdb

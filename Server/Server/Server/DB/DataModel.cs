@@ -12,7 +12,7 @@ namespace Server.DB
         // Convention 방법 PK설정 (클래스 이름 + Id)
         public int AccountDbId { get; set; }
         public string AccountName { get; set; }
-        // 한 계정에 여러개의 캐릭터 1 : M 관계
+        
         public ICollection<PlayerDb> Players { get; set; }
     }
 
