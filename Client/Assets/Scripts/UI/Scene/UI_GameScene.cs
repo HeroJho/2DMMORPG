@@ -25,6 +25,7 @@ public class UI_GameScene : UI_Scene
     public UI_SceneChange ChangeUI { get; private set; }
     public UI_ShopPanel ShopPanelUI { get; private set; }
     public UI_Massage MassageUI { get; private set; }
+    public UI_SelectPlayer SelectUI { get; private set; }
 
     public UI_CanClassUp ClassUp { get; private set; }
     public UI_DescriptionBox DescriptionBox { get; private set; }
@@ -51,6 +52,7 @@ public class UI_GameScene : UI_Scene
         ChangeUI = GetComponentInChildren<UI_SceneChange>();
         ShopPanelUI = GetComponentInChildren<UI_ShopPanel>();
         MassageUI = GetComponentInChildren<UI_Massage>();
+        SelectUI = GetComponentInChildren<UI_SelectPlayer>();
 
         ClassUp = GetComponentInChildren<UI_CanClassUp>();
         DescriptionBox = GetComponentInChildren<UI_DescriptionBox>();
@@ -64,6 +66,8 @@ public class UI_GameScene : UI_Scene
         DungunUI.gameObject.SetActive(false);
         ShopPanelUI.gameObject.SetActive(false);
         MassageUI.gameObject.SetActive(false);
+        SelectUI.gameObject.SetActive(false);
+
     }
 
     void BindEvent()

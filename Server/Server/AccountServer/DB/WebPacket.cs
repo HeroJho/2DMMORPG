@@ -34,7 +34,7 @@ public class ServerInfo
 public class LoginAccountPacketRes
 {
     public bool LoginOk { get; set; }
-    public int AccountId { get; set; }
+    public string AccountId { get; set; }
     public int Token { get; set; }
     public List<ServerInfo> ServerList { get; set; } = new List<ServerInfo>();
 }

@@ -16,6 +16,8 @@ public class WebManager
 
     IEnumerator CoSendWebRequest<T>(string url, string method, object obj, Action<T> res)
     {
+        UI_LoginScene loginScene = Managers.UI.SceneUI as UI_LoginScene;
+
         string sendUrl = $"{BaseUrl}/{url}";
 
         byte[] jsonBytes = null;
@@ -34,11 +36,13 @@ public class WebManager
             uwr.SetRequestHeader("Content-Type", "application/json");
 
             // 서버가 다 처리를 하고 응답이 올 때 까지 yield 기다린다.
+            loginScene.MassageUI.WriteMassage("잠시만 기다려주세요...", true);
             yield return uwr.SendWebRequest();
 
             if(uwr.isNetworkError || uwr.isHttpError)
             {
                 Debug.Log(uwr.error);
+                loginScene.MassageUI.WriteMassage("서버와 연결이 원활하지 않습니다!", false);
             }
             else
             {

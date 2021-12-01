@@ -22,6 +22,11 @@ public class UI_SceneChange : UI_Base
         StartCoroutine("PadeOut");
     }
 
+    public void PadeIns()
+    {
+        StartCoroutine("PadeInNoChange");
+    }
+
     IEnumerator PadeIn()
     {
         float a = 0;
@@ -51,4 +56,14 @@ public class UI_SceneChange : UI_Base
         }
     }
 
+    IEnumerator PadeInNoChange()
+    {
+        float a = 0;
+        while (a <= 1.0f)
+        {
+            _image.color = new Color(_image.color.r, _image.color.g, _image.color.b, a += 0.1f);
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
 }

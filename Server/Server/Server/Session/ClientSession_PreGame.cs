@@ -26,7 +26,8 @@ namespace Server
 
             using (AppDbContext db = new AppDbContext())
             {
-                // AccountName을 UniqueId로 사용
+                // AccountName은 ID
+                // 패킷 UniqueId는 로그인 Db에서 가져온 ID임
                 AccountDb findAccount = db.Accounts
                     .Include(a => a.Players)
                     .Where(a => a.AccountName == loginPacket.UniqueId).FirstOrDefault();
@@ -78,8 +79,11 @@ namespace Server
                     // 로비로 이동
                     ServerState = PlayerServerState.ServerStateLobby;
                 }
-                else
-                {
+                else 
+                { 
+                    // 만약 해당 서버에서 해당 AccountName(ID)가 없다면 new해줌
+                    // 왜냐하면 서버마다 해당 아이디의 캐릭터가 없을 수도 있으니깐
+
                     AccountDb newAccount = new AccountDb() { AccountName = loginPacket.UniqueId };
                     db.Accounts.Add(newAccount);
                     bool success = db.SaveChangesEx();

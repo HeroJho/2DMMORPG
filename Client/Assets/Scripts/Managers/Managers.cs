@@ -86,4 +86,20 @@ public class Managers : MonoBehaviour
     {
         UI.Clear();
     }
+
+    public void ChangeScene(ServerInfo info)
+    {
+        StartCoroutine("Change", info);
+    }
+    IEnumerator Change(ServerInfo info)
+    {
+        UI_LoginScene loginScene = UI.SceneUI as UI_LoginScene;
+        loginScene.ChangeUI.PadeIns();
+        loginScene.MassageUI.WriteMassage("접속 중입니다...", true);
+
+        yield return new WaitForSeconds(2f);
+
+        Network.ConnectToGame(info);
+        Scene.LoadScene(Define.Scene.Game);
+    }
 }

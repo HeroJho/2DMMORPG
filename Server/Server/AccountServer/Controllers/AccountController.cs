@@ -41,6 +41,8 @@ public class AccountController : ControllerBase
                 password = req.Password
             });
 
+            // TODO : TCP서버 DB의 Account에도 추가 >> 서버에서 이름(ID)을 비교해서 캐릭정보 찾음
+
             // 찰나의 순간 닉네임 중복
             bool success = _context.SaveChangeEx();
             res.CreateOk = true;
@@ -73,7 +75,7 @@ public class AccountController : ControllerBase
         {
             res.LoginOk = true;
 
-            // 토큰 발급
+            #region 토큰 발급
             DateTime expired = DateTime.UtcNow;
             expired.AddSeconds(600); // 600초 후에 만료
 
@@ -95,8 +97,9 @@ public class AccountController : ControllerBase
                 _shared.Add(tokenDb);
                 _shared.SaveChangeEx();
             }
+            #endregion
 
-            res.AccountId = account.AccountDbId;
+            res.AccountId = account.AccountName;
             res.Token = tokenDb.Token;
             res.ServerList = new List<ServerInfo>();
 

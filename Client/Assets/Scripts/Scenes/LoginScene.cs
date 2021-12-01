@@ -17,6 +17,9 @@ public class LoginScene : BaseScene
         Screen.SetResolution(960, 540, false);
 
         _sceneUI = Managers.UI.ShowSceneUI<UI_LoginScene>();
+
+        UI_LoginScene loginSceneUI = Managers.UI.SceneUI as UI_LoginScene;
+        loginSceneUI.ChangeUI.ArrivedRoom();
     }
 
     public override void Clear()

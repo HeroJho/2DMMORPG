@@ -33,7 +33,7 @@ public class ServerInfo
 public class LoginAccountPacketRes
 {
     public bool LoginOk;
-    public int AccountId;
+    public string AccountId;
     public int Token;
     public List<ServerInfo> ServerList = new List<ServerInfo>();
 }

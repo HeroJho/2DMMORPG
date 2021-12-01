@@ -18,6 +18,9 @@ public class UI_LoginScene : UI_Scene
         LoginButton
     }
 
+    public UI_SceneChange ChangeUI { get; private set; }
+    public UI_Massage MassageUI { get; private set; }
+
     public override void Init()
     {
         base.Init();
@@ -26,6 +29,11 @@ public class UI_LoginScene : UI_Scene
         Bind<Button>(typeof(Buttons));
 
         BindEvent();
+
+        ChangeUI = GetComponentInChildren<UI_SceneChange>();
+        MassageUI = GetComponentInChildren<UI_Massage>();
+
+        MassageUI.gameObject.SetActive(false);
     }
 
     public void BindEvent()
@@ -50,6 +58,10 @@ public class UI_LoginScene : UI_Scene
         Managers.Web.SendPostRequest<CreateAccountPacketRes>("account/create", packet, (res) =>
         {
             Debug.Log(res.CreateOk);
+            if(res.CreateOk)
+                MassageUI.WriteMassage("계정을 만들었습니다!", true);
+            else
+                MassageUI.WriteMassage("중복된 계정입니다!", false);
 
             Get<GameObject>((int)GameObjects.Input_ID).GetComponent<InputField>().text = "";
             Get<GameObject>((int)GameObjects.Input_Password).GetComponent<InputField>().text = "";
@@ -74,12 +86,18 @@ public class UI_LoginScene : UI_Scene
             Get<GameObject>((int)GameObjects.Input_ID).GetComponent<InputField>().text = "";
             Get<GameObject>((int)GameObjects.Input_Password).GetComponent<InputField>().text = "";
 
-            // 로그인에 성공하면 씬이동
+            // 로그인에 성공하면 서버 선택창 이동
             if (res.LoginOk)
             {
-                // 서버와 연결
-                Managers.Network.ConnectToGame();
-                Managers.Scene.LoadScene(Define.Scene.Game);
+                Managers.Network.AccountId = res.AccountId;
+                Managers.Network.Token = res.Token;
+
+                UI_SelectServerPopup popup = Managers.UI.ShowPopupUI<UI_SelectServerPopup>();
+                popup.SetServers(res.ServerList);
+            }
+            else
+            {
+                MassageUI.WriteMassage("로그인에 실패했습니다!\n아이디와 비밀번호를 확인해 주세요.", false);
             }
 
         });

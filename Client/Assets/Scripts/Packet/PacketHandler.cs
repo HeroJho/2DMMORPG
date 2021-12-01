@@ -3,6 +3,7 @@ using Google.Protobuf.Protocol;
 using ServerCore;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 class PacketHandler
@@ -148,7 +149,7 @@ class PacketHandler
 		C_Login loginPacket = new C_Login();
 		// Unique한 값을 뱉음
 		string path = Application.dataPath;
-		loginPacket.UniqueId = path.GetHashCode().ToString();
+		loginPacket.UniqueId = Managers.Network.AccountId;
 		Managers.Network.Send(loginPacket);
 	}
 
@@ -162,17 +163,29 @@ class PacketHandler
 		// 해당 식별자로는 캐릭터가 없다
 		if(loginPacket.Players == null || loginPacket.Players.Count == 0)
         {
-			C_CreatePlayer createPlayerPacket = new C_CreatePlayer();
-			createPlayerPacket.Name = $"Player_{Random.Range(0, 10000).ToString("0000")}";
-			Managers.Network.Send(createPlayerPacket);
+		    // 캐릭터 선택창
+			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+			gameSceneUI.SelectUI.gameObject.SetActive(true);
+			gameSceneUI.SelectUI.RefreshUI(loginPacket.Players.ToList());
+			gameSceneUI.ChangeUI.ArrivedRoom();
+
+			// 캐릭터를 만든다
+			//C_CreatePlayer createPlayerPacket = new C_CreatePlayer();
+			//createPlayerPacket.Name = $"Player_{Random.Range(0, 10000).ToString("0000")}";
+			//Managers.Network.Send(createPlayerPacket);
 		}
         else
         {
-			// 무조건 첫번째 캐릭터로 로그인
-			LobbyPlayerInfo info = loginPacket.Players[0];
-			C_EnterGame enterGamePacket = new C_EnterGame();
-			enterGamePacket.Name = info.Name;
-			Managers.Network.Send(enterGamePacket);
+			// 캐릭터 선택창
+			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+			gameSceneUI.SelectUI.gameObject.SetActive(true);
+			gameSceneUI.SelectUI.RefreshUI(loginPacket.Players.ToList());
+			gameSceneUI.ChangeUI.ArrivedRoom();
+
+			//LobbyPlayerInfo info = loginPacket.Players[0];
+			//C_EnterGame enterGamePacket = new C_EnterGame();
+			//enterGamePacket.Name = info.Name;
+			//Managers.Network.Send(enterGamePacket);
         }
 	}
 
@@ -192,6 +205,7 @@ class PacketHandler
 			C_EnterGame enterGamePacket = new C_EnterGame();
 			enterGamePacket.Name = createPlayerPacket.Player.Name;
 			Managers.Network.Send(enterGamePacket);
+
         }
     }
 
@@ -524,7 +538,6 @@ class PacketHandler
 			gameSceneUI.MassageUI.WriteCount(true);
 		else
 			gameSceneUI.MassageUI.WriteMassage(massagePacket.Str, massagePacket.IsGreen);
-
 	}
 
 }
