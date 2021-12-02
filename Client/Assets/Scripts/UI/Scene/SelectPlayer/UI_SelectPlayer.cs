@@ -2,19 +2,93 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_SelectPlayer : UI_Base
 {
-    const int MAXCHAR = 6;
-    private List<UI_SelectPlayer_Item> _infos = new List<UI_SelectPlayer_Item>();
+    enum GameObjects
+    {
+        ShowingInfoPanel,
+        MakingPlayerPanel
+    }
+    enum Texts
+    {
+        InfoNameText,
+        LevelValueText,
+        JobClassText,
+        AttackValueText,
+        DefenceValueText,
+        HpValueText,
+        MpValueText,
+        GoldValueText
+    }
+    enum Buttons
+    {
+        MakingPlayerButton,
+        StartingButton,
+        MakingButton
+    }
+    enum InputFields
+    {
+        NameInput
+    }
+
+
+    [SerializeField]
+    private List<UI_SelectPlayer_Item> _items = new List<UI_SelectPlayer_Item>();
+    private UI_SelectPlayer_Item _selectedItem;
 
     public override void Init()
     {
-        _infos.Clear();
+        Bind<GameObject>(typeof(GameObjects));
+        Bind<Text>(typeof(Texts));
+        Bind<Button>(typeof(Buttons));
+        Bind<InputField>(typeof(InputFields));
 
-        GameObject grid = transform.Find("Grid").gameObject;
-        foreach (Transform child in grid.transform)
-            Destroy(child.gameObject);
+        BindEvent();
+
+        Get<GameObject>((int)GameObjects.ShowingInfoPanel).SetActive(false);
+        Get<GameObject>((int)GameObjects.MakingPlayerPanel).gameObject.SetActive(false);
+    }
+
+    private void BindEvent()
+    {
+        BindEvent(Get<Button>((int)Buttons.StartingButton).gameObject, (e) =>
+        {
+            // TODO : 방 입장
+
+
+        }, Define.UIEvent.LeftClick);
+
+        BindEvent(Get<Button>((int)Buttons.MakingPlayerButton).gameObject, (e) =>
+        {
+            // 닉네임 입력창
+            Get<GameObject>((int)GameObjects.MakingPlayerPanel).gameObject.SetActive(true);
+
+            ClearSelectPlayer();
+            Get<GameObject>((int)GameObjects.ShowingInfoPanel).gameObject.SetActive(false);
+
+        }, Define.UIEvent.LeftClick);
+
+        BindEvent(Get<Button>((int)Buttons.MakingButton).gameObject, (e) =>
+        {
+            C_CreatePlayer createPlayerPacket = new C_CreatePlayer();
+            string name = Get<InputField>((int)InputFields.NameInput).text;
+            if(name == null || name == "")
+            {
+                (Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("닉네임을 입력해 주세요.", false);
+                return;
+            }
+            else
+                (Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("생성 중입니다...", true);
+
+            createPlayerPacket.Name = name;
+            // 전송한다
+            //Managers.Network.Send(createPlayerPacket);
+            Debug.Log(name);
+
+        }, Define.UIEvent.LeftClick);
+
     }
 
     public void RefreshUI(List<LobbyPlayerInfo> infos)
@@ -22,18 +96,63 @@ public class UI_SelectPlayer : UI_Base
         if (infos.Count < 0)
             return;
 
-        GameObject grid = transform.Find("Grid").gameObject;
-        foreach (Transform child in grid.transform)
-            Destroy(child.gameObject);
-
+        int count = -1;
         foreach (LobbyPlayerInfo info in infos)
         {
-            GameObject go = Managers.Resource.Instantiate("UI/Scene/SelectPlayer/UI_SelectPlayer_Item", grid.transform);
-            UI_SelectPlayer_Item infoUI = go.GetComponent<UI_SelectPlayer_Item>();
-            _infos.Add(infoUI);
-            infoUI.RefreshUI(info);
+            ++count;
+            _items[count].RefreshUI(info);
+        }
+
+        if (count == _items.Count - 1)
+            return;
+
+        ++count;
+        for (int i = count; i < _items.Count; i++)
+        {
+            _items[i].RefreshUI(null);
         }
 
     }
 
+    public void SelectPlayer(UI_SelectPlayer_Item aItem)
+    {
+        _selectedItem = aItem;
+
+        foreach (UI_SelectPlayer_Item item in _items)
+        {
+            if (item.Info == null)
+                continue;
+            item.StopSelectedAnim();
+        }
+
+
+        _selectedItem.PlaySelectedAnim();
+        LobbyPlayerInfo info = _selectedItem.Info;
+
+        Get<Text>((int)Texts.InfoNameText).text = "이름: " + info.Name;
+        Get<Text>((int)Texts.LevelValueText).text = "레벨: " + info.StatInfo.Level;
+        Get<Text>((int)Texts.JobClassText).text = "직업: " + info.StatInfo.JobClassType;
+        Get<Text>((int)Texts.AttackValueText).text = "공격력: " + info.StatInfo.Attack;
+        Get<Text>((int)Texts.DefenceValueText).text = "방어력: " + info.StatInfo.Defence;
+        Get<Text>((int)Texts.HpValueText).text = "체력: " + info.StatInfo.MaxHp;
+        Get<Text>((int)Texts.MpValueText).text = "마나: " + info.StatInfo.MaxMp;
+        Get<Text>((int)Texts.GoldValueText).text = "골드: " + info.Gold;
+
+        Get<GameObject>((int)GameObjects.ShowingInfoPanel).SetActive(true);
+
+    }
+
+    public void ClearSelectPlayer()
+    {
+        foreach (UI_SelectPlayer_Item item in _items)
+        {
+            if (item.Info == null)
+                continue;
+            item.StopSelectedAnim();
+        }
+
+        _selectedItem = null;
+    }
+
 }
+

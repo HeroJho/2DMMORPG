@@ -158,8 +158,7 @@ class PacketHandler
 		S_Login loginPacket = (S_Login)packet;
 		Debug.Log($"LoginOk({loginPacket.LoginOk})");
 
-		// TODO : 로비 UI에서 캐릭터 보여주고, 선택할 수 있도록
-
+		//로비 UI에서 캐릭터 보여주고, 선택할 수 있도록
 		// 해당 식별자로는 캐릭터가 없다
 		if(loginPacket.Players == null || loginPacket.Players.Count == 0)
         {
@@ -169,10 +168,6 @@ class PacketHandler
 			gameSceneUI.SelectUI.RefreshUI(loginPacket.Players.ToList());
 			gameSceneUI.ChangeUI.ArrivedRoom();
 
-			// 캐릭터를 만든다
-			//C_CreatePlayer createPlayerPacket = new C_CreatePlayer();
-			//createPlayerPacket.Name = $"Player_{Random.Range(0, 10000).ToString("0000")}";
-			//Managers.Network.Send(createPlayerPacket);
 		}
         else
         {
