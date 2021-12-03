@@ -27,6 +27,8 @@ namespace Server
             }
         }
 
+        // TEST
+        public bool IsDummy { get; set; } = true;
 
         private int Level
         {

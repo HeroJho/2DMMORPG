@@ -89,16 +89,23 @@ class PacketHandler
 		S_CreatePlayer createPlayerPacket = (S_CreatePlayer)packet;
 		ServerSession serverSession = (ServerSession)session;
 
-		if(createPlayerPacket.Player == null)
+		if(createPlayerPacket.Players == null)
         {
 
         }
         else
 		{
 			C_EnterGame enterGamePacket = new C_EnterGame();
-			enterGamePacket.Name = createPlayerPacket.Player.Name;
+			enterGamePacket.Name = createPlayerPacket.Players[0].Name;
 			serverSession.Send(enterGamePacket);
         }
+	}
+
+	public static void S_DeletePlayerHandler(PacketSession session, IMessage packet)
+	{
+		S_CreatePlayer createPlayerPacket = (S_CreatePlayer)packet;
+		ServerSession serverSession = (ServerSession)session;
+
 	}
 
 	public static void S_ItemListHandler(PacketSession session, IMessage packet)

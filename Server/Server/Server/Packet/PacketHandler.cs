@@ -69,6 +69,14 @@ namespace Server
             clientSession.HandleCreatePlayer(createPacket);
         }
 
+        public static void C_DeletePlayerHandler(PacketSession session, IMessage packet)
+        {
+            C_DeletePlayer deletePacket = (C_DeletePlayer)packet;
+            ClientSession clientSession = (ClientSession)session;
+
+            clientSession.HandleDeletePlayer(deletePacket);
+        }
+
         public static void C_EquipItemHandler(PacketSession session, IMessage packet)
         {
             C_EquipItem equipPacket = (C_EquipItem)packet;

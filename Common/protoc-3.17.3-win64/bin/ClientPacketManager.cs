@@ -142,6 +142,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.SSendMassage, MakePacket<S_SendMassage>);
             _handler.Add((ushort)MsgId.SSendMassage, PacketHandler.S_SendMassageHandler);
 
+            _onRecv.Add((ushort)MsgId.SDeletePlayer, MakePacket<S_DeletePlayer>);
+            _handler.Add((ushort)MsgId.SDeletePlayer, PacketHandler.S_DeletePlayerHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

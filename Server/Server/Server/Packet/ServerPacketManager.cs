@@ -100,6 +100,9 @@ namespace Server
             _onRecv.Add((ushort)MsgId.CSellItem, MakePacket<C_SellItem>);
             _handler.Add((ushort)MsgId.CSellItem, PacketHandler.C_SellItemHandler);
 
+            _onRecv.Add((ushort)MsgId.CDeletePlayer, MakePacket<C_DeletePlayer>);
+            _handler.Add((ushort)MsgId.CDeletePlayer, PacketHandler.C_DeletePlayerHandler);
+
         }
 
         public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

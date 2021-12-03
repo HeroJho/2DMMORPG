@@ -119,8 +119,10 @@ namespace Server
             {
                 case GameObjectType.Player:
                     {
+                        Player player = (Player)gameObject;
+
                         // TEST : ChooseDummyPos
-                        if (true)
+                        if (player.Info.Name.Contains("_"))
                         {
                             Vector2Int respawnPos;
                             while (true)
@@ -129,13 +131,12 @@ namespace Server
                                 respawnPos.y = _rand.Next(Map.MinY, Map.MaxY + 1);
                                 if (Map.Find(respawnPos) == null)
                                 {
-                                    gameObject.CellPos = respawnPos;
+                                    player.CellPos = respawnPos;
                                     break;
                                 }
                             }
                         }
 
-                        Player player = (Player)gameObject;
                         _players.Add(player.Id, player);
                         player.Room = this;
 

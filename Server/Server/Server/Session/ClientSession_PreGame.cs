@@ -28,76 +28,82 @@ namespace Server
             {
                 // AccountName은 ID
                 // 패킷 UniqueId는 로그인 Db에서 가져온 ID임
-                AccountDb findAccount = db.Accounts
+                List<AccountDb> findAccounts = db.Accounts
                     .Include(a => a.Players)
-                    .Where(a => a.AccountName == loginPacket.UniqueId).FirstOrDefault();
+                    .Where(a => a.AccountName == loginPacket.UniqueId).ToList();
 
-                if (findAccount != null)
+                S_Login loginOkPacket = new S_Login() { LoginOk = 1 };
+                foreach (AccountDb findAccount in findAccounts)
                 {
-                    // AccountDbId 메모리에 기억
-                    AccountDbId = findAccount.AccountDbId;
 
-                    S_Login loginOkPacket = new S_Login() { LoginOk = 1 };
-                    foreach (PlayerDb playerDb in findAccount.Players)
+                    if (findAccount != null)
                     {
-                        LobbyPlayerInfo lobbyPlayer = new LobbyPlayerInfo()
+                        // AccountDbId 메모리에 기억
+                        AccountDbId = findAccount.AccountDbId;
+
+                        foreach (PlayerDb playerDb in findAccount.Players)
                         {
-                            PlayerDbId = playerDb.PlayerDbId,
-                            Name = playerDb.PlayerName,
-                            Gold = playerDb.Gold,
-                            PosX = playerDb.PosX,
-                            PosY = playerDb.PosY,
-                            StatInfo = new StatInfo()
+                            LobbyPlayerInfo lobbyPlayer = new LobbyPlayerInfo()
                             {
-                                Level = playerDb.Level,
-                                TotalExp = playerDb.TotalExp,
-                                Hp = playerDb.Hp,
-                                MaxHp = playerDb.MaxHp,
-                                Mp = playerDb.Mp,
-                                MaxMp = playerDb.MaxMp,
-                                Attack = playerDb.Attack,
-                                Defence = playerDb.Defence,
-                                Str = playerDb.Str,
-                                Int = playerDb.Int,
-                                Speed = playerDb.Speed,
-                                StatPoints = playerDb.StatPoints,
+                                PlayerDbId = playerDb.PlayerDbId,
+                                Name = playerDb.PlayerName,
+                                Gold = playerDb.Gold,
+                                PosX = playerDb.PosX,
+                                PosY = playerDb.PosY,
+                                StatInfo = new StatInfo()
+                                {
+                                    Level = playerDb.Level,
+                                    TotalExp = playerDb.TotalExp,
+                                    Hp = playerDb.Hp,
+                                    MaxHp = playerDb.MaxHp,
+                                    Mp = playerDb.Mp,
+                                    MaxMp = playerDb.MaxMp,
+                                    Attack = playerDb.Attack,
+                                    Defence = playerDb.Defence,
+                                    Str = playerDb.Str,
+                                    Int = playerDb.Int,
+                                    Speed = playerDb.Speed,
+                                    StatPoints = playerDb.StatPoints,
 
-                                JobClassType = (JobClassType)playerDb.JobClassType,
-                                CanUpClass = playerDb.CanUpClass
+                                    JobClassType = (JobClassType)playerDb.JobClassType,
+                                    CanUpClass = playerDb.CanUpClass
 
-                            }
-                        };
+                                }
+                            };
 
-                        // 메모리에 들고 있는다
-                        LobbyPlayers.Add(lobbyPlayer);
+                            // 메모리에 들고 있는다
+                            LobbyPlayers.Add(lobbyPlayer);
 
-                        // 패킷에 넣어준다
-                        loginOkPacket.Players.Add(lobbyPlayer);
+                            // 패킷에 넣어준다
+                            loginOkPacket.Players.Add(lobbyPlayer);
+                        }
+
+                        Send(loginOkPacket);
+                        // 로비로 이동
+                        ServerState = PlayerServerState.ServerStateLobby;
+                    }
+                    else
+                    {
+                        // 만약 해당 서버에서 해당 AccountName(ID)이 없다면 new해줌
+                        // 왜냐하면 서버마다 해당 아이디의 캐릭터가 없을 수도 있으니깐
+
+                        AccountDb newAccount = new AccountDb() { AccountName = loginPacket.UniqueId };
+                        db.Accounts.Add(newAccount);
+                        bool success = db.SaveChangesEx();
+                        if (success == false)
+                            return; // TODO
+
+                        // AccountDbId 메모리에 기억
+                        AccountDbId = newAccount.AccountDbId;
+
+                        Send(loginOkPacket);
+                        // 로비로 이동
+                        ServerState = PlayerServerState.ServerStateLobby;
                     }
 
-                    Send(loginOkPacket);
-                    // 로비로 이동
-                    ServerState = PlayerServerState.ServerStateLobby;
                 }
-                else 
-                { 
-                    // 만약 해당 서버에서 해당 AccountName(ID)가 없다면 new해줌
-                    // 왜냐하면 서버마다 해당 아이디의 캐릭터가 없을 수도 있으니깐
 
-                    AccountDb newAccount = new AccountDb() { AccountName = loginPacket.UniqueId };
-                    db.Accounts.Add(newAccount);
-                    bool success = db.SaveChangesEx();
-                    if (success == false)
-                        return; // TODO
 
-                    // AccountDbId 메모리에 기억
-                    AccountDbId = newAccount.AccountDbId;
-
-                    S_Login loginOkPacket = new S_Login() { LoginOk = 1};
-                    Send(loginOkPacket);
-                    // 로비로 이동
-                    ServerState = PlayerServerState.ServerStateLobby;
-                }
             }
         }
 
@@ -126,7 +132,6 @@ namespace Server
                 // ClassType에 따라 Tree클래스 설정
                 MyPlayer.Skill.SetSkillTree();
 
-                
                 // 아이템 정보
                 S_ItemList itemListPacket = new S_ItemList();
                 // 스킬 정보
@@ -342,10 +347,48 @@ namespace Server
                     LobbyPlayers.Add(lobbyPlayer);
 
                     // 클라에 전송
-                    S_CreatePlayer newPlayer = new S_CreatePlayer() { Player = new LobbyPlayerInfo() };
-                    newPlayer.Player.MergeFrom(lobbyPlayer);
+                    S_CreatePlayer newPlayer = new S_CreatePlayer();
+                    foreach (LobbyPlayerInfo info in LobbyPlayers)
+                        newPlayer.Players.Add(info);
 
                     Send(newPlayer);
+                }
+            }
+        }
+
+        public void HandleDeletePlayer(C_DeletePlayer deletePacket)
+        {
+            // TODO : 이런 저런 보안 체크
+            if (ServerState != PlayerServerState.ServerStateLobby)
+                return;
+
+            using (AppDbContext db = new AppDbContext())
+            {
+                PlayerDb findPlayer = db.Players
+                    .Where(p => p.PlayerName == deletePacket.Name).FirstOrDefault();
+
+                if (findPlayer == null)
+                {
+                    // 닉네임이 없다? >> 일단 빈 걸 보내서 클라에서 처리하게 함
+                    Send(new S_DeletePlayer());
+                }
+                else
+                {
+                    LobbyPlayerInfo lobbyPlayer = LobbyPlayers.Find((e) => e.Name == findPlayer.PlayerName);
+                    if (lobbyPlayer == null)
+                        return;
+
+                    db.Players.Remove(findPlayer);
+                    db.SaveChangesEx();
+
+                    LobbyPlayers.Remove(lobbyPlayer);
+
+                    // 클라에 전송
+                    S_DeletePlayer deletePlayer = new S_DeletePlayer();
+                    foreach (LobbyPlayerInfo info in LobbyPlayers)
+                        deletePlayer.Players.Add(info);
+
+                    Send(deletePlayer);
                 }
             }
         }

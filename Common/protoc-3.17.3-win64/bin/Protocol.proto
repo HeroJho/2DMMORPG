@@ -66,6 +66,8 @@ enum MsgId{
     S_SEND_MASSAGE = 59;
     C_BUY_ITEM = 60;
     C_SELL_ITEM = 61;
+    C_DELETE_PLAYER = 62;
+    S_DELETE_PLAYER = 63;
 }
 
 enum CreatureState{
@@ -257,7 +259,15 @@ message C_CreatePlayer{
 }
 
 message S_CreatePlayer{
-    LobbyPlayerInfo Player = 1;
+    repeated LobbyPlayerInfo players = 1;
+}
+
+message C_DeletePlayer{
+    string name = 1;
+}
+
+message S_DeletePlayer{
+    repeated LobbyPlayerInfo players = 1;
 }
 
 message C_EnterGame{

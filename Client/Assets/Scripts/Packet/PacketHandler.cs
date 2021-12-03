@@ -14,6 +14,8 @@ class PacketHandler
 
 		Debug.Log("Enter!");
 		Managers.Object.Add(enterPacket.Player, myPlayer: true);
+		(Managers.UI.SceneUI as UI_GameScene).SelectUI.gameObject.SetActive(false);
+		(Managers.UI.SceneUI as UI_GameScene).ChangeUI.ArrivedRoom();
 	}
 
 	public static void S_LeaveGameHandler(PacketSession session, IMessage packet)
@@ -160,28 +162,12 @@ class PacketHandler
 
 		//로비 UI에서 캐릭터 보여주고, 선택할 수 있도록
 		// 해당 식별자로는 캐릭터가 없다
-		if(loginPacket.Players == null || loginPacket.Players.Count == 0)
-        {
-		    // 캐릭터 선택창
-			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-			gameSceneUI.SelectUI.gameObject.SetActive(true);
-			gameSceneUI.SelectUI.RefreshUI(loginPacket.Players.ToList());
-			gameSceneUI.ChangeUI.ArrivedRoom();
+		// 캐릭터 선택창
+		UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+		gameSceneUI.SelectUI.gameObject.SetActive(true);
+		gameSceneUI.SelectUI.RefreshUI(loginPacket.Players.ToList());
+		gameSceneUI.ChangeUI.ArrivedRoom();
 
-		}
-        else
-        {
-			// 캐릭터 선택창
-			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
-			gameSceneUI.SelectUI.gameObject.SetActive(true);
-			gameSceneUI.SelectUI.RefreshUI(loginPacket.Players.ToList());
-			gameSceneUI.ChangeUI.ArrivedRoom();
-
-			//LobbyPlayerInfo info = loginPacket.Players[0];
-			//C_EnterGame enterGamePacket = new C_EnterGame();
-			//enterGamePacket.Name = info.Name;
-			//Managers.Network.Send(enterGamePacket);
-        }
 	}
 
 	public static void S_CreatePlayerHandler(PacketSession session, IMessage packet)
@@ -189,20 +175,36 @@ class PacketHandler
 		S_CreatePlayer createPlayerPacket = (S_CreatePlayer)packet;
 
         // 뭔가 문제가 있다(이름 중복이라든지..) > 다시 만들기 시도
-        if (createPlayerPacket.Player == null)
+        if (createPlayerPacket.Players.Count <= 0)
         {
-			C_CreatePlayer createPlayer = new C_CreatePlayer();
-			createPlayer.Name = $"Player_{Random.Range(0, 10000).ToString("0000")}";
-			Managers.Network.Send(createPlayer);
+			(Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("닉네임이 중복됩니다.", false);
 		}
 		else // 캐릭터 만들기 성공
         {
-			C_EnterGame enterGamePacket = new C_EnterGame();
-			enterGamePacket.Name = createPlayerPacket.Player.Name;
-			Managers.Network.Send(enterGamePacket);
-
-        }
+			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+			gameSceneUI.SelectUI.gameObject.SetActive(true);
+			gameSceneUI.SelectUI.RefreshUI(createPlayerPacket.Players.ToList());
+			(Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("생성되었습니다!", true);
+		}
     }
+
+	public static void S_DeletePlayerHandler(PacketSession session, IMessage packet)
+	{
+		S_DeletePlayer deletePlayerPacket = (S_DeletePlayer)packet;
+
+		// 뭔가 문제가 있다
+		if (deletePlayerPacket.Players.Count <= 0)
+		{
+			(Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("서버에 없는 캐릭터입니다.", false);
+		}
+		else // 캐릭터 삭제 성공
+		{
+			UI_GameScene gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
+			gameSceneUI.SelectUI.gameObject.SetActive(true);
+			gameSceneUI.SelectUI.RefreshUI(deletePlayerPacket.Players.ToList());
+			(Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("삭제되었습니다.", true);
+		}
+	}
 
 	public static void S_ItemListHandler(PacketSession session, IMessage packet)
     {

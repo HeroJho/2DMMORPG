@@ -25,8 +25,10 @@ public class UI_SelectPlayer : UI_Base
     enum Buttons
     {
         MakingPlayerButton,
+        DeletePlayerButton,
         StartingButton,
-        MakingButton
+        MakingButton,
+        XButton
     }
     enum InputFields
     {
@@ -53,13 +55,24 @@ public class UI_SelectPlayer : UI_Base
 
     private void BindEvent()
     {
+        // 시작 버튼
         BindEvent(Get<Button>((int)Buttons.StartingButton).gameObject, (e) =>
         {
-            // TODO : 방 입장
+            if (_selectedItem == null)
+            {
+                (Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("캐릭터를 선택해 주세요!", false);
+                return;
+            }
 
+            C_EnterGame enterGamePacket = new C_EnterGame();
+            enterGamePacket.Name = _selectedItem.Info.Name;
+            Managers.Network.Send(enterGamePacket);
+
+            (Managers.UI.SceneUI as UI_GameScene).ChangeUI.PadeIns();
 
         }, Define.UIEvent.LeftClick);
 
+        // 생성 시작 버튼
         BindEvent(Get<Button>((int)Buttons.MakingPlayerButton).gameObject, (e) =>
         {
             // 닉네임 입력창
@@ -70,6 +83,7 @@ public class UI_SelectPlayer : UI_Base
 
         }, Define.UIEvent.LeftClick);
 
+        // 생성 버튼
         BindEvent(Get<Button>((int)Buttons.MakingButton).gameObject, (e) =>
         {
             C_CreatePlayer createPlayerPacket = new C_CreatePlayer();
@@ -79,13 +93,36 @@ public class UI_SelectPlayer : UI_Base
                 (Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("닉네임을 입력해 주세요.", false);
                 return;
             }
-            else
-                (Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("생성 중입니다...", true);
+
+            (Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("생성 중입니다...", true);
+            Get<InputField>((int)InputFields.NameInput).text = "";
+            Get<GameObject>((int)GameObjects.MakingPlayerPanel).gameObject.SetActive(false);
 
             createPlayerPacket.Name = name;
-            // 전송한다
-            //Managers.Network.Send(createPlayerPacket);
-            Debug.Log(name);
+            Managers.Network.Send(createPlayerPacket);
+
+        }, Define.UIEvent.LeftClick);
+
+        // 삭제 버튼
+        BindEvent(Get<Button>((int)Buttons.DeletePlayerButton).gameObject, (e) =>
+        {
+            if (_selectedItem == null)
+            {
+                (Managers.UI.SceneUI as UI_GameScene).MassageUI.WriteMassage("캐릭터를 선택해 주세요!", false);
+                return;
+            }
+
+            C_DeletePlayer deletePlayerPacket = new C_DeletePlayer();
+
+            deletePlayerPacket.Name = _selectedItem.Info.Name;
+            Managers.Network.Send(deletePlayerPacket);
+
+        }, Define.UIEvent.LeftClick);
+
+        // X버튼
+        BindEvent(Get<Button>((int)Buttons.XButton).gameObject, (e) =>
+        {
+            Get<GameObject>((int)GameObjects.MakingPlayerPanel).gameObject.SetActive(false);
 
         }, Define.UIEvent.LeftClick);
 
@@ -116,6 +153,9 @@ public class UI_SelectPlayer : UI_Base
 
     public void SelectPlayer(UI_SelectPlayer_Item aItem)
     {
+        if (aItem == _selectedItem)
+            return;
+
         _selectedItem = aItem;
 
         foreach (UI_SelectPlayer_Item item in _items)
