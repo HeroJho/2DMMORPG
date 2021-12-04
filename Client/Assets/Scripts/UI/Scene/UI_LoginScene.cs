@@ -97,7 +97,15 @@ public class UI_LoginScene : UI_Scene
             }
             else
             {
-                MassageUI.WriteMassage("로그인에 실패했습니다!\n아이디와 비밀번호를 확인해 주세요.", false);
+                switch(res.LoginFalse)
+                {
+                    case 0:
+                        MassageUI.WriteMassage("로그인에 실패했습니다!\n아이디와 비밀번호를 확인해 주세요.", false);
+                        break;
+                    case 1:
+                        MassageUI.WriteMassage("이미 접속 중인 계정입니다!", false);
+                        break;
+                }
             }
 
         });

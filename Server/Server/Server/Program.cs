@@ -81,6 +81,11 @@ namespace Server
 			t.Interval = 10 * 1000; // 10초마다 한번
 			t.Start();
         }
+		static void LoginInfoTask()
+		{
+			// TODO: 로그아웃 했는대도 남아있는 계정 주기적으로 해제
+			// Session과 비교해서
+		}
 
 		// TODO : Configure에서 관리하기
 		public static string Name { get; } = "스카니아";

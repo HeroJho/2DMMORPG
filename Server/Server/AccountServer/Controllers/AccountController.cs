@@ -16,6 +16,9 @@ public class AccountController : ControllerBase
     AppDbContext _context;
     SharedDbContext _shared;
 
+    static Dictionary<string, int> _loginList = new Dictionary<string, int>();
+    object _lock = new object();
+
     public AccountController(AppDbContext context, SharedDbContext shared)
     {
         _context = context;
@@ -67,58 +70,88 @@ public class AccountController : ControllerBase
             .Where(a => a.AccountName == req.AccountName && a.password == req.Password)
             .FirstOrDefault();
 
-        if(account == null)
+        if (account == null)
         {
             res.LoginOk = false;
+            res.LoginFalse = 0; // 계정이 없다
         }
         else
         {
-            res.LoginOk = true;
 
-            #region 토큰 발급
-            DateTime expired = DateTime.UtcNow;
-            expired.AddSeconds(600); // 600초 후에 만료
-
-            TokenDb tokenDb = _shared.Tokens.Where(t => t.AccountDbId == account.AccountDbId).FirstOrDefault();
-            if (tokenDb != null) // 토큰이 이미 있다 > 갱신
+            int isLoginNow = -1;
+            if (_loginList.TryGetValue(account.AccountName, out isLoginNow))
             {
-                tokenDb.Token = new Random().Next(Int32.MinValue, Int32.MaxValue);
-                tokenDb.Expired = expired;
-                _shared.SaveChangeEx();
+                res.LoginOk = false;
+                res.LoginFalse = 1; // 현재 접속 중이다
             }
-            else // 토큰이 없다 > 처음 로그인 했다
+            else
             {
-                tokenDb = new TokenDb()
+                res.LoginOk = true;
+
+                // 로그인 리스트에 저장
+                lock (_lock)
                 {
-                    AccountDbId = account.AccountDbId,
-                    Token = new Random().Next(Int32.MinValue, Int32.MaxValue),
-                    Expired = expired
-                };
-                _shared.Add(tokenDb);
-                _shared.SaveChangeEx();
-            }
-            #endregion
+                    _loginList.Add(account.AccountName, account.AccountDbId);
+                }
 
-            res.AccountId = account.AccountName;
-            res.Token = tokenDb.Token;
-            res.ServerList = new List<ServerInfo>();
+                #region 토큰 발급
+                DateTime expired = DateTime.UtcNow;
+                expired.AddSeconds(600); // 600초 후에 만료
 
-            // 서버 정보를 보낸다
-            foreach(ServerDb serverDb in _shared.Servers)
-            {
-                res.ServerList.Add(new ServerInfo()
+                TokenDb tokenDb = _shared.Tokens.Where(t => t.AccountDbId == account.AccountDbId).FirstOrDefault();
+                if (tokenDb != null) // 토큰이 이미 있다 > 갱신
                 {
-                    Name = serverDb.Name,
-                    IpAddress = serverDb.IpAddress,
-                    Port = serverDb.Port,
-                    BusyScore = serverDb.BusyScore
-                });
+                    tokenDb.Token = new Random().Next(Int32.MinValue, Int32.MaxValue);
+                    tokenDb.Expired = expired;
+                    _shared.SaveChangeEx();
+                }
+                else // 토큰이 없다 > 처음 로그인 했다
+                {
+                    tokenDb = new TokenDb()
+                    {
+                        AccountDbId = account.AccountDbId,
+                        Token = new Random().Next(Int32.MinValue, Int32.MaxValue),
+                        Expired = expired
+                    };
+                    _shared.Add(tokenDb);
+                    _shared.SaveChangeEx();
+                }
+                #endregion
+
+                res.AccountId = account.AccountName;
+                res.Token = tokenDb.Token;
+                res.ServerList = new List<ServerInfo>();
+
+                // 서버 정보를 보낸다
+                foreach (ServerDb serverDb in _shared.Servers)
+                {
+                    res.ServerList.Add(new ServerInfo()
+                    {
+                        Name = serverDb.Name,
+                        IpAddress = serverDb.IpAddress,
+                        Port = serverDb.Port,
+                        BusyScore = serverDb.BusyScore
+                    });
+                }
             }
+
         }
 
         return res;
     }
 
+    [HttpPost]
+    [Route("logout")]
+    public void LogoutAccount([FromBody] LogoutAccountPacketReq req)
+    {
+        // 로그인 리스트에 저장
+        lock (_lock)
+        {
+            if (_loginList.Remove(req.AccountName))
+                return;
+        }
+
+    }
 
 
 }

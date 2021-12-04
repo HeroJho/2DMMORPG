@@ -28,81 +28,78 @@ namespace Server
             {
                 // AccountName은 ID
                 // 패킷 UniqueId는 로그인 Db에서 가져온 ID임
-                List<AccountDb> findAccounts = db.Accounts
+                AccountDb findAccount = db.Accounts
                     .Include(a => a.Players)
-                    .Where(a => a.AccountName == loginPacket.UniqueId).ToList();
+                    .Where(a => a.AccountName == loginPacket.UniqueId)
+                    .FirstOrDefault();
 
                 S_Login loginOkPacket = new S_Login() { LoginOk = 1 };
-                foreach (AccountDb findAccount in findAccounts)
+
+                // 만약 해당 서버에서 계정ID에 맞는 Account가 없다
+                if (findAccount == null)
                 {
+                    // Account를 만들어주고 빈 캐릭 선택창을 띄운다
+                    AccountDb newAccount = new AccountDb() { AccountName = loginPacket.UniqueId };
+                    db.Accounts.Add(newAccount);
+                    bool success = db.SaveChangesEx();
+                    if (success == false)
+                        return; // TODO
 
-                    if (findAccount != null)
-                    {
-                        // AccountDbId 메모리에 기억
-                        AccountDbId = findAccount.AccountDbId;
+                    // AccountDbId 메모리에 기억
+                    AccountDbId = newAccount.AccountDbId;
 
-                        foreach (PlayerDb playerDb in findAccount.Players)
-                        {
-                            LobbyPlayerInfo lobbyPlayer = new LobbyPlayerInfo()
-                            {
-                                PlayerDbId = playerDb.PlayerDbId,
-                                Name = playerDb.PlayerName,
-                                Gold = playerDb.Gold,
-                                PosX = playerDb.PosX,
-                                PosY = playerDb.PosY,
-                                StatInfo = new StatInfo()
-                                {
-                                    Level = playerDb.Level,
-                                    TotalExp = playerDb.TotalExp,
-                                    Hp = playerDb.Hp,
-                                    MaxHp = playerDb.MaxHp,
-                                    Mp = playerDb.Mp,
-                                    MaxMp = playerDb.MaxMp,
-                                    Attack = playerDb.Attack,
-                                    Defence = playerDb.Defence,
-                                    Str = playerDb.Str,
-                                    Int = playerDb.Int,
-                                    Speed = playerDb.Speed,
-                                    StatPoints = playerDb.StatPoints,
-
-                                    JobClassType = (JobClassType)playerDb.JobClassType,
-                                    CanUpClass = playerDb.CanUpClass
-
-                                }
-                            };
-
-                            // 메모리에 들고 있는다
-                            LobbyPlayers.Add(lobbyPlayer);
-
-                            // 패킷에 넣어준다
-                            loginOkPacket.Players.Add(lobbyPlayer);
-                        }
-
-                        Send(loginOkPacket);
-                        // 로비로 이동
-                        ServerState = PlayerServerState.ServerStateLobby;
-                    }
-                    else
-                    {
-                        // 만약 해당 서버에서 해당 AccountName(ID)이 없다면 new해줌
-                        // 왜냐하면 서버마다 해당 아이디의 캐릭터가 없을 수도 있으니깐
-
-                        AccountDb newAccount = new AccountDb() { AccountName = loginPacket.UniqueId };
-                        db.Accounts.Add(newAccount);
-                        bool success = db.SaveChangesEx();
-                        if (success == false)
-                            return; // TODO
-
-                        // AccountDbId 메모리에 기억
-                        AccountDbId = newAccount.AccountDbId;
-
-                        Send(loginOkPacket);
-                        // 로비로 이동
-                        ServerState = PlayerServerState.ServerStateLobby;
-                    }
-
+                    // 캐릭터 리스트 없는 빈 패킷 전송 >> 선택창만 띄움
+                    Send(loginOkPacket);
+                    // 로비로 이동
+                    ServerState = PlayerServerState.ServerStateLobby;
+                    return;
                 }
+                else // 해당 서버에 Account가 존재한다 >> Account의 Players를 사용해서 캐릭 정보 전송
+                {
+                    // AccountDbId 메모리에 기억
+                    AccountDbId = findAccount.AccountDbId;
 
+                    foreach (PlayerDb playerDb in findAccount.Players)
+                    {
+                        LobbyPlayerInfo lobbyPlayer = new LobbyPlayerInfo()
+                        {
+                            PlayerDbId = playerDb.PlayerDbId,
+                            Name = playerDb.PlayerName,
+                            Gold = playerDb.Gold,
+                            PosX = playerDb.PosX,
+                            PosY = playerDb.PosY,
+                            StatInfo = new StatInfo()
+                            {
+                                Level = playerDb.Level,
+                                TotalExp = playerDb.TotalExp,
+                                Hp = playerDb.Hp,
+                                MaxHp = playerDb.MaxHp,
+                                Mp = playerDb.Mp,
+                                MaxMp = playerDb.MaxMp,
+                                Attack = playerDb.Attack,
+                                Defence = playerDb.Defence,
+                                Str = playerDb.Str,
+                                Int = playerDb.Int,
+                                Speed = playerDb.Speed,
+                                StatPoints = playerDb.StatPoints,
+
+                                JobClassType = (JobClassType)playerDb.JobClassType,
+                                CanUpClass = playerDb.CanUpClass
+
+                            }
+                        };
+
+                        // 메모리에 들고 있는다
+                        LobbyPlayers.Add(lobbyPlayer);
+
+                        // 패킷에 넣어준다
+                        loginOkPacket.Players.Add(lobbyPlayer);
+                    }
+
+                    Send(loginOkPacket);
+                    // 로비로 이동
+                    ServerState = PlayerServerState.ServerStateLobby;
+                }
 
             }
         }
@@ -274,6 +271,8 @@ namespace Server
                     PlayerDb newPlayerDb = new PlayerDb()
                     {
                         PlayerName = createPacket.Name,
+                        PosX = -50,
+                        PosY = -75,
                         Gold = 500,
                         Level = stat.Level,
                         Hp = stat.Hp,
@@ -323,8 +322,8 @@ namespace Server
                         PlayerDbId = newPlayerDb.PlayerDbId,
                         Name = createPacket.Name,
                         Gold = newPlayerDb.Gold,
-                        PosX = -50,
-                        PosY = -75,
+                        PosX = newPlayerDb.PosX,
+                        PosY = newPlayerDb.PosY,
                         StatInfo = new StatInfo()
                         {
                             Level = stat.Level,

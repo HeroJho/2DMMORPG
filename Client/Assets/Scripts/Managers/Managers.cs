@@ -102,4 +102,11 @@ public class Managers : MonoBehaviour
         Network.ConnectToGame(info);
         Scene.LoadScene(Define.Scene.Game);
     }
+
+    // 게임을 나가면 로그아웃 신청
+    private void OnApplicationQuit()
+    {
+        Network.LogoutAccount();
+    }
+
 }

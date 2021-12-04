@@ -33,7 +33,19 @@ public class ServerInfo
 public class LoginAccountPacketRes
 {
     public bool LoginOk;
+    public int LoginFalse;
     public string AccountId;
     public int Token;
     public List<ServerInfo> ServerList = new List<ServerInfo>();
+}
+
+
+public class LogoutAccountPacketReq
+{
+    public string AccountName;
+}
+
+public class LogoutAccountPacketRes
+{
+
 }

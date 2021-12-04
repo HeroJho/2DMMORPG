@@ -42,4 +42,17 @@ public class NetworkManager
         }
     }
 
+    public void LogoutAccount()
+    {
+        LogoutAccountPacketReq packet = new LogoutAccountPacketReq()
+        {
+            AccountName = AccountId
+        };
+
+        Managers.Web.SendPostRequest<LogoutAccountPacketRes>("account/logout", packet, (res) =>
+        {
+
+        });
+    }
+
 }
