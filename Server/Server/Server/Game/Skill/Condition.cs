@@ -23,7 +23,6 @@ namespace Server
             }
         }
 
-
     }
 
     public class Condition
@@ -121,7 +120,41 @@ namespace Server
             ManageBuffOrCondition(skillData, time, info, ConditionType.ConditionHealing);
             SendConditionPacket(ConditionType.ConditionHealing, time);
         }
+        public void Despell()
+        {
+            GameRoom room = _creatureObj.Room;
+            if (_creatureObj == null || room == null)
+                return;
+            if (_creatureObj.State == CreatureState.Dead)
+                return;
 
+            if(_stunJob != null)
+            {
+                _stunJob.Execute();
+
+            }
+            if (_slowJob != null)
+            {
+                _slowJob.Execute();
+
+            }
+            if (_slowAtteckJob != null)
+            {
+                _slowAtteckJob.Execute();
+
+            }
+            if (_tickDamageJob != null)
+            {
+                _tickDamageJob.Execute();
+
+            }
+
+            S_Debuff debuffPacket = new S_Debuff();
+            debuffPacket.Id = _creatureObj.Id;
+
+            room.Broadcast(_creatureObj.CellPos, debuffPacket);
+
+        }
 
         IJob _magicGuardJob;
         float _magicGuardValue = 0;
@@ -405,7 +438,7 @@ namespace Server
             CreatureObject co = (CreatureObject)speller;
 
             // 틱 데미지는 백분율 해서 고정피해로 적용
-            int damage = Math.Max((damageValue / 100) * co.TotalAttack, 1); 
+            int damage = Math.Max((int)((damageValue / 100.0) * co.TotalAttack), 1);
             _creatureObj.OnDamaged(speller, damage, true);
         }
 

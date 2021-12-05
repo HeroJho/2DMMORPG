@@ -18,6 +18,10 @@ public class QuestGiver : MonoBehaviour
     public GameObject QuestionMark;
     public GameObject ExclamationMark;
 
+    public GameObject ProceedingMark_Mini;
+    public GameObject QuestionMark_Mini;
+    public GameObject ExclamationMark_Mini;
+
     public void Init(NpcData npcData)
     {
         NpcName = npcData.name;
@@ -168,20 +172,27 @@ public class QuestGiver : MonoBehaviour
         QuestionMark.SetActive(false);
         ExclamationMark.SetActive(false);
 
+        ProceedingMark_Mini.SetActive(false);
+        QuestionMark_Mini.SetActive(false);
+        ExclamationMark_Mini.SetActive(false);
+
         foreach (Quest quest in QuestList.Values)
         {
             // 완료 가능 > 진행중 > 수행 가능 순으로 표시
             if(quest.QuestState == QuestState.Cancomplete)
             {
                 QuestionMark.SetActive(true);
+                QuestionMark_Mini.SetActive(true);
             }
             else if (quest.QuestState == QuestState.Proceed)
             {
                 ProceedingMark.SetActive(true);
+                ProceedingMark_Mini.SetActive(true);
             }
             else if (quest.QuestState == QuestState.Canaccapt)
             {
                 ExclamationMark.SetActive(true);
+                ExclamationMark_Mini.SetActive(true);
             }
 
         }

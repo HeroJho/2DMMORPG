@@ -51,7 +51,7 @@ namespace Server
                         foreach (CreatureObject co in objects)
                         {
                             co.Condition.Stun(skillData.conditions[point].Time, skillData.conditions[point].StunChanceValue);
-                            co.OnDamaged(_player, skillData.skillPointInfos[point].damage);
+                            co.OnDamaged(_player, skillData.skillPointInfos[point].damage + _player.TotalAttack);
                         }
 
                     }

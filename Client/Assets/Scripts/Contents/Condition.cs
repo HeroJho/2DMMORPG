@@ -254,6 +254,45 @@ public class Condition : MonoBehaviour
         }));
     }
 
+    public void DeBuffAll()
+    {
+        if(_slowJob != null)
+        {
+            StopCoroutine(_slowJob);
+            _creatureController.Speed = _originSpeed;
+            _slowJob = null;
+        }
+        if (_slowAttackJob != null)
+        {
+            StopCoroutine(_slowAttackJob);
+            _creatureController.Stat.AttackSpeed = _originAttackSpeed;
+            _slowAttackJob = null;
+        }
+        if (_stunAnim != null)
+        {
+            StopCoroutine(_stunAnim);
+            _stunAnim = null;
+            _stunEffect.gameObject.SetActive(false);
+            _creatureController.State = CreatureState.Idle;
+        }
+        if (_chilledAnim != null)
+        {
+            StopCoroutine(_chilledAnim);
+            _chilledAnim = null;
+            _spriteRenderer.color = new Color(255, 255, 255);
+            if (_animator != null)
+                _animator.SetFloat("AttackSpeed", 1);
+        }
+        if (_poisonAnim != null)
+        {
+            StopCoroutine(_poisonAnim);
+            _poisonAnim = null;
+            _spriteRenderer.color = new Color(255, 255, 255);
+            _posionEffect.gameObject.SetActive(false);
+        }
+
+    }
+
     // 쿨타임 메서드
     IEnumerator CoolTime(int timeValue, Action func)
     {

@@ -27,9 +27,6 @@ namespace Server
             }
         }
 
-        // TEST
-        public bool IsDummy { get; set; } = true;
-
         private int Level
         {
             get { return Stat.Level; }
@@ -294,7 +291,13 @@ namespace Server
                 switch (item.ItemType)
                 {
                     case ItemType.Weapon:
-                        WeaponDamage += ((Weapon)item).Damage;
+                        Weapon weapon = (Weapon)item;
+                        if(weapon.WeaponType == WeaponType.Sword && JobClassType == JobClassType.Warrior)
+                            WeaponDamage += weapon.Damage;
+                        else if (weapon.WeaponType == WeaponType.Staff && JobClassType == JobClassType.Mage)
+                            WeaponDamage += weapon.Damage;
+                        else if(JobClassType == JobClassType.None)
+                            WeaponDamage += weapon.Damage;
                         break;
                     case ItemType.Armor:
                         ArmorDefence += ((Armor)item).Defence;

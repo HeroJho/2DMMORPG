@@ -163,7 +163,7 @@
       "gold": "1000",
       "stat": {
         "level": "10",
-        "maxHp": "100",
+        "maxHp": "30000",
         "attack": "5",
         "speed": "5.0",
         "attackSpeed": "0.5",

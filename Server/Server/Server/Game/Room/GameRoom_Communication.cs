@@ -55,10 +55,31 @@ namespace Server
             if (str.Length <= 0)
                 return;
 
+            // TEST
+            if (Cheat(player, str))
+                return;
+
             S_Chat schatPacket = new S_Chat();
             schatPacket.Id = player.Id;
             schatPacket.Str = str;
             room.Broadcast(player.CellPos, schatPacket);
+        }
+
+        public bool Cheat(Player player, string str)
+        {
+            if (str[0] != '/')
+                return false;
+
+            switch (str)
+            {
+                case "/get Gold":
+                    player.GetGold(1000);
+                    return true;
+                default:
+                    break;
+            }
+
+            return false;
         }
 
     }

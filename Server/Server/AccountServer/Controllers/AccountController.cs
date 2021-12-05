@@ -144,13 +144,16 @@ public class AccountController : ControllerBase
     [Route("logout")]
     public void LogoutAccount([FromBody] LogoutAccountPacketReq req)
     {
+        if (req.AccountName == null)
+            return;
+
         // 로그인 리스트에 저장
         lock (_lock)
         {
-            if (_loginList.Remove(req.AccountName))
-                return;
+            _loginList.Remove(req.AccountName);
         }
 
+        return;
     }
 
 

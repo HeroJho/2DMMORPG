@@ -164,6 +164,9 @@ namespace Server
                         case 2008:
                             party.Condition.IronBody(skillData, point);
                             break;
+                        case 2009:
+                            party.Condition.Despell();
+                            break;
                         default:
                             break;
                     }

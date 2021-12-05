@@ -2,22 +2,86 @@
   "weapons": [
     {
       "id": "1",
-      "name": "조영웅의 검",
-      "gold": "100",
-      "description": "공격력: 99\n아무나 사용할 수 없는 검이다. 자칫 어둠의 힘에 잡아먹힐 수도...",
-      "weaponType": "Sword",
-      "damage": "99",
-      "iconPath": "Textures/Item/sword"
-    },
-    {
-      "id": "2",
       "name": "견습생의 활",
       "gold": "100",
       "description": "공격력: 5\n누구나 당길 수 있는 가벼운 활이다.",
       "weaponType": "Bow",
       "damage": "5",
       "iconPath": "Textures/Item/bow"
+    },
+    {
+      "id": "2",
+      "name": "나무 검",
+      "gold": "100",
+      "description": "공격력: 3\n나무로 만든 연습용 검이다.",
+      "weaponType": "Sword",
+      "damage": "3",
+      "iconPath": "Textures/Item/sword1"
+    },
+    {
+      "id": "3",
+      "name": "구리 검",
+      "gold": "500",
+      "description": "공격력: 10\n구리로 만든 날카로운 검이다.",
+      "weaponType": "Sword",
+      "damage": "10",
+      "iconPath": "Textures/Item/sword2"
+    },
+    {
+      "id": "4",
+      "name": "철 검",
+      "gold": "3000",
+      "description": "공격력: 35\n철로 만든 날카로운 검이다.\n무겁지만...살상력은 굉장하다.",
+      "weaponType": "Sword",
+      "damage": "35",
+      "iconPath": "Textures/Item/sword3"
+    },
+    {
+      "id": "5",
+      "name": "전설의 검",
+      "gold": "10000",
+      "description": "공격력: 100\n왕국의 잊혀진 전설의 검이다.\n일반 병사들은 들을 수도 없는 검이다.",
+      "weaponType": "Sword",
+      "damage": "100",
+      "iconPath": "Textures/Item/sword4"
+    },
+    {
+      "id": "6",
+      "name": "나무 지팡이",
+      "gold": "100",
+      "description": "공격력: 3\n나무로 만든 연습용 지팡이다.",
+      "weaponType": "Staff",
+      "damage": "3",
+      "iconPath": "Textures/Item/staff1"
+    },
+    {
+      "id": "7",
+      "name": "에메랄드 지팡이",
+      "gold": "500",
+      "description": "공격력: 10\n에메랄드를 박은 마법사 지팡이다.",
+      "weaponType": "Staff",
+      "damage": "10",
+      "iconPath": "Textures/Item/staff2"
+    },
+    {
+      "id": "8",
+      "name": "크리스탈 지팡이",
+      "gold": "3000",
+      "description": "공격력: 35\n크리스탈을 박은 마법사 지팡이다.\n영롱한 힘이 느껴진다.",
+      "weaponType": "Staff",
+      "damage": "35",
+      "iconPath": "Textures/Item/staff3"
+    },
+    {
+      "id": "9",
+      "name": "전설의 지팡이",
+      "gold": "10000",
+      "description": "공격력: 100\n왕국의 잊혀진 전설의 지팡이다.\n일반 마법사들이 사용하면 뇌가 터져버린다.",
+      "weaponType": "Staff",
+      "damage": "100",
+      "iconPath": "Textures/Item/staff4"
     }
+
   ],
   "armors": [
     {
@@ -52,25 +116,70 @@
   "consumables": [
     {
       "id": "200",
-      "name": "소형 물약",
+      "name": "소형 HP물약",
       "gold": "50",
       "description": "회복력: 10\n쓰기는 하지만... 효과는 좋다!",
       "consumableType": "Potion",
       "posionType": "Hp",
       "maxCount": "999",
       "recovery": "10",
-      "iconPath": "Textures/Item/hp"
+      "iconPath": "Textures/Item/hp1"
     },
     {
       "id": "201",
-      "name": "MP 물약",
+      "name": "중형 HP물약",
+      "gold": "100",
+      "description": "회복력: 20\n쓰기는 하지만... 효과는 좋다!",
+      "consumableType": "Potion",
+      "posionType": "Hp",
+      "maxCount": "999",
+      "recovery": "20",
+      "iconPath": "Textures/Item/hp2"
+    },
+    {
+      "id": "202",
+      "name": "대형 HP물약",
+      "gold": "200",
+      "description": "회복력: 50\n쓰기는 하지만... 효과는 좋다!",
+      "consumableType": "Potion",
+      "posionType": "Hp",
+      "maxCount": "999",
+      "recovery": "50",
+      "iconPath": "Textures/Item/hp3"
+    },
+
+    {
+      "id": "203",
+      "name": "소형 MP물약",
       "gold": "50",
       "description": "회복력: 10\n쓰기는 하지만... 효과는 좋다!",
       "consumableType": "Potion",
       "posionType": "Mp",
-      "maxCount": "500",
+      "maxCount": "999",
       "recovery": "10",
-      "iconPath": "Textures/Item/mp"
+      "iconPath": "Textures/Item/mp1"
+    },
+    {
+      "id": "204",
+      "name": "중형 MP물약",
+      "gold": "100",
+      "description": "회복력: 20\n쓰기는 하지만... 효과는 좋다!",
+      "consumableType": "Potion",
+      "posionType": "Mp",
+      "maxCount": "999",
+      "recovery": "20",
+      "iconPath": "Textures/Item/mp2"
+    },
+    {
+      "id": "205",
+      "name": "대형 MP물약",
+      "gold": "200",
+      "description": "회복력: 50\n쓰기는 하지만... 효과는 좋다!",
+      "consumableType": "Potion",
+      "posionType": "Mp",
+      "maxCount": "999",
+      "recovery": "50",
+      "iconPath": "Textures/Item/mp3"
     }
   ],
   "collections": [

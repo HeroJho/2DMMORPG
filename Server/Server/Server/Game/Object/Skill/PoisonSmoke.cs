@@ -33,8 +33,6 @@ namespace Server
                             co.Condition.Poison(_skillData, _skillLevel, Owner);
                         else if (co != Owner && player.Communication.Party.FindPlayerById(co.Id) == null)
                             co.Condition.Poison(_skillData, _skillLevel, Owner);
-
-
                     }
                     else if(Owner is BanBan)
                     {

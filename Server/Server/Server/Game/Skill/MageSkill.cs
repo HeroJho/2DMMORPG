@@ -22,6 +22,7 @@ namespace Server
             SkillPoints.Add(2003, 1);
             SkillPoints.Add(2005, 1);
             SkillPoints.Add(2006, 1);
+            SkillPoints.Add(2009, 1);
 
             S_SkillPoint skillPointPacket = new S_SkillPoint();
 
@@ -72,7 +73,7 @@ namespace Server
                         HashSet<CreatureObject> objects = _player.Room.Map.LoopByCircle<CreatureObject>(_player.CellPos, skillData.explosion.explosionPointInfos[point].radian);
 
                         foreach (CreatureObject co in objects)
-                            co.OnDamaged(_player, skillData.skillPointInfos[point].damage);
+                            co.OnDamaged(_player, skillData.skillPointInfos[point].damage + _player.TotalAttack);
 
                     }
                     break;

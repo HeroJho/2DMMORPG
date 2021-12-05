@@ -240,6 +240,7 @@ class PacketHandler
 		gameSceneUI.InvenUI.RefreshUI();
 		gameSceneUI.StatUI.RefreshUI();
 		gameSceneUI.ShortcutKeyUI.RefreshUI();
+		gameSceneUI.ShopPanelUI.SetPlayerGrid();
 	}
 
 	public static void S_EquipItemHandler(PacketSession session, IMessage packet)
@@ -471,6 +472,20 @@ class PacketHandler
 			return;
 
 		condition.UpdateCondition(changeConditionPacket.ConditionType, changeConditionPacket.Id, changeConditionPacket.SkillId, changeConditionPacket.Time, changeConditionPacket.AttackSpeed, changeConditionPacket.MoveSpeed);
+	}
+
+	public static void S_DebuffHandler(PacketSession session, IMessage packet)
+	{
+		S_Debuff debuffPacket = (S_Debuff)packet;
+
+		GameObject go = Managers.Object.FindById(debuffPacket.Id);
+		if (go == null)
+			return;
+		Condition condition = go.GetComponent<Condition>();
+		if (condition == null)
+			return;
+
+		condition.DeBuffAll();
 	}
 
 	public static void S_PartyListHandler(PacketSession session, IMessage packet)

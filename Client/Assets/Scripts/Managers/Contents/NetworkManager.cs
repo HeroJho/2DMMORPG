@@ -49,10 +49,7 @@ public class NetworkManager
             AccountName = AccountId
         };
 
-        Managers.Web.SendPostRequest<LogoutAccountPacketRes>("account/logout", packet, (res) =>
-        {
-
-        });
+        Managers.Web.SendPost("account/logout", packet);
     }
 
 }

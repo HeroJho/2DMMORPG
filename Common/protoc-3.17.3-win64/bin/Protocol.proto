@@ -68,6 +68,7 @@ enum MsgId{
     C_SELL_ITEM = 61;
     C_DELETE_PLAYER = 62;
     S_DELETE_PLAYER = 63;
+    S_DEBUFF = 64;
 }
 
 enum CreatureState{
@@ -123,7 +124,8 @@ enum ItemType{
 enum WeaponType{
     WEAPON_TYPE_NONE = 0;
     WEAPON_TYPE_SWORD = 1;
-    WEAPON_TYPE_BOW = 2;
+    WEAPON_TYPE_STAFF = 2;
+    WEAPON_TYPE_BOW = 3;
 }
 
 enum ArmorType{
@@ -423,6 +425,10 @@ message S_ChangeConditionInfo{
     float moveSpeed = 4;
     float attackSpeed = 5;
     int32 skillId = 6;
+}
+
+message S_Debuff{
+    int32 id = 1;
 }
 
 message C_InvitePlayer{

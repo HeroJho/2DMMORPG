@@ -126,7 +126,6 @@ namespace Server
                 damage = Math.Max(damage - TotalDefence, 0);
 
             Hp -= damage;
-
 			UpdateHpMpStat();
 
 			if (Hp <= 0)

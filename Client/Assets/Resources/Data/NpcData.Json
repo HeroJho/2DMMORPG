@@ -73,12 +73,20 @@
       "Description": "위험! 지금이라도 돌아가시오!"
     },
     {
+      "id": "10",
+      "mapId": "1",
+      "name": "약제 상인",
+      "x": "21",
+      "y": "-58",
+      "Description": "어디 아프신가요?"
+    },
+    {
       "id": "99",
       "mapId": "1",
       "name": "TestNPC",
       "x": "-47",
       "y": "-73",
-      "Description": "기모띠"
+      "Description": "TestTest"
     }
 
   ]

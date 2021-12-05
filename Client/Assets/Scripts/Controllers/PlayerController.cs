@@ -201,6 +201,10 @@ public class PlayerController : CreatureController
 		{
 			_coSkill = StartCoroutine("CoStartIronBodyReady", skillLevel);
 		}
+		else if (skillId == 2009)
+		{
+			_coSkill = StartCoroutine("CoStartDespellReady", skillLevel);
+		}
 
 
 	}
@@ -412,6 +416,24 @@ public class PlayerController : CreatureController
 		CheckUpdatedFlag();
 	}
 
+	IEnumerator CoStartDespellReady(int skillLevel)
+	{
+		_rangedSkill = false;
+		State = CreatureState.Skill; // 서버에서 허락을 맡음
+
+		GameObject go = Managers.Resource.Instantiate("Effect/SkillEffect/DespellReadyEffect");
+		go.transform.position = transform.position + new Vector3(0, 0.4f, 0);
+
+		go.GetComponent<Animator>().Play("BUFF_DESPELL_READY_EFFECT_START");
+		Destroy(go, 1);
+
+		yield return new WaitForSeconds(1f);
+		if (State != CreatureState.Stun)
+			State = CreatureState.Idle;
+		_coSkill = null;
+
+		CheckUpdatedFlag();
+	}
 
 	public override void OnDamaged()
 	{

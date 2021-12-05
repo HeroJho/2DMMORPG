@@ -416,7 +416,13 @@ public class MyPlayerController : PlayerController
 			switch (item.ItemType)
 			{
 				case ItemType.Weapon:
-					WeaponDamage += ((Weapon)item).Damage;
+					Weapon weapon = (Weapon)item;
+					if (weapon.WeaponType == WeaponType.Sword && Stat.JobClassType == JobClassType.Warrior)
+						WeaponDamage += weapon.Damage;
+					else if (weapon.WeaponType == WeaponType.Staff && Stat.JobClassType == JobClassType.Mage)
+						WeaponDamage += weapon.Damage;
+					else if (Stat.JobClassType == JobClassType.None)
+						WeaponDamage += weapon.Damage;
 					break;
 				case ItemType.Armor:
 					ArmorDefence += ((Armor)item).Defence;

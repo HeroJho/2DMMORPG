@@ -14,6 +14,11 @@ public class WebManager
         Managers.Instance.StartCoroutine(CoSendWebRequest(url, UnityWebRequest.kHttpVerbPOST, obj, res));
     }
 
+    public void SendPost(string url, object obj)
+    {
+        Managers.Instance.StartCoroutine(CoSendWeb(url, UnityWebRequest.kHttpVerbPOST, obj));
+    }
+
     IEnumerator CoSendWebRequest<T>(string url, string method, object obj, Action<T> res)
     {
         UI_LoginScene loginScene = Managers.UI.SceneUI as UI_LoginScene;
@@ -53,5 +58,29 @@ public class WebManager
 
         }
 
+    }
+    IEnumerator CoSendWeb(string url, string method, object obj)
+    {
+        UI_LoginScene loginScene = Managers.UI.SceneUI as UI_LoginScene;
+
+        string sendUrl = $"{BaseUrl}/{url}";
+
+        byte[] jsonBytes = null;
+        if (obj != null)
+        {
+            string jsonStr = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            jsonBytes = Encoding.UTF8.GetBytes(jsonStr);
+        }
+
+        using (var uwr = new UnityWebRequest(sendUrl, method))
+        {
+            // 웹 서버에 obj의 json을 upload
+            uwr.uploadHandler = new UploadHandlerRaw(jsonBytes);
+            // 웹 서버의 응답을 받을 버퍼(text형태로 json으로 온다)
+            uwr.downloadHandler = new DownloadHandlerBuffer();
+            uwr.SetRequestHeader("Content-Type", "application/json");
+
+            yield return uwr.SendWebRequest();
+        }
     }
 }
