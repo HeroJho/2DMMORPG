@@ -145,6 +145,7 @@ namespace Server
                         SpawnObstacle(player);
                                              
                         player.RefreshAdditionanlStat();
+                        player.IsChangedRoom = false;
 
                         Map.ApplyMove(player, new Vector2Int(player.CellPos.x, player.CellPos.y));
                         GetZone(player.CellPos).Players.Add(player);

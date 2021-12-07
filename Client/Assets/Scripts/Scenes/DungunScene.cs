@@ -15,8 +15,6 @@ public class DungunScene : BaseScene
 
         Managers.Map.LoadMap(2);
 
-        Screen.SetResolution(960, 540, false);
-
         _sceneUI = Managers.UI.ShowSceneUI<UI_GameScene>();
 
         StartCoroutine("aaa");
