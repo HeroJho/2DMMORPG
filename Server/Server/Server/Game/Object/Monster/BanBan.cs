@@ -272,7 +272,7 @@ namespace Server
             // 데미지 판정
             _target.OnDamaged(this, Stat.Attack + TotalAttack);
             // 평타에 일정확률로 기절
-            _target.Condition.Stun(3, 5);
+            _target.Condition.Stun(8, 10);
 
             // 스킬 사용 Broadcast
             S_Skill skill = new S_Skill() { Info = new SkillInfo() };

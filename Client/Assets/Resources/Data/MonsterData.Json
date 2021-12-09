@@ -54,8 +54,8 @@
       "gold": "5",
       "stat": {
         "level": "1",
-        "maxHp": "100",
-        "attack": "2",
+        "maxHp": "20",
+        "attack": "1",
         "speed": "5.0",
         "attackSpeed": "0.5",
         "totalExp": "5"
@@ -91,11 +91,11 @@
       "gold": "10",
       "stat": {
         "level": "10",
-        "maxHp": "250",
-        "attack": "5",
+        "maxHp": "50",
+        "attack": "3",
         "speed": "3.0",
         "attackSpeed": "0.5",
-        "totalExp": "20"
+        "totalExp": "40"
       },
       "chaseCellDist": "5",
       "searchCellDist": "2",
@@ -127,11 +127,11 @@
       "gold": "20",
       "stat": {
         "level": "10",
-        "maxHp": "250",
+        "maxHp": "100",
         "attack": "5",
         "speed": "3.0",
         "attackSpeed": "0.5",
-        "totalExp": "20"
+        "totalExp": "100"
       },
       "chaseCellDist": "5",
       "searchCellDist": "5",
@@ -228,7 +228,7 @@
         "totalExp": "0"
       },
       "chaseCellDist": "5",
-      "searchCellDist": "5",
+      "searchCellDist": "15",
       "maxCount": "1",
       "genDelay": "0",
       "rangth": "1",

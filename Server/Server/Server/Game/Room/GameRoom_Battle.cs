@@ -44,6 +44,8 @@ namespace Server
                     backMovePacket.ObjectId = player.Info.ObjectId;
                     backMovePacket.PosInfo = player.PosInfo;
                     backMovePacket.IncludingMe = true;
+                    info.PosInfo.State = movePosInfo.State;
+                    info.PosInfo.MoveDir = movePosInfo.MoveDir;
 
                     Broadcast(player.CellPos, backMovePacket);
                     return;

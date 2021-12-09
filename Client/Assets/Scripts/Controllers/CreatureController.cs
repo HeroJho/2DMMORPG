@@ -10,9 +10,9 @@ public class CreatureController : BaseController
 	Condition _condition;
 	public ChatBox ChatBox { get; private set; }
 
-	string _name = null;
+	protected string _name = null;
 	private TextMeshPro _nameBox = null;
-	public string Name 
+	public virtual string Name 
 	{
 		get
         {

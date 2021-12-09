@@ -724,7 +724,7 @@
       ],
       "completeQuestIds": [ "2006" ],
       "condition": {
-        "level": "1",
+        "level": "40",
         "completeQuests": [
           "2006"
         ]

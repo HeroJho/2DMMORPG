@@ -73,7 +73,10 @@ namespace Server
             switch (str)
             {
                 case "/get Gold":
-                    player.GetGold(1000);
+                    player.GetGold(90000);
+                    return true;
+                case "/get Exp":
+                    player.GetEx(10000);
                     return true;
                 default:
                     break;

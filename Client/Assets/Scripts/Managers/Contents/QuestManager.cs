@@ -37,7 +37,8 @@ public class QuestManager
                         quest.Init(huntinQuestData);
                         quest.QuestState = QuestState.Proceed;
 
-                        Quests.Add(quest.QuestId, quest);
+                        if (!Quests.ContainsKey(quest.QuestId))
+                            Quests.Add(quest.QuestId, quest);
                     }
                     break;
                 case QuestType.Collection:
@@ -48,7 +49,8 @@ public class QuestManager
                         quest.Init(collectionQuestData);
                         quest.QuestState = QuestState.Proceed;
 
-                        Quests.Add(quest.QuestId, quest);
+                        if (!Quests.ContainsKey(quest.QuestId))
+                            Quests.Add(quest.QuestId, quest);
                     }
                     break;
                 case QuestType.Complete:
@@ -59,7 +61,8 @@ public class QuestManager
                         quest.Init(collectionQuestData);
                         quest.QuestState = QuestState.Proceed;
 
-                        Quests.Add(quest.QuestId, quest);
+                        if (!Quests.ContainsKey(quest.QuestId))
+                            Quests.Add(quest.QuestId, quest);
                     }
                     break;
             }
@@ -72,7 +75,9 @@ public class QuestManager
             Quest quest = null;
             Quests.TryGetValue(id, out quest);
             quest.QuestState = QuestState.Cancomplete;
-            CanCompleteQuests.Add(quest.QuestId, quest);
+
+            if (!CanCompleteQuests.ContainsKey(quest.QuestId))
+                CanCompleteQuests.Add(quest.QuestId, quest);
         }
 
         foreach (int id in questInfo.CompletedQuests)
@@ -90,7 +95,8 @@ public class QuestManager
                         quest.Init(huntinQuestData);
                         quest.QuestState = QuestState.Complete;
 
-                        CompletedQuests.Add(quest.QuestId, quest);
+                        if (!CompletedQuests.ContainsKey(quest.QuestId))
+                            CompletedQuests.Add(quest.QuestId, quest);
                     }
                     break;
                 case QuestType.Collection:
@@ -101,7 +107,8 @@ public class QuestManager
                         quest.Init(collectionQuestData);
                         quest.QuestState = QuestState.Complete;
 
-                        CompletedQuests.Add(quest.QuestId, quest);
+                        if (!CompletedQuests.ContainsKey(quest.QuestId))
+                            CompletedQuests.Add(quest.QuestId, quest);
                     }
                     break;
                 case QuestType.Complete:
@@ -112,7 +119,8 @@ public class QuestManager
                         quest.Init(collectionQuestData);
                         quest.QuestState = QuestState.Complete;
 
-                        CompletedQuests.Add(quest.QuestId, quest);
+                        if (!CompletedQuests.ContainsKey(quest.QuestId))
+                            CompletedQuests.Add(quest.QuestId, quest);
                     }
                     break;
 
@@ -331,9 +339,9 @@ public class QuestManager
 
     public void Clear()
     {
-        CanCompleteQuests.Clear();
-        CompletedQuests.Clear();
-        Quests.Clear();
+        //CanCompleteQuests.Clear();
+        //CompletedQuests.Clear();
+        //Quests.Clear();
 
         _condition = null;
         _conditions.Clear();

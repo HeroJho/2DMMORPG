@@ -19,7 +19,19 @@ public class BanBanController : MonsterController
 	[SerializeField]
 	private GameObject WarningSkill_10_Down;
 
-    protected override void AddHpBar()
+	public override string Name
+	{
+		get
+		{
+			return _name;
+		}
+		set
+		{
+			_name = value;
+		}
+	}
+
+	protected override void AddHpBar()
     {
 		_gameSceneUI = Managers.UI.SceneUI as UI_GameScene;
 		_gameSceneUI.BossHpUI.gameObject.SetActive(true);

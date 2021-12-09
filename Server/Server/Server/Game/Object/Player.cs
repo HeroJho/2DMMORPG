@@ -69,7 +69,13 @@ namespace Server
                     case JobClassType.Mage:
                         totalAttack += Stat.Int;
                         break;
+                    case JobClassType.None:
+                        totalAttack += Stat.Str;
+                        totalAttack += Stat.Int;
+                        break;
                     default:
+                        totalAttack += Stat.Str;
+                        totalAttack += Stat.Int;
                         break;
                 }
 
